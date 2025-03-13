@@ -1,0 +1,43 @@
+Architecture/design ideas:
+
+Motivation and main requirements:
+Create a lightweight ontology to describe digital twins of battery manufacturing.
+Address BatCAT requirements (D4.1) and connect to BattINFO, BVCO, MODA, CHADA.
+
+Expressivity level: OWL dialect, with as much expressivity as needed. Start low (ALC+Transitivity (*)), increase as per explicit substantiated needs.
+(*) Transitivity is needed to exploit parthood.
+
+Naming convention:
+- CamelCase or snake_case? -> snake_case
+-- Individuals: all upper case
+-- Classes: all lower case
+-- Properties: all lower case
+- Singular nouns. Properties given as verbs, third person.
+
+Splitting in modules and files:
+- Modules should be usable on their own, or at most require an upper one 
+- Decide on prefixes/namespaces (same for all modules or not?) (TBD)
+
+Versioning convention:
+- Use clear and semantic versioning (TBD)
+- Versioning of modules/whole set : define how do they relate to each other (TBD)
+
+Alignment to TLOs:
+- It is done in a separate "alignment" module(s)
+- Decide on hard vs soft alignment (TBD)
+
+Reuse:
+- Reuse/connect to existing ontologies/vocabularies etc wherever possible
+-- E.g., for missing terms in BattINFO, cf. ISO/IEC standards (cf. Clark et al paper on BattINFO)
+
+Openness:
+- Our results will be open, and do not impose dependencies on non-open standards - NB: Issue with connections to ISO/IEC 
+
+Good practices:
+- Use OOPS! to check implementation
+- Make the repositiory public as soon as reasonable, connect to LOV
+- (Could) Use MOD Ontology to describe and publish the ontologies themselves (https://www.isibang.ac.in/ns/mod/index.html)
+
+SKOS/RDF for dropdowns:
+- For dropdowns, make the needed concepts implementation friendly. For example, in case of flat lists, provide SKOKS lists (even if this implies duplication of RDF classes).
+ Or define clear SPARQL queries to identify the elements clearly. Evaluate need for nested dropdowns.
