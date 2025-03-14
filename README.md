@@ -3,10 +3,10 @@ Minimal BatCAT Core Ontologies
 
 Tentative modules will cover:
 
-- Higher level concept 
+- Higher level concept (-> higher.ttl)
 
 Tranversal modules:
-- Optimization, decision support, design 
+- Optimization, decision support, design (-> optimization.ttl)
 - Twinning
 - Data & metadata
 
