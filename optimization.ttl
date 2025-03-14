@@ -1,0 +1,267 @@
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/optimization#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
+  owl:versionInfo "version 0.1.0"^^xs:string ;
+  dcterms:modified "2025-03-14"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
+  dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
+  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:problem a owl:Class ;
+    rdfs:label "Problem" ; # TODO: do we need this class? Or does it make the hierarchy too deep?
+    rdfs:subClassOf mbco:statement .
+
+mbco:solution a owl:Class ;
+    rdfs:label "Solution" ;
+    rdfs:comment "Answer addressing a problem. It should contain a quantification of error and confidence."^^xs:string ;
+    rdfs:subClassOf mbco:statement .
+
+mbco:optimization_problem a owl:Class ;
+    rdfs:label "Optimization problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:optimization_method a owl:Class ; # TOSEE: or are they "problem solving methods???"
+    rdfs:label "Optimization method" ;
+    rdfs:subClassOf mbco:method ;
+    a owl:DeprecatedClass .
+
+mbco:answer_set_programming a owl:Class ;
+    rdfs:label "Answer Set Programming (ASP)" ;
+    rdfs:subClassOf mbco:optimization_method ; # correct??? It is a "logic programming method/paradigm"
+    rdfs:comment "A logic programming paradigm, tailored to search problems. (See Wikipedia)"^^xs:string .
+
+mbco:multi_criteria_optimization a owl:Class ;
+    rdfs:label "Multi Criteria Optimization (MCO)" ;
+    rdfs:subClassOf mbco:optimization_method ;
+    rdfs:comment "Mathematical optimization problem, where multiple objective functions (criteria) are simultaneuosly optimized. (See Wikipedia)"^^xs:string .
+
+mbco:mathematical_role a owl:Class ;
+    rdfs:label "Mathematical role" .
+
+mbco:variable a owl:Class ;
+    rdfs:label "Variable" ;
+    owl:disjointUnionOf (mbco:discrete_variable mbco:continuum_variable) ;
+    rdfs:subClassOf mbco:mathematical_role .		
+
+mbco:discrete_variable a owl:Class ;
+    rdfs:label "Discrete variable" ;
+    rdfs:subClassOf mbco:variable .
+
+mbco:continuum_variable a owl:Class ;
+    rdfs:label "Continuum variable" ;
+    rdfs:subClassOf mbco:variable .
+
+mbco:target a owl:Class ;
+    rdfs:label "Target" ;
+    rdfs:subClassOf mbco:mathematical_role .		
+
+mbco:constraint a owl:Class ;
+    rdfs:label "Constraint" ;
+    rdfs:subClassOf mbco:statement .		    
+
+mbco:constraint a owl:Class ;
+    rdfs:label "Constraint" ;
+    owl:disjointUnionOf (mbco:qualitative_constraint mbco:quantitative_constraint) .
+
+mbco:qualitative_constraint a owl:Class ;
+    rdfs:label "Qualitative constraint" ;
+    rdfs:comment "Examples of qualtitative constraints are: step X follows (directly) step Y; step X requires participant Y; step X requires input Y; physical location constraint."^^xs:string .
+
+mbco:quantitative_constraint a owl:Class ;
+    rdfs:label "Quantitative constraint" ;
+    rdfs:comment "Examples of quantitative constraints are equalities (e.g., the sum of some variables is constant) and inequalitites (variable X > value X0)."^^xs:string .
+
+mbco:optimization_problem  # TOSEE: Do these restrictions apply to all problems?
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:variable] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:target] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:constraint] .
+
+mbco:coarse_amount_level a owl:Class ; # TOSEE: create a "quantifier" class? TOSEE: move this to "higher" module?
+    rdfs:label "(Coarse) Amount level" ;
+    owl:oneOf (mbco:LOW mbco:MEDIUM mbco:HIGH) .  
+
+# Examples of general logic-based problems/activity. TOSEE: Are these really optimization problems??? Problems? Logic-based problems? Are these activities? goals? Tasks?
+# Taken from CQ_CRO_8
+
+mbco:logic_based_problem a owl:Class ;
+    rdfs:label "Logic-based problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:numerical_problem a owl:Class ;
+    rdfs:label "Numerical problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:scheduling a owl:Class ;
+    rdfs:label "Scheduling" ;
+    rdfs:comment "Scheduling (e.g., of maintenance)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:resource_allocation a owl:Class ;
+    rdfs:label "Resource allocation" ;
+    rdfs:comment "Allocation of resources (e.g., machines/humans for tasks)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:compatibility_check a owl:Class ;
+    rdfs:label "Compatibility check" ;
+    rdfs:comment "Compatibility checks (e.g., between materials)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:compliance_validation a owl:Class ;
+    rdfs:label "Compliance validation" ;
+    rdfs:comment "Compliance validation (e.g., of a process with regulation)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:process_design a owl:Class ;
+    rdfs:label "Process design" ;
+    rdfs:comment "Process design (e.g., simulation, experiment)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem ;
+    rdfs:subClassOf mbco:numerical_problem . # right?
+
+mbco:process_sequence_validation a owl:Class ;
+    rdfs:label "Process sequence validation" ;
+    rdfs:comment "Process sequence validation (e.g., that the ordering of sub-processes does not break dependencies)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:model_parametrization_process a owl:Class ; # this is for MCO
+    rdfs:label "Model parametrization process" ;
+    rdfs:comment "Determining the numerical values of the parameters as those that best reproduce certain properties. "^^xs:string ;
+    rdfs:comment "Not to be confused with the resulting model parameterization (a set of parameters)."^^xs:string ;
+    rdfs:subClassOf mbco:numerical_problem .
+
+
+### Object Properties ###
+
+mbco:has_cost_level a owl:ObjectProperty ; # TOSEE: express it differently? Issue is: if we use more general verbs, the statements are more complex.
+    rdfs:range mbco:coarse_amount_level .
+
+mbco:has_precision_level a owl:ObjectProperty ;  # TOSEE: same as for has_cost_level
+    rdfs:range mbco:coarse_amount_level .
+    
+### Datatype Properties ###
+
+### Other tentative properties still under consideration ...
+
+# mbco:has_quantifier
+# mbco:has_confidence
+# mbco:has_error
+# mbco:has_assumption
+# mbco:has_variable
+# mbco:has_target
+# mbco:has_constraint 
+#
+# Other: design_parameters, operating conditions, cost, KPI
+
+####################################################################################
+# EXAMPLES below: Put here temporarily only, just for simplicity
+####################################################################################
+
+@prefix ex: <https://batcat.info/semantics/example#> .
+
+ex:GITT_TEST a mbco:method ;
+    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
+    mbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
+    mbco:has_participant ex:POTENTIOSTAT ;
+    mbco:has_participant [a mbco:sample] ;
+    mbco:has_participant [a mbco:agent] ;
+    mbco:has_cost_level mbco:HIGH ;
+    mbco:has_precision_level mbco:HIGH .       
+
+ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
+    mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
+    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
+    mbco:has_participant [a mbco:compute_resource] ;
+    mbco:has_participant [a mbco:software] ; # E.g., license access needed
+    mbco:has_cost_level mbco:MEDIUM ;
+    mbco:has_precision_level mbco:LOW .       
+#    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
+
+ex:DPD_DATA_ANALYSIS a mbco:process ;
+    mbco:has_participant [a mbco:agent] .		   
+
+ex:DPD_SIMULATION_SETTING_UP a mbco:process ;
+    mbco:has_participant [a mbco:agent] .
+
+ex:EXPERIMENT_SETTING_UP a mbco:process ;
+    mbco:has_participant [a mbco:agent] .		   
+
+ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
+    a mbco:logic_based_problem ;
+    a mbco:optimization_problem ;
+    rdfs:comment "An example about running simulations"^^xs:string ;
+    mbco:has_part ex:CONSTRAINT_1 ;
+    mbco:has_part ex:CONSTRAINT_2 ;
+    mbco:has_part ex:CONSTRAINT_3 .
+    
+ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
+    rdfs:comment "There is only one available agent"^^xs:string .
+
+ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
+    rdfs:comment "There are two available compute resources"^^xs:string .
+
+ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
+    rdfs:comment "A computational method must be used"^^xs:string .
+
+ex:DPD_SIMULATION_RUN 
+    mbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
+    mbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
+
+ex:DPD_DATA_ANALYSIS mbco:followsdirectly ex:DPD_SIMULATION_RUN .
+
+ex:COMPARISON_EXAMPLE_PROBLEM
+    a mbco:logic_based_problem ;
+    a mbco:optimization_problem ;
+    rdfs:comment "An example about comparing simulations or epxeriments"^^xs:string ;
+    mbco:has_part ex:CONSTRAINT_4 ;
+    mbco:has_part ex:TARGET_1 .
+
+ex:CONSTRAINT_4 a mbco:qualitative_constraint ;
+    rdfs:comment "The method used must give access to the diffusion coeffcient"^^xs:string .
+
+ex:TARGET_1 a mbco:target ;
+   rdfs:comment "Maximize precision and minimize cost"^^xs:string .
+
+ex:SOLUTION_COMPARISON a mbco:solution ;
+   mbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
+   mbco:uses_method [a mbco:answer_set_programming] .
+
+ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
+   mbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
+   mbco:uses_method [a mbco:answer_set_programming] .
+
+####################################################################################
+# See also:
+# inequality # EMMO - Math module (under "disciplines") 
+# equality # EMMO - Math module (under "disciplines") - it has "equation"
+# variable from VOV could be used. Also present in EMMO "math"
