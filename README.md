@@ -5,7 +5,7 @@ Tentative modules will cover:
 
 - Higher level concept (-> higher.ttl)
 
-Tranversal modules:
+Transversal modules:
 - Optimization, decision support, design (-> optimization.ttl)
 - Twinning
 - Data & metadata (-> data.ttl)
