@@ -1,0 +1,70 @@
+@prefix abel: <https://batcat.info/semantics/abel#> .
+
+@prefix mbco: <https://batcat.info/semantics/core#> .
+
+@prefix emmol: <https://w3id.org/emmo/emmo-lite#> .
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/abel#> dcterms:title "Alignment of BatCAT to EMMO-LITE (ABEL)"^^xs:string ;
+  owl:versionInfo "version 0.0.1"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  dcterms:modified "2025-03-27"^^xs:string ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:creator "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://creativecommons.org/licenses/by/4.0/legalcode"^^xs:anyURI ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+########################################################################################
+
+### Classes ###
+
+mbco:agent rdfs:subClassOf emmol:IntentionalAgent .
+
+mbco:data rdfs:subClassOf emmol:Data .
+
+mbco:material rdfs:subClassOf emmol:Material .
+
+mbco:process rdfs:subClassOf emmol:Process .
+
+mbco:software rdfs:subClassOf emmol:DigitalData . # OK?
+
+mbco:physical_object rdfs:subClassOf emmol:PhysicalObject . # or PhysicalEntity ?
+
+mbco:compute_resource rdfs:subClassOf emmol:Object . # OK? What about virtual machines?
+
+mbco:statement rdfs:subClassOf emmol:Data . # OK?
+
+mbco:role rdfs:subClassOf emmol:Role . #OK?
+
+### Object Properties ###
+
+mbco:has_part rdfs:subPropertyOf emmol:hasPart .
+
+mbco:has_participant rdfs:subPropertyOf emmol:hasParticipant .
+
+mbco:follows rdfs:subPropertyOf emmol:follows .
+
+mbco:has_input rdfs:subPropertyOf emmol:hasInput .
+
+mbco:has_output rdfs:subPropertyOf emmol:hasOutput .
+
+mbco:has_setting rdfs:subPropertyOf emmol:hasPart . # OK?
+
+mbco:uses_method rdfs:subPropertyOf emmol:hasPart . # OK?
+
+mbco:answers rdfs:subPropertyOf emmol:isSemioticallyRelatedTo . # OK?
+    
+

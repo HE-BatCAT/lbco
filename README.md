@@ -17,3 +17,10 @@ Vertical modules:
 
 Battery specific modules:
 - Battery (LiB and RFB)
+
+=========================================
+
+Alignment directory:
+
+- Alignment to DOLCE-LITE (-> abdul.ttl)
+- Alignment to EMMO-LITE (-> abel.ttl)
