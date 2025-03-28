@@ -184,6 +184,7 @@ mbco:model_parametrization_process a owl:Class ; # this is for MCO
 ### Object Properties ###
 
 mbco:has_cost_level a owl:ObjectProperty ; # TOSEE: express it differently? Issue is: if we use more general verbs, the statements are more complex.
+    rdfs:comment "Points to the cost of an entity, in the broad sense. It could be monetary cost, computational cost, etc."^^xs:string ;
     rdfs:range mbco:coarse_amount_level .
 
 mbco:has_precision_level a owl:ObjectProperty ;  # TOSEE: same as for has_cost_level
