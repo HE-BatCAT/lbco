@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/optimization#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.0"^^xs:string ;
-  dcterms:modified "2025-03-14"^^xs:string ;
+  owl:versionInfo "version 0.1.1"^^xs:string ;
+  dcterms:modified "2025-03-28"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -79,14 +79,19 @@ mbco:continuum_variable a owl:Class ;
 
 mbco:target a owl:Class ;
     rdfs:label "Target" ;
-    rdfs:subClassOf mbco:mathematical_role .		
+    rdfs:subClassOf mbco:mathematical_role ;
+    rdfs:comment "In an optimization problem, a property which has to be attained exactly or approximatively by the solution."^^xs:string .
+
+mbco:goal a owl:Class ;
+    rdfs:label "Goal" ;
+    rdfs:altLabel "Exact target" ;
+    rdfs:subClassOf mbco:target ;
+    rdfs:comment "In an optimization problem, a property which must be attained exactly by a solution."^^xs:string ;
+    rdfs:comment "In an optimization problem, an exact target."^^xs:string .
 
 mbco:constraint a owl:Class ;
     rdfs:label "Constraint" ;
-    rdfs:subClassOf mbco:statement .		    
-
-mbco:constraint a owl:Class ;
-    rdfs:label "Constraint" ;
+    rdfs:subClassOf mbco:statement ;		    
     owl:disjointUnionOf (mbco:qualitative_constraint mbco:quantitative_constraint) .
 
 mbco:qualitative_constraint a owl:Class ;
@@ -106,11 +111,27 @@ mbco:optimization_problem  # TOSEE: Do these restrictions apply to all problems?
                    owl:someValuesFrom mbco:target] ;
 	rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_part ;
-                   owl:someValuesFrom mbco:constraint] .
-
+                   owl:someValuesFrom mbco:constraint] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:goal] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:initial_status] .  
+		  
 mbco:coarse_amount_level a owl:Class ; # TOSEE: create a "quantifier" class? TOSEE: move this to "higher" module?
     rdfs:label "(Coarse) Amount level" ;
     owl:oneOf (mbco:LOW mbco:MEDIUM mbco:HIGH) .  
+
+mbco:initial_status a owl:Class ; 
+    rdfs:label "Initial status" ;
+    rdfs:subClassOf mbco:status ;
+    rdfs:comment "Status of an object/system right at the start of a given process. E.g., before an optimization is done"^^xs:string .    
+
+mbco:final_status a owl:Class ; 
+    rdfs:label "Final status" ;
+    rdfs:subClassOf mbco:status ;
+    rdfs:comment "Status of an object/system right at the end of a given process. E.g., after an optimization is done"^^xs:string .    
 
 # Examples of general logic-based problems/activity. TOSEE: Are these really optimization problems??? Problems? Logic-based problems? Are these activities? goals? Tasks?
 # Taken from CQ_CRO_8
@@ -159,7 +180,6 @@ mbco:model_parametrization_process a owl:Class ; # this is for MCO
     rdfs:comment "Determining the numerical values of the parameters as those that best reproduce certain properties. "^^xs:string ;
     rdfs:comment "Not to be confused with the resulting model parameterization (a set of parameters)."^^xs:string ;
     rdfs:subClassOf mbco:numerical_problem .
-
 
 ### Object Properties ###
 
@@ -220,10 +240,22 @@ ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
     a mbco:logic_based_problem ;
     a mbco:optimization_problem ;
     rdfs:comment "An example about running simulations"^^xs:string ;
+    mbco:has_part ex:GOAL_1 ;
+    mbco:has_part ex:TARGET_2 ;
     mbco:has_part ex:CONSTRAINT_1 ;
     mbco:has_part ex:CONSTRAINT_2 ;
-    mbco:has_part ex:CONSTRAINT_3 .
-    
+    mbco:has_part ex:CONSTRAINT_3 ;
+    mbco:has_part ex:INITIAL_STATUS_1 .
+
+ex:GOAL_1 a mbco:goal ;
+   rdfs:comment "Allocate human and compute resources to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
+
+ex:INITIAL_STATUS_1 a mbco:initial_status ;
+   rdfs:comment "Human and compute resources are available and operational. Needed software is installed"^^xs:string .
+
+ex:TARGET_2 a mbco:target ;
+   rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
+
 ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
     rdfs:comment "There is only one available agent"^^xs:string .
 
@@ -243,11 +275,11 @@ ex:COMPARISON_EXAMPLE_PROBLEM
     a mbco:logic_based_problem ;
     a mbco:optimization_problem ;
     rdfs:comment "An example about comparing simulations or epxeriments"^^xs:string ;
-    mbco:has_part ex:CONSTRAINT_4 ;
+    mbco:has_part ex:GOAL_2 ;
     mbco:has_part ex:TARGET_1 .
 
-ex:CONSTRAINT_4 a mbco:qualitative_constraint ;
-    rdfs:comment "The method used must give access to the diffusion coeffcient"^^xs:string .
+ex:GOAL_2 a mbco:qualitative_constraint ;
+    rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string .
 
 ex:TARGET_1 a mbco:target ;
    rdfs:comment "Maximize precision and minimize cost"^^xs:string .
