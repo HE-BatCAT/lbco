@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/data#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/data#> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
-  owl:versionInfo "version 0.0.3"^^xs:string ;
-  dcterms:modified "2025-03-17"^^xs:string ;
+  owl:versionInfo "version 0.0.4"^^xs:string ;
+  dcterms:modified "2025-03-28"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -80,6 +80,19 @@ mbco:data_structure a owl:Class ;
     rdfs:label "Data structure" ;
     rdfs:comment "E.g., includes data shapes, as SHACL or OO-LD shapes."^^xs:string .    
 
+mbco:uncertainty_quantification_method a owl:Class ;
+    rdfs:label "Uncertainty quantification method" ;
+    rdfs:subClassOf mbco:method .
+
+#mbco:BLOCK_AVERAGING a mbco:uncertainty_quantification_method ;
+#    rdfs:label "Block averaging" .
+    
+mbco:ERROR_PROPAGATION a mbco:uncertainty_quantification_method ;
+    rdfs:label "Error propagation" .
+
+mbco:ERROR_ESTIMATE_VIA_STATISTICAL_METHODS a mbco:uncertainty_quantification_method ;
+    rdfs:label "Error estimate via statistical methods" .
+
 ### Object Properties ###
 
 mbco:is_compatible_with a owl:ObjectProperty ;
@@ -106,6 +119,15 @@ mbco:has_average a owl:DatatypeProperty ;
 mbco:has_error a owl:DatatypeProperty ;
     rdfs:label "has error" ;
     rdfs:domain mbco:data .
+
+# Should/could add:
+# systematic error
+# statistical error
+# random error
+# total? error
+# mbco:STANDARD_DEVIATION a mbco:error_type .
+# mbco:STANDARD_ERROR a mbco:error_type ;
+#    rdfs:comment "Error calculation based on standard deviation and the assumption of independent data points."^^xs:string .
 
 ####################################################################################
 
