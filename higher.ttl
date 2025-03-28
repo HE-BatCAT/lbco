@@ -96,7 +96,10 @@ mbco:statement a owl:Class ;
     rdfs:label "Statement" . # Note: in EVMPO, statement is used for elementary communications. Here not, it is more general.   
 
 mbco:role a owl:Class ;
-    rdfs:label "Role" . 
+    rdfs:label "Role" ;
+    rdfs:comment "A non-rigid category (i.e., during its lifespan, an entity can change role)."^^xs:string ;
+    rdfs:comment """For example: role of a human agent in an organization (employee/director), in a software repository (editor/owner); 
+    role of a variable in a mathematical problem (dependent/independent/parameter)."""^^xs:string .
 
 mbco:status a owl:Class ;
     rdfs:label "Status" ;
