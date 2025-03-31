@@ -2,7 +2,7 @@
 
 @prefix mbco: <https://batcat.info/semantics/core#> .
 
-@prefix dul: <http://www.loa-cnr.it/ontologies/DOLCE-Lite#> .
+@prefix dol: <http://www.loa-cnr.it/ontologies/DOLCE-Lite#> .
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -16,7 +16,7 @@
 <https://batcat.info/semantics/abdul#> dcterms:title "Alignment of BatCAT to DOLCE-LITE (ABDuL)"^^xs:string ;
   owl:versionInfo "version 0.0.2"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
-  dcterms:modified "2025-03-28"^^xs:string ;
+  dcterms:modified "2025-03-31"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:creator "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -31,43 +31,43 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:agent rdfs:subClassOf dul:endurant . 
+mbco:agent rdfs:subClassOf dol:endurant . 
 
-mbco:data rdfs:subClassOf dul:endurant . # OK?
+mbco:data rdfs:subClassOf dol:endurant . # OK?
 
-mbco:material rdfs:subClassOf dul:set . # OK? 
+mbco:material rdfs:subClassOf dol:set . # OK? 
 
-mbco:process rdfs:subClassOf dul:perdurant .
+mbco:process rdfs:subClassOf dol:perdurant .
 
-mbco:software rdfs:subClassOf dul:endurant . # OK?
+mbco:software rdfs:subClassOf dol:endurant . # OK?
 
-mbco:physical_object rdfs:subClassOf dul:physical-endurant . 
+mbco:physical_object rdfs:subClassOf dol:physical-endurant . 
 
-mbco:compute_resource rdfs:subClassOf dul:endurant . # OK?
+mbco:compute_resource rdfs:subClassOf dol:endurant . # OK?
 
-mbco:statement rdfs:subClassOf dul:proposition . # OK?
+mbco:statement rdfs:subClassOf dol:proposition . # OK?
 
-mbco:role rdfs:subClassOf dul:abstract-quality . # OK?
+mbco:role rdfs:subClassOf dol:abstract-quality . # OK?
 
-mbco:status rdfs:subClassOf dul:stative . # OK?
+mbco:status rdfs:subClassOf dol:stative . # OK?
 
 ### Object Properties ###
 
-mbco:has_part rdfs:subPropertyOf dul:part . 
+mbco:has_part rdfs:subPropertyOf dol:part . 
 
-mbco:has_participant rdfs:subPropertyOf dul:participant . 
+mbco:has_participant rdfs:subPropertyOf dol:participant . 
 
-mbco:follows rdfs:subPropertyOf dul:generically-dependent-on . # OK? Should it be dul:specific-constant-dependent ???
+mbco:follows rdfs:subPropertyOf dol:generically-dependent-on . # OK? Should it be dol:specific-constant-dependent ???
 
-mbco:has_input rdfs:subPropertyOf dul:part . 
+mbco:has_input rdfs:subPropertyOf dol:part . 
 
-mbco:has_output rdfs:subPropertyOf dul:part . 
+mbco:has_output rdfs:subPropertyOf dol:part . 
 
-mbco:has_setting rdfs:subPropertyOf dul:part . 
+mbco:has_setting rdfs:subPropertyOf dol:part . 
 
-mbco:uses_method rdfs:subPropertyOf dul:part . 
+mbco:uses_method rdfs:subPropertyOf dol:part . 
 
-mbco:has_status rdfs:subPropertyOf dul:temporary-participant-in . # ok?
+mbco:has_status rdfs:subPropertyOf dol:temporary-participant-in . # ok?
 
 
     
