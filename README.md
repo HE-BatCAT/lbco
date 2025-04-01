@@ -11,7 +11,7 @@ Transversal modules:
 - Data & metadata (-> data.ttl)
 
 Vertical modules:
-- Modelling and simulation
+- Modelling and simulation (-> modelling.ttl)
 - Characterization
 - Manufacturing
 
