@@ -7,7 +7,7 @@ Tentative modules will cover:
 
 Transversal modules:
 - Optimization, decision support, design (-> optimization.ttl)
-- Twinning
+- Twinning (-> twinning.ttl)
 - Data & metadata (-> data.ttl)
 
 Vertical modules:
