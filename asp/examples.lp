@@ -17,6 +17,11 @@ property("DISSIPATIVE_PARTICLE_DYNAMICS","has_precision_level","LOW").
 
 entity("DPD_DATA_ANALYSIS","process").
 property("DPD_DATA_ANALYSIS","has_participant","agent",1,1).
+property("DPD_DATA_ANALYSIS","followsdirectly","DPD_SIMULATION_RUN").
+
+entity("DPD_SIMULATION_RUN","process").
+property("DPD_SIMULATION_RUN","uses_method","DISSIPATIVE_PARTICLE_DYNAMICS").
+property("DPD_SIMULATION_RUN","followsdirectly","DPD_SIMULATION_SETTING_UP").
 
 entity("DPD_SIMULATION_SETTING_UP","process").
 property("DPD_SIMULATION_SETTING_UP","has_participant","agent",1,1).
