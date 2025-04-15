@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.1"^^xs:string ;
-  dcterms:modified "2025-03-28"^^xs:string ;
+  owl:versionInfo "version 0.1.2"^^xs:string ;
+  dcterms:modified "2025-04-15"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -81,7 +81,26 @@ mbco:sample a owl:Class ;
 
 mbco:device a owl:Class ;
     rdfs:label "Device" ;
-    rdfs:subClassOf mbco:physical_object .
+    rdfs:subClassOf mbco:physical_object ;
+    rdfs:comment "A physical object made for a given functionality"^^xs:string .
+
+mbco:computational_device a owl:Class ;
+    rdfs:label "Computational device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a (digital) computational action."^^xs:string ;
+    rdfs:comment "E.g., a PC, a computational cluster."^^xs:string .
+
+mbco:characterization_device a owl:Class ;
+    rdfs:label "Characterization device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a characterization action."^^xs:string ;
+    rdfs:comment "E.g., a potentiostat."^^xs:string .
+
+mbco:manufacturing_device a owl:Class ;
+    rdfs:label "Manufacturing device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a manufacturing action"^^xs:string ;
+    rdfs:comment "E.g., a mixer, a calenderer."^^xs:string .    
 
 mbco:method a owl:Class ;
     rdfs:label "Method" ; 
@@ -90,7 +109,8 @@ mbco:method a owl:Class ;
 
 mbco:compute_resource a owl:Class ;
     rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
-    rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string .
+    rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
+    a owl:DeprecatedClass .
 
 mbco:statement a owl:Class ;
     rdfs:label "Statement" . # Note: in EVMPO, statement is used for elementary communications. Here not, it is more general.   

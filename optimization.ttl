@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/optimization#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.1"^^xs:string ;
-  dcterms:modified "2025-03-28"^^xs:string ;
+  owl:versionInfo "version 0.1.2"^^xs:string ;
+  dcterms:modified "2025-04-15"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -222,7 +222,7 @@ ex:GITT_TEST a mbco:method ;
 ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
     mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
     mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-    mbco:has_participant [a mbco:compute_resource] ;
+    mbco:has_participant [a mbco:computational_device] ;
     mbco:has_participant [a mbco:software] ; # E.g., license access needed
     mbco:has_cost_level mbco:MEDIUM ;
     mbco:has_precision_level mbco:LOW .       
@@ -249,10 +249,10 @@ ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
     mbco:has_part ex:INITIAL_STATUS_1 .
 
 ex:GOAL_1 a mbco:goal ;
-   rdfs:comment "Allocate human and compute resources to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
+   rdfs:comment "Allocate human and computational devices to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
 
 ex:INITIAL_STATUS_1 a mbco:initial_status ;
-   rdfs:comment "Human and compute resources are available and operational. Needed software is installed"^^xs:string .
+   rdfs:comment "Human and computational devices are available and operational. Needed software is installed"^^xs:string .
 
 ex:TARGET_2 a mbco:target ;
    rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
@@ -261,7 +261,7 @@ ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
     rdfs:comment "There is only one available agent"^^xs:string .
 
 ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
-    rdfs:comment "There are two available compute resources"^^xs:string .
+    rdfs:comment "There are two available computational devices"^^xs:string .
 
 ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
     rdfs:comment "A computational method must be used"^^xs:string .
