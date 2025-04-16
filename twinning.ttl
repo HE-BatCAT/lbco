@@ -13,7 +13,7 @@
 
 <https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.0.1"^^xs:string ;
-  dcterms:modified "2025-04-02"^^xs:string ;
+  dcterms:modified "2025-04-16"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -53,11 +53,15 @@ mbco:digital_twin_action a owl:Class ;
     rdfs:label "Digital twin action" ;
     owl:oneOf (mbco:VISUALIZE mbco:MONITOR mbco:PREDICT mbco:RECOMMEND) ;
     rdfs:comment """Based on an extract of application-related terms from ISO/IEC 30173:2023, 
-    with an addition inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'. """^^xs:string .
+    with an addition inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."""^^xs:string .
 
 mbco:generality_level a owl:Class ; 
     owl:oneOf (mbco:UNIVERSAL mbco:TYPE mbco:INDIVIDUAL) ;
-    rdfs:comment "Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'. "^^xs:string .
+    rdfs:comment "Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'. Note: There a fourth level is present."^^xs:string .
+
+mbco:UNIVERSAL rdfs:comment "Encompassing, e.g. for a very generic entity or process."^^xs:string .
+mbco:TYPE rdfs:comment "E.g., a car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
+mbco:INDIVIDUAL rdfs:comment "E.g., John's car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
 
 ### Object Properties ###
 
