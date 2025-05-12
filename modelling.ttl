@@ -50,14 +50,23 @@ mbco:model_validation_process a owl:Class ;
     rdfs:subClassOf mbco:process ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:model_parametrization] .
-
+                   owl:someValuesFrom mbco:model_parametrization] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:data] ;      # e.g., experimental data
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom mbco:statement] . # on the model validity
+		   
 mbco:model_parametrization_process a owl:Class ;
     rdfs:label "Model parametrization process" ;
     rdfs:subClassOf mbco:process ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:model_parametrization] .
+                   owl:someValuesFrom mbco:model_parametrization] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:data] . # e.g., experimental data
 
 # From CQ_CRO_3
 mbco:time_scale a owl:Class ;
@@ -114,6 +123,11 @@ mbco:has_modelled_length_scale a owl:ObjectProperty ;
     rdfs:label "has modelled length scale" ;
 #    rdfs:domain mbco:computational_modelling_method ;
     rdfs:range [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
+
+# Could add:
+#mbco:has_input_data 
+#mbco:has_input_training_data
+#mbco:has_input_runtime_data 
 
 ### Datatype Properties ###
 
