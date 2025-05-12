@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.2"^^xs:string ;
-  dcterms:modified "2025-04-15"^^xs:string ;
+  owl:versionInfo "version 0.1.3"^^xs:string ;
+  dcterms:modified "2025-05-12"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -124,6 +124,10 @@ mbco:role a owl:Class ;
 mbco:status a owl:Class ;
     rdfs:label "Status" ;
     rdfs:comment "For an single object or a system. E.g.: the software is installed/not-installed; the device is on/off, operational/faulty, the agent is available/busy, etc."^^xs:string .
+
+mbco:annotation a owl:Class ;
+    rdfs:label "Annotation" ;
+    rdfs:comment "Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module"^^xs:string .
 
 ### Object Properties ###
 
