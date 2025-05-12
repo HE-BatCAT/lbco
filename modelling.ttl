@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.1"^^xs:string ;
-  dcterms:modified "2025-04-01"^^xs:string ;
+  owl:versionInfo "version 0.0.2"^^xs:string ;
+  dcterms:modified "2025-05-12"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -40,7 +40,7 @@ mbco:model_parametrization a owl:Class ;
 mbco:computational_modelling_method a owl:Class ;
     rdfs:label "Computational modelling method" ;
     rdfs:subClassOf mbco:method .
-
+    
 mbco:digital_twinning a owl:Class ; # TOSEE: OK?
     rdfs:label "Digital twinning" ;
     rdfs:subClassOf mbco:computational_modelling_method .
@@ -58,6 +58,20 @@ mbco:model_parametrization_process a owl:Class ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_output ;
                    owl:someValuesFrom mbco:model_parametrization] .
+
+# From CQ_CRO_3
+mbco:time_scale a owl:Class ;
+    owl:oneOf (mbco:INDUSTRIAL_SAFETY_TIME_SCALE mbco:INTERMEDIATE_TIME_SCALE mbco:PLANNING_TIME_SCALE) ;
+    rdfs:subClassOf mbco:annotation .
+
+# From CQ_CRO_9. Move to battery module later?
+mbco:rfb_length_scale a owl:Class ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
+    rdfs:subClassOf mbco:annotation .
+
+mbco:lib_length_scale a owl:Class ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
+    rdfs:subClassOf mbco:annotation .
 
 ### Object Properties ###
 
@@ -90,6 +104,16 @@ mbco:gives_value_for a owl:ObjectProperty ; # quantifies?
     rdfs:label "gives value for" ;
     rdfs:domain mbco:method ; #TOSEE: OK?
     rdfs:range mbco:physical_quantity .
+
+mbco:has_modelled_time_scale a owl:ObjectProperty ;
+    rdfs:label "has modelled time scale" ;
+#    rdfs:domain mbco:computational_modelling_method ;
+    rdfs:range mbco:time_scale .
+
+mbco:has_modelled_length_scale a owl:ObjectProperty ;
+    rdfs:label "has modelled length scale" ;
+#    rdfs:domain mbco:computational_modelling_method ;
+    rdfs:range [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
 
 ### Datatype Properties ###
 
