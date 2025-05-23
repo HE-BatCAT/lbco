@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/optimization#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.4"^^xs:string ;
-  dcterms:modified "2025-05-12"^^xs:string ;
+  owl:versionInfo "version 0.1.5"^^xs:string ;
+  dcterms:modified "2025-05-23"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -97,11 +97,14 @@ mbco:goal a owl:Class ;
 mbco:constraint a owl:Class ;
     rdfs:label "Constraint" ;
     rdfs:subClassOf mbco:statement ;		    
-    owl:disjointUnionOf (mbco:qualitative_constraint mbco:quantitative_constraint) .
+    owl:disjointUnionOf (mbco:qualitative_constraint mbco:quantitative_constraint) ;
+    rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_part ;
+        owl:someValuesFrom mbco:variable] .
 
 mbco:qualitative_constraint a owl:Class ;
     rdfs:label "Qualitative constraint" ;
-    rdfs:comment "Examples of qualtitative constraints are: step X follows (directly) step Y; step X requires participant Y; step X requires input Y; physical location constraint."^^xs:string .
+    rdfs:comment "Examples of qualitative constraints are: step X follows (directly) step Y; step X requires participant Y; step X requires input Y; physical location constraint."^^xs:string .
 
 mbco:quantitative_constraint a owl:Class ;
     rdfs:label "Quantitative constraint" ;
@@ -239,6 +242,11 @@ ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
     mbco:has_precision_level mbco:LOW .       
 #    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
 
+ex:POTENTIOSTAT a mbco:characterization_device .
+ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable .
+ex:ACTIVE_MATERIAL_POTENTIALS a mbco:continuum_variable .
+ex:DPD_MODEL_PARAMETRIZATION_1 a mbco:model_parametrization . 
+
 ex:DPD_DATA_ANALYSIS a mbco:process ;
     mbco:has_participant [a mbco:agent] .		   
 
@@ -291,7 +299,8 @@ ex:COMPARISON_EXAMPLE_PROBLEM
     mbco:has_part ex:TARGET_1 .
 
 ex:GOAL_2 a mbco:qualitative_constraint ;
-    rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string .
+    rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string ;
+    mbco:has_part ex:DIFFUSION_COEFFICIENT .
 
 ex:TARGET_1 a mbco:target ;
    rdfs:comment "Maximize precision and minimize cost"^^xs:string .
