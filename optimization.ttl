@@ -218,100 +218,100 @@ mbco:has_confidence_level a owl:ObjectProperty ;
 #
 # Other: design_parameters, operating conditions, cost, KPI
 
-####################################################################################
-# EXAMPLES below: Put here temporarily only, just for simplicity
-####################################################################################
+# ####################################################################################
+# # EXAMPLES below: Put here temporarily only, just for simplicity -> moved to a separate file
+# ####################################################################################
 
-@prefix ex: <https://batcat.info/semantics/example#> .
+# @prefix ex: <https://batcat.info/semantics/example#> .
 
-ex:GITT_TEST a mbco:method ;
-    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-    mbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
-    mbco:has_participant ex:POTENTIOSTAT ;
-    mbco:has_participant [a mbco:sample] ;
-    mbco:has_participant [a mbco:agent] ;
-    mbco:has_cost_level mbco:HIGH ;
-    mbco:has_precision_level mbco:HIGH .       
+# ex:GITT_TEST a mbco:method ;
+#     mbco:has_output ex:DIFFUSION_COEFFICIENT ;
+#     mbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
+#     mbco:has_participant ex:POTENTIOSTAT ;
+#     mbco:has_participant [a mbco:sample] ;
+#     mbco:has_participant [a mbco:agent] ;
+#     mbco:has_cost_level mbco:HIGH ;
+#     mbco:has_precision_level mbco:HIGH .       
 
-ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
-    mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
-    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-    mbco:has_participant [a mbco:computational_device] ;
-    mbco:has_participant [a mbco:software] ; # E.g., license access needed
-    mbco:has_cost_level mbco:MEDIUM ;
-    mbco:has_precision_level mbco:LOW .       
-#    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
+# ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
+#     mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
+#     mbco:has_output ex:DIFFUSION_COEFFICIENT ;
+#     mbco:has_participant [a mbco:computational_device] ;
+#     mbco:has_participant [a mbco:software] ; # E.g., license access needed
+#     mbco:has_cost_level mbco:MEDIUM ;
+#     mbco:has_precision_level mbco:LOW .       
+# #    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
 
-ex:POTENTIOSTAT a mbco:characterization_device .
-ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable .
-ex:ACTIVE_MATERIAL_POTENTIALS a mbco:continuum_variable .
-ex:DPD_MODEL_PARAMETRIZATION_1 a mbco:model_parametrization . 
+# ex:POTENTIOSTAT a mbco:characterization_device .
+# ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable .
+# ex:ACTIVE_MATERIAL_POTENTIALS a mbco:continuum_variable .
+# ex:DPD_MODEL_PARAMETRIZATION_1 a mbco:model_parametrization . 
 
-ex:DPD_DATA_ANALYSIS a mbco:process ;
-    mbco:has_participant [a mbco:agent] .		   
+# ex:DPD_DATA_ANALYSIS a mbco:process ;
+#     mbco:has_participant [a mbco:agent] .		   
 
-ex:DPD_SIMULATION_SETTING_UP a mbco:process ;
-    mbco:has_participant [a mbco:agent] .
+# ex:DPD_SIMULATION_SETTING_UP a mbco:process ;
+#     mbco:has_participant [a mbco:agent] .
 
-ex:EXPERIMENT_SETTING_UP a mbco:process ;
-    mbco:has_participant [a mbco:agent] .		   
+# ex:EXPERIMENT_SETTING_UP a mbco:process ;
+#     mbco:has_participant [a mbco:agent] .		   
 
-ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
-    a mbco:logic_based_problem ;
-    a mbco:optimization_problem ;
-    rdfs:comment "An example about running simulations"^^xs:string ;
-    mbco:has_part ex:GOAL_1 ;
-    mbco:has_part ex:TARGET_2 ;
-    mbco:has_part ex:CONSTRAINT_1 ;
-    mbco:has_part ex:CONSTRAINT_2 ;
-    mbco:has_part ex:CONSTRAINT_3 ;
-    mbco:has_part ex:INITIAL_STATUS_1 .
+# ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
+#     a mbco:logic_based_problem ;
+#     a mbco:optimization_problem ;
+#     rdfs:comment "An example about running simulations"^^xs:string ;
+#     mbco:has_part ex:GOAL_1 ;
+#     mbco:has_part ex:TARGET_2 ;
+#     mbco:has_part ex:CONSTRAINT_1 ;
+#     mbco:has_part ex:CONSTRAINT_2 ;
+#     mbco:has_part ex:CONSTRAINT_3 ;
+#     mbco:has_part ex:INITIAL_STATUS_1 .
 
-ex:GOAL_1 a mbco:goal ;
-   rdfs:comment "Allocate human and computational devices to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
+# ex:GOAL_1 a mbco:goal ;
+#    rdfs:comment "Allocate human and computational devices to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
 
-ex:INITIAL_STATUS_1 a mbco:initial_status ;
-   rdfs:comment "Human and computational devices are available and operational. Needed software is installed"^^xs:string .
+# ex:INITIAL_STATUS_1 a mbco:initial_status ;
+#    rdfs:comment "Human and computational devices are available and operational. Needed software is installed"^^xs:string .
 
-ex:TARGET_2 a mbco:target ;
-   rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
+# ex:TARGET_2 a mbco:target ;
+#    rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
 
-ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
-    rdfs:comment "There is only one available agent"^^xs:string .
+# ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
+#     rdfs:comment "There is only one available agent"^^xs:string .
 
-ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
-    rdfs:comment "There are two available computational devices"^^xs:string .
+# ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
+#     rdfs:comment "There are two available computational devices"^^xs:string .
 
-ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
-    rdfs:comment "A computational method must be used"^^xs:string .
+# ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
+#     rdfs:comment "A computational method must be used"^^xs:string .
 
-ex:DPD_SIMULATION_RUN 
-    mbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
-    mbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
+# ex:DPD_SIMULATION_RUN 
+#     mbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
+#     mbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
 
-ex:DPD_DATA_ANALYSIS mbco:followsdirectly ex:DPD_SIMULATION_RUN .
+# ex:DPD_DATA_ANALYSIS mbco:followsdirectly ex:DPD_SIMULATION_RUN .
 
-ex:COMPARISON_EXAMPLE_PROBLEM
-    a mbco:logic_based_problem ;
-    a mbco:optimization_problem ;
-    rdfs:comment "An example about comparing simulations or experiments"^^xs:string ;
-    mbco:has_part ex:GOAL_2 ;
-    mbco:has_part ex:TARGET_1 .
+# ex:COMPARISON_EXAMPLE_PROBLEM
+#     a mbco:logic_based_problem ;
+#     a mbco:optimization_problem ;
+#     rdfs:comment "An example about comparing simulations or experiments"^^xs:string ;
+#     mbco:has_part ex:GOAL_2 ;
+#     mbco:has_part ex:TARGET_1 .
 
-ex:GOAL_2 a mbco:qualitative_constraint ;
-    rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string ;
-    mbco:has_part ex:DIFFUSION_COEFFICIENT .
+# ex:GOAL_2 a mbco:qualitative_constraint ;
+#     rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string ;
+#     mbco:has_part ex:DIFFUSION_COEFFICIENT .
 
-ex:TARGET_1 a mbco:target ;
-   rdfs:comment "Maximize precision and minimize cost"^^xs:string .
+# ex:TARGET_1 a mbco:target ;
+#    rdfs:comment "Maximize precision and minimize cost"^^xs:string .
 
-ex:SOLUTION_COMPARISON a mbco:solution ;
-   mbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
-   mbco:uses_method [a mbco:answer_set_programming] .
+# ex:SOLUTION_COMPARISON a mbco:solution ;
+#    mbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
+#    mbco:uses_method [a mbco:answer_set_programming] .
 
-ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
-   mbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
-   mbco:uses_method [a mbco:answer_set_programming] .
+# ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
+#    mbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
+#    mbco:uses_method [a mbco:answer_set_programming] .
 
 ####################################################################################
 # See also:
