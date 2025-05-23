@@ -1,5 +1,5 @@
 # mbco
-Minimal BatCAT Core Ontologies
+(Minimal) BatCAT Core Ontologies
 
 Tentative modules will cover:
 

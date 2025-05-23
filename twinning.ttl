@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/twinning#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
-  owl:versionInfo "version 0.0.2"^^xs:string ;
-  dcterms:modified "2025-05-12"^^xs:string ;
+  owl:versionInfo "version 0.0.3"^^xs:string ;
+  dcterms:modified "2025-05-23"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -30,15 +30,16 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-# CAVEAT: Duplicated here from modelling.ttl. remove it there???
-mbco:digital_twinning a owl:Class ; # TOSEE: OK?
+# CAVEAT: Duplicated here from modelling.ttl for convenience
+mbco:digital_twinning a owl:Class ; 
     rdfs:label "Digital twinning" ;
     rdfs:subClassOf mbco:computational_modelling_method .
 mbco:computational_modelling_method rdfs:subClassOf mbco:method .    
+# end of duplication
 
-mbco:digital_twin a owl:Class ; 
-    rdfs:label "Digital twin" ;
-    rdfs:subClassOf mbco:software ; # TOSEE:OK?
+mbco:digital_twin_model a owl:Class ; 
+    rdfs:label "Digital twin model" ;
+    rdfs:subClassOf mbco:data ; # TOSEE: define a model class?
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:represents ;
                    owl:someValuesFrom owl:Thing] ;
