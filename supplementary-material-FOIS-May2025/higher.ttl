@@ -1,0 +1,177 @@
+@prefix mbco: <https://batcat.info/semantics/core#> .
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
+
+<https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
+  owl:versionInfo "version 0.1.3"^^xs:string ;
+  dcterms:modified "2025-05-12"^^xs:string ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
+  dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain, 
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+mbco:agent a owl:Class ;
+    rdfs:label "Agent" ;
+    owl:disjointUnionOf (mbco:human_agent mbco:machine_agent) .
+
+mbco:human_agent a owl:Class ;
+    rdfs:label "Human agent" .
+
+mbco:machine_agent a owl:Class ;
+    rdfs:label "Machine agent" .
+
+mbco:data a owl:Class ;
+    rdfs:label "Data" .
+
+mbco:material a owl:Class ;
+    rdfs:label "Material" .
+
+mbco:process a owl:Class ;
+    rdfs:label "Process" ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_participant ; 
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_setting ;
+                   owl:someValuesFrom owl:Thing] .		   
+
+mbco:process_step a owl:Class ;
+    rdfs:label "Process step" ;
+    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty [owl:inverseOf mbco:has_part] ;
+                   owl:someValuesFrom mbco:process] .
+
+mbco:software a owl:Class ;
+    rdfs:label "Software" .
+
+mbco:physical_object a owl:Class ;
+    rdfs:label "(Physical) Object" . 
+
+mbco:sample a owl:Class ;
+    rdfs:label "Sample" ;
+    rdfs:subClassOf mbco:physical_object .
+
+mbco:device a owl:Class ;
+    rdfs:label "Device" ;
+    rdfs:subClassOf mbco:physical_object ;
+    rdfs:comment "A physical object made for a given functionality"^^xs:string .
+
+mbco:computational_device a owl:Class ;
+    rdfs:label "Computational device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a (digital) computational action."^^xs:string ;
+    rdfs:comment "E.g., a PC, a computational cluster."^^xs:string .
+
+mbco:characterization_device a owl:Class ;
+    rdfs:label "Characterization device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a characterization action."^^xs:string ;
+    rdfs:comment "E.g., a potentiostat."^^xs:string .
+
+mbco:manufacturing_device a owl:Class ;
+    rdfs:label "Manufacturing device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a manufacturing action"^^xs:string ;
+    rdfs:comment "E.g., a mixer, a calenderer."^^xs:string .    
+
+mbco:method a owl:Class ;
+    rdfs:label "Method" ; 
+    rdfs:comment "Could be a characterization method, a simulation method, a manufacturing method, etc."^^xs:string ;
+    rdfs:subClassOf mbco:process . 
+
+mbco:compute_resource a owl:Class ;
+    rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
+    rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
+    a owl:DeprecatedClass .
+
+mbco:statement a owl:Class ;
+    rdfs:label "Statement" . # Note: in EVMPO, statement is used for elementary communications. Here not, it is more general.   
+
+mbco:role a owl:Class ;
+    rdfs:label "Role" ;
+    rdfs:comment "A non-rigid category (i.e., during its lifespan, an entity can change role)."^^xs:string ;
+    rdfs:comment """For example: role of a human agent in an organization (employee/director), in a software repository (editor/owner); 
+    role of a variable in a mathematical problem (dependent/independent/parameter)."""^^xs:string .
+
+mbco:status a owl:Class ;
+    rdfs:label "Status" ;
+    rdfs:comment "For an single object or a system. E.g.: the software is installed/not-installed; the device is on/off, operational/faulty, the agent is available/busy, etc."^^xs:string .
+
+mbco:annotation a owl:Class ;
+    rdfs:label "Annotation" ;
+    rdfs:comment "Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module"^^xs:string .
+
+### Object Properties ###
+
+mbco:has_part a owl:ObjectProperty ;
+    rdfs:label "has part" . 
+
+mbco:has_participant a owl:ObjectProperty ;
+    rdfs:domain mbco:process ;
+    rdfs:range [owl:unionOf (mbco:agent mbco:physical_object mbco:compute_resource mbco:software)] .
+
+mbco:follows a owl:ObjectProperty ;
+    rdfs:label "follows" ;
+    rdfs:domain mbco:process_step ;
+    rdfs:range mbco:process_step .
+
+mbco:follows_directly a owl:ObjectProperty ;
+    rdfs:label "follows directly" ;
+    rdfs:domain mbco:process_step ;
+    rdfs:range mbco:process_step ;
+    rdfs:subPropertyOf mbco:follows .
+
+mbco:has_input a owl:ObjectProperty ;
+   rdfs:label "has input" .
+
+mbco:has_output a owl:ObjectProperty ;
+   rdfs:label "has output" .
+
+mbco:has_setting a owl:ObjectProperty ;
+   rdfs:label "has setting" ;
+   rdfs:comment "Settings, conditions affecting the process."^^xs:string . 
+
+mbco:uses_method a owl:ObjectProperty ;
+   rdfs:label "uses method" ;
+   rdfs:range mbco:method .
+
+mbco:answers a owl:ObjectProperty ;
+    rdfs:domain mbco:statement ; 
+    rdfs:range mbco:statement .
+    
+mbco:has_status a owl:ObjectProperty ;
+    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:compute_resource mbco:software)] ;
+    rdfs:range mbco:status .
+
+### Datatype Properties ###
+
+# see also: EMMO-LITE, DOLCE-LITE, EVMPO.
+
