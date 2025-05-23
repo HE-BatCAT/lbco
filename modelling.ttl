@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.2"^^xs:string ;
-  dcterms:modified "2025-05-12"^^xs:string ;
+  owl:versionInfo "version 0.0.3"^^xs:string ;
+  dcterms:modified "2025-05-23"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -80,6 +80,10 @@ mbco:rfb_length_scale a owl:Class ;
 
 mbco:lib_length_scale a owl:Class ;
     owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
+    rdfs:subClassOf mbco:annotation .
+
+mbco:physical_quantity a owl:Class ;
+    rdfs:label "Physical quantity" ;
     rdfs:subClassOf mbco:annotation .
 
 ### Object Properties ###
