@@ -13,7 +13,7 @@
 
 <https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.0.3"^^xs:string ;
-  dcterms:modified "2025-05-23"^^xs:string ;
+  dcterms:modified "2025-05-24"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -77,7 +77,8 @@ mbco:has_action_type a owl:ObjectProperty ;
     rdfs:range mbco:digital_twin_action .
 
 mbco:has_generality_level a owl:ObjectProperty ;
-    rdfs:label "has generality level" . 
+    rdfs:label "has generality level" ;
+    rdfs:range mbco:generality_level .
     
 ### Datatype Properties ###
 
@@ -92,13 +93,13 @@ mbco:has_synchronization_rate a owl:DatatypeProperty ;
 
 @prefix ex: <https://batcat.info/semantics/example#> .
 
-ex:DT_LIB_CELL_C032 a mbco:digital_twin ;
-mbco:has_generality_level mbco:TYPE ;
-    rdfs:comment """Digital twin of a LiB cell of type C032
-    the digital entity and its target entity happens"""^^xs:string .
+ex:DT_LIB_CELL_C032 a mbco:digital_twin_model ;
+    mbco:has_generality_level mbco:TYPE ;
+    rdfs:comment "Digital twin of a LiB cell of type C032"^^xs:string .
 
-ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin ;
-mbco:has_generality_level mbco:INDIVIDUAL ;
-mbco:has_synchronization_rate 1.0 .
+ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
+    mbco:has_generality_level mbco:INDIVIDUAL ;
+    mbco:has_synchronization_rate 1.0 ;
+    rdfs:comment "Digital twin of a specific LiB cell of type C032, identified by its PID"^^xs:string .
 
 ####################################################################################

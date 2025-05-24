@@ -49,7 +49,6 @@ ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
     mbco:has_participant [a mbco:software] ; # E.g., license access needed
     mbco:has_cost_level mbco:MEDIUM ;
     mbco:has_precision_level mbco:LOW .       
-#    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
 
 ex:POTENTIOSTAT a mbco:characterization_device .
 ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable ;
