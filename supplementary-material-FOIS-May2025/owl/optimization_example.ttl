@@ -10,7 +10,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/scenarios/optimization_example#> dcterms:title "BatCAT core ontologies: Optimization example"^^xs:string ;
+<https://batcat.info/semantics/scenarios/optimization_example#> dcterms:title "Minimal BatCAT core ontologies: Optimization example"^^xs:string ;
   owl:versionInfo "version 0.1.0"^^xs:string ;
   dcterms:modified "2025-05-23"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;

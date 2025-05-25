@@ -11,7 +11,7 @@
 
 <https://batcat.info/semantics/core/twinning#> a owl:Ontology .
 
-<https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
+<https://batcat.info/semantics/core/twinning#> dcterms:title "Minimal BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.0.3"^^xs:string ;
   dcterms:modified "2025-05-24"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;

@@ -11,7 +11,7 @@
 
 <https://batcat.info/semantics/core/optimization#> a owl:Ontology .
 
-<https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
+<https://batcat.info/semantics/core/optimization#> dcterms:title "Minimal BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
   owl:versionInfo "version 0.1.5"^^xs:string ;
   dcterms:modified "2025-05-23"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
