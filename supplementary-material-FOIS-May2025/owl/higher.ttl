@@ -173,5 +173,4 @@ mbco:has_status a owl:ObjectProperty ;
 
 ### Datatype Properties ###
 
-# see also: EMMO-LITE, DOLCE-LITE, EVMPO.
 

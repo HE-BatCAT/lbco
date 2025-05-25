@@ -57,7 +57,7 @@ mbco:optimization_method a owl:Class ;
 
 mbco:answer_set_programming a owl:Class ;
     rdfs:label "Answer Set Programming (ASP)" ;
-    rdfs:subClassOf mbco:optimization_method ; # correct??? It is a "logic programming method/paradigm"
+    rdfs:subClassOf mbco:optimization_method ; 
     rdfs:comment "A logic programming paradigm, tailored to search problems. (See Wikipedia)"^^xs:string .
 
 mbco:multi_criteria_optimization a owl:Class ;
@@ -177,7 +177,7 @@ mbco:process_design a owl:Class ;
     rdfs:label "Process design" ;
     rdfs:comment "Process design (e.g., simulation, experiment)"^^xs:string ;
     rdfs:subClassOf mbco:logic_based_problem ;
-    rdfs:subClassOf mbco:numerical_problem . # right?
+    rdfs:subClassOf mbco:numerical_problem . 
 
 mbco:process_sequence_validation a owl:Class ;
     rdfs:label "Process sequence validation" ;
