@@ -19,6 +19,7 @@ Battery specific modules:
 - Battery (LiB and RFB)
 
 =========================================
+
 Examples:
 
 - Optimization examples (-> optimization_example.ttl)
