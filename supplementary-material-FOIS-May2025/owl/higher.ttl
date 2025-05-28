@@ -108,7 +108,7 @@ mbco:method a owl:Class ;
     rdfs:subClassOf mbco:process . 
 
 mbco:compute_resource a owl:Class ;
-    rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
+    rdfs:label "Compute resource" ; 
     rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
     a owl:DeprecatedClass .
 
