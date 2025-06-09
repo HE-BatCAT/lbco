@@ -12,8 +12,8 @@ Transversal modules:
 
 Vertical modules:
 - Modelling and simulation (-> modelling.ttl)
-- Characterization
-- Manufacturing
+- Characterization (-> characterization.ttl)
+- Manufacturing (-> manufacturing.ttl)
 
 Battery specific modules:
 - Battery (LiB and RFB)

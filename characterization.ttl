@@ -1,0 +1,89 @@
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/characterization#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/characterization#> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
+   owl:versionInfo "version 0.0.1"^^xs:string ;
+   dcterms:modified "2025-06-09"^^xs:string ;
+   owl:imports <https://batcat.info/semantics/core#> ;
+   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:sample a owl:Class ;
+     rdfs:label "Sample" ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:sample_history a owl:Class ;
+     rdfs:label "Sample history" ;
+     rdfs:subClassOf mbco:data ;
+     rdfs:comment """Track the whole history (across laboratories) of each experimental sample being 
+characterized in BatCAT. It includes input and preparation conditions, records all processes undergone by a sample, 
+including its artificial / accelerated ageing."""^^xs:string. 
+
+mbco:batch a owl:Class ;
+     rdfs:label "Batch" ;
+     rdfs:comment "A batch of experimental samples or products, acquired or manufactured/prepared."^^xs:string ;
+     rdfs:subClassOf mbco:physical_object .     
+
+mbco:characterization_technique a owl:Class ;
+     rdfs:label "Characterization technique" ;
+     rdfs:subClassOf mbco:method .
+
+mbco:characterization_measurement a owl:Class ;
+     rdfs:label "Characterization measurement" ;
+     rdfs:subClassOf mbco:process .
+
+mbco:batch rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:sample] .
+
+mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA
+     rdfs:label "Sensor" ;
+     rdfs:subClassOf mbco:device .     
+
+mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TOSEE: duplicated in Manufacturing module
+     rdfs:label "Actuator" ;
+     rdfs:subClassOf mbco:device .     
+
+### Object Properties ###
+
+mbco:has_sample_history a owl:ObjectProperty ;
+     rdfs:label "has sample history" ;
+     rdfs:domain mbco:sample ;
+     rdfs:range mbco:sample_history .
+
+### Datatype Properties ###
+
+mbco:has_sample_ID a owl:DatatypeProperty ;
+    rdfs:label "has sample ID" ;
+    rdfs:domain mbco:sample .
+
+mbco:has_batch_ID a owl:DatatypeProperty ;
+    rdfs:label "has batch ID" ;
+    rdfs:domain mbco:batch .
+
+####################################################################################
+
+
