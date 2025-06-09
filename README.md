@@ -16,7 +16,7 @@ Vertical modules:
 - Manufacturing (-> manufacturing.ttl)
 
 Battery specific modules:
-- Battery (LiB and RFB)
+- Battery (LiB and RFB) (-> battery.ttl)
 
 =========================================
 

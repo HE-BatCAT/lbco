@@ -1,0 +1,239 @@
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/battery#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
+  owl:versionInfo "version 0.0.1"^^xs:string ;
+  dcterms:modified "2025-06-09"^^xs:string ;
+#  owl:imports <https://batcat.info/semantics/core#> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Sara Drvaric Talian (ORCID 0000-0003-1355-2843)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:lithium_ion_battery a owl:Class ;
+     rdfs:label "Lithium-ion battery (LiB)" ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:redox_flow_battery a owl:Class ;
+     rdfs:label "Redox-flow battery (RFB)" ;
+     rdfs:subClassOf mbco:physical_object .
+
+# LiB main components. based on CQ_CRO_10 (from Excel sheet) NB: not all entries included. Coating added (from MIRO)
+# (CQ_CRO_10: Active material, Binder, Percolant, slurry solvent, slurry, coated electrode, calendered electrode, electrode, separator, electrolyte, collector, battery cell, casing)
+mbco:lithium_ion_battery
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:active_material] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:binder] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:percolant] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:electrode] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:separator] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:electrolyte] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:collector] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:casing] ;
+     rdfs:subClassOf [a owl:Restriction ;
+     owl:onProperty mbco:has_part ;
+     owl:someValuesFrom mbco:coating] .
+
+# CQ_CRO_4: RFB main components
+mbco:redox_flow_battery
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_part ;
+	owl:someValuesFrom mbco:bipolar_plate] ;
+        rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_part ;
+	owl:someValuesFrom mbco:membrane] ;
+        rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_part ;
+	owl:someValuesFrom mbco:carbon_felt] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_part ;
+	owl:someValuesFrom mbco:electrolyte] .
+
+# CQ_MAN_9.1: LiB product KPIs.
+mbco:lithium_ion_battery
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_kpi ;
+	owl:someValuesFrom mbco:full_cell_initial_performance] ; # TOSEE: initial_performance -> full_cell_*: OK?
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_kpi ;
+	owl:someValuesFrom mbco:full_cell_ageing] ; # TOSEE: keep it???
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_kpi ;
+	owl:someValuesFrom mbco:full_cell_safety] . # TOSEE: keep it???
+
+# CQ_MAN_9.2: RFB product KPIs. TOSEE: add "efficiency"? (removed currently)
+mbco:redox_flow_battery
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_kpi ;
+	owl:someValuesFrom mbco:round_trip_efficiency] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_kpi ;
+	owl:someValuesFrom mbco:full_cell_capacity] ; # TOSEE: capacity -> full_cell_capacity: OK?
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_kpi ;
+	owl:someValuesFrom mbco:full_cell_durability] . # TOSEE: durability -> full_cell_durability: OK?
+
+### Object Properties ###
+
+###############################################
+# NB: these classes below (for physical objects and properties) are just stubs
+# TODO: add labels, etc (and connect to BattINFO etc):
+
+mbco:active_material a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:binder a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:percolant a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:electrode a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:separator a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:electrolyte a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:collector a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:casing a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:coating a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:bipolar_plate a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:membrane a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:carbon_felt a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:full_cell_initial_performance a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:full_cell_ageing a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:full_cell_capacity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:full_cell_durability a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:round_trip_efficiency a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:full_cell_safety a owl:Class ;
+     rdfs:subClassOf mbco:annotation .
+
+####################################################################################
+# Based (partially) on CQ_EXP_3 and CQ_EXP_3.2 
+
+mbco:electrode_porosity  a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrode_conductivity  a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrode_tortuosity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:coating_thickness a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:active_material_potential a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:active_material_granulometry a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:active_material_diffusion a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:full_cell_power a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:felt_porosity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:felt_thickness a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:felt_conductivity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:felt_hydraulic_resistance a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:membrane_thickness a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:membrane_conductivity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrolyte_viscosity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrolyte_cyclic_voltametry a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+# Slurry properties, Coating thickness, Active materials
+# potential, Active material granulometry, Active
+# material diffusion, Electrode conductivity, Electrode
+# porosity, Electrode tortuosity, Full cell capacity, Full cell
+# power, Full cell aging
+
+# Electrolyte viscosity, Electrolyte cyclic voltametry, Felt
+# surface properties, Felt porosity, Felt thickness, Felt
+# conductivity, Felt hydraulic resistance, Membrane
+# thickness, Membrane conductivity, Full cell cycling,
+# Post mortem analysis of aged components
+
+####################################################################################
+mbco:physical_quantity a owl:Class ; # Duplicated here from modelling. To be updated
+     rdfs:subClassOf mbco:annotation .
+####################################################################################
