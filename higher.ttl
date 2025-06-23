@@ -177,6 +177,9 @@ mbco:has_status a owl:ObjectProperty ;
     rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:compute_resource mbco:software)] ;
     rdfs:range mbco:status .
 
+mbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
+    rdfs:range mbco:property .
+
 ### Datatype Properties ###
 
 # see also: EMMO-LITE, DOLCE-LITE, EVMPO.
