@@ -33,7 +33,8 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 mbco:agent a owl:Class ;
     rdfs:label "Agent" ;
-    owl:disjointUnionOf (mbco:human_agent mbco:machine_agent) .
+    owl:disjointUnionOf (mbco:human_agent mbco:machine_agent) ;
+    rdfs:comment "An entity that has the capability to act"^^xs:string .    
 
 mbco:human_agent a owl:Class ;
     rdfs:label "Human agent" .
