@@ -13,7 +13,7 @@
 
 <https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
   owl:versionInfo "version 0.1.5"^^xs:string ;
-  dcterms:modified "2025-05-23"^^xs:string ;
+  dcterms:modified "2025-06-23"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -130,7 +130,9 @@ mbco:optimization_problem  # TOSEE: Do these restrictions apply to all problems?
 mbco:coarse_amount_level a owl:Class ; # TOSEE: create a "quantifier" class? TOSEE: move this to "higher" module?
     rdfs:label "(Coarse) Amount level" ;
     owl:oneOf (mbco:LOW mbco:MEDIUM mbco:HIGH) ;
-    rdfs:subClassOf mbco:annotation . # ok?
+    rdfs:subClassOf mbco:annotation ; # ok?
+    rdfs:comment """A coarse quantifier. It can be used as part of a traffic light system to enable users to select options 
+in an easy and coarse way, for properties where this is suitable."""^^xs:string .
 
 mbco:initial_status a owl:Class ; 
     rdfs:label "Initial status" ;
