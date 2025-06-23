@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.3"^^xs:string ;
-  dcterms:modified "2025-05-23"^^xs:string ;
+  owl:versionInfo "version 0.0.4"^^xs:string ;
+  dcterms:modified "2025-06-23"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -35,6 +35,7 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 mbco:model_parametrization a owl:Class ;
     rdfs:label "Model parametrization" ;
+#    skos:altLabel "Model parameters" ;
     rdfs:subClassOf mbco:data .
 
 mbco:computational_modelling_method a owl:Class ;
@@ -71,20 +72,26 @@ mbco:model_parametrization_process a owl:Class ;
 # From CQ_CRO_3
 mbco:time_scale a owl:Class ;
     owl:oneOf (mbco:INDUSTRIAL_SAFETY_TIME_SCALE mbco:INTERMEDIATE_TIME_SCALE mbco:PLANNING_TIME_SCALE) ;
-    rdfs:subClassOf mbco:annotation .
+    rdfs:subClassOf mbco:annotation ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+ to specify which one it addresses"""^^xs:string .
 
 # From CQ_CRO_9. Move to battery module later?
 mbco:rfb_length_scale a owl:Class ;
     owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
-    rdfs:subClassOf mbco:annotation .
+    rdfs:subClassOf mbco:annotation ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
 
 mbco:lib_length_scale a owl:Class ;
     owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
-    rdfs:subClassOf mbco:annotation .
+    rdfs:subClassOf mbco:annotation ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
 
 mbco:physical_quantity a owl:Class ;
     rdfs:label "Physical quantity" ;
-    rdfs:subClassOf mbco:annotation .
+    rdfs:subClassOf mbco:property .
 
 ### Object Properties ###
 
