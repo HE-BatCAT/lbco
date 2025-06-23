@@ -12,9 +12,10 @@
 <https://batcat.info/semantics/core/battery#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.1"^^xs:string ;
-  dcterms:modified "2025-06-09"^^xs:string ;
-#  owl:imports <https://batcat.info/semantics/core#> ;
+  owl:versionInfo "version 0.0.2"^^xs:string ;
+  dcterms:modified "2025-06-23"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -34,14 +35,17 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 mbco:lithium_ion_battery a owl:Class ;
      rdfs:label "Lithium-ion battery (LiB)" ;
-     rdfs:subClassOf mbco:physical_object .
-
+     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf mbco:whole_product .
+     
 mbco:redox_flow_battery a owl:Class ;
      rdfs:label "Redox-flow battery (RFB)" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf mbco:whole_product .
 
 # LiB main components. based on CQ_CRO_10 (from Excel sheet) NB: not all entries included. Coating added (from MIRO)
 # (CQ_CRO_10: Active material, Binder, Percolant, slurry solvent, slurry, coated electrode, calendered electrode, electrode, separator, electrolyte, collector, battery cell, casing)
+# NB: I am not adding slurry, slurry solvent, coated electrode and battery cell as I think they belong elsewhere.
 mbco:lithium_ion_battery
      rdfs:subClassOf [a owl:Restriction ;
      owl:onProperty mbco:has_part ;
@@ -233,7 +237,129 @@ mbco:electrolyte_cyclic_voltametry a owl:Class ;
 # thickness, Membrane conductivity, Full cell cycling,
 # Post mortem analysis of aged components
 
+# Addiditional quantities (from the Characterization Master File):
+
+mbco:slurry_solid_content a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
 ####################################################################################
 mbco:physical_quantity a owl:Class ; # Duplicated here from modelling. To be updated
-     rdfs:subClassOf mbco:annotation .
+     rdfs:subClassOf mbco:property .
 ####################################################################################
+
+# product design parameters
+# CQ_MAN_6.1: LiB product design parameters: Active material choice, Formulation, Particle Size Disitribution (PSD), Electrolyte composition, Separator, Size
+
+mbco:electrolyte_formulation a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrolyte_composition a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:particle_size_distribution a owl:Class ; # TOSEE: of what particles?
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:cell_size a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:current_density a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:ion_species_concentration a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrode_base_material a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:volume_flow_rate a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:lithium_ion_battery
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:active_material] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:electrolyte_formulation] ; # TOSEE: "electrolyte" added. OK?
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:particle_size_distribution] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:electrolyte_composition] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:separator] ; # TOSEE: what needs to be chosen? The separator material? or?
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:cell_size] . # TOSEE: "cell" added. OK?
+
+# CQ_MAN_6.2: RFB product design parameters: Current density, Ion species concentration, Electrode base material, Volume flow rate, Product dimensions
+
+mbco:redox_flow_battery
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:current_density] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:ion_species_concentration] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:electrode_base_material] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:volume_flow_rate] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_product_design_parameter ;
+	owl:someValuesFrom mbco:cell_size] . # TOSEE: renamed from "product dimensions" -> cell size
+
+# Manufacturing process KPIs
+# CQ_MAN_8.1 KPIs for LiB man. process: Scrap (rate), Production cost (per unit)
+# CQ_MAN_8.2 KPIs for RFB man. process: Production performance, Production cost, Throughput failure rate
+
+mbco:lib_manufacturing_process a owl:Class ;
+     rdfs:label "LiB manufacturing process" ;
+     rdfs:subClassOf mbco:process .
+
+mbco:rfb_manufacturing_process a owl:Class ;
+     rdfs:label "RFB manufacturing process" ;
+     rdfs:subClassOf mbco:process .
+
+mbco:scrap_rate a owl:Class ;
+     rdfs:label "Scrap rate" ;
+     rdfs:subClassOf mbco:property .
+
+mbco:production_performance a owl:Class ;
+     rdfs:label "Production performance" ;
+     rdfs:subClassOf mbco:property ;
+     rdfs:comment "The performance/efficiency of production."^^xs:string . # TODO: quantify better
+
+mbco:production_cost_per_unit a owl:Class ;
+     rdfs:label "Production cost per unit" ;
+     rdfs:subClassOf mbco:property . # TOSEE: annotation?
+
+mbco:throughput_failure_rate a owl:Class ;
+     rdfs:label "Throughput failure rate" ;
+     rdfs:subClassOf mbco:property . # TOSEE: annotation?
+
+mbco:lib_manufacturing_process
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:scrap_rate] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:production_cost_per_unit] .
+
+mbco:rfb_manufacturing_process 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:production_cost_per_unit] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:throughput_failure_rate] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:production_performance] .
+
+
+
