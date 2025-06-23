@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.1"^^xs:string ;
-   dcterms:modified "2025-06-09"^^xs:string ;
+   owl:versionInfo "version 0.0.2"^^xs:string ;
+   dcterms:modified "2025-06-23"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -65,9 +65,9 @@ mbco:has_product_design_parameter a owl:ObjectProperty ;
      rdfs:label "has product design parameter" ;
      rdfs:domain mbco:whole_product .
 
-mbco:has_product_KPI a owl:ObjectProperty ;
+mbco:has_product_kpi a owl:ObjectProperty ;
      rdfs:label "has product KPI" ;
-     rdfs:comment "Points to a Key Performance Indicator"^^xs:string ;
+     rdfs:comment "Points to a product Key Performance Indicator"^^xs:string ;
      rdfs:domain mbco:whole_product .
      
 mbco:has_product_operating_condition a owl:ObjectProperty ;
@@ -78,6 +78,11 @@ mbco:performs_action a owl:ObjectProperty ;
      rdfs:label "performs action" ;
      rdfs:domain mbco:actuator ;
      rdfs:range mbco:process . # TOSEE: define "action" class under "process" in higer.ttl?
+
+mbco:has_process_kpi a owl:ObjectProperty ;
+     rdfs:label "has process KPI" ;
+     rdfs:domain mbco:process ;	
+     rdfs:comment "Points to a process Key Performance Indicator"^^xs:string .
 
 ### Datatype Properties ###
 
