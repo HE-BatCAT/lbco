@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/battery#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.2"^^xs:string ;
-  dcterms:modified "2025-06-23"^^xs:string ;
+  owl:versionInfo "version 0.0.3"^^xs:string ;
+  dcterms:modified "2025-06-24"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -133,7 +133,7 @@ mbco:active_material a owl:Class ;
 	owl:someValuesFrom mbco:active_material_granulometry ] ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:active_material_diffusion] .
+	owl:someValuesFrom mbco:active_material_diffusion_coefficient] .
 
 mbco:binder a owl:Class ;
      rdfs:subClassOf mbco:physical_object .
@@ -151,7 +151,23 @@ mbco:electrode a owl:Class ;
 	owl:someValuesFrom mbco:electrode_conductivity] ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_tortuosity] .
+	owl:someValuesFrom mbco:electrode_tortuosity] ;
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrode_surface_area] ; # CQ_CRO_1
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrode_surface_chemical_composition] ; # CQ_CRO_1
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrode_surface_hydrophilicity] ; # CQ_CRO_1
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrode_surface_stability] ; # CQ_CRO_1
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrode_exchange_current_rate] . # CQ_CRO_1
+
 
 mbco:separator a owl:Class ;
      rdfs:subClassOf mbco:physical_object .
@@ -169,7 +185,16 @@ mbco:electrolyte a owl:Class ;
 	owl:someValuesFrom mbco:electrolyte_viscosity] ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_cyclic_voltametry] .
+	owl:someValuesFrom mbco:electrolyte_cyclic_voltametry] ;
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrolyte_ionic_conductivity] ;
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrolyte_mass_density] ;
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:electrolyte_purity ] .
 
 mbco:collector a owl:Class ;
      rdfs:subClassOf mbco:physical_object .
@@ -195,7 +220,9 @@ mbco:membrane a owl:Class ;
      	owl:onProperty mbco:has_property ;
 	owl:someValuesFrom mbco:membrane_conductivity] .
 
-mbco:carbon_felt a owl:Class ;
+mbco:carbon_felt a owl:Class ; # TODO: Add "surface properties". What are they?
+     rdfs:label "Carbon felt" ;
+     skos:altLabel "Felt" ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty mbco:has_property ;
@@ -243,8 +270,31 @@ mbco:round_trip_efficiency a owl:Class ;
 mbco:full_cell_safety a owl:Class ;
      rdfs:subClassOf mbco:annotation .
 
+# intermediate products (from various sources, including WP1 master file, MIRO board)
+
+mbco:slurry a owl:Class ;
+     rdfs:subClassOf mbco:intermediate_product ;
+     rdfs:subClassOf [a owl:Restriction ;
+     	owl:onProperty mbco:has_property ;
+	owl:someValuesFrom mbco:slurry_solid_content] .
+
+mbco:coated_electrode a owl:Class ;
+     rdfs:subClassOf mbco:intermediate_product .
+
+mbco:dried_coated_electrode a owl:Class ;
+     rdfs:subClassOf mbco:intermediate_product .
+
+mbco:calendered_electrode a owl:Class ;
+     rdfs:subClassOf mbco:intermediate_product .
+
+mbco:calendered_electrode a owl:Class ;
+     rdfs:subClassOf mbco:intermediate_product .
+
+mbco:thermally_activated_felt a owl:Class ;
+     rdfs:subClassOf mbco:intermediate_product .
+
 ####################################################################################
-# Based (partially) on CQ_EXP_3 and CQ_EXP_3.2 
+# Based (partially) on CQ_EXP_3 and CQ_EXP_3.2. CQ_CRO_1 and CQ_CRO_2
 
 mbco:electrode_porosity a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
@@ -253,6 +303,21 @@ mbco:electrode_conductivity a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrode_tortuosity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrode_surface_area a owl:Class ;
+     rdfs:subClassOf mbco:property .
+
+mbco:electrode_surface_chemical_composition a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrode_surface_hydrophilicity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrode_surface_stability a owl:Class ;
+     rdfs:subClassOf mbco:property .
+     
+mbco:electrode_exchange_current_rate a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:coating_thickness a owl:Class ;
@@ -264,7 +329,7 @@ mbco:active_material_potential a owl:Class ;
 mbco:active_material_granulometry a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
-mbco:active_material_diffusion a owl:Class ;
+mbco:active_material_diffusion_coefficient a owl:Class ; # TOSEE: "coefficient" added: OK?
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:full_cell_power a owl:Class ;
@@ -285,13 +350,22 @@ mbco:felt_hydraulic_resistance a owl:Class ;
 mbco:membrane_thickness a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
-mbco:membrane_conductivity a owl:Class ;
+mbco:membrane_conductivity a owl:Class ; # TOSEE: electrical?
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrolyte_viscosity a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrolyte_cyclic_voltametry a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrolyte_ionic_conductivity a owl:Class ; # CQ_CRO_2
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrolyte_mass_density a owl:Class ; # CQ_CRO_2
+     rdfs:subClassOf mbco:physical_quantity .
+
+mbco:electrolyte_purity a owl:Class ; # CQ_CRO_2
      rdfs:subClassOf mbco:physical_quantity .
 
 # Slurry properties, Coating thickness, Active materials
