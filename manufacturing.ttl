@@ -59,6 +59,57 @@ mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in C
      rdfs:label "Actuator" ;
      rdfs:subClassOf mbco:agent .
 
+# sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
+# TO SEE: 
+
+mbco:temperature_sensor a owl:Class ;
+     rdfs:label "Temperature sensor" ;
+     rdfs:subClassOf mbco:sensor .
+
+mbco:thermocouple a owl:Class ;
+     rdfs:label "Thermocouple" ;
+     rdfs:subClassOf mbco:temperature_sensor .
+
+mbco:accelerometer a owl:Class ;
+     rdfs:label "Accelerometer" ;
+     rdfs:subClassOf mbco:sensor .
+
+mbco:vibration_sensor a owl:Class ;
+     rdfs:label "Vibration sensor" ;
+     rdfs:subClassOf mbco:sensor .
+
+mbco:power_sensor a owl:Class ;
+     rdfs:label "Power sensor" ;
+     rdfs:subClassOf mbco:sensor .
+
+mbco:power_monitoring_clip a owl:Class ;
+     rdfs:label "Power monitoring clip" ;
+     rdfs:subClassOf mbco:power_sensor .
+
+mbco:gas_detection_sensor a owl:Class ;
+     rdfs:label "Gas detection sensor" ;
+     rdfs:subClassOf mbco:sensor .
+
+mbco:carbon_monoxide_sensor a owl:Class ;
+     rdfs:label "Carbon monoxide sensor" ;
+     skos:altTabel "CO sensor" ;
+     rdfs:subClassOf mbco:gas_detection_sensor .
+
+mbco:carbon_dioxide_sensor a owl:Class ;
+     rdfs:label "Carbon dioxide sensor" ;
+     skos:altTabel "CO2 sensor" ;
+     rdfs:subClassOf mbco:gas_detection_sensor .
+
+mbco:pressure_sensor a owl:Class ;
+     rdfs:label "Pressure sensor" ;
+     rdfs:subClassOf mbco:sensor .
+
+mbco:laser_profilometer a owl:Class ;
+     rdfs:label "Laser profilometer" ;
+     rdfs:subClassOf mbco:device ; 
+     rdfs:subClassOf mbco:characterization_device ; # TOSEE: not a sensor, OK? Should "on-line charaterization" be defined?
+     rdfs:comment "Can be used for on-line characterization (e.g., thickness measurement)"^^xs:string .
+
 ### Object Properties ###
 
 mbco:has_product_design_parameter a owl:ObjectProperty ;
