@@ -190,6 +190,21 @@ mbco:sensor
 	owl:onProperty mbco:has_connection ;
 	owl:allValuesFrom mbco:connection] .
 
+# CQ_MAN_4
+mbco:manufacturing_process 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:energy_consumption] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:equipment_performance] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:waste_produced] ; 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:product_quality] .
+
 # mbco:whole_product
 # 	rdfs:subClassOf [a owl:Restriction ;
 # 	owl:onProperty mbco:has_product_design_parameter ;
