@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.2"^^xs:string ;
-   dcterms:modified "2025-06-23"^^xs:string ;
+   owl:versionInfo "version 0.0.3"^^xs:string ;
+   dcterms:modified "2025-07-04"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -64,7 +64,10 @@ mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in C
 
 mbco:temperature_sensor a owl:Class ;
      rdfs:label "Temperature sensor" ;
-     rdfs:subClassOf mbco:sensor .
+     rdfs:subClassOf mbco:sensor ;
+     rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:temperature] . # TOSEE: why is the reasoner not deducing that temperature is a mbco:property?
 
 mbco:thermocouple a owl:Class ;
      rdfs:label "Thermocouple" ;
@@ -73,14 +76,23 @@ mbco:thermocouple a owl:Class ;
 mbco:accelerometer a owl:Class ;
      rdfs:label "Accelerometer" ;
      rdfs:subClassOf mbco:sensor .
+#     rdfs:subClassOf [a owl:Restriction ;
+#	owl:onProperty mbco:observes ;
+#	owl:allValuesFrom mbco:acceleration] .
 
 mbco:vibration_sensor a owl:Class ;
      rdfs:label "Vibration sensor" ;
      rdfs:subClassOf mbco:sensor .
+#     rdfs:subClassOf [a owl:Restriction ;
+#	owl:onProperty mbco:observes ;
+#	owl:allValuesFrom mbco:vibration] . # TOSEE: OK? is vibration a property?
 
 mbco:power_sensor a owl:Class ;
      rdfs:label "Power sensor" ;
      rdfs:subClassOf mbco:sensor .
+#     rdfs:subClassOf [a owl:Restriction ;
+#	owl:onProperty mbco:observes ;
+#	owl:allValuesFrom mbco:power] .
 
 mbco:power_monitoring_clip a owl:Class ;
      rdfs:label "Power monitoring clip" ;
@@ -89,6 +101,9 @@ mbco:power_monitoring_clip a owl:Class ;
 mbco:gas_detection_sensor a owl:Class ;
      rdfs:label "Gas detection sensor" ;
      rdfs:subClassOf mbco:sensor .
+#     rdfs:subClassOf [a owl:Restriction ;
+#	owl:onProperty mbco:observes ;
+#	owl:allValuesFrom mbco:gas_density] . # TOSEE: OK?
 
 mbco:carbon_monoxide_sensor a owl:Class ;
      rdfs:label "Carbon monoxide sensor" ;
@@ -103,12 +118,23 @@ mbco:carbon_dioxide_sensor a owl:Class ;
 mbco:pressure_sensor a owl:Class ;
      rdfs:label "Pressure sensor" ;
      rdfs:subClassOf mbco:sensor .
+#     rdfs:subClassOf [a owl:Restriction ;
+#	owl:onProperty mbco:observes ;
+#	owl:allValuesFrom mbco:pressure] .
 
 mbco:laser_profilometer a owl:Class ;
      rdfs:label "Laser profilometer" ;
      rdfs:subClassOf mbco:device ; 
      rdfs:subClassOf mbco:characterization_device ; # TOSEE: not a sensor, OK? Should "on-line charaterization" be defined?
      rdfs:comment "Can be used for on-line characterization (e.g., thickness measurement)"^^xs:string .
+#     rdfs:subClassOf [a owl:Restriction ;
+#	owl:onProperty mbco:observes ;
+#	owl:someValuesFrom mbco:thickness] .
+
+# CQ_MAN_3
+mbco:connection a owl:Class ;
+     rdfs:label "Connection" ;
+     owl:oneOf (mbco:WIRED_ELECTRICAL_CABLE mbco:BLUETOOTH mbco:OPTICAL_FIBRE) .
 
 ### Object Properties ###
 
@@ -135,6 +161,11 @@ mbco:has_process_kpi a owl:ObjectProperty ;
      rdfs:domain mbco:process ;	
      rdfs:comment "Points to a process Key Performance Indicator"^^xs:string .
 
+mbco:observes a owl:ObjectProperty ;
+     rdfs:label "observes" ;
+     rdfs:range mbco:property ;	
+     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string .
+
 ### Datatype Properties ###
 
 mbco:has_trigger a owl:DatatypeProperty ;
@@ -150,6 +181,14 @@ mbco:whole_product
 	rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty mbco:has_part ;
 	owl:someValuesFrom mbco:material] .
+
+mbco:sensor
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:property] ; # TOSEE: property -> physical_property? 
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:has_connection ;
+	owl:allValuesFrom mbco:connection] .
 
 # mbco:whole_product
 # 	rdfs:subClassOf [a owl:Restriction ;
