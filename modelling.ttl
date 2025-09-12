@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.4"^^xs:string ;
-  dcterms:modified "2025-06-23"^^xs:string ;
+  owl:versionInfo "version 0.0.5"^^xs:string ;
+  dcterms:modified "2025-09-12"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -22,6 +22,7 @@
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
   dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
+  dcterms:contributor "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
@@ -35,7 +36,31 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 mbco:model_parametrization a owl:Class ;
     rdfs:label "Model parametrization" ;
-#    skos:altLabel "Model parameters" ;
+    skos:altLabel "Model parameters" ; 
+    rdfs:comment"Set of model parameters"^^xs:string ;   
+    rdfs:subClassOf mbco:data .
+
+mbco:simulation a owl:Class ;
+    rdfs:label "Simulation" ;
+    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:data] ;      
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom mbco:simulation_result] ;      
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:physical_quantity] ;      
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom mbco:physical_quantity] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_participant ;
+                   owl:someValuesFrom mbco:software] .
+
+mbco:simulation_result a owl:Class ;
+    rdfs:label "Simulation result" ;
     rdfs:subClassOf mbco:data .
 
 mbco:computational_modelling_method a owl:Class ;
