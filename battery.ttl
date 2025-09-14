@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/battery#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.4"^^xs:string ;
-  dcterms:modified "2025-07-04"^^xs:string ;
+  owl:versionInfo "version 0.0.5"^^xs:string ;
+  dcterms:modified "2025-09-14"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -75,7 +75,7 @@ mbco:lithium_ion_battery
      owl:someValuesFrom mbco:casing] ;
      rdfs:subClassOf [a owl:Restriction ;
      owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:coating] ;
+     owl:someValuesFrom mbco:coating_layer] ;
      rdfs:subClassOf [a owl:Restriction ;
      owl:onProperty mbco:has_part ;
      owl:someValuesFrom mbco:full_cell] . # battery_cell -> full cell . OK? or better to rename it?
@@ -204,7 +204,7 @@ mbco:collector a owl:Class ;
 mbco:casing a owl:Class ;
      rdfs:subClassOf mbco:physical_object .
 
-mbco:coating a owl:Class ;
+mbco:coating_layer a owl:Class ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty mbco:has_property ;
@@ -488,11 +488,11 @@ mbco:redox_flow_battery
 
 mbco:lib_manufacturing_process a owl:Class ;
      rdfs:label "LiB manufacturing process" ;
-     rdfs:subClassOf mbco:process .
+     rdfs:subClassOf mbco:manufacturing_process .
 
 mbco:rfb_manufacturing_process a owl:Class ;
      rdfs:label "RFB manufacturing process" ;
-     rdfs:subClassOf mbco:process .
+     rdfs:subClassOf mbco:manufacturing_process .
 
 mbco:scrap_rate a owl:Class ;
      rdfs:label "Scrap rate" ;
@@ -529,6 +529,119 @@ mbco:rfb_manufacturing_process
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_process_kpi ;
 	owl:someValuesFrom mbco:production_performance] .
+
+mbco:lib_manufacturing_process_step a owl:Class ;
+	rdfs:subClassOf mbco:process_step, mbco:lib_manufacturing_process .
+
+mbco:rfb_manufacturing_process_step a owl:Class ;
+	rdfs:subClassOf mbco:process_step, mbco:rfb_manufacturing_process .
+
+#CQ_MAN_5.1.
+#Main ordered steps of LiB/NiB manufacturing: Mixing, Coating, Drying, Calendering, Cutting, Assembly, Filling, Forming, Degasing
+
+mbco:mixing a owl:Class ;
+        rdfs:label "Mixing" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step .
+
+mbco:coating_process a owl:Class ;
+        rdfs:label "Coating (process)" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:mixing] .
+
+mbco:drying a owl:Class ;
+        rdfs:label "Drying" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:coating_process] .
+
+mbco:calendering a owl:Class ;
+        rdfs:label "Calendering" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:drying] .
+
+mbco:cutting a owl:Class ;
+        rdfs:label "Cutting" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:calendering] .
+
+mbco:assemblying a owl:Class ;
+        rdfs:label "Assemblying" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:cutting] .
+
+mbco:filling a owl:Class ;
+        rdfs:label "Filling" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:assemblying] .
+
+mbco:forming a owl:Class ;
+        rdfs:label "Forming" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:filling] .
+
+mbco:degassing a owl:Class ;
+        rdfs:label "Degassing" ;
+	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:allValuesFrom mbco:forming] .
+
+#CQ_MAN_5.2. Main ordered steps in RFB manufacturing process: (Incoming goods inspection), Stack assembly, Stack
+#compression, Stack sealing (glueing), (Stack testing), Tanks: Assembly stacks+Piping+Periphery, (Tanks testing)
+# slighlty modified: added "Electrode activation"
+
+mbco:electrode_activation a owl:Class ;
+        rdfs:label "Electrode activation" ;
+	rdfs:subClassOf mbco:rfb_manufacturing_process_step .
+
+mbco:electrode_chemical_activation a owl:Class ;
+        rdfs:label "Electrode chemical activation" ;
+	rdfs:subClassOf mbco:electrode_activation .
+
+mbco:electrode_thermal_activation a owl:Class ;
+        rdfs:label "Electrode thermal activation" ;
+	rdfs:subClassOf mbco:electrode_activation .
+
+mbco:stack_assemblying a owl:Class ;
+        rdfs:label "Stack assemblying" ;
+	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:someValuesFrom mbco:electrode_activation] .
+
+mbco:stack_compression a owl:Class ;
+        rdfs:label "Stack compression" ;
+	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:someValuesFrom mbco:stack_assemblying] .
+
+mbco:stack_sealing a owl:Class ;
+        rdfs:label "Stack sealing (glueing)" ;
+	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:someValuesFrom mbco:stack_compression] .
+
+mbco:tanks_assemblying a owl:Class ;
+        rdfs:label "Stack assemblying" ;
+	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:follows_directly ;
+	owl:someValuesFrom mbco:stack_sealing] .
 
 
 
