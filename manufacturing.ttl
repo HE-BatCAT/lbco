@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.3"^^xs:string ;
-   dcterms:modified "2025-07-04"^^xs:string ;
+   owl:versionInfo "version 0.0.4"^^xs:string ;
+   dcterms:modified "2025-09-15"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -204,6 +204,18 @@ mbco:manufacturing_process
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_process_kpi ;
 	owl:someValuesFrom mbco:product_quality] .
+
+mbco:equipment_performance a owl:Class ;
+	rdfs:subClassOf mbco:property .
+
+mbco:product_quality a owl:Class ;
+	rdfs:subClassOf mbco:property .
+
+mbco:waste_produced a owl:Class ;
+	rdfs:subClassOf mbco:property .
+
+mbco:energy_consumption a owl:Class ;
+	rdfs:subClassOf mbco:property .
 
 # mbco:whole_product
 # 	rdfs:subClassOf [a owl:Restriction ;
