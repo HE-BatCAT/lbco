@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.4"^^xs:string ;
-  dcterms:modified "2025-06-23"^^xs:string ;
+  owl:versionInfo "version 0.1.5"^^xs:string ;
+  dcterms:modified "2025-09-15"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -135,6 +135,26 @@ mbco:annotation a owl:Class ;
     rdfs:label "Annotation" ;
     rdfs:comment "Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module"^^xs:string .
 
+mbco:physical_object_status a owl:Class ;
+    rdfs:label "Physical object status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:NEW mbco:OK mbco:BROKEN mbco:AGED) .
+
+mbco:object_analysis_status a owl:Class ;
+    rdfs:label "(Object) Analysis status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:ANALYZED mbco:NOT_ANALYZED) .
+
+mbco:physical_object_network_status a owl:Class ;
+    rdfs:label "Physical object network status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:ONLINE mbco:OFFLINE) .
+
+mbco:process_status a owl:Class ;
+    rdfs:label "Process status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
+
 ### Object Properties ###
 
 mbco:has_part a owl:ObjectProperty ;
@@ -142,7 +162,7 @@ mbco:has_part a owl:ObjectProperty ;
 
 mbco:has_participant a owl:ObjectProperty ;
     rdfs:domain mbco:process ;
-    rdfs:range [owl:unionOf (mbco:agent mbco:physical_object mbco:compute_resource mbco:software)] .
+    rdfs:range [owl:unionOf (mbco:agent mbco:physical_object mbco:software)] .
 
 mbco:follows a owl:ObjectProperty ;
     rdfs:label "follows" ;
@@ -174,7 +194,7 @@ mbco:answers a owl:ObjectProperty ;
     rdfs:range mbco:statement .
     
 mbco:has_status a owl:ObjectProperty ;
-    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:compute_resource mbco:software)] ;
+    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:software mbco:process)] ;
     rdfs:range mbco:status .
 
 mbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
