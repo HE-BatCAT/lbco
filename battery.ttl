@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/battery#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.5"^^xs:string ;
-  dcterms:modified "2025-09-14"^^xs:string ;
+  owl:versionInfo "version 0.0.6"^^xs:string ;
+  dcterms:modified "2025-09-15"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -144,6 +144,12 @@ mbco:binder a owl:Class ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:percolant a owl:Class ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:slurry_solvent a owl:Class ; # TOSEE: an object with this role?
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:additive a owl:Class ;       # TOSEE: an object with this role?
      rdfs:subClassOf mbco:physical_object .
 
 mbco:electrode a owl:Class ;
@@ -334,6 +340,55 @@ mbco:pristine_felt a owl:Class ;
 # TO SEE: how different from the coated electrode? both needed?
 mbco:coated_collector a owl:Class ;
      rdfs:subClassOf mbco:intermediate_product .
+
+# manufacturing settings
+
+mbco:mixing_speed a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:mixing_order a owl:Class ;
+     rdfs:subClassOf mbco:property . 
+
+mbco:coating_speed a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:wet_coating_gap a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:coating_targeted_area_capacity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:calendering_speed a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:calendering_temperature a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:calendering_thickness a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:cutting_shape a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:cutting_size a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:furnace_temperature a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:time_at_furnace a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:cooling_time a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+mbco:furnace_atmosphere_composition a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity . 
+
+# manufacturing devices
+
+mbco:furnace a owl:Class ;
+     rdfs:subClassOf mbco:device. 
 
 ####################################################################################
 # Based (partially) on CQ_EXP_3 and CQ_EXP_3.2. CQ_CRO_1 and CQ_CRO_2
@@ -575,7 +630,13 @@ mbco:mixing a owl:Class ;
 	owl:someValuesFrom mbco:slurry_solvent] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:slurry] .
+	owl:someValuesFrom mbco:slurry] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:mixing_speed] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:mixing_order] .
 
 mbco:coating_process a owl:Class ;
         rdfs:label "Coating (process)" ;
@@ -591,7 +652,16 @@ mbco:coating_process a owl:Class ;
 	owl:someValuesFrom mbco:collector] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:coated_collector] .
+	owl:someValuesFrom mbco:coated_collector] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:coating_speed] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:wet_coating_gap] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:coating_targeted_area_capacity] .
 
 mbco:drying a owl:Class ;
         rdfs:label "Drying" ;
@@ -617,7 +687,16 @@ mbco:calendering a owl:Class ;
 	owl:someValuesFrom mbco:dried_coated_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:calendered_electrode] .
+	owl:someValuesFrom mbco:calendered_electrode] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:calendering_speed] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:calendering_temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:calendering_thickness] .
 
 mbco:cutting a owl:Class ;
         rdfs:label "Cutting" ;
@@ -630,10 +709,16 @@ mbco:cutting a owl:Class ;
 	owl:someValuesFrom mbco:calendered_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:electrode] .
+	owl:someValuesFrom mbco:electrode] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:cutting_shape] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:cutting_size] .
 
 mbco:assemblying a owl:Class ;
-        rdfs:label "Assemblying" ;
+        rdfs:label "(Full cell) Assemblying" ;
 	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:follows_directly ;
@@ -696,8 +781,22 @@ mbco:electrode_thermal_activation a owl:Class ;
 	owl:someValuesFrom mbco:pristine_felt] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:thermally_activated_felt] .
-
+	owl:someValuesFrom mbco:thermally_activated_felt] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:furnace_temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:time_at_furnace] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:cooling_time] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_setting ;
+	owl:someValuesFrom mbco:furnace_atmosphere_composition] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_participant ;
+	owl:someValuesFrom mbco:furnace] .
 
 # Could add (from SDT, CQ spreadsheet):
 # material_activation
