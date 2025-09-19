@@ -1,0 +1,120 @@
+BatCAT_record: # True for all, or only for "data"?
+  obligatory_properties: # From D4.2 kernel. Levels in LA: obligatory, recommended, suggested
+    creator:  # question: is this automatically generated??? Link it to BatCAT_user
+      datatype: REFERENCE Link it to BatCAT_user
+    filename:
+      datatype: TEXT
+    date:
+      datatype: DATETIME
+      description: 'date' # creation or last update?
+    version: #question: is this automatically generated???
+      datatype: TEXT
+      description: 'version'
+    license: 
+      datatype: TEXT #URL
+      description: 'License (please use a resolvable URL or IRI for it)'
+    source:
+      datatype: TEXT # It should be possible to say "same as owner"      
+    record_PID:
+      datatype: TEXT #URL
+      description: 'PID of this record (if any)'
+    related_record_PID:
+      datatype: TEXT #URL
+      description: 'PID of records (if any) related to this one'
+  recommended_properties: # OPTIONAL 
+    file_description: 
+      datatype: TEXT
+    file_format: 
+      datatype: TEXT
+
+Simulation_result: # WP2 minimal record type
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+  recommended_properties:
+    intput_physical_property:
+      datatype: LIST #? REFERENCE?
+    output_physical_property:
+      datatype: LIST #? REFERENCE?
+    software:
+      datatype: REFERENCE # or TEXT?
+    granularity_level_MODA_OSMO:
+      datatype: TEXT # or REFERENCE # or LIST?
+      description: "one of: Electronic, Atomistic, Mesoscopic (=from two atoms on), Continuum"
+    model_type_MODA_OSMO:
+      datatype: REFERENCE # or LIST?
+      description: "one of MODA/OSMO Physical Equation (PE) types"
+    compound: # this property should already be there as LinkAhead property, right?
+      datatype: REFERENCE 
+      description: "Link to a compound/substance (from PubChem list)"
+
+Characterization_result: # WP1 minimal record type
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+  recommended_properties:  
+    sample:
+      datatype: REFERENCE
+    experimental_protocol:
+      datatype: REFERENCE    
+    output_physical_property:
+      datatype: LIST #? REFERENCE?
+
+Manufacturing_sensor_data: # WP6 minimal record type
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+  recommended_properties:
+    sensor:
+      datatype: REFERENCE
+    output_physical_property:
+      datatype: LIST #? REFERENCE?
+
+Characterization_protocol: # WP1 minimal record type
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+    - Process
+  recommended_properties:
+    characterization method:
+      datatype: REFERENCE
+
+Manufacturing_protocol: # WP6 minimal record type
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+    - Process
+
+# # Question: can these be assigned to both properties and objects?
+#     ontology_iri_BatCAT:
+#       datatype: TEXT
+#       description: 'Ontology IRI - from batCAT ontologies'
+#     ontology_iri_external:
+#       datatype: TEXT
+#       description: 'Ontology IRI - from external, non-batCAT ontologies'
+
+BatCAT_user:
+  recommended_properties:
+    firstname:
+      datatype: TEXT
+    lastname:
+      datatype: TEXT
+    orcid:
+      datatype: TEXT    
+
+Process:
+  recommended_properties:
+    has_input:
+      datatype: REFERENCE
+    has_output:
+      datatype: REFERENCE
+    has_setting:
+      datatype: REFERENCE 
+    has_participant:
+      datatype: REFERENCE
+

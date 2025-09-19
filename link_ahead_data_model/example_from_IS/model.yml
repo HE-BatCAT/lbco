@@ -1,0 +1,85 @@
+eLabFTWExperiment:
+  recommended_properties:
+    externalID:
+      datatype: INTEGER
+      description: 'ID of an entity in a remote system'
+    eLabFTWUniqueID:
+      datatype: TEXT
+      description: 'unique eLabFTW id'
+    date:
+      datatype: DATETIME
+      description: 'date'
+    url:
+      datatype: TEXT
+      description: 'url'
+    status:
+      datatype: TEXT
+      description: 'date of the experiment'
+    category:
+      datatype: TEXT
+      description: 'experiment category'
+    rating:
+      datatype: INTEGER
+      description: '0-5 stars rating of the experiment'
+    notes:
+      datatype: TEXT
+      description: 'Notes on the execution of the experiment'
+    state:
+      datatype: TEXT
+    tags:
+      datatype: LIST<TEXT>
+      description: 'Tags of the experiment'
+    steps:
+      datatype: TEXT
+      description: 'Steps during the experiment'
+    metadata:
+      datatype: TEXT
+      description: 'JSON metadata'
+    next_step:
+      datatype: TEXT
+      description: 'Next step in an experiment'
+    eLabFTWUpload:
+    eLabFTWItem:
+    eLabFTWExperiment:
+eLabFTWItem:
+  recommended_properties:
+    externalID:
+    bookable:
+      datatype: INTEGER
+      description: 'Whether or not this item is bookable.'
+Microscope:
+  inherit_from_suggested:
+    - eLabFTWItem
+Sample:
+  inherit_from_suggested:
+    - eLabFTWItem
+Project:
+  inherit_from_suggested:
+    - eLabFTWItem
+eLabFTWUser:
+  recommended_properties:
+    firstname:
+      datatype: TEXT
+    lastname:
+      datatype: TEXT
+    externalID:
+eLabFTWInstance:
+  recommended_properties:
+    url:
+eLabFTWUpload:
+  recommended_properties:
+    externalID:
+    hash:
+      datatype: TEXT
+      description: 'the hash of some digital object'
+    hash_algorithm:
+      datatype: TEXT
+      description: 'the hash algorithm being used'
+    filename:
+      datatype: TEXT
+CommentAnnotation:
+  recommended_properties:
+    comment:
+      datatype: TEXT
+    annotationOf:
+      datatype: REFERENCE
