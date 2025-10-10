@@ -1,0 +1,50 @@
+Manufacturing_protocol:
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+    - Process
+ 
+ obligatory:
+    process_type:
+      datatype: TEXT
+      description: "Name of the manufacturing step (e.g., slurry mixing, coating, drying, calendering, stacking, formation)."
+ 
+   process_equipment:
+      datatype: REFERENCE
+      description: "Reference to the equipment or tool used for this manufacturing step."
+    process_key_parameter:
+      datatype: LIST
+      description: "List of key parameters (mandatory parameters depend on process type e.g., speed, temperature, pressure)."
+   input_material:
+      datatype: LIST
+      description: "List of input materials or components (link to Material or Compound)."
+ 
+   output_product:
+      datatype: REFERENCE
+      description: "Resulting material or intermediate product from this process step."
+ 
+ recommended:
+    process_parameter:
+      datatype: REFERENCE
+      description: "List of recommended parameters (some optional parameters e.g., notes on defects)."
+ 
+   environment_condition:
+      datatype: LIST
+      description: "Ambient or controlled environment conditions (e.g., humidity, atmosphere, temperature)."
+ 
+   quality_metric:
+      datatype: LIST
+      description: "Quality metrics such as uniformity, thickness, porosity, adhesion, alignment."
+ 
+   process_sequence_id:
+      datatype: TEXT
+      description: "Order of this step in the overall manufacturing chain (e.g., step 1 of 6)."
+ 
+   operator:
+      datatype: REFERENCE
+      description: "Link to the user or operator executing the process."
+ 
+   digital_twin_model:
+      datatype: REFERENCE
+      description: "Optional link to a simulation or digital twin that models this process step."
