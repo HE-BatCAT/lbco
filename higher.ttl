@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.5"^^xs:string ;
-  dcterms:modified "2025-09-15"^^xs:string ;
+  owl:versionInfo "version 0.1.6"^^xs:string ;
+  dcterms:modified "2025-11-07"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -200,6 +200,18 @@ mbco:has_status a owl:ObjectProperty ;
 mbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
     rdfs:range mbco:property .
 
+mbco:is_incompatible_with a owl:ObjectProperty ;
+   rdfs:label "is incompatible with" ;
+   rdfs:comment "E.g., it can be used to flag up incompatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
+
+# FA_CRO_3
+mbco:is_material_incompatible_with_material a owl:ObjectProperty ;
+   rdfs:label "is material incompatible with material" ;
+   rdfs:comment "To flag up between materials (e.g., mixtures that are unsafe, etc)"^^xs:string ;
+   rdfs:domain mbco:material ; 
+   rdfs:range mbco:material ;
+   rdfs:subPropertyOf mbco:is_incompatible_with .
+   
 ### Datatype Properties ###
 
 # see also: EMMO-LITE, DOLCE-LITE, EVMPO.

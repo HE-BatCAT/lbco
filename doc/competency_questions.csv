@@ -21,4 +21,4 @@ CQ_MAN_9.2, What are the RFB battery product main properties (KPIs)?, Full cell 
 [CQ_CRO_10], What are the main electrochemical components in LiB/NiB manufacturing processes?, Active material ; Binder ; Percolant ; Slurry solvent; Electrode; Separator; Electrolyte; Collector; Battery cell; Casing; Coating layer; Full cell, IRI
 [CQ_EXP_3], , , 
 [CQ_EXP_3.2], , , 
-
+FA_CRO_3, Materials incompatibilities need to be pointed out (e.g., mixtures that are unsafe), n/a - fact, is_incompatible_with ; mbco:is_material_incompatible_with_material
