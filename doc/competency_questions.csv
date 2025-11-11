@@ -6,6 +6,8 @@ CQ_CRO_4, What are the main components of a RFB? , Bipolar plates; Membranes; Ca
 CQ_CRO_4.1, What are the main components of a LiB/NiB? , Active material ; Binder ; Percolant ; Slurry solvent; Electrode; Separator; Electrolyte; Collector; Battery cell; Casing; Coating layer; Full cell , https://batcat.info/semantics/core#lithium_ion_battery ; https://batcat.info/semantics/core#has_part
 CQ_CRO_8, What are the high-level types of optimization problems that can benefit from logic-based approaches?,	Scheduling (e.g. of maintenance); Allocation of resources (e.g. machines/humans for tasks); Compatibility checks (e.g. between materials); Compliance (e.g. of a process with regulation); Process design (e.g. simulation / experiment); Process sequence validation (e.g. that the ordering of sub-processes does not break dependencies) , https://batcat.info/semantics/core#logic_based_problem
 CQ_CRO_9, What are the main scales for processes in RFB?, Molecular scale; Fiber scale; Pore scale; Cell scale; Stack scale; Battery system scale; Energy system scale , https://batcat.info/semantics/core#rfb_length_scale
+FA_CRO_3, Materials incompatibilities need to be pointed out (e.g., mixtures that are unsafe), n/a - fact, is_incompatible_with ; mbco:is_material_incompatible_with_material
+CQ_DAT_3.2, What method is used to process the raw data (and obtain processed data)?, Conversion; extraction; incomplete dataset removal; incomplete dataset padding, mbco:has_data_processing_method ; mbco:has_data_processing_info ; mbco:data_processing_method 
 CQ_DAT_4, What types of data quality evaluation methods (checks/guarantees) are available within BatCAT? , Human assessment ; Quality insurance procedures (e.g. regular calibration checks) ; Automated repeatability tests , https://batcat.info/semantics/core#data_quality_evaluation_method
 CQ_DAT_5, What is the average value and error of property X over a certain set? , n/a - case-specific , https://batcat.info/semantics/core#data ; https://batcat.info/semantics/core#has_average ; https://batcat.info/semantics/core#has_error
 CQ_DAT_7, What methods are available in BatCAT to quantify uncertainties in general?, Error propagation ; Error estimate via statistical methods, https://batcat.info/semantics/core#uncertainty_quantification_method
@@ -21,4 +23,4 @@ CQ_MAN_9.2, What are the RFB battery product main properties (KPIs)?, Full cell 
 [CQ_CRO_10], What are the main electrochemical components in LiB/NiB manufacturing processes?, Active material ; Binder ; Percolant ; Slurry solvent; Electrode; Separator; Electrolyte; Collector; Battery cell; Casing; Coating layer; Full cell, IRI
 [CQ_EXP_3], , , 
 [CQ_EXP_3.2], , , 
-FA_CRO_3, Materials incompatibilities need to be pointed out (e.g., mixtures that are unsafe), n/a - fact, is_incompatible_with ; mbco:is_material_incompatible_with_material
+
