@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.4"^^xs:string ;
-   dcterms:modified "2025-09-15"^^xs:string ;
+   owl:versionInfo "version 0.0.5"^^xs:string ;
+   dcterms:modified "2025-11-12"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -58,6 +58,10 @@ mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Cha
 mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Characterization module
      rdfs:label "Actuator" ;
      rdfs:subClassOf mbco:agent .
+
+mbco:manufacturing_process a owl:Class ;
+     rdfs:label "Manufacturing process" ;
+     rdfs:subClassOf mbco:process .
 
 # sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
 # TO SEE: 
@@ -204,6 +208,17 @@ mbco:manufacturing_process
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_process_kpi ;
 	owl:someValuesFrom mbco:product_quality] .
+
+mbco:manufacturing_process 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_participant ;
+	owl:someValuesFrom mbco:manufacturing_device] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_input ;
+	owl:someValuesFrom [owl:unionOf (mbco:material mbco:physical_object)]] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_output ;
+	owl:someValuesFrom mbco:physical_object] .
 
 mbco:equipment_performance a owl:Class ;
 	rdfs:subClassOf mbco:property .
