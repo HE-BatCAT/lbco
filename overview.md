@@ -8,6 +8,8 @@ needs to address corresponding issues from modelling, characterization and manuf
 
 Below we briefly describe the scope of each module, also to clarify the boundaries between them.
 
+Also, the competency questions (CQs) addressed by MBCO are tracked [here](doc/competency_questions.csv).
+
 ## Higher level concept (-> higher.ttl) 
 
 A module to facilitate a structuring of and connection between the lower modules, and a possible alignment of MBCO with top level ontologies.
