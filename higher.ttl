@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.6"^^xs:string ;
-  dcterms:modified "2025-11-07"^^xs:string ;
+  owl:versionInfo "version 0.1.7"^^xs:string ;
+  dcterms:modified "2025-11-13"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -155,6 +155,14 @@ mbco:process_status a owl:Class ;
     rdfs:subClassOf mbco:status ;
     owl:oneOf (mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
 
+mbco:batch a owl:Class ;
+     rdfs:label "Batch" ;
+     rdfs:comment "A batch is a set of experimental samples or products, acquired or manufactured/prepared together."^^xs:string ;
+     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf [a owl:Restriction ;
+          owl:onProperty mbco:has_part ;
+          owl:someValuesFrom mbco:physical_object] .
+
 ### Object Properties ###
 
 mbco:has_part a owl:ObjectProperty ;
@@ -213,6 +221,10 @@ mbco:is_material_incompatible_with_material a owl:ObjectProperty ;
    rdfs:subPropertyOf mbco:is_incompatible_with .
    
 ### Datatype Properties ###
+
+mbco:has_batch_ID a owl:DatatypeProperty ;
+    rdfs:label "has batch ID" ;
+    rdfs:domain mbco:batch .
 
 # see also: EMMO-LITE, DOLCE-LITE, EVMPO.
 
