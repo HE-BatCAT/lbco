@@ -12,9 +12,10 @@
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.5"^^xs:string ;
-  dcterms:modified "2025-09-12"^^xs:string ;
+  owl:versionInfo "version 0.0.6"^^xs:string ;
+  dcterms:modified "2025-09-13"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
+  owl:imports <https://batcat.info/semantics/core/data#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -118,6 +119,23 @@ mbco:physical_quantity a owl:Class ;
     rdfs:label "Physical quantity" ;
     rdfs:subClassOf mbco:property .
 
+# CQ_SIM_9
+mbco:model_reproducibility_method a owl:Class ; 
+    rdfs:label "Model reproducibility method" ;
+    rdfs:comment "Methods to evaluate the robustness of models and modelling data"^^xs:string ;
+    rdfs:subClassOf mbco:data_quality_evaluation_method ; #TOSEE: OK?
+    rdfs:subClassOf mbco:method .
+
+mbco:VARYING_MODELLING_APPROACH a mbco:model_reproducibility_method ;
+    rdfs:seeAlso """E.g., see S. Stephan et al, Vapor−Liquid Interface of the Lennard-Jones Truncated and Shifted Fluid: Comparison of Molecular Simulation, Density Gradient Theory, and Density Functional Theory, J.  Phys. Chem. C 2018 122 (43),
+    4705-24715, DOI: 10.1021/acs.jpcc.8b06332 """^^xs:string .
+
+mbco:VARYING_NUMERICAL_METHOD a mbco:model_reproducibility_method .
+
+mbco:VARYING_MODELLING_SOFTWARE a mbco:model_reproducibility_method ;
+    rdfs:seeAlso """E.g., see M. Schappals et al., Round Robin Study: Molecular Simulation of Thermodynamic Properties from Models with Internal Degrees of Freedom,
+    J. Chem. Theory Comput. 2017 13 (9), 4270-4280, DOI: 10.1021/acs.jctc.7b00489"""^^xs:string .
+    
 ### Object Properties ###
 
 mbco:implements a owl:ObjectProperty ; # TOSEE: use the same property for plan implementation into process???
