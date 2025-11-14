@@ -411,7 +411,7 @@ mbco:electrode_tortuosity a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrode_surface_area a owl:Class ;
-     rdfs:subClassOf mbco:property .
+     rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrode_surface_chemical_composition a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
