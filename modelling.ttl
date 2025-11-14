@@ -13,7 +13,7 @@
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
   owl:versionInfo "version 0.0.6"^^xs:string ;
-  dcterms:modified "2025-09-13"^^xs:string ;
+  dcterms:modified "2025-09-14"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/data#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -115,9 +115,9 @@ mbco:lib_length_scale a owl:Class ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
 to specify which one it addresses"""^^xs:string .
 
-mbco:physical_quantity a owl:Class ;
-    rdfs:label "Physical quantity" ;
-    rdfs:subClassOf mbco:property .
+# mbco:physical_quantity a owl:Class ;
+#     rdfs:label "Physical quantity" ;
+#     rdfs:subClassOf mbco:property .
 
 # CQ_SIM_9
 mbco:model_reproducibility_method a owl:Class ; 

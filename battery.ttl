@@ -13,7 +13,7 @@
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.0.7"^^xs:string ;
-  dcterms:modified "2025-11-12"^^xs:string ;
+  dcterms:modified "2025-11-14"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   owl:imports <https://batcat.info/semantics/core/characterization#> ;
@@ -502,8 +502,8 @@ mbco:full_cell_open_circuit_voltage a owl:Class ;
      rdfs:subClassOf mbco:open_circuit_voltage .
 
 ####################################################################################
-mbco:physical_quantity a owl:Class ; # Duplicated here from modelling. To be updated
-     rdfs:subClassOf mbco:property .
+# mbco:physical_quantity a owl:Class ; # Duplicated here from modelling. To be updated
+#      rdfs:subClassOf mbco:property .
 ####################################################################################
 
 # product design parameters
