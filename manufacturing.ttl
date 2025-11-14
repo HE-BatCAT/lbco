@@ -145,7 +145,10 @@ mbco:laser_profilometer a owl:Class ;
      rdfs:comment "Can be used for on-line characterization (e.g., thickness measurement)"^^xs:string ;
     rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty mbco:observes ;
-	owl:someValuesFrom mbco:thickness] .
+	owl:someValuesFrom mbco:thickness] ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:someValuesFrom mbco:porosity] .
 
 # CQ_MAN_3
 mbco:connection a owl:Class ;
@@ -282,5 +285,8 @@ mbco:vibration_frequency a owl:Class ;
 	rdfs:subClassOf mbco:physical_quantity .
 
 mbco:vibration_amplitude a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:porosity a owl:Class ;
 	rdfs:subClassOf mbco:physical_quantity .
 
