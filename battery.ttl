@@ -600,7 +600,7 @@ mbco:production_performance a owl:Class ;
      rdfs:subClassOf mbco:property ;
      rdfs:comment "The performance/efficiency of production."^^xs:string . # TODO: quantify better
 
-mbco:production_cost_per_unit a owl:Class ;
+mbco:production_cost_per_unit a owl:Class ; # duplicated in manufacturing module
      rdfs:label "Production cost per unit" ;
      rdfs:subClassOf mbco:property . # TOSEE: annotation?
 

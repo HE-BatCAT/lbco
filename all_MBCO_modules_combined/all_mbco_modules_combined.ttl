@@ -352,6 +352,10 @@ mbco:pristine_felt a owl:Class ;
 mbco:coated_collector a owl:Class ;
      rdfs:subClassOf mbco:intermediate_product .
 
+mbco:half_cell a owl:Class ;
+     rdfs:label "Half cell" ;
+     rdfs:subClassOf mbco:physical_object .
+
 # manufacturing settings
 
 mbco:mixing_speed a owl:Class ;
@@ -510,7 +514,7 @@ mbco:full_cell_open_circuit_voltage a owl:Class ;
 ####################################################################################
 
 # product design parameters
-# CQ_MAN_6.1: LiB product design parameters: Active material choice, Formulation, Particle Size Disitribution (PSD), Electrolyte composition, Separator, Size
+# CQ_MAN_6.1: LiB product design parameters: Active material choice, Elecrtolyte Formulation, Particle Size Disitribution (PSD), Electrolyte composition, Separator, Cell Size
 
 mbco:electrolyte_formulation a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
@@ -556,7 +560,7 @@ mbco:lithium_ion_battery
         owl:onProperty mbco:has_product_design_parameter ;
 	owl:someValuesFrom mbco:cell_size] . # TOSEE: "cell" added. OK?
 
-# CQ_MAN_6.2: RFB product design parameters: Current density, Ion species concentration, Electrode base material, Volume flow rate, Product dimensions
+# CQ_MAN_6.2: RFB product design parameters: Current density, Ion species concentration, Electrode base material, Volume flow rate, Cell size (Product dimensions)
 
 mbco:redox_flow_battery
 	rdfs:subClassOf [a owl:Restriction ;
@@ -596,7 +600,7 @@ mbco:production_performance a owl:Class ;
      rdfs:subClassOf mbco:property ;
      rdfs:comment "The performance/efficiency of production."^^xs:string . # TODO: quantify better
 
-mbco:production_cost_per_unit a owl:Class ;
+mbco:production_cost_per_unit a owl:Class ; # duplicated in manufacturing module
      rdfs:label "Production cost per unit" ;
      rdfs:subClassOf mbco:property . # TOSEE: annotation?
 
@@ -1624,8 +1628,8 @@ mbco:has_batch_ID a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.7"^^xs:string ;
-   dcterms:modified "2025-11-14"^^xs:string ;
+   owl:versionInfo "version 0.0.8"^^xs:string ;
+   dcterms:modified "2025-11-17"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -1682,7 +1686,16 @@ mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in C
 
 mbco:manufacturing_process a owl:Class ;
      rdfs:label "Manufacturing process" ;
-     rdfs:subClassOf mbco:process .
+     rdfs:subClassOf mbco:process ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty mbco:has_process_kpi ;
+        	     owl:someValuesFrom mbco:production_cost_per_unit] ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty mbco:has_setting ;
+        	     owl:someValuesFrom mbco:electricity_unit_cost] ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty mbco:has_setting ;
+        	     owl:someValuesFrom mbco:personnel_unit_cost] .
 
 # sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
 # TO SEE: 
@@ -1870,6 +1883,21 @@ mbco:energy_consumption a owl:Class ;
 #     	owl:onProperty mbco:has_product_operating_condition ;
 #     	owl:someValuesFrom owl:Thing] .
 	    
+# CQ_MAN_10
+mbco:personnel_unit_cost a owl:Class ;
+        rdfs:label "Personnel unit cost" ;
+        rdfs:comment "Personnel cost, e.g., per person per hour"^^xs:string ;
+	rdfs:subClassOf mbco:property .
+
+mbco:electricity_unit_cost a owl:Class ;
+        rdfs:label "Electricity unit cost" ;
+        rdfs:comment "E.g., cost per kWh"^^xs:string ;
+	rdfs:subClassOf mbco:property .
+
+mbco:production_cost_per_unit a owl:Class ; # NB: duplicated here from battery module
+     rdfs:label "Production cost per unit" ;
+     rdfs:subClassOf mbco:property . 
+
 ####################################################################################
 
 # Physical quantities # TO SEE: move them elsewhere, higher or transversal module?
