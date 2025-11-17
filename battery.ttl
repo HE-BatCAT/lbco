@@ -514,7 +514,7 @@ mbco:full_cell_open_circuit_voltage a owl:Class ;
 ####################################################################################
 
 # product design parameters
-# CQ_MAN_6.1: LiB product design parameters: Active material choice, Formulation, Particle Size Disitribution (PSD), Electrolyte composition, Separator, Size
+# CQ_MAN_6.1: LiB product design parameters: Active material choice, Elecrtolyte Formulation, Particle Size Disitribution (PSD), Electrolyte composition, Separator, Cell Size
 
 mbco:electrolyte_formulation a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
@@ -560,7 +560,7 @@ mbco:lithium_ion_battery
         owl:onProperty mbco:has_product_design_parameter ;
 	owl:someValuesFrom mbco:cell_size] . # TOSEE: "cell" added. OK?
 
-# CQ_MAN_6.2: RFB product design parameters: Current density, Ion species concentration, Electrode base material, Volume flow rate, Product dimensions
+# CQ_MAN_6.2: RFB product design parameters: Current density, Ion species concentration, Electrode base material, Volume flow rate, Cell size (Product dimensions)
 
 mbco:redox_flow_battery
 	rdfs:subClassOf [a owl:Restriction ;
