@@ -352,6 +352,10 @@ mbco:pristine_felt a owl:Class ;
 mbco:coated_collector a owl:Class ;
      rdfs:subClassOf mbco:intermediate_product .
 
+mbco:half_cell a owl:Class ;
+     rdfs:label "Half cell" ;
+     rdfs:subClassOf mbco:physical_object .
+
 # manufacturing settings
 
 mbco:mixing_speed a owl:Class ;
