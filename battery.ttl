@@ -13,7 +13,7 @@
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.0.7"^^xs:string ;
-  dcterms:modified "2025-11-14"^^xs:string ;
+  dcterms:modified "2025-11-17"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   owl:imports <https://batcat.info/semantics/core/characterization#> ;
@@ -296,6 +296,9 @@ mbco:round_trip_efficiency a owl:Class ;
 
 mbco:full_cell_safety a owl:Class ;
      rdfs:subClassOf mbco:annotation .
+
+mbco:full_cell_electric_resistance a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity .
 
 mbco:battery_lifespan a owl:Class ; # TOSEE: is it a cell or a battery property?
      rdfs:subClassOf mbco:physical_quantity .
@@ -931,7 +934,7 @@ mbco:cyclic_voltametry a owl:Class ;
 	owl:someValuesFrom mbco:electrolyte_cyclic_voltametry] ; # OK?
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:mbco:electrolyte_ionic_conductivity] . # OK?
+	owl:someValuesFrom mbco:electrolyte_ionic_conductivity] . # OK?
 
 mbco:cycling a owl:Class ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
