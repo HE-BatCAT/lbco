@@ -1,0 +1,37 @@
+@prefix map2gpo: <https://batcat.info/semantics/mappings/map2gpo#> . # non-resolvable URI
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix mbco: <https://batcat.info/semantics/core#> . # non-resolvable URI
+@prefix gpo: <https://gpo.ontology.link/> . 
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/mappings/map2gpo#> a owl:Ontology .
+
+# TO DO: complete file header
+
+<https://batcat.info/semantics/mappings/map2gpo#> dcterms:title
+  """Mapping of MBCO-Minimal BatCAT Ontologies to GPO-General Process Ontology"""^^xs:string ;
+  owl:versionInfo "version 0.0.1"^^xs:string ;
+  dcterms:modified "2025-11-19"^^xs:string .
+
+# LiB
+mbco:mixing rdfs:subClassOf gpo:GPO_45b3677d_f436_4cfd_aa55_3ae5eab2e232 . # GPO class for Mixing
+mbco:coating_process rdfs:subClassOf gpo:GPO_ce7db854_9e14_4339_9e71_a8d4ab8f6331 . # GPO class for Coating 
+# drying
+mbco:calendering rdfs:subClassOf gpo:GPO_f846eaba_e75a_49df_b71a_5f769e6a7e7e . # GPO class for Calendering
+mbco:cutting rdfs:subClassOf gpo:GPO_275452d1_abaa_4c59_b4af_2f14332209c6 . # GPO class for Cutting
+mbco:assemblying rdfs:subClassOf gpo:GPO_560b54ed_de02_421d_b929_6fdc512a730f . # GPO class for Part Assemblying
+mbco:filling rdfs:subClassOf gpo:GPO_680078b4_e669_407d_a9a5_902c1f55031a . # GPO class for Filling
+# forming
+mbco:degassing rdfs:subClassOf gpo:GPO_a32722d5_42c1_446f_a071_05071047831f . # GPO class for Degassing
+
+# RFB
+# mbco:electrode_activation
+mbco:stack_assemblying rdfs:subClassOf gpo:GPO_5f02dbb0_2803_4aaa_9104_ba39f17a4c8d . # GPO class for Stacking
+# mbco:stack_compression
+# mbco:stack_sealing
+# mbco:tanks_assemblying
