@@ -9,19 +9,33 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/mappings/map2gpo#> a owl:Ontology .
+######################### Header of this file ##########################################
 
-# TO DO: complete file header
+<https://batcat.info/semantics/mappings/map2gpo#> a owl:Ontology .
 
 <https://batcat.info/semantics/mappings/map2gpo#> dcterms:title
   """Mapping of MBCO-Minimal BatCAT Ontologies to GPO-General Process Ontology"""^^xs:string ;
-  owl:versionInfo "version 0.0.1"^^xs:string ;
-  dcterms:modified "2025-11-19"^^xs:string .
+  owl:versionInfo "version 0.0.2"^^xs:string ;
+  dcterms:modified "2025-11-19"^^xs:string ;
+#  owl:imports <https://batcat.info/semantics/core#> ; # OK? TO DO: check what (modules?) to import 
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Sara Drvaric Talian (ORCID 0000-0003-1355-2843)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+#  dcterms:description ""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
 
+########################################################################################
+# Manufacturing process steps, for LiB and RFB
+########################################################################################
 # LiB
 mbco:mixing rdfs:subClassOf gpo:GPO_45b3677d_f436_4cfd_aa55_3ae5eab2e232 . # GPO class for Mixing
 mbco:coating_process rdfs:subClassOf gpo:GPO_ce7db854_9e14_4339_9e71_a8d4ab8f6331 . # GPO class for Coating 
-# drying
+mbco:drying rdfs:subClassOf [owl:unionOf (gpo:GPO_c7c1e32d_025b_4e30_8e8f_5b16e14a8190 gpo:GPO_66366e89_4a13_4996_b887_a127e498ed98)] . # GPO classes for Thermal drying and Vacuum drying
 mbco:calendering rdfs:subClassOf gpo:GPO_f846eaba_e75a_49df_b71a_5f769e6a7e7e . # GPO class for Calendering
 mbco:cutting rdfs:subClassOf gpo:GPO_275452d1_abaa_4c59_b4af_2f14332209c6 . # GPO class for Cutting
 mbco:assemblying rdfs:subClassOf gpo:GPO_560b54ed_de02_421d_b929_6fdc512a730f . # GPO class for Part Assemblying
@@ -31,7 +45,19 @@ mbco:degassing rdfs:subClassOf gpo:GPO_a32722d5_42c1_446f_a071_05071047831f . # 
 
 # RFB
 # mbco:electrode_activation
+mbco:electrode_thermal_activation rdfs:subClassOf gpo:GPO_d24a9939_582b_40e7_8f8e_0d64cb54bc42 . # GPO class for Heath treatment # OK?
 mbco:stack_assemblying rdfs:subClassOf gpo:GPO_5f02dbb0_2803_4aaa_9104_ba39f17a4c8d . # GPO class for Stacking
-# mbco:stack_compression
+mbco:stack_compression rdfs:subClassOf gpo:GPO_d7b2ecea_f055_4e3e_b5b9_020b8d81130d . # GPO class for Pressing
 # mbco:stack_sealing
-# mbco:tanks_assemblying
+mbco:tanks_assemblying rdfs:subClassOf gpo:GPO_560b54ed_de02_421d_b929_6fdc512a730f . # GPO class for Part Assemblying
+
+########################################################################################
+# Main relations (relevant for process steps)
+########################################################################################
+
+mbco:follows rdfs:subPropertyOf gpo:GPO_389686f5_86d8_4e97_ba71_0537bedf0f38 . # GPO property for Has predecessor
+# mbco:has_input
+# mbco:has_output
+mbco:has_setting rdfs:subPropertyOf gpo:GPO_d9f99371_6c00_41a0_9676_bbb150b317fb # GPO property for Has Conventional Semantic Parameter # OK?
+
+########################################################################################
