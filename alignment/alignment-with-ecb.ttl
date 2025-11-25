@@ -61,15 +61,29 @@
 # emmo:Information 	reference/information		EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36
 # emmo:Object 		perspective/persistence		EMMO_90ae56e4_d197_49b6_be1a_0049e4756606
 # emmo:Procedure	reference/workflow			EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49
+# emmo:Process		perspectives/persistence	EMMO_43e9a05d_98af_41b4_92f6_00f79a09bfce
 # emmo:Property		perspectives/semiotics		EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba
 
 
+# emmo:Information
 mbco:annotation rdfs:subClassOf emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36 .
-mbco:method owl:equivalentClass emmo:EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49
-mbco:physical_object owl:equivalentClass emmo:EMMO_90ae56e4_d197_49b6_be1a_0049e4756606
+
+# emmo:Procedure
+mbco:method owl:equivalentClass emmo:EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49 .
+
+# emmo:Object
+mbco:physical_object owl:equivalentClass emmo:EMMO_90ae56e4_d197_49b6_be1a_0049e4756606 .
+
+# emmo:Process
 mbco:process owl:equivalentClass emmo:EMMO_43e9a05d_98af_41b4_92f6_00f79a09bfce .
+
+# emmo:Property
 mbco:property owl:equivalentClass emmo:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba .
+
+# emmo:Role
 mbco:role owl:equivalentClass emmo:EMMO_4f226cf3_6d02_4d35_8566_a9e641bc6ff3 .
+
+# emmo:Information
 mbco:statement rdfs:subClassOf emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36 .
 
 	
