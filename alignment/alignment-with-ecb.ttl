@@ -68,7 +68,7 @@
 # emmo:Information
 mbco:annotation rdfs:subClassOf emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36 .
 
-# emmo:Procedure
+# emmo:Procedure, look at the characterisation techniques under that in CHAMEO (FunctionalIcon)...
 mbco:method owl:equivalentClass emmo:EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49 .
 
 # emmo:Object
