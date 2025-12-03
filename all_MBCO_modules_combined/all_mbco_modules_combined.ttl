@@ -1967,11 +1967,15 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:model_parametrization a owl:Class ;
+mbco:model_parametrization a owl:Class ; 
     rdfs:label "Model parametrization" ;
-    skos:altLabel "Model parameters" ; 
-    rdfs:comment"Set of model parameters"^^xs:string ;   
-    rdfs:subClassOf mbco:data .
+    skos:altLabel "Model parameters" ;
+    skos:altLabel "Model" ;   # TO SEE: OK?
+    rdfs:comment "Set of model parameters"^^xs:string ;
+    rdfs:subClassOf mbco:data ;
+   rdfs:subClassOf [a owl:Restriction ;
+                  owl:onProperty mbco:has_action_type ;
+                  owl:someValuesFrom mbco:model_action] .
 
 mbco:simulation a owl:Class ;
     rdfs:label "Simulation" ;
@@ -2067,7 +2071,33 @@ mbco:VARYING_NUMERICAL_METHOD a mbco:model_reproducibility_method .
 mbco:VARYING_MODELLING_SOFTWARE a mbco:model_reproducibility_method ;
     rdfs:seeAlso """E.g., see M. Schappals et al., Round Robin Study: Molecular Simulation of Thermodynamic Properties from Models with Internal Degrees of Freedom,
     J. Chem. Theory Comput. 2017 13 (9), 4270-4280, DOI: 10.1021/acs.jctc.7b00489"""^^xs:string .
-    
+
+mbco:model_action a owl:Class ;
+    rdfs:label "Model action" ;
+    rdfs:subClassOf mbco:process .    
+
+mbco:PREDICT a mbco:model_action .
+mbco:CLASSIFY a mbco:model_action . 
+mbco:INTERPOLATE a mbco:model_action . 
+
+mbco:data_driven_model a owl:Class ;
+    rdfs:subClassOf mbco:model_parametrization ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:is_data_driven ;
+                   owl:hasValue true] .      
+
+mbco:physics_based_model a owl:Class ;
+    rdfs:subClassOf mbco:model_parametrization ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:is_physics_based ;
+                   owl:hasValue true] .      
+
+mbco:hybrid_model a owl:Class ;
+    owl:equivalentClass [ owl:intersectionOf (mbco:physics_based_model mbco:data_driven_model ) ].
+
+mbco:neural_network_model a owl:Class ;
+    rdfs:subClassOf mbco:data_driven_model .
+
 ### Object Properties ###
 
 mbco:implements a owl:ObjectProperty ; # TOSEE: use the same property for plan implementation into process???
@@ -2110,6 +2140,10 @@ mbco:has_modelled_length_scale a owl:ObjectProperty ;
 #    rdfs:domain mbco:computational_modelling_method ;
     rdfs:range [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
 
+# mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
+#     rdfs:label "has action type" ;
+#     rdfs:comment "points to the action type an entity is built for"^^xs:string .
+
 # Could add:
 #mbco:has_input_data 
 #mbco:has_input_training_data
@@ -2125,6 +2159,21 @@ mbco:is_data_driven a owl:DatatypeProperty ;
     rdfs:label "is data-driven" ;
     rdfs:range xs:boolean .
 
+# FA_SIM_1
+mbco:has_nn_input_dimensionality a owl:DatatypeProperty ;
+    rdfs:label "has NN input dimensionality" ;
+    rdfs:domain mbco:neural_network_model ;
+    rdfs:range xs:nonNegativeInteger ;
+    rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
+    rdfs:comment "For example, input can be numbers, geometry/image, a transient"^^xs:string .
+
+mbco:has_nn_output_dimensionality a owl:DatatypeProperty ;
+     rdfs:label "has NN output dimensionality" ;
+     rdfs:domain mbco:neural_network_model ;
+     rdfs:range xs:nonNegativeInteger ;
+     rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
+     rdfs:comment "For example, output can be a scalar quantity, a local quantity or replace an equation"^^xs:string .
+    
 # mbco:is_hybrid a owl:DatatypeProperty . # TO SEE: necessary? if both physics_based and data_driven, is hybrid
 
 ####################################################################################
@@ -2595,7 +2644,7 @@ ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
 
 <https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.0.3"^^xs:string ;
-  dcterms:modified "2025-05-24"^^xs:string ;
+  dcterms:modified "2025-12-03"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -2654,9 +2703,9 @@ mbco:represents a owl:ObjectProperty ;
     rdfs:label "represents" ;
     rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] .
 
-mbco:has_action_type a owl:ObjectProperty ;
-    rdfs:label "has action type" ;
-    rdfs:range mbco:digital_twin_action .
+#mbco:has_action_type a owl:ObjectProperty ; # now defined in modelling.ttl
+#    rdfs:label "has action type" .
+#    rdfs:range mbco:digital_twin_action .
 
 mbco:has_generality_level a owl:ObjectProperty ;
     rdfs:label "has generality level" ;
