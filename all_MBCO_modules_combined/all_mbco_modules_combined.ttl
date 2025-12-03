@@ -1940,6 +1940,7 @@ mbco:porosity a owl:Class ;
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+@prefix osmo: <https://purl.org/vimmp/osmo#> .
 
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
@@ -2090,7 +2091,13 @@ mbco:physics_based_model a owl:Class ;
     rdfs:subClassOf mbco:model_parametrization ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:is_physics_based ;
-                   owl:hasValue true] .      
+                   owl:hasValue true] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_granularity_level ;
+                   owl:allValuesFrom osmo:granularity_level] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_physical_equation_type ;
+                   owl:allValuesFrom osmo:physical_equation_type] .
 
 mbco:hybrid_model a owl:Class ;
     owl:equivalentClass [ owl:intersectionOf (mbco:physics_based_model mbco:data_driven_model ) ].
@@ -2144,6 +2151,21 @@ mbco:has_modelled_length_scale a owl:ObjectProperty ;
 #     rdfs:label "has action type" ;
 #     rdfs:comment "points to the action type an entity is built for"^^xs:string .
 
+mbco:has_granularity_level a owl:ObjectProperty ;
+     rdfs:label "has granularity level" ;
+     rdfs:comment "points to the MODA granularity level"^^xs:string ;
+     rdfs:comment "one of: Electronic, Atomistic, Mesoscopic (=from two atoms on), Continuum"^^xs:string ;
+     rdfs:seeAlso """CEN-CENELEC Management Centre, Materials modelling: terminology, classification and
+     metadata. CEN workshop agreement 17284, Brussels, Belgium (2018)"""^^xs:string.
+
+mbco:has_physical_equation_type a owl:ObjectProperty ;
+     rdfs:label "has physical equation type" ;
+     rdfs:comment "points to one of the 24/25 RoMM/OSMO PE types"^^xs:string ;
+     rdfs:comment "For example, PE type A.3: Molecular dynamics (atomistic)"^^xs:string ;
+     rdfs:seeAlso "A.F. De Baas (ed.), What makes a material function? (EU Publications Office, Luxembourg, Let me compute the ways, 2017)"^^xs:string ;
+     rdfs:seeAlso """M.T. Horsch, et al., Semantic interoperability and characterization of data provenance
+     in computational molecular engineering. J. Chem. Eng. Data 65(3), 1313–1329 (2020)."""^^xs:string .
+
 # Could add:
 #mbco:has_input_data 
 #mbco:has_input_training_data
@@ -2183,6 +2205,11 @@ mbco:has_applicability_range_info a owl:DatatypeProperty ;
 ####################################################################################
 
 # TODO: compare with VISO, MSO-EM, VOV
+
+# Duplicated here from OSMO for convenience
+osmo:granularity_level a owl:Class ;
+   owl:oneOf (osmo:ELECTRONIC osmo:ATOMISTIC osmo:MESOSCOPIC osmo:CONTINUUM) ;
+   rdfs:comment "granularity level (from RoMM), i.e., electronic, atomistic, mesoscopic, or continuum level according to RoMM"^^xs:string .
 
 @prefix mbco: <https://batcat.info/semantics/core#> . 
 
