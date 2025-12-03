@@ -2174,7 +2174,11 @@ mbco:has_nn_output_dimensionality a owl:DatatypeProperty ;
      rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
      rdfs:comment "For example, output can be a scalar quantity, a local quantity or replace an equation"^^xs:string .
     
-# mbco:is_hybrid a owl:DatatypeProperty . # TO SEE: necessary? if both physics_based and data_driven, is hybrid
+mbco:has_applicability_range_info a owl:DatatypeProperty ;
+     rdfs:label "has_applicability_range_info" ;
+     rdfs:domain mbco:model_parametrization ;
+     rdfs:range xs:string ;
+     rdfs:comment "Gives informations on the range (e.g., temperature) in which the model can be (meaningfully) applied"^^xs:string .
 
 ####################################################################################
 
