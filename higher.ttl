@@ -106,7 +106,9 @@ mbco:manufacturing_device a owl:Class ;
     rdfs:comment "E.g., a mixer, a calenderer."^^xs:string .    
 
 mbco:method a owl:Class ;
-    rdfs:label "Method" ; 
+    rdfs:label "Method" ;
+    rdfs:comment """a procedure, technique, or planned way of doing something (WordReference Random House
+    Learner's Dictionary of American English 2025"""^^xs:string ;
     rdfs:comment "Could be a characterization method, a simulation method, a manufacturing method, etc."^^xs:string ;
     rdfs:subClassOf mbco:process . 
 
