@@ -39,3 +39,4 @@ EQ_SIM_3, What data was used to validate this model parametrization?, n/a - answ
 [CQ_CRO_10], What are the main electrochemical components in LiB/NiB manufacturing processes?, Active material ; Binder ; Percolant ; Slurry solvent; Electrode; Separator; Electrolyte; Collector; Battery cell; Casing; Coating layer; Full cell, IRI
 [CQ_EXP_3], , , 
 [CQ_EXP_3.2], , , 
+[CQ_SIM_3], What are the modelling approaches for LiB?, , wip-partially addressed (mbco:P2D_CELL_MODEL etc.)

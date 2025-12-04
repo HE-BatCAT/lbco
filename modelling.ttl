@@ -185,9 +185,10 @@ mbco:implements a owl:ObjectProperty ; # TOSEE: use the same property for plan i
     rdfs:domain mbco:software ; 
     rdfs:range mbco:method . 
 
-#mbco:is_model_for_system a owl:ObjectProperty ; 
-#    rdfs:label "is model for system" ;
-#    rdfs:domain mbco:model_parametrization . 
+mbco:is_model_for a owl:ObjectProperty ; 
+    rdfs:label "is model for" ;
+    rdfs:domain mbco:model_parametrization ;
+    rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] . # TODO: compare with mbco:represents in twinning.ttl. Merge?
 
 mbco:is_model_for_system_containing_material a owl:ObjectProperty ; 
     rdfs:label "is model for system containing material" ;
@@ -282,9 +283,9 @@ osmo:granularity_level a owl:Class ;
    owl:oneOf (osmo:ELECTRONIC osmo:ATOMISTIC osmo:MESOSCOPIC osmo:CONTINUUM) ;
    rdfs:comment "granularity level (from RoMM), i.e., electronic, atomistic, mesoscopic, or continuum level according to RoMM"^^xs:string .
 ####################################################################################
+# alignment
 
 osmo:granularity_level rdfs:subClassOf mbco:annotation .
 osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
-
-
+####################################################################################
 # TODO: compare with VISO, MSO-EM, VOV

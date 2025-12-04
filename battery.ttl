@@ -8,15 +8,17 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+@prefix osmo: <https://purl.org/vimmp/osmo#> .
 
 <https://batcat.info/semantics/core/battery#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.7"^^xs:string ;
-  dcterms:modified "2025-11-17"^^xs:string ;
+  owl:versionInfo "version 0.0.8"^^xs:string ;
+  dcterms:modified "2025-12-04"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   owl:imports <https://batcat.info/semantics/core/characterization#> ;
+  owl:imports <https://batcat.info/semantics/core/modelling#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1106,3 +1108,49 @@ mbco:XPS_technique a owl:Class ;
 #        mbco:has_participant [a mbco:sample] ;
 #	mbco:has_participant [a mbco:agent] ;
 
+####################################################################################
+# Modelling approaches, from D4.1, cf. CQ_SIM_3 and CQ_SIM_4, partially covered (TO DO: complete / check)
+
+# mbco:AB_INITIO_DFT
+# mbco:REACTIVE_MD
+# mbco:CLASSICAL_MC_MD
+
+mbco:electrolyte_model a owl:Class ;
+    owl:equivalentClass [a owl:Restriction ;
+                   owl:onProperty mbco:is_model_for ;
+                   owl:someValuesFrom mbco:electrolyte] .
+
+mbco:DPD_ELECTROLYTE_MODEL a mbco:physics_based_model ;
+		    a mbco:electrolyte_model ;
+		    mbco:has_granularity_level osmo:MESOSCOPIC .
+
+mbco:full_cell_model a owl:Class ;
+    owl:equivalentClass [a owl:Restriction ;
+                   owl:onProperty mbco:is_model_for ;
+                   owl:someValuesFrom mbco:full_cell] .
+
+mbco:P3D_CELL_MODEL a mbco:physics_based_model ;
+		    a mbco:full_cell_model ;
+		    mbco:has_granularity_level osmo:CONTINUUM ;
+		    rdfs:comment "Pseudo 3 dimensional (P3D) cell model"^^xs:string .
+
+mbco:P2D_CELL_MODEL a mbco:physics_based_model ;
+		    a mbco:full_cell_model ;
+		    mbco:has_granularity_level osmo:CONTINUUM ;
+		    rdfs:comment "Pseudo 2 dimensional (P3D) cell model"^^xs:string .
+
+mbco:SP_CIRCUIT_CELL_MODEL a mbco:physics_based_model ;
+		    a mbco:full_cell_model ;
+		    mbco:has_granularity_level osmo:CONTINUUM .
+
+mbco:electrode_model a owl:Class ;
+    owl:equivalentClass [a owl:Restriction ;
+                   owl:onProperty mbco:is_model_for ;
+                   owl:someValuesFrom mbco:electrode] .
+
+mbco:4D_RESOLVED_PHASE_FIELD_ELECTRODE_MODEL a mbco:physics_based_model ;
+		    a mbco:electrode_model ;
+		    mbco:has_granularity_level osmo:CONTINUUM .
+
+#mbco:CONTINUUM_FLOW_FIELD_MODEL
+#mbco:POISSON_NERNST_PLACK
