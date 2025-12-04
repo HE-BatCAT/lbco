@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.8"^^xs:string ;
-  dcterms:modified "2025-11-14"^^xs:string ;
+  owl:versionInfo "version 0.1.9"^^xs:string ;
+  dcterms:modified "2025-12-05"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -61,7 +61,9 @@ mbco:process a owl:Class ;
                    owl:someValuesFrom owl:Thing] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_setting ;
-                   owl:someValuesFrom owl:Thing] .		   
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:comment "A series of actions, can be broken down in process steps of given order"^^xs:string ;
+    rdfs:comment "Can be planned (not realized yet), or already realized"^^xs:string .		   
 
 mbco:process_step a owl:Class ;
     rdfs:label "Process step" ;
@@ -157,7 +159,7 @@ mbco:physical_object_network_status a owl:Class ;
 mbco:process_status a owl:Class ;
     rdfs:label "Process status" ;
     rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
+    owl:oneOf (mbco:PLANNED mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
 
 mbco:batch a owl:Class ;
      rdfs:label "Batch" ;
