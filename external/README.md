@@ -15,4 +15,11 @@ GPO
 - Version 0.2.0 (dating 4 Apr 2024)
 - DOI of all versions: https://doi.org/10.5281/zenodo.7799526
 
+OSMO
+====
+
+- Citation: M. T. Horsch et al., Ontology for Simulation, Modelling, and Optimization (OSMO), v1.7.5, released 2020-11-19.
+- Source of .ttl: GitLab, at this URL: https://gitlab.com/vimmp-semantics/vimmp-ontologies/-/raw/master/osmo/osmo.ttl
+- Version 1.7.5 (dating 19 Nov 2020)
+- Note: Part of VIMMP - Virtual Materials MarketPlace Ontologies, OSMO is the ontology version of MODA (CWA 17284 by CEN/CENLEC)
 
