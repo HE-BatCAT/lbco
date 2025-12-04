@@ -13,8 +13,8 @@
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.6"^^xs:string ;
-  dcterms:modified "2025-09-14"^^xs:string ;
+  owl:versionInfo "version 0.0.7"^^xs:string ;
+  dcterms:modified "2025-12-04"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/data#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -77,6 +77,7 @@ mbco:digital_twinning a owl:Class ; # TOSEE: OK?
     rdfs:label "Digital twinning" ;
     rdfs:subClassOf mbco:computational_modelling_method .
 
+# cf. EQ_SIM_3
 mbco:model_validation_process a owl:Class ;
     rdfs:label "Model validation process" ;
     rdfs:subClassOf mbco:process ;
@@ -88,8 +89,11 @@ mbco:model_validation_process a owl:Class ;
                    owl:someValuesFrom mbco:data] ;      # e.g., experimental data
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:statement] . # on the model validity
-		   
+                   owl:someValuesFrom mbco:statement] ; # on the model validity
+    rdfs:comment"""Its input contains data (e.g., from experiments, modelling methods at a different scale) and
+    its output contains a statement about the model parametrization validity"""^^xs:string .
+
+# cf. EQ_SIM_2
 mbco:model_parametrization_process a owl:Class ;
     rdfs:label "Model parametrization process" ;
     rdfs:subClassOf mbco:process ;
@@ -98,7 +102,8 @@ mbco:model_parametrization_process a owl:Class ;
                    owl:someValuesFrom mbco:model_parametrization] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:data] . # e.g., experimental data
+                   owl:someValuesFrom mbco:data] ; # e.g., experimental data
+    rdfs:comment"""Its input contains data (e.g., from experiments) and its output a model parametrization"""^^xs:string .
 
 # From CQ_CRO_3
 mbco:time_scale a owl:Class ;
@@ -271,11 +276,15 @@ mbco:has_applicability_range_info a owl:DatatypeProperty ;
      rdfs:comment "Gives informations on the range (e.g., temperature) in which the model can be (meaningfully) applied"^^xs:string .
 
 ####################################################################################
-
-# TODO: compare with VISO, MSO-EM, VOV
-
 # Duplicated here from OSMO for convenience
+
 osmo:granularity_level a owl:Class ;
    owl:oneOf (osmo:ELECTRONIC osmo:ATOMISTIC osmo:MESOSCOPIC osmo:CONTINUUM) ;
    rdfs:comment "granularity level (from RoMM), i.e., electronic, atomistic, mesoscopic, or continuum level according to RoMM"^^xs:string .
+####################################################################################
 
+osmo:granularity_level rdfs:subClassOf mbco:annotation .
+osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
+
+
+# TODO: compare with VISO, MSO-EM, VOV
