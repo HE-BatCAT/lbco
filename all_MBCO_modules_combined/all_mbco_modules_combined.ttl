@@ -25,7 +25,7 @@
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Sara Drvaric Talian (ORCID 0000-0003-1355-2843)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -1176,7 +1176,7 @@ mbco:4D_RESOLVED_PHASE_FIELD_ELECTRODE_MODEL a mbco:physics_based_model ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -1264,7 +1264,7 @@ mbco:has_sample_ID a owl:DatatypeProperty ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -1473,7 +1473,7 @@ mbco:contains_dummy_values a owl:DatatypeProperty ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
   dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
@@ -1710,7 +1710,7 @@ mbco:has_batch_ID a owl:DatatypeProperty ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -2031,7 +2031,7 @@ mbco:porosity a owl:Class ;
   dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
   dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
   dcterms:contributor "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -2319,7 +2319,7 @@ osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
   dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -2642,7 +2642,7 @@ mbco:has_confidence_level a owl:ObjectProperty ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
   dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -2765,7 +2765,7 @@ ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
