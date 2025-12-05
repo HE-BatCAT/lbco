@@ -1,3 +1,4 @@
+---  # BatCAT Data model first line
 BatCAT_record:  # True for all, or only for "data"?
   obligatory_properties:  # From D4.2 kernel.
     creator:  # question: is this auto-generated??? Link it to BatCAT_user
@@ -121,3 +122,4 @@ Process:
 
 # General notes:
 # Levels in LA: obligatory, recommended, suggested
+...   # BatCAT data model last line
