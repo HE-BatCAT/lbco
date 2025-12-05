@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/characterization#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/characterization#> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
-   owl:versionInfo "version 0.0.2"^^xs:string ;
-   dcterms:modified "2025-11-13"^^xs:string ;
+   owl:versionInfo "version 0.0.3"^^xs:string ;
+   dcterms:modified "2025-12-05"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -62,6 +62,12 @@ mbco:characterization_measurement a owl:Class ;
      rdfs:label "Characterization measurement" ;
      rdfs:subClassOf mbco:process .
 
+mbco:characterization_device a owl:Class ;
+     rdfs:label "Characterization device" ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:measures ; 
+                   owl:someValuesFrom mbco:physical_quantity] .
+
 mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA
      rdfs:label "Sensor" ;
      rdfs:subClassOf mbco:device .     
@@ -76,6 +82,10 @@ mbco:has_sample_history a owl:ObjectProperty ;
      rdfs:label "has sample history" ;
      rdfs:domain mbco:sample ;
      rdfs:range mbco:sample_history .
+
+mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors?
+     rdfs:label "measures" ;
+     rdfs:range mbco:physical_quantity .
 
 ### Datatype Properties ###
 
