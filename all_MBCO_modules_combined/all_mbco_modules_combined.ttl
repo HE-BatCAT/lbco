@@ -13,8 +13,8 @@
 <https://batcat.info/semantics/core/battery#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.8"^^xs:string ;
-  dcterms:modified "2025-12-04"^^xs:string ;
+  owl:versionInfo "version 0.0.9"^^xs:string ;
+  dcterms:modified "2025-12-05"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   owl:imports <https://batcat.info/semantics/core/characterization#> ;
@@ -414,6 +414,10 @@ mbco:electrode_porosity a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrode_conductivity a owl:Class ;
+     rdfs:subClassOf mbco:physical_quantity ;
+     rdfs:subClassOf mbco:conductivity .     
+
+mbco:conductivity a owl:Class ; # TO SEE: electrical for all of them? or is heat conductivity relevant as well?
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrode_tortuosity a owl:Class ;
@@ -456,7 +460,8 @@ mbco:felt_thickness a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:felt_conductivity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+     rdfs:subClassOf mbco:physical_quantity ;
+     rdfs:subClassOf mbco:conductivity .     
 
 mbco:felt_hydraulic_resistance a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
@@ -474,7 +479,8 @@ mbco:electrolyte_cyclic_voltametry a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:electrolyte_ionic_conductivity a owl:Class ; # CQ_CRO_2
-     rdfs:subClassOf mbco:physical_quantity .
+     rdfs:subClassOf mbco:physical_quantity ;
+     rdfs:subClassOf mbco:conductivity .     
 
 mbco:electrolyte_mass_density a owl:Class ; # CQ_CRO_2
      rdfs:subClassOf mbco:physical_quantity .
@@ -868,7 +874,10 @@ mbco:potentiostat a owl:Class ;
 	rdfs:subClassOf mbco:characterization_device .
 
 mbco:conductivity_probe a owl:Class ;
-	rdfs:subClassOf mbco:characterization_device .
+	rdfs:subClassOf mbco:characterization_device ;
+	rdfs:subClassOf [a owl:Restriction ;
+        		owl:onProperty mbco:measures ;
+			owl:allValuesFrom mbco:conductivity ]. 
 
 mbco:bet_surface_area_analyzer a owl:Class ;
 	rdfs:label "BET surface area analyzer"^^xs:string ;
@@ -878,10 +887,16 @@ mbco:bet_surface_area_analyzer a owl:Class ;
 mbco:palmer a owl:Class ;
 	rdfs:label "Palmer"^^xs:string ;
 	rdfs:comment "Palmer callipers, micrometer"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_device .
+	rdfs:subClassOf mbco:characterization_device ;
+	rdfs:subClassOf [a owl:Restriction ;
+        		owl:onProperty mbco:measures ;
+			owl:allValuesFrom mbco:thickness ]. # TO SEE: lenght?
 
 mbco:porosimeter a owl:Class ;
-	rdfs:subClassOf mbco:characterization_device .
+	rdfs:subClassOf mbco:characterization_device ;
+	rdfs:subClassOf [a owl:Restriction ;
+        		owl:onProperty mbco:measures ;
+			owl:allValuesFrom mbco:porosity ]. 
 
 mbco:raman_spectrometer a owl:Class ;
 	rdfs:subClassOf mbco:characterization_device .
@@ -1168,8 +1183,8 @@ mbco:4D_RESOLVED_PHASE_FIELD_ELECTRODE_MODEL a mbco:physics_based_model ;
 <https://batcat.info/semantics/core/characterization#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/characterization#> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
-   owl:versionInfo "version 0.0.2"^^xs:string ;
-   dcterms:modified "2025-11-13"^^xs:string ;
+   owl:versionInfo "version 0.0.3"^^xs:string ;
+   dcterms:modified "2025-12-05"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -1218,6 +1233,12 @@ mbco:characterization_measurement a owl:Class ;
      rdfs:label "Characterization measurement" ;
      rdfs:subClassOf mbco:process .
 
+mbco:characterization_device a owl:Class ;
+     rdfs:label "Characterization device" ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:measures ; 
+                   owl:someValuesFrom mbco:physical_quantity] .
+
 mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA
      rdfs:label "Sensor" ;
      rdfs:subClassOf mbco:device .     
@@ -1232,6 +1253,10 @@ mbco:has_sample_history a owl:ObjectProperty ;
      rdfs:label "has sample history" ;
      rdfs:domain mbco:sample ;
      rdfs:range mbco:sample_history .
+
+mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors?
+     rdfs:label "measures" ;
+     rdfs:range mbco:physical_quantity .
 
 ### Datatype Properties ###
 
@@ -1702,8 +1727,8 @@ mbco:has_batch_ID a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.8"^^xs:string ;
-   dcterms:modified "2025-11-17"^^xs:string ;
+   owl:versionInfo "version 0.0.9"^^xs:string ;
+   dcterms:modified "2025-12-05"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -1851,8 +1876,11 @@ mbco:laser_profilometer a owl:Class ;
 
 # CQ_MAN_3
 mbco:connection a owl:Class ;
-     rdfs:label "Connection" ;
-     owl:oneOf (mbco:WIRED_ELECTRICAL_CABLE mbco:BLUETOOTH mbco:OPTICAL_FIBRE) .
+     rdfs:label "Connection (type)" ;
+     owl:oneOf (mbco:WIRED_ELECTRICAL_CABLE mbco:BLUETOOTH mbco:OPTICAL_FIBRE) ;
+     rdfs:subClassOf mbco:annotation .
+     # Note: put there and not under mbco:device because we only see it as a property of another object.
+     # A related entity under mbco:device could be added if needed
 
 ### Object Properties ###
 
@@ -1903,7 +1931,7 @@ mbco:whole_product
 mbco:sensor
 	rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:property] ; # TOSEE: property -> physical_property? 
+	owl:allValuesFrom mbco:physical_quantity] ; 
 	rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty mbco:has_connection ;
 	owl:allValuesFrom mbco:connection] .
@@ -1932,7 +1960,10 @@ mbco:manufacturing_process
 	owl:someValuesFrom [owl:unionOf (mbco:material mbco:physical_object)]] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:physical_object] .
+	owl:someValuesFrom mbco:physical_object] ;
+	rdfs:subClassOf [a owl:Restriction ;
+			owl:onProperty mbco:has_output ;
+        	     	owl:someValuesFrom [owl:unionOf (mbco:whole_product mbco:intermediate_product mbco:product_component)] ] .
 
 mbco:equipment_performance a owl:Class ;
 	rdfs:subClassOf mbco:property .
