@@ -12,8 +12,8 @@
 <https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.8"^^xs:string ;
-   dcterms:modified "2025-11-17"^^xs:string ;
+   owl:versionInfo "version 0.0.9"^^xs:string ;
+   dcterms:modified "2025-12-05"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core#> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -161,8 +161,11 @@ mbco:laser_profilometer a owl:Class ;
 
 # CQ_MAN_3
 mbco:connection a owl:Class ;
-     rdfs:label "Connection" ;
-     owl:oneOf (mbco:WIRED_ELECTRICAL_CABLE mbco:BLUETOOTH mbco:OPTICAL_FIBRE) .
+     rdfs:label "Connection (type)" ;
+     owl:oneOf (mbco:WIRED_ELECTRICAL_CABLE mbco:BLUETOOTH mbco:OPTICAL_FIBRE) ;
+     rdfs:subClassOf mbco:annotation .
+     # Note: put there and not under mbco:device because we only see it as a property of another object.
+     # A related entity under mbco:device could be added if needed
 
 ### Object Properties ###
 
@@ -213,7 +216,7 @@ mbco:whole_product
 mbco:sensor
 	rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:property] ; # TOSEE: property -> physical_property? 
+	owl:allValuesFrom mbco:physical_quantity] ; 
 	rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty mbco:has_connection ;
 	owl:allValuesFrom mbco:connection] .
@@ -242,7 +245,10 @@ mbco:manufacturing_process
 	owl:someValuesFrom [owl:unionOf (mbco:material mbco:physical_object)]] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:physical_object] .
+	owl:someValuesFrom mbco:physical_object] ;
+	rdfs:subClassOf [a owl:Restriction ;
+			owl:onProperty mbco:has_output ;
+        	     	owl:someValuesFrom [owl:unionOf (mbco:whole_product mbco:intermediate_product mbco:product_component)] ] .
 
 mbco:equipment_performance a owl:Class ;
 	rdfs:subClassOf mbco:property .
