@@ -13,8 +13,8 @@
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.7"^^xs:string ;
-  dcterms:modified "2025-12-04"^^xs:string ;
+  owl:versionInfo "version 0.0.8"^^xs:string ;
+  dcterms:modified "2025-12-08"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/data#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -63,7 +63,10 @@ mbco:simulation a owl:Class ;
                    owl:someValuesFrom mbco:physical_quantity] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_participant ;
-                   owl:someValuesFrom mbco:software] .
+                   owl:someValuesFrom mbco:software] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:model_parametrization] .
 
 mbco:simulation_result a owl:Class ;
     rdfs:label "Simulation result" ;
@@ -194,6 +197,12 @@ mbco:is_model_for_system_containing_material a owl:ObjectProperty ;
     rdfs:label "is model for system containing material" ;
     rdfs:domain mbco:model_parametrization ;
     rdfs:range mbco:material .
+
+mbco:is_model_for_system_containing_substance a owl:ObjectProperty ; 
+    rdfs:label "is model for system containing substance" ;
+    rdfs:domain mbco:model_parametrization ;
+    rdfs:range mbco:substance ;
+    rdfs:subPropertyOf mbco:is_model_for_system_containing_material .
 
 mbco:has_model_type a owl:ObjectProperty ; 
     rdfs:label "has model type" ;
