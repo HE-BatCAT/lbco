@@ -1639,10 +1639,10 @@ mbco:method a owl:Class ;
     rdfs:comment "Could be a characterization method, a simulation method, a manufacturing method, etc."^^xs:string ;
     rdfs:subClassOf mbco:process . 
 
-mbco:compute_resource a owl:Class ;
-    rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
-    rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
-    a owl:DeprecatedClass .
+# mbco:compute_resource a owl:Class ;
+#     rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
+#     rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
+#     a owl:DeprecatedClass .
 
 mbco:statement a owl:Class ;
     rdfs:label "Statement" . # Note: in EVMPO, statement is used for elementary communications. Here not, it is more general.   
