@@ -13,8 +13,8 @@
 <https://batcat.info/semantics/core/battery#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.9"^^xs:string ;
-  dcterms:modified "2025-12-05"^^xs:string ;
+  owl:versionInfo "version 0.0.10"^^xs:string ;
+  dcterms:modified "2025-12-08"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
   owl:imports <https://batcat.info/semantics/core/characterization#> ;
@@ -1169,6 +1169,52 @@ mbco:4D_RESOLVED_PHASE_FIELD_ELECTRODE_MODEL a mbco:physics_based_model ;
 
 #mbco:CONTINUUM_FLOW_FIELD_MODEL
 #mbco:POISSON_NERNST_PLACK
+
+####################################################################################
+# Substances / materials
+
+mbco:CARBON_BLACK a mbco:substance ;
+    rdfs:label "Carbon black" .
+
+mbco:GRAPHITE a mbco:substance ;
+    rdfs:label "Graphite" .
+
+mbco:LFP a mbco:substance ;
+    rdfs:label "LFP" ;
+    rdfs:altLabel "Lithium Iron Phosphate" .
+
+mbco:NMC a mbco:substance ;
+    rdfs:label "NMC" ;
+    rdfs:altLabel "Lithium Nickel Manganese Cobalt Oxide" .
+
+mbco:NMP a mbco:substance ;
+    rdfs:label "NMP" ;
+    rdfs:altLabel "N-Methyl-2-Pyrrolidone" .
+
+mbco:PVDF a mbco:substance ;
+    rdfs:label "PVDF" ;
+    rdfs:altLabel "Polyvinylidene Fluoride" .
+
+mbco:CMC a mbco:substance ;
+    rdfs:label "CMC" ;
+    rdfs:altLabel "Carboxymethyl Cellulose" .
+
+mbco:SBR a mbco:substance ;
+    rdfs:label "SBR" ;
+    rdfs:altLabel "Styrene Butadiene Rubber" .
+
+mbco:ARGON_GAS a mbco:substance ;
+    rdfs:label "Argon gas" .
+
+mbco:HYDROGEN_GAS a mbco:substance ;
+    rdfs:label "Hydrogen gas" .
+
+mbco:CARBON_MONOXIDE a mbco:substance ;
+    rdfs:label "Carbon monoxide" .
+
+mbco:CARBON_DIOXIDE a mbco:substance ;
+    rdfs:label "Carbon dioxide" .
+
 @prefix mbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -1489,8 +1535,8 @@ mbco:contains_dummy_values a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.9"^^xs:string ;
-  dcterms:modified "2025-12-05"^^xs:string ;
+  owl:versionInfo "version 0.1.10"^^xs:string ;
+  dcterms:modified "2025-12-08"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1524,6 +1570,10 @@ mbco:data a owl:Class ;
 
 mbco:material a owl:Class ;
     rdfs:label "Material" .
+
+mbco:substance a owl:Class ;
+    rdfs:label "Substance" ;
+    rdfs:subClassOf mbco:material .
 
 mbco:process a owl:Class ;
     rdfs:label "Process" ;
@@ -2050,8 +2100,8 @@ mbco:porosity a owl:Class ;
 <https://batcat.info/semantics/core/modelling#> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.7"^^xs:string ;
-  dcterms:modified "2025-12-04"^^xs:string ;
+  owl:versionInfo "version 0.0.8"^^xs:string ;
+  dcterms:modified "2025-12-08"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core#> ;
   owl:imports <https://batcat.info/semantics/core/data#> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -2100,7 +2150,10 @@ mbco:simulation a owl:Class ;
                    owl:someValuesFrom mbco:physical_quantity] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_participant ;
-                   owl:someValuesFrom mbco:software] .
+                   owl:someValuesFrom mbco:software] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:model_parametrization] .
 
 mbco:simulation_result a owl:Class ;
     rdfs:label "Simulation result" ;
@@ -2231,6 +2284,12 @@ mbco:is_model_for_system_containing_material a owl:ObjectProperty ;
     rdfs:label "is model for system containing material" ;
     rdfs:domain mbco:model_parametrization ;
     rdfs:range mbco:material .
+
+mbco:is_model_for_system_containing_substance a owl:ObjectProperty ; 
+    rdfs:label "is model for system containing substance" ;
+    rdfs:domain mbco:model_parametrization ;
+    rdfs:range mbco:substance ;
+    rdfs:subPropertyOf mbco:is_model_for_system_containing_material .
 
 mbco:has_model_type a owl:ObjectProperty ; 
     rdfs:label "has model type" ;
