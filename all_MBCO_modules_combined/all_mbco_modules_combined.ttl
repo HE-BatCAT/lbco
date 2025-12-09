@@ -1,3 +1,1600 @@
+@prefix mbco: <https://batcat.info/semantics/core#> .
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
+
+<https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
+  owl:versionInfo "version 0.1.10"^^xs:string ;
+  dcterms:modified "2025-12-08"^^xs:string ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
+  dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain, 
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+mbco:agent a owl:Class ;
+    rdfs:label "Agent" ;
+    owl:disjointUnionOf (mbco:human_agent mbco:machine_agent) ;
+    rdfs:comment "An entity that has the capability to act"^^xs:string .    
+
+mbco:human_agent a owl:Class ;
+    rdfs:label "Human agent" .
+
+mbco:machine_agent a owl:Class ;
+    rdfs:label "Machine agent" .
+
+mbco:data a owl:Class ;
+    rdfs:label "Data" .
+
+mbco:material a owl:Class ;
+    rdfs:label "Material" .
+
+mbco:substance a owl:Class ;
+    rdfs:label "Substance" ;
+    rdfs:subClassOf mbco:material .
+
+mbco:process a owl:Class ;
+    rdfs:label "Process" ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_participant ; # TODO: clarify how different from input/output (cf. BVCO)??? E.g.: a machine+operator+sample are participants, input is certain data, output is other data.
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_setting ;
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:comment "A series of actions, can be broken down in process steps of given order"^^xs:string ;
+    rdfs:comment "Can be planned (not realized yet), or already realized"^^xs:string .		   
+
+mbco:process_step a owl:Class ;
+    rdfs:label "Process step" ;
+    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty [owl:inverseOf mbco:has_part] ;
+                   owl:someValuesFrom mbco:process] .
+
+mbco:software a owl:Class ;
+    rdfs:label "Software" .
+
+mbco:physical_object a owl:Class ;
+    rdfs:label "(Physical) Object" . 
+
+mbco:sample a owl:Class ;
+    rdfs:label "Sample" ;
+    rdfs:subClassOf mbco:physical_object .
+
+mbco:device a owl:Class ;
+    rdfs:label "Device" ;
+    rdfs:subClassOf mbco:physical_object ;
+    rdfs:comment "A physical object made for a given functionality"^^xs:string .
+
+mbco:computational_device a owl:Class ;
+    rdfs:label "Computational device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a (digital) computational action."^^xs:string ;
+    rdfs:comment "E.g., a PC, a computational cluster."^^xs:string .
+
+mbco:characterization_device a owl:Class ;
+    rdfs:label "Characterization device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a characterization action."^^xs:string ;
+    rdfs:comment "E.g., a potentiostat."^^xs:string .
+
+mbco:manufacturing_device a owl:Class ;
+    rdfs:label "Manufacturing device" ;
+    rdfs:subClassOf mbco:device ;
+    rdfs:comment "A device that can perform a manufacturing action"^^xs:string ;
+    rdfs:comment "E.g., a mixer, a calenderer."^^xs:string .    
+
+mbco:method a owl:Class ;
+    rdfs:label "Method" ;
+    rdfs:comment """a procedure, technique, or planned way of doing something (WordReference Random House
+    Learner's Dictionary of American English 2025"""^^xs:string ;
+    rdfs:comment "Could be a characterization method, a simulation method, a manufacturing method, etc."^^xs:string ;
+    rdfs:subClassOf mbco:process . 
+
+# mbco:compute_resource a owl:Class ;
+#     rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
+#     rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
+#     a owl:DeprecatedClass .
+
+mbco:statement a owl:Class ;
+    rdfs:label "Statement" . # Note: in EVMPO, statement is used for elementary communications. Here not, it is more general.   
+
+mbco:role a owl:Class ;
+    rdfs:label "Role" ;
+    rdfs:comment "A non-rigid category (i.e., during its lifespan, an entity can change role)."^^xs:string ;
+    rdfs:comment """For example: role of a human agent in an organization (employee/director), in a software repository (editor/owner); 
+    role of a variable in a mathematical problem (dependent/independent/parameter)."""^^xs:string .
+
+mbco:property a owl:Class ; #TOSEE: property is a keyword in OWL, add specifier?
+    rdfs:label "Property" ;
+    rdfs:comment "Observable property, such as a physical property of a material, the status of a device, etc"^^xs:string .
+
+mbco:status a owl:Class ;
+    rdfs:label "Status" ;
+    rdfs:comment "For a single object or a system. E.g.: the software is installed/not-installed; the device is on/off, operational/faulty, the agent is available/busy, etc."^^xs:string ;
+    rdfs:subClassOf mbco:property .
+
+mbco:physical_quantity a owl:Class ;
+     rdfs:label "Physical quantity" ;
+     rdfs:subClassOf mbco:property .
+
+mbco:annotation a owl:Class ;
+    rdfs:label "Annotation" ;
+    rdfs:comment "Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module"^^xs:string .
+
+mbco:physical_object_status a owl:Class ;
+    rdfs:label "Physical object status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:NEW mbco:OK mbco:BROKEN mbco:AGED) .
+
+mbco:object_analysis_status a owl:Class ;
+    rdfs:label "(Object) Analysis status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:ANALYZED mbco:NOT_ANALYZED) .
+
+mbco:physical_object_network_status a owl:Class ;
+    rdfs:label "Physical object network status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:ONLINE mbco:OFFLINE) .
+
+mbco:process_status a owl:Class ;
+    rdfs:label "Process status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:PLANNED mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
+
+mbco:batch a owl:Class ;
+     rdfs:label "Batch" ;
+     rdfs:comment "A batch is a set of experimental samples or products, acquired or manufactured/prepared together."^^xs:string ;
+     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf [a owl:Restriction ;
+          owl:onProperty mbco:has_part ;
+          owl:someValuesFrom mbco:physical_object] .
+
+### Object Properties ###
+
+mbco:has_part a owl:ObjectProperty ;
+    rdfs:label "has part" . 
+
+mbco:has_participant a owl:ObjectProperty ;
+    rdfs:domain mbco:process ;
+    rdfs:range [owl:unionOf (mbco:agent mbco:physical_object mbco:software)] .
+
+mbco:follows a owl:ObjectProperty ;
+    rdfs:label "follows" ;
+    rdfs:domain mbco:process_step ;
+    rdfs:range mbco:process_step .
+
+mbco:follows_directly a owl:ObjectProperty ;
+    rdfs:label "follows directly" ;
+    rdfs:domain mbco:process_step ;
+    rdfs:range mbco:process_step ;
+    rdfs:subPropertyOf mbco:follows .
+
+mbco:has_input a owl:ObjectProperty ;
+   rdfs:label "has input" .
+
+mbco:has_output a owl:ObjectProperty ;
+   rdfs:label "has output" .
+
+mbco:has_setting a owl:ObjectProperty ;
+   rdfs:label "has setting" ;
+   rdfs:comment "Settings, conditions affecting the process."^^xs:string . # TODO: clarify how this is separate from "input" and how different from "constraint". E.g.: numerical parameters vs model parameters for a simulation
+
+mbco:uses_method a owl:ObjectProperty ;
+   rdfs:label "uses method" ;
+   rdfs:range mbco:method .
+
+mbco:answers a owl:ObjectProperty ;
+    rdfs:domain mbco:statement ; 
+    rdfs:range mbco:statement .
+    
+mbco:has_status a owl:ObjectProperty ;
+    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:software mbco:process)] ;
+    rdfs:range mbco:status .
+
+mbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
+    rdfs:range mbco:property .
+
+mbco:is_incompatible_with a owl:ObjectProperty ;
+   rdfs:label "is incompatible with" ;
+   rdfs:comment "E.g., it can be used to flag up incompatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
+
+# FA_CRO_3
+mbco:is_material_incompatible_with_material a owl:ObjectProperty ;
+   rdfs:label "is material incompatible with material" ;
+   rdfs:comment "To flag up between materials (e.g., mixtures that are unsafe, etc)"^^xs:string ;
+   rdfs:domain mbco:material ; 
+   rdfs:range mbco:material ;
+   rdfs:subPropertyOf mbco:is_incompatible_with .
+   
+### Datatype Properties ###
+
+mbco:has_batch_ID a owl:DatatypeProperty ;
+    rdfs:label "has batch ID" ;
+    rdfs:domain mbco:batch .
+
+# see also: EMMO-LITE, DOLCE-LITE, EVMPO.
+
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/characterization#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/characterization#> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
+   owl:versionInfo "version 0.0.3"^^xs:string ;
+   dcterms:modified "2025-12-05"^^xs:string ;
+   owl:imports <https://batcat.info/semantics/core#> ;
+   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:sample a owl:Class ;
+     rdfs:label "Sample" ;
+     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty [owl:inverseOf mbco:has_part] ;
+                   owl:someValuesFrom mbco:batch] .
+
+mbco:sample_history a owl:Class ;
+     rdfs:label "Sample history" ;
+     rdfs:subClassOf mbco:data ;
+     rdfs:comment """Track the whole history (across laboratories) of each experimental sample being 
+characterized in BatCAT. It includes input and preparation conditions, records all processes undergone by a sample, 
+including its artificial / accelerated ageing."""^^xs:string. 
+
+mbco:characterization_technique a owl:Class ;
+     rdfs:label "Characterization technique" ;
+     rdfs:subClassOf mbco:method ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_participant ; 
+                   owl:someValuesFrom mbco:characterization_device] ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_participant ; 
+                   owl:someValuesFrom mbco:sample] ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ; 
+                   owl:someValuesFrom mbco:physical_quantity] .
+
+mbco:characterization_measurement a owl:Class ;
+     rdfs:label "Characterization measurement" ;
+     rdfs:subClassOf mbco:process .
+
+mbco:characterization_device a owl:Class ;
+     rdfs:label "Characterization device" ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:measures ; 
+                   owl:someValuesFrom mbco:physical_quantity] .
+
+mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA
+     rdfs:label "Sensor" ;
+     rdfs:subClassOf mbco:device .     
+
+mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TOSEE: duplicated in Manufacturing module
+     rdfs:label "Actuator" ;
+     rdfs:subClassOf mbco:device .     
+
+### Object Properties ###
+
+mbco:has_sample_history a owl:ObjectProperty ;
+     rdfs:label "has sample history" ;
+     rdfs:domain mbco:sample ;
+     rdfs:range mbco:sample_history .
+
+mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors?
+     rdfs:label "measures" ;
+     rdfs:range mbco:physical_quantity .
+
+### Datatype Properties ###
+
+mbco:has_sample_ID a owl:DatatypeProperty ;
+    rdfs:label "has sample ID" ;
+    rdfs:domain mbco:sample .
+
+####################################################################################
+
+
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
+   owl:versionInfo "version 0.0.9"^^xs:string ;
+   dcterms:modified "2025-12-05"^^xs:string ;
+   owl:imports <https://batcat.info/semantics/core#> ;
+   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:manufacturing_line a owl:Class ;
+     rdfs:label "Manufacturing line" ;
+     rdfs:subClassOf mbco:manufacturing_device .
+
+mbco:whole_product a owl:Class ;
+     rdfs:label "Whole product" ;
+     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf [a owl:Restriction ;
+          owl:onProperty [owl:inverseOf mbco:has_part] ;
+          owl:someValuesFrom mbco:batch] .
+
+mbco:intermediate_product a owl:Class ;
+     rdfs:label "Intermediate product" ;
+     rdfs:subClassOf mbco:physical_object .
+
+mbco:product_component a owl:Class ;
+     rdfs:label "Product component" ;
+     rdfs:subClassOf mbco:physical_object .
+
+# mbco:manufacturing_technique a owl:Class ;
+#      rdfs:label "Manufacturing technique" ;
+#      rdfs:subClassOf mbco:method .
+
+mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Characterization module
+     rdfs:label "Sensor" ;
+     rdfs:subClassOf mbco:device ;
+     rdfs:comment """From Merriam Webster: a device that responds to a physical stimulus
+     (such as heat, light, sound, pressure, magnetism, or a particular motion) and transmits
+     a resulting impulse (as for measurement or operating a control)
+     [Merriam-Webster.com Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/sensor. Accessed 13 Nov. 2025.]"""^^xs:string ;
+     rdfs:comment """In the SOSA (Sensor, Observation, Sample, and Actuator) Ontology, a device that responds to a physical stimulus
+     and generates a result"""^^xs:string .     
+
+mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Characterization module
+     rdfs:label "Actuator" ;
+     rdfs:subClassOf mbco:agent .
+
+mbco:manufacturing_process a owl:Class ;
+     rdfs:label "Manufacturing process" ;
+     rdfs:subClassOf mbco:process ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty mbco:has_process_kpi ;
+        	     owl:someValuesFrom mbco:production_cost_per_unit] ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty mbco:has_setting ;
+        	     owl:someValuesFrom mbco:electricity_unit_cost] ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty mbco:has_setting ;
+        	     owl:someValuesFrom mbco:personnel_unit_cost] .
+
+# sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
+# TO SEE: 
+
+mbco:temperature_sensor a owl:Class ;
+     rdfs:label "Temperature sensor" ;
+     rdfs:subClassOf mbco:sensor ;
+     rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:temperature] . # TOSEE: why is the reasoner not deducing that temperature is a mbco:property?
+	
+mbco:thermocouple a owl:Class ;
+     rdfs:label "Thermocouple" ;
+     rdfs:subClassOf mbco:temperature_sensor .
+
+mbco:accelerometer a owl:Class ;
+     rdfs:label "Accelerometer" ;
+     rdfs:subClassOf mbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:acceleration] .
+
+mbco:vibration_sensor a owl:Class ;
+     rdfs:label "Vibration sensor" ;
+     rdfs:subClassOf mbco:sensor ;
+     rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:someValuesFrom mbco:vibration_amplitude] ; 
+     rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:someValuesFrom mbco:vibration_frequency] . 
+
+mbco:power_sensor a owl:Class ;
+     rdfs:label "Power sensor" ;
+     rdfs:subClassOf mbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:power] .
+
+mbco:power_monitoring_clip a owl:Class ;
+     rdfs:label "Power monitoring clip" ;
+     rdfs:subClassOf mbco:power_sensor .
+
+mbco:gas_detection_sensor a owl:Class ;
+     rdfs:label "Gas detection sensor" ;
+     rdfs:subClassOf mbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:gas_concentration] . 
+
+mbco:carbon_monoxide_sensor a owl:Class ;
+     rdfs:label "Carbon monoxide sensor" ;
+     skos:altTabel "CO sensor" ;
+     rdfs:subClassOf mbco:gas_detection_sensor .
+
+mbco:carbon_dioxide_sensor a owl:Class ;
+     rdfs:label "Carbon dioxide sensor" ;
+     skos:altTabel "CO2 sensor" ;
+     rdfs:subClassOf mbco:gas_detection_sensor .
+
+mbco:pressure_sensor a owl:Class ;
+     rdfs:label "Pressure sensor" ;
+     rdfs:subClassOf mbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:pressure] .
+
+mbco:laser_profilometer a owl:Class ;
+     rdfs:label "Laser profilometer" ;
+     rdfs:subClassOf mbco:device ; 
+     rdfs:subClassOf mbco:characterization_device ; # TOSEE: not a sensor, OK? Should "on-line charaterization" be defined?
+     rdfs:comment "Can be used for on-line characterization (e.g., thickness measurement)"^^xs:string ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:someValuesFrom mbco:thickness] ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:someValuesFrom mbco:porosity] .
+
+# CQ_MAN_3
+mbco:connection a owl:Class ;
+     rdfs:label "Connection (type)" ;
+     owl:oneOf (mbco:WIRED_ELECTRICAL_CABLE mbco:BLUETOOTH mbco:OPTICAL_FIBRE) ;
+     rdfs:subClassOf mbco:annotation .
+     # Note: put there and not under mbco:device because we only see it as a property of another object.
+     # A related entity under mbco:device could be added if needed
+
+### Object Properties ###
+
+mbco:has_product_design_parameter a owl:ObjectProperty ;
+     rdfs:label "has product design parameter" ;
+     rdfs:domain mbco:whole_product .
+
+mbco:has_product_kpi a owl:ObjectProperty ;
+     rdfs:label "has product KPI" ;
+     rdfs:comment "Points to a product Key Performance Indicator"^^xs:string ;
+     rdfs:domain mbco:whole_product .
+     
+mbco:has_product_operating_condition a owl:ObjectProperty ;
+     rdfs:label "has product operating condition" ;
+     rdfs:domain mbco:whole_product .
+
+mbco:performs_action a owl:ObjectProperty ;
+     rdfs:label "performs action" ;
+     rdfs:domain mbco:actuator ;
+     rdfs:range mbco:process . # TOSEE: define "action" class under "process" in higer.ttl?
+
+mbco:has_process_kpi a owl:ObjectProperty ;
+     rdfs:label "has process KPI" ;
+     rdfs:domain mbco:process ;	
+     rdfs:comment "Points to a process Key Performance Indicator"^^xs:string .
+
+mbco:observes a owl:ObjectProperty ;
+     rdfs:label "observes" ;
+     rdfs:range mbco:property ;	
+     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string .
+
+### Datatype Properties ###
+
+mbco:has_trigger a owl:DatatypeProperty ;
+    rdfs:label "has trigger" ;
+    rdfs:domain mbco:actuator .
+
+### Restrictions ###
+
+mbco:whole_product
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:has_part ;
+	owl:someValuesFrom mbco:product_component] ;
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:has_part ;
+	owl:someValuesFrom mbco:material] .
+
+mbco:sensor
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:observes ;
+	owl:allValuesFrom mbco:physical_quantity] ; 
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty mbco:has_connection ;
+	owl:allValuesFrom mbco:connection] .
+
+# CQ_MAN_4
+mbco:manufacturing_process 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:energy_consumption] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:equipment_performance] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:waste_produced] ; 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_process_kpi ;
+	owl:someValuesFrom mbco:product_quality] .
+
+mbco:manufacturing_process 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_participant ;
+	owl:someValuesFrom mbco:manufacturing_device] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_input ;
+	owl:someValuesFrom [owl:unionOf (mbco:material mbco:physical_object)]] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_output ;
+	owl:someValuesFrom mbco:physical_object] ;
+	rdfs:subClassOf [a owl:Restriction ;
+			owl:onProperty mbco:has_output ;
+        	     	owl:someValuesFrom [owl:unionOf (mbco:whole_product mbco:intermediate_product mbco:product_component)] ] .
+
+mbco:equipment_performance a owl:Class ;
+	rdfs:subClassOf mbco:property .
+
+mbco:product_quality a owl:Class ;
+	rdfs:subClassOf mbco:property .
+
+mbco:waste_produced a owl:Class ;
+	rdfs:subClassOf mbco:property .
+
+mbco:energy_consumption a owl:Class ;
+	rdfs:subClassOf mbco:property .
+
+# mbco:whole_product
+# 	rdfs:subClassOf [a owl:Restriction ;
+# 	owl:onProperty mbco:has_product_design_parameter ;
+# 	owl:someValuesFrom owl:Thing] ;
+#     	rdfs:subClassOf [a owl:Restriction ;
+#     	owl:onProperty mbco:has_product_KPI ;
+#     	owl:someValuesFrom owl:Thing] ;
+#     	rdfs:subClassOf [a owl:Restriction ;
+#     	owl:onProperty mbco:has_product_operating_condition ;
+#     	owl:someValuesFrom owl:Thing] .
+	    
+# CQ_MAN_10
+mbco:personnel_unit_cost a owl:Class ;
+        rdfs:label "Personnel unit cost" ;
+        rdfs:comment "Personnel cost, e.g., per person per hour"^^xs:string ;
+	rdfs:subClassOf mbco:property .
+
+mbco:electricity_unit_cost a owl:Class ;
+        rdfs:label "Electricity unit cost" ;
+        rdfs:comment "E.g., cost per kWh"^^xs:string ;
+	rdfs:subClassOf mbco:property .
+
+mbco:production_cost_per_unit a owl:Class ; # NB: duplicated here from battery module
+     rdfs:label "Production cost per unit" ;
+     rdfs:subClassOf mbco:property . 
+
+####################################################################################
+
+# Physical quantities # TO SEE: move them elsewhere, higher or transversal module?
+# TO SEE: statements added explicitly as not deduced by the reasoner. Bug?
+
+mbco:temperature a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:acceleration a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:power a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:gas_concentration a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:pressure a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:thickness a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:vibration_frequency a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:vibration_amplitude a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+mbco:porosity a owl:Class ;
+	rdfs:subClassOf mbco:physical_quantity .
+
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+@prefix osmo: <https://purl.org/vimmp/osmo#> .
+
+<https://batcat.info/semantics/core/modelling#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
+  owl:versionInfo "version 0.0.8"^^xs:string ;
+  dcterms:modified "2025-12-08"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  owl:imports <https://batcat.info/semantics/core/data#> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
+  dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
+  dcterms:contributor "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:model_parametrization a owl:Class ; 
+    rdfs:label "Model parametrization" ;
+    skos:altLabel "Model parameters" ;
+    skos:altLabel "Model" ;   # TO SEE: OK?
+    rdfs:comment "Set of model parameters"^^xs:string ;
+    rdfs:subClassOf mbco:data ;
+   rdfs:subClassOf [a owl:Restriction ;
+                  owl:onProperty mbco:has_action_type ;
+                  owl:someValuesFrom mbco:model_action] .
+
+mbco:simulation a owl:Class ;
+    rdfs:label "Simulation" ;
+    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:data] ;      
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom mbco:simulation_result] ;      
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:physical_quantity] ;      
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom mbco:physical_quantity] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_participant ;
+                   owl:someValuesFrom mbco:software] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:model_parametrization] .
+
+mbco:simulation_result a owl:Class ;
+    rdfs:label "Simulation result" ;
+    rdfs:subClassOf mbco:data .
+
+mbco:computational_modelling_method a owl:Class ;
+    rdfs:label "Computational modelling method" ;
+    rdfs:subClassOf mbco:method .
+    
+mbco:digital_twinning a owl:Class ; # TOSEE: OK?
+    rdfs:label "Digital twinning" ;
+    rdfs:subClassOf mbco:computational_modelling_method .
+
+# cf. EQ_SIM_3
+mbco:model_validation_process a owl:Class ;
+    rdfs:label "Model validation process" ;
+    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:model_parametrization] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:data] ;      # e.g., experimental data
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom mbco:statement] ; # on the model validity
+    rdfs:comment"""Its input contains data (e.g., from experiments, modelling methods at a different scale) and
+    its output contains a statement about the model parametrization validity"""^^xs:string .
+
+# cf. EQ_SIM_2
+mbco:model_parametrization_process a owl:Class ;
+    rdfs:label "Model parametrization process" ;
+    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_output ;
+                   owl:someValuesFrom mbco:model_parametrization] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_input ;
+                   owl:someValuesFrom mbco:data] ; # e.g., experimental data
+    rdfs:comment"""Its input contains data (e.g., from experiments) and its output a model parametrization"""^^xs:string .
+
+# From CQ_CRO_3
+mbco:time_scale a owl:Class ;
+    owl:oneOf (mbco:INDUSTRIAL_SAFETY_TIME_SCALE mbco:INTERMEDIATE_TIME_SCALE mbco:PLANNING_TIME_SCALE) ;
+    rdfs:subClassOf mbco:annotation ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+ to specify which one it addresses"""^^xs:string .
+
+# From CQ_CRO_9. Move to battery module later?
+mbco:rfb_length_scale a owl:Class ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
+    rdfs:subClassOf mbco:annotation ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
+
+mbco:lib_length_scale a owl:Class ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
+    rdfs:subClassOf mbco:annotation ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
+
+# mbco:physical_quantity a owl:Class ;
+#     rdfs:label "Physical quantity" ;
+#     rdfs:subClassOf mbco:property .
+
+# CQ_SIM_9
+mbco:model_reproducibility_method a owl:Class ; 
+    rdfs:label "Model reproducibility method" ;
+    rdfs:comment "Methods to evaluate the robustness of models and modelling data"^^xs:string ;
+    rdfs:subClassOf mbco:data_quality_evaluation_method ; #TOSEE: OK?
+    rdfs:subClassOf mbco:method .
+
+mbco:VARYING_MODELLING_APPROACH a mbco:model_reproducibility_method ;
+    rdfs:seeAlso """E.g., see S. Stephan et al, Vapor−Liquid Interface of the Lennard-Jones Truncated and Shifted Fluid: Comparison of Molecular Simulation, Density Gradient Theory, and Density Functional Theory, J.  Phys. Chem. C 2018 122 (43),
+    4705-24715, DOI: 10.1021/acs.jpcc.8b06332 """^^xs:string .
+
+mbco:VARYING_NUMERICAL_METHOD a mbco:model_reproducibility_method .
+
+mbco:VARYING_MODELLING_SOFTWARE a mbco:model_reproducibility_method ;
+    rdfs:seeAlso """E.g., see M. Schappals et al., Round Robin Study: Molecular Simulation of Thermodynamic Properties from Models with Internal Degrees of Freedom,
+    J. Chem. Theory Comput. 2017 13 (9), 4270-4280, DOI: 10.1021/acs.jctc.7b00489"""^^xs:string .
+
+mbco:model_action a owl:Class ;
+    rdfs:label "Model action" ;
+    rdfs:subClassOf mbco:process .    
+
+mbco:PREDICT a mbco:model_action .
+mbco:CLASSIFY a mbco:model_action . 
+mbco:INTERPOLATE a mbco:model_action . 
+
+mbco:data_driven_model a owl:Class ;
+    rdfs:subClassOf mbco:model_parametrization ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:is_data_driven ;
+                   owl:hasValue true] .      
+
+mbco:physics_based_model a owl:Class ;
+    rdfs:subClassOf mbco:model_parametrization ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:is_physics_based ;
+                   owl:hasValue true] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_granularity_level ;
+                   owl:allValuesFrom osmo:granularity_level] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_physical_equation_type ;
+                   owl:allValuesFrom osmo:physical_equation_type] .
+
+mbco:hybrid_model a owl:Class ;
+    owl:equivalentClass [ owl:intersectionOf (mbco:physics_based_model mbco:data_driven_model ) ].
+
+mbco:neural_network_model a owl:Class ;
+    rdfs:subClassOf mbco:data_driven_model .
+
+### Object Properties ###
+
+mbco:implements a owl:ObjectProperty ; # TOSEE: use the same property for plan implementation into process???
+    rdfs:label "implements" ;
+    rdfs:domain mbco:software ; 
+    rdfs:range mbco:method . 
+
+mbco:is_model_for a owl:ObjectProperty ; 
+    rdfs:label "is model for" ;
+    rdfs:domain mbco:model_parametrization ;
+    rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] . # TODO: compare with mbco:represents in twinning.ttl. Merge?
+
+mbco:is_model_for_system_containing_material a owl:ObjectProperty ; 
+    rdfs:label "is model for system containing material" ;
+    rdfs:domain mbco:model_parametrization ;
+    rdfs:range mbco:material .
+
+mbco:is_model_for_system_containing_substance a owl:ObjectProperty ; 
+    rdfs:label "is model for system containing substance" ;
+    rdfs:domain mbco:model_parametrization ;
+    rdfs:range mbco:substance ;
+    rdfs:subPropertyOf mbco:is_model_for_system_containing_material .
+
+mbco:has_model_type a owl:ObjectProperty ; 
+    rdfs:label "has model type" ;
+    rdfs:domain mbco:model_parametrization ;
+    rdfs:range mbco:computational_modelling_method .
+
+mbco:gives_modelling_value_for a owl:ObjectProperty ; #gives_prediction_for?
+    rdfs:label "gives modelling value for" ;
+    rdfs:domain mbco:computational_modelling_method ; #TOSEE: OK?
+    rdfs:range mbco:physical_quantity ;
+    rdfs:subPropertyOf mbco:gives_value_for .
+
+mbco:gives_value_for a owl:ObjectProperty ; # quantifies?
+    rdfs:label "gives value for" ;
+    rdfs:domain mbco:method ; #TOSEE: OK?
+    rdfs:range mbco:physical_quantity .
+
+mbco:has_modelled_time_scale a owl:ObjectProperty ;
+    rdfs:label "has modelled time scale" ;
+#    rdfs:domain mbco:computational_modelling_method ;
+    rdfs:range mbco:time_scale .
+
+mbco:has_modelled_length_scale a owl:ObjectProperty ;
+    rdfs:label "has modelled length scale" ;
+#    rdfs:domain mbco:computational_modelling_method ;
+    rdfs:range [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
+
+# mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
+#     rdfs:label "has action type" ;
+#     rdfs:comment "points to the action type an entity is built for"^^xs:string .
+
+mbco:has_granularity_level a owl:ObjectProperty ;
+     rdfs:label "has granularity level" ;
+     rdfs:comment "points to the MODA granularity level"^^xs:string ;
+     rdfs:comment "one of: Electronic, Atomistic, Mesoscopic (=from two atoms on), Continuum"^^xs:string ;
+     rdfs:seeAlso """CEN-CENELEC Management Centre, Materials modelling: terminology, classification and
+     metadata. CEN workshop agreement 17284, Brussels, Belgium (2018)"""^^xs:string.
+
+mbco:has_physical_equation_type a owl:ObjectProperty ;
+     rdfs:label "has physical equation type" ;
+     rdfs:comment "points to one of the 24/25 RoMM/OSMO PE types"^^xs:string ;
+     rdfs:comment "For example, PE type A.3: Molecular dynamics (atomistic)"^^xs:string ;
+     rdfs:seeAlso "A.F. De Baas (ed.), What makes a material function? (EU Publications Office, Luxembourg, Let me compute the ways, 2017)"^^xs:string ;
+     rdfs:seeAlso """M.T. Horsch, et al., Semantic interoperability and characterization of data provenance
+     in computational molecular engineering. J. Chem. Eng. Data 65(3), 1313–1329 (2020)."""^^xs:string .
+
+# Could add:
+#mbco:has_input_data 
+#mbco:has_input_training_data
+#mbco:has_input_runtime_data 
+
+### Datatype Properties ###
+
+mbco:is_physics_based a owl:DatatypeProperty ;
+    rdfs:label "is physics-based" ;
+    rdfs:range xs:boolean .
+
+mbco:is_data_driven a owl:DatatypeProperty ;
+    rdfs:label "is data-driven" ;
+    rdfs:range xs:boolean .
+
+# FA_SIM_1
+mbco:has_nn_input_dimensionality a owl:DatatypeProperty ;
+    rdfs:label "has NN input dimensionality" ;
+    rdfs:domain mbco:neural_network_model ;
+    rdfs:range xs:nonNegativeInteger ;
+    rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
+    rdfs:comment "For example, input can be numbers, geometry/image, a transient"^^xs:string .
+
+mbco:has_nn_output_dimensionality a owl:DatatypeProperty ;
+     rdfs:label "has NN output dimensionality" ;
+     rdfs:domain mbco:neural_network_model ;
+     rdfs:range xs:nonNegativeInteger ;
+     rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
+     rdfs:comment "For example, output can be a scalar quantity, a local quantity or replace an equation"^^xs:string .
+    
+mbco:has_applicability_range_info a owl:DatatypeProperty ;
+     rdfs:label "has_applicability_range_info" ;
+     rdfs:domain mbco:model_parametrization ;
+     rdfs:range xs:string ;
+     rdfs:comment "Gives informations on the range (e.g., temperature) in which the model can be (meaningfully) applied"^^xs:string .
+
+####################################################################################
+# Duplicated here from OSMO for convenience
+
+osmo:granularity_level a owl:Class ;
+   owl:oneOf (osmo:ELECTRONIC osmo:ATOMISTIC osmo:MESOSCOPIC osmo:CONTINUUM) ;
+   rdfs:comment "granularity level (from RoMM), i.e., electronic, atomistic, mesoscopic, or continuum level according to RoMM"^^xs:string .
+####################################################################################
+# alignment
+
+osmo:granularity_level rdfs:subClassOf mbco:annotation .
+osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
+####################################################################################
+# TODO: compare with VISO, MSO-EM, VOV
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/data#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/data#> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
+  owl:versionInfo "version 0.0.8"^^xs:string ;
+  dcterms:modified "2025-12-04"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:dataset a owl:Class ;
+    rdfs:label "Dataset" ;
+    rdfs:subClassOf mbco:data .
+
+mbco:data_mapping a owl:Class ;
+    rdfs:label "Data mapping" .
+
+mbco:metadata_mapping a owl:Class ;
+    rdfs:label "Metadata mapping" .
+
+mbco:metadata_scheme a owl:Class ;
+    rdfs:label "Metadata scheme" ;
+    rdfs:comment "Also called data model or schema"^^xs:string .
+
+mbco:file_format a owl:Class ;
+    rdfs:label "File format" .
+
+mbco:data_quality_evaluation_method a owl:Class ;
+    rdfs:label "Data quality evaluation method" ;
+    rdfs:subClassOf mbco:method .
+
+# From CQ_DAT_4
+mbco:HUMAN_ASSESSMENT a mbco:data_quality_evaluation_method ;
+    rdfs:label "Human assessment" .
+
+mbco:QUALITY_INSURANCE_PROCEDURE a mbco:data_quality_evaluation_method ;
+    rdfs:label "Quality insurance procedure" ;
+    rdfs:comment "E.g., regular calibration checks."^^xs:string .
+
+mbco:AUTOMATED_REPEATABILITY_TEST a mbco:data_quality_evaluation_method ;
+    rdfs:label "Automated repeatability test" .
+
+mbco:metadata_quality_evaluation_method a owl:Class ;
+    rdfs:label "Metadata quality evaluation method" ;
+    rdfs:subClassOf mbco:method .
+
+mbco:SCANNING_BY_OOPS a mbco:metadata_quality_evaluation_method ;
+    rdfs:comment "OOPS! Ontology Pitfall Scanner"^^xs:string ;
+    rdfs:seeAlso "https://oops.linkeddata.es/index.jsp"^^xs:anyURI ;
+    rdfs:comment """Poveda-Villalón, María; Gómez-Pérez, Asunción; and Suárez-Figueroa,
+    Mari Carmen. "OOPS! (Ontology Pitfall Scanner!): An on-line tool for ontology evaluation."
+    International Journal on Semantic Web and Information Systems (IJSWIS) 10.2 (2014): 7-34."""^^xs:string .
+
+mbco:SCANNING_BY_FOOPS a mbco:metadata_quality_evaluation_method ;
+		       a mbco:data_fairness_evaluation_method ;
+    rdfs:comment "FOOPS! - Ontology Pitfall Scanner for FAIR"^^xs:string ;
+    rdfs:seeAlso "https://foops.linkeddata.es/FAIR_validator.html"^^xs:anyURI ;
+    rdfs:seeAlso "https://ceur-ws.org/Vol-2980/paper321.pdf"^^xs:anyURI .
+
+mbco:data_fairness_evaluation_method a owl:Class ;
+    rdfs:label "Data FAIRness evaluation method" ;
+    rdfs:subClassOf mbco:method .
+
+mbco:SCANNING_BY_FUJI a mbco:data_fairness_evaluation_method ;
+    rdfs:comment "F-UJI - Automated FAIR Data Assessment Tool"^^xs:string ;
+    rdfs:seeAlso "https://www.f-uji.net/"^^xs:anyURI ;
+    rdfs:comment "https://doi.org/10.5281/zenodo.6461229"^^xs:string .
+
+mbco:raw_data a owl:Class ;
+    rdfs:label "Raw data" ;
+    rdfs:subClassOf mbco:data ;
+    rdfs:comment "Data as it is generated (e.g., from a software or device)"^^xs:string .
+
+mbco:processed_data a owl:Class ;
+    rdfs:label "Processed data" ;
+    rdfs:subClassOf mbco:data ;
+    rdfs:comment "At variance with raw data, processed data, after generation, was modified, either to clean, extract, transform it etc."^^xs:string .
+
+mbco:data_structure a owl:Class ;
+    rdfs:label "Data structure" ;
+    rdfs:comment "E.g., includes data shapes, as SHACL or OO-LD shapes."^^xs:string .    
+
+mbco:uncertainty_quantification_method a owl:Class ;
+    rdfs:label "Uncertainty quantification method" ;
+    rdfs:subClassOf mbco:method .
+
+#mbco:BLOCK_AVERAGING a mbco:uncertainty_quantification_method ;
+#    rdfs:label "Block averaging" .
+    
+mbco:ERROR_PROPAGATION a mbco:uncertainty_quantification_method ;
+    rdfs:label "Error propagation" .
+
+mbco:ERROR_ESTIMATE_VIA_STATISTICAL_METHODS a mbco:uncertainty_quantification_method ;
+    rdfs:label "Error estimate via statistical methods" .
+
+mbco:data_processing_method a owl:Class ;
+    rdfs:label "Data processing method" ;
+    rdfs:subClassOf mbco:method .
+
+# from CQ_DAT_3.1
+mbco:INCOMPLETE_DATASET_REMOVAL a mbco:data_processing_method ;
+    rdfs:comment "Removal of datasets that are incomplete (w.r.t. some data structure)"^^xs:string .    
+
+mbco:INCOMPLETE_DATASET_PADDING a mbco:data_processing_method ;
+    rdfs:comment "Padding of datasets that are incomplete (w.r.t. some data structure) with dummy values"^^xs:string .    
+
+# From RoMM and VISO
+mbco:EXTRACTION a mbco:data_processing_method ;
+     rdfs:comment """A method that enriches the dataset/state description by further information
+                   calculated based on the information already contained in the state.
+                   Examples include averaging, interpolation and the calculation of physical quantities (cf. RoMM)."""^^xs:string .
+
+mbco:CONVERSION a mbco:data_processing_method ;
+     rdfs:comment """A method that changes the data without altering the physical state itself
+		(e.g., it changes the numerical representation of a state, cf. RoMM)."""^^xs:string .
+
+### Object Properties ###
+
+mbco:is_compatible_with a owl:ObjectProperty ;
+    rdfs:label "is compatible with" ;
+    rdfs:domain mbco:dataset ; # TOSEE: use data_format instead???
+    rdfs:range mbco:software .
+    
+mbco:complies_with a owl:ObjectProperty ;
+    rdfs:domain mbco:dataset ; 
+    rdfs:range mbco:data_structure . # TOSEE: add metadata_scheme to range?
+
+mbco:is_generated_by a owl:ObjectProperty ; # TOSEE: use inverse (has_output) instead of defining this additional prop?
+    rdfs:label "is generated by" ;
+    rdfs:domain mbco:data ; 
+    rdfs:range [owl:unionOf (mbco:agent mbco:device mbco:software)] .
+
+mbco:has_data_processing_method a owl:ObjectProperty ;
+    rdfs:label "has data processing method" ;
+    rdfs:domain mbco:processed_data ;
+    rdfs:range mbco:data_processing_method .
+
+# CQ_DAT_8
+mbco:is_annotated_using_scheme a owl:ObjectProperty ;
+    rdfs:label "is_annotated_using_scheme" ;
+    rdfs:domain mbco:data ;
+    rdfs:range mbco:metadata_scheme .
+
+### Datatype Properties ###
+
+mbco:has_average a owl:DatatypeProperty ;
+    rdfs:label "has average" ;
+    rdfs:domain mbco:data ;
+    rdfs:comment "Only applicable to a homogeneous set of data (i.e., data with same units)"^^xs:string .
+
+mbco:has_error a owl:DatatypeProperty ;
+    rdfs:label "has error" ;
+    rdfs:domain mbco:data .
+
+# Should/could add:
+# systematic error
+# statistical error
+# random error
+# total? error
+# mbco:STANDARD_DEVIATION a mbco:error_type .
+# mbco:STANDARD_ERROR a mbco:error_type ;
+#    rdfs:comment "Error calculation based on standard deviation and the assumption of independent data points."^^xs:string .
+
+mbco:has_data_processing_info a owl:DatatypeProperty ;
+    rdfs:label "has data processing info" ;
+    rdfs:domain mbco:processed_data ;
+    rdfs:range xs:string .
+
+# CQ_DAT_1
+mbco:is_complete_dataset a owl:DatatypeProperty ;
+    rdfs:label "is_complete_dataset" ;
+    rdfs:domain mbco:dataset ;
+    rdfs:range xs:boolean ;
+    rdfs:comment """Given a dataset that complies with a data structure, specifies whether all fields are given (complete) or some are missing
+    (incomplete)"""^^xs:string .
+
+# CQ_DAT_2
+mbco:contains_dummy_values a owl:DatatypeProperty ;
+    rdfs:label "contains dummy values" ;
+    rdfs:domain mbco:dataset ;
+    rdfs:range xs:boolean .
+
+####################################################################################
+
+
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/optimization#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
+  owl:versionInfo "version 0.1.5"^^xs:string ;
+  dcterms:modified "2025-06-23"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
+  dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:problem a owl:Class ;
+    rdfs:label "Problem" ; # TODO: do we need this class? Or does it make the hierarchy too deep?
+    rdfs:subClassOf mbco:statement .
+
+mbco:solution a owl:Class ;
+    rdfs:label "Solution" ;
+    rdfs:comment "Answer addressing a problem. It should contain a quantification of error and confidence."^^xs:string ;
+    rdfs:subClassOf mbco:statement .
+
+mbco:solution rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_confidence ;
+                   owl:someValuesFrom mbco:coarse_amount_level] .
+
+mbco:optimization_problem a owl:Class ;
+    rdfs:label "Optimization problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:optimization_method a owl:Class ; # TOSEE: or are they "problem solving methods???"
+    rdfs:label "Optimization method" ;
+    rdfs:subClassOf mbco:method ;
+    a owl:DeprecatedClass .
+
+mbco:answer_set_programming a owl:Class ;
+    rdfs:label "Answer Set Programming (ASP)" ;
+    rdfs:subClassOf mbco:optimization_method ; # correct??? It is a "logic programming method/paradigm"
+    rdfs:comment "A logic programming paradigm, tailored to search problems. (See Wikipedia)"^^xs:string .
+
+mbco:multi_criteria_optimization a owl:Class ;
+    rdfs:label "Multi Criteria Optimization (MCO)" ;
+    rdfs:subClassOf mbco:optimization_method ;
+    rdfs:comment "Mathematical optimization problem, where multiple objective functions (criteria) are simultaneuosly optimized. (See Wikipedia)"^^xs:string .
+
+mbco:mathematical_role a owl:Class ;
+    rdfs:label "Mathematical role" ;
+    rdfs:subClassOf mbco:role .
+
+mbco:variable a owl:Class ;
+    rdfs:label "Variable" ;
+    owl:disjointUnionOf (mbco:discrete_variable mbco:continuum_variable) ;
+    rdfs:subClassOf mbco:mathematical_role .		
+
+mbco:discrete_variable a owl:Class ;
+    rdfs:label "Discrete variable" ;
+    rdfs:subClassOf mbco:variable .
+
+mbco:continuum_variable a owl:Class ;
+    rdfs:label "Continuum variable" ;
+    rdfs:subClassOf mbco:variable .
+
+mbco:target a owl:Class ;
+    rdfs:label "Target" ;
+    rdfs:subClassOf mbco:mathematical_role ;
+    rdfs:comment "In an optimization problem, a property which has to be attained exactly or approximatively by the solution."^^xs:string .
+
+mbco:goal a owl:Class ;
+    rdfs:label "Goal" ;
+    rdfs:altLabel "Exact target" ;
+    rdfs:subClassOf mbco:target ;
+    rdfs:comment "In an optimization problem, a property which must be attained exactly by a solution."^^xs:string ;
+    rdfs:comment "In an optimization problem, an exact target."^^xs:string .
+
+mbco:constraint a owl:Class ;
+    rdfs:label "Constraint" ;
+    rdfs:subClassOf mbco:statement ;		    
+    owl:disjointUnionOf (mbco:qualitative_constraint mbco:quantitative_constraint) ;
+    rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_part ;
+        owl:someValuesFrom mbco:variable] .
+
+mbco:qualitative_constraint a owl:Class ;
+    rdfs:label "Qualitative constraint" ;
+    rdfs:comment "Examples of qualitative constraints are: step X follows (directly) step Y; step X requires participant Y; step X requires input Y; physical location constraint."^^xs:string .
+
+mbco:quantitative_constraint a owl:Class ;
+    rdfs:label "Quantitative constraint" ;
+    rdfs:comment "Examples of quantitative constraints are equalities (e.g., the sum of some variables is constant) and inequalitites (variable X > value X0)."^^xs:string .
+
+mbco:optimization_problem  # TOSEE: Do these restrictions apply to all problems?
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:variable] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:target] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:constraint] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:goal] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:initial_status] .  
+		  
+mbco:coarse_amount_level a owl:Class ; # TOSEE: create a "quantifier" class? TOSEE: move this to "higher" module?
+    rdfs:label "(Coarse) Amount level" ;
+    owl:oneOf (mbco:LOW mbco:MEDIUM mbco:HIGH) ;
+    rdfs:subClassOf mbco:annotation ; # ok?
+    rdfs:comment """A coarse quantifier. It can be used as part of a traffic light system to enable users to select options 
+in an easy and coarse way, for properties where this is suitable."""^^xs:string .
+
+mbco:initial_status a owl:Class ; 
+    rdfs:label "Initial status" ;
+    rdfs:subClassOf mbco:status ;
+    rdfs:comment "Status of an object/system right at the start of a given process. E.g., before an optimization is done"^^xs:string .    
+
+mbco:final_status a owl:Class ; 
+    rdfs:label "Final status" ;
+    rdfs:subClassOf mbco:status ;
+    rdfs:comment "Status of an object/system right at the end of a given process. E.g., after an optimization is done"^^xs:string .    
+
+# Examples of general logic-based problems/activity. TOSEE: Are these really optimization problems??? Problems? Logic-based problems? Are these activities? goals? Tasks?
+# Taken from CQ_CRO_8
+
+mbco:logic_based_problem a owl:Class ;
+    rdfs:label "Logic-based problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:numerical_problem a owl:Class ;
+    rdfs:label "Numerical problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:scheduling a owl:Class ;
+    rdfs:label "Scheduling" ;
+    rdfs:comment "Scheduling (e.g., of maintenance)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:resource_allocation a owl:Class ;
+    rdfs:label "Resource allocation" ;
+    rdfs:comment "Allocation of resources (e.g., machines/humans for tasks)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:compatibility_check a owl:Class ;
+    rdfs:label "Compatibility check" ;
+    rdfs:comment "Compatibility checks (e.g., between materials)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:compliance_validation a owl:Class ;
+    rdfs:label "Compliance validation" ;
+    rdfs:comment "Compliance validation (e.g., of a process with regulation)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:process_design a owl:Class ;
+    rdfs:label "Process design" ;
+    rdfs:comment "Process design (e.g., simulation, experiment)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem ;
+    rdfs:subClassOf mbco:numerical_problem . # right?
+
+mbco:process_sequence_validation a owl:Class ;
+    rdfs:label "Process sequence validation" ;
+    rdfs:comment "Process sequence validation (e.g., that the ordering of sub-processes does not break dependencies)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:model_parametrization_process a owl:Class ; # this is for MCO
+    rdfs:label "Model parametrization process" ;
+    rdfs:comment "Determining the numerical values of the parameters as those that best reproduce certain properties. "^^xs:string ;
+    rdfs:comment "Not to be confused with the resulting model parameterization (a set of parameters)."^^xs:string ;
+    rdfs:subClassOf mbco:numerical_problem .
+
+### Object Properties ###
+
+mbco:has_cost_level a owl:ObjectProperty ; # TOSEE: express it differently? Issue is: if we use more general verbs, the statements are more complex.
+    rdfs:comment "Points to the cost of an entity, in the broad sense. It could be monetary cost, computational cost, etc."^^xs:string ;
+    rdfs:range mbco:coarse_amount_level .
+
+mbco:has_precision_level a owl:ObjectProperty ;  # TOSEE: same as for has_cost_level
+    rdfs:range mbco:coarse_amount_level .
+
+mbco:has_confidence_level a owl:ObjectProperty ;
+    rdfs:comment "Points to the confidence in the correctness of a statement, and is generated by the same source."^^xs:string ;
+    rdfs:range mbco:coarse_amount_level ;
+    rdfs:domain mbco:statement .
+
+### Datatype Properties ###
+
+### Other tentative properties still under consideration ...
+
+# mbco:has_quantifier
+# mbco:has_confidence
+# mbco:has_error
+# mbco:has_assumption
+# mbco:has_variable
+# mbco:has_target
+# mbco:has_constraint 
+#
+# Other: design_parameters, operating conditions, cost, KPI
+
+# ####################################################################################
+# # EXAMPLES below: Put here temporarily only, just for simplicity -> moved to a separate file
+# ####################################################################################
+
+# @prefix ex: <https://batcat.info/semantics/example#> .
+
+# ex:GITT_TEST a mbco:method ;
+#     mbco:has_output ex:DIFFUSION_COEFFICIENT ;
+#     mbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
+#     mbco:has_participant ex:POTENTIOSTAT ;
+#     mbco:has_participant [a mbco:sample] ;
+#     mbco:has_participant [a mbco:agent] ;
+#     mbco:has_cost_level mbco:HIGH ;
+#     mbco:has_precision_level mbco:HIGH .       
+
+# ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
+#     mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
+#     mbco:has_output ex:DIFFUSION_COEFFICIENT ;
+#     mbco:has_participant [a mbco:computational_device] ;
+#     mbco:has_participant [a mbco:software] ; # E.g., license access needed
+#     mbco:has_cost_level mbco:MEDIUM ;
+#     mbco:has_precision_level mbco:LOW .       
+# #    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
+
+# ex:POTENTIOSTAT a mbco:characterization_device .
+# ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable .
+# ex:ACTIVE_MATERIAL_POTENTIALS a mbco:continuum_variable .
+# ex:DPD_MODEL_PARAMETRIZATION_1 a mbco:model_parametrization . 
+
+# ex:DPD_DATA_ANALYSIS a mbco:process ;
+#     mbco:has_participant [a mbco:agent] .		   
+
+# ex:DPD_SIMULATION_SETTING_UP a mbco:process ;
+#     mbco:has_participant [a mbco:agent] .
+
+# ex:EXPERIMENT_SETTING_UP a mbco:process ;
+#     mbco:has_participant [a mbco:agent] .		   
+
+# ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
+#     a mbco:logic_based_problem ;
+#     a mbco:optimization_problem ;
+#     rdfs:comment "An example about running simulations"^^xs:string ;
+#     mbco:has_part ex:GOAL_1 ;
+#     mbco:has_part ex:TARGET_2 ;
+#     mbco:has_part ex:CONSTRAINT_1 ;
+#     mbco:has_part ex:CONSTRAINT_2 ;
+#     mbco:has_part ex:CONSTRAINT_3 ;
+#     mbco:has_part ex:INITIAL_STATUS_1 .
+
+# ex:GOAL_1 a mbco:goal ;
+#    rdfs:comment "Allocate human and computational devices to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
+
+# ex:INITIAL_STATUS_1 a mbco:initial_status ;
+#    rdfs:comment "Human and computational devices are available and operational. Needed software is installed"^^xs:string .
+
+# ex:TARGET_2 a mbco:target ;
+#    rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
+
+# ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
+#     rdfs:comment "There is only one available agent"^^xs:string .
+
+# ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
+#     rdfs:comment "There are two available computational devices"^^xs:string .
+
+# ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
+#     rdfs:comment "A computational method must be used"^^xs:string .
+
+# ex:DPD_SIMULATION_RUN 
+#     mbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
+#     mbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
+
+# ex:DPD_DATA_ANALYSIS mbco:followsdirectly ex:DPD_SIMULATION_RUN .
+
+# ex:COMPARISON_EXAMPLE_PROBLEM
+#     a mbco:logic_based_problem ;
+#     a mbco:optimization_problem ;
+#     rdfs:comment "An example about comparing simulations or experiments"^^xs:string ;
+#     mbco:has_part ex:GOAL_2 ;
+#     mbco:has_part ex:TARGET_1 .
+
+# ex:GOAL_2 a mbco:qualitative_constraint ;
+#     rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string ;
+#     mbco:has_part ex:DIFFUSION_COEFFICIENT .
+
+# ex:TARGET_1 a mbco:target ;
+#    rdfs:comment "Maximize precision and minimize cost"^^xs:string .
+
+# ex:SOLUTION_COMPARISON a mbco:solution ;
+#    mbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
+#    mbco:uses_method [a mbco:answer_set_programming] .
+
+# ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
+#    mbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
+#    mbco:uses_method [a mbco:answer_set_programming] .
+
+####################################################################################
+# See also:
+# inequality # EMMO - Math module (under "disciplines") 
+# equality # EMMO - Math module (under "disciplines") - it has "equation"
+# variable from VOV could be used. Also present in EMMO "math"
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/twinning#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
+  owl:versionInfo "version 0.0.3"^^xs:string ;
+  dcterms:modified "2025-12-03"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+# CAVEAT: Duplicated here from modelling.ttl for convenience
+mbco:digital_twinning a owl:Class ; 
+    rdfs:label "Digital twinning" ;
+    rdfs:subClassOf mbco:computational_modelling_method .
+mbco:computational_modelling_method rdfs:subClassOf mbco:method .    
+# end of duplication
+
+mbco:digital_twin_model a owl:Class ; 
+    rdfs:label "Digital twin model" ;
+    rdfs:subClassOf mbco:data ; # TOSEE: define a model class?
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:represents ;
+                   owl:someValuesFrom owl:Thing] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_action_type ;
+                   owl:someValuesFrom mbco:digital_twin_action] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_synchronization_rate ;
+                   owl:someValuesFrom xs:decimal] .
+
+mbco:digital_twin_action a owl:Class ;
+    rdfs:label "Digital twin action" ;
+    owl:oneOf (mbco:VISUALIZE mbco:MONITOR mbco:PREDICT mbco:RECOMMEND) ;
+    rdfs:comment """Based on an extract of application-related terms from ISO/IEC 30173:2023, 
+    with an addition inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."""^^xs:string ;
+    rdfs:subClassOf mbco:process .
+
+mbco:generality_level a owl:Class ; 
+    owl:oneOf (mbco:UNIVERSAL mbco:TYPE mbco:INDIVIDUAL) ;
+    rdfs:comment "Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'. Note: There a fourth level is present."^^xs:string ;
+    rdfs:subClassOf mbco:annotation .
+
+mbco:UNIVERSAL rdfs:comment "Encompassing, e.g. for a very generic entity or process."^^xs:string .
+mbco:TYPE rdfs:comment "E.g., a car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
+mbco:INDIVIDUAL rdfs:comment "E.g., John's car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
+
+### Object Properties ###
+
+mbco:represents a owl:ObjectProperty ;
+    rdfs:label "represents" ;
+    rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] .
+
+#mbco:has_action_type a owl:ObjectProperty ; # now defined in modelling.ttl
+#    rdfs:label "has action type" .
+#    rdfs:range mbco:digital_twin_action .
+
+mbco:has_generality_level a owl:ObjectProperty ;
+    rdfs:label "has generality level" ;
+    rdfs:range mbco:generality_level .
+    
+### Datatype Properties ###
+
+mbco:has_synchronization_rate a owl:DatatypeProperty ;
+    rdfs:label "has synchronization rate" ;
+    rdfs:comment """(Average) Rate (in 1/seconds) at which communication (in either direction) between 
+    the digital entity and its target entity happens"""^^xs:string .
+
+####################################################################################
+# EXAMPLES below: Put here temporarily only, just for simplicity
+####################################################################################
+
+@prefix ex: <https://batcat.info/semantics/example#> .
+
+ex:DT_LIB_CELL_C032 a mbco:digital_twin_model ;
+    mbco:has_generality_level mbco:TYPE ;
+    rdfs:comment "Digital twin of a LiB cell of type C032"^^xs:string .
+
+ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
+    mbco:has_generality_level mbco:INDIVIDUAL ;
+    mbco:has_synchronization_rate 1.0 ;
+    rdfs:comment "Digital twin of a specific LiB cell of type C032, identified by its PID"^^xs:string .
+
+####################################################################################
 @prefix mbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -37,7 +1634,7 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 ### Classes ###
 
 mbco:lithium_ion_battery a owl:Class ;
-     rdfs:label "Lithium-ion battery (LiB)" ;
+     rdfs:label "Lithium-ion battery (LiB)"@en ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf mbco:whole_product ;
      rdfs:subClassOf mbco:battery .    
@@ -1215,1727 +2812,3 @@ mbco:CARBON_MONOXIDE a mbco:substance ;
 mbco:CARBON_DIOXIDE a mbco:substance ;
     rdfs:label "Carbon dioxide" .
 
-@prefix mbco: <https://batcat.info/semantics/core#> . 
-
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://batcat.info/semantics/core/characterization#> a owl:Ontology .
-
-<https://batcat.info/semantics/core/characterization#> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
-   owl:versionInfo "version 0.0.3"^^xs:string ;
-   dcterms:modified "2025-12-05"^^xs:string ;
-   owl:imports <https://batcat.info/semantics/core#> ;
-   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-### Classes ###
-
-mbco:sample a owl:Class ;
-     rdfs:label "Sample" ;
-     rdfs:subClassOf mbco:physical_object ;
-     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty [owl:inverseOf mbco:has_part] ;
-                   owl:someValuesFrom mbco:batch] .
-
-mbco:sample_history a owl:Class ;
-     rdfs:label "Sample history" ;
-     rdfs:subClassOf mbco:data ;
-     rdfs:comment """Track the whole history (across laboratories) of each experimental sample being 
-characterized in BatCAT. It includes input and preparation conditions, records all processes undergone by a sample, 
-including its artificial / accelerated ageing."""^^xs:string. 
-
-mbco:characterization_technique a owl:Class ;
-     rdfs:label "Characterization technique" ;
-     rdfs:subClassOf mbco:method ;
-     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ; 
-                   owl:someValuesFrom mbco:characterization_device] ;
-     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ; 
-                   owl:someValuesFrom mbco:sample] ;
-     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ; 
-                   owl:someValuesFrom mbco:physical_quantity] .
-
-mbco:characterization_measurement a owl:Class ;
-     rdfs:label "Characterization measurement" ;
-     rdfs:subClassOf mbco:process .
-
-mbco:characterization_device a owl:Class ;
-     rdfs:label "Characterization device" ;
-     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:measures ; 
-                   owl:someValuesFrom mbco:physical_quantity] .
-
-mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA
-     rdfs:label "Sensor" ;
-     rdfs:subClassOf mbco:device .     
-
-mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TOSEE: duplicated in Manufacturing module
-     rdfs:label "Actuator" ;
-     rdfs:subClassOf mbco:device .     
-
-### Object Properties ###
-
-mbco:has_sample_history a owl:ObjectProperty ;
-     rdfs:label "has sample history" ;
-     rdfs:domain mbco:sample ;
-     rdfs:range mbco:sample_history .
-
-mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors?
-     rdfs:label "measures" ;
-     rdfs:range mbco:physical_quantity .
-
-### Datatype Properties ###
-
-mbco:has_sample_ID a owl:DatatypeProperty ;
-    rdfs:label "has sample ID" ;
-    rdfs:domain mbco:sample .
-
-####################################################################################
-
-
-@prefix mbco: <https://batcat.info/semantics/core#> . 
-
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://batcat.info/semantics/core/data#> a owl:Ontology .
-
-<https://batcat.info/semantics/core/data#> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
-  owl:versionInfo "version 0.0.8"^^xs:string ;
-  dcterms:modified "2025-12-04"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-### Classes ###
-
-mbco:dataset a owl:Class ;
-    rdfs:label "Dataset" ;
-    rdfs:subClassOf mbco:data .
-
-mbco:data_mapping a owl:Class ;
-    rdfs:label "Data mapping" .
-
-mbco:metadata_mapping a owl:Class ;
-    rdfs:label "Metadata mapping" .
-
-mbco:metadata_scheme a owl:Class ;
-    rdfs:label "Metadata scheme" ;
-    rdfs:comment "Also called data model or schema"^^xs:string .
-
-mbco:file_format a owl:Class ;
-    rdfs:label "File format" .
-
-mbco:data_quality_evaluation_method a owl:Class ;
-    rdfs:label "Data quality evaluation method" ;
-    rdfs:subClassOf mbco:method .
-
-# From CQ_DAT_4
-mbco:HUMAN_ASSESSMENT a mbco:data_quality_evaluation_method ;
-    rdfs:label "Human assessment" .
-
-mbco:QUALITY_INSURANCE_PROCEDURE a mbco:data_quality_evaluation_method ;
-    rdfs:label "Quality insurance procedure" ;
-    rdfs:comment "E.g., regular calibration checks."^^xs:string .
-
-mbco:AUTOMATED_REPEATABILITY_TEST a mbco:data_quality_evaluation_method ;
-    rdfs:label "Automated repeatability test" .
-
-mbco:metadata_quality_evaluation_method a owl:Class ;
-    rdfs:label "Metadata quality evaluation method" ;
-    rdfs:subClassOf mbco:method .
-
-mbco:SCANNING_BY_OOPS a mbco:metadata_quality_evaluation_method ;
-    rdfs:comment "OOPS! Ontology Pitfall Scanner"^^xs:string ;
-    rdfs:seeAlso "https://oops.linkeddata.es/index.jsp"^^xs:anyURI ;
-    rdfs:comment """Poveda-Villalón, María; Gómez-Pérez, Asunción; and Suárez-Figueroa,
-    Mari Carmen. "OOPS! (Ontology Pitfall Scanner!): An on-line tool for ontology evaluation."
-    International Journal on Semantic Web and Information Systems (IJSWIS) 10.2 (2014): 7-34."""^^xs:string .
-
-mbco:SCANNING_BY_FOOPS a mbco:metadata_quality_evaluation_method ;
-		       a mbco:data_fairness_evaluation_method ;
-    rdfs:comment "FOOPS! - Ontology Pitfall Scanner for FAIR"^^xs:string ;
-    rdfs:seeAlso "https://foops.linkeddata.es/FAIR_validator.html"^^xs:anyURI ;
-    rdfs:seeAlso "https://ceur-ws.org/Vol-2980/paper321.pdf"^^xs:anyURI .
-
-mbco:data_fairness_evaluation_method a owl:Class ;
-    rdfs:label "Data FAIRness evaluation method" ;
-    rdfs:subClassOf mbco:method .
-
-mbco:SCANNING_BY_FUJI a mbco:data_fairness_evaluation_method ;
-    rdfs:comment "F-UJI - Automated FAIR Data Assessment Tool"^^xs:string ;
-    rdfs:seeAlso "https://www.f-uji.net/"^^xs:anyURI ;
-    rdfs:comment "https://doi.org/10.5281/zenodo.6461229"^^xs:string .
-
-mbco:raw_data a owl:Class ;
-    rdfs:label "Raw data" ;
-    rdfs:subClassOf mbco:data ;
-    rdfs:comment "Data as it is generated (e.g., from a software or device)"^^xs:string .
-
-mbco:processed_data a owl:Class ;
-    rdfs:label "Processed data" ;
-    rdfs:subClassOf mbco:data ;
-    rdfs:comment "At variance with raw data, processed data, after generation, was modified, either to clean, extract, transform it etc."^^xs:string .
-
-mbco:data_structure a owl:Class ;
-    rdfs:label "Data structure" ;
-    rdfs:comment "E.g., includes data shapes, as SHACL or OO-LD shapes."^^xs:string .    
-
-mbco:uncertainty_quantification_method a owl:Class ;
-    rdfs:label "Uncertainty quantification method" ;
-    rdfs:subClassOf mbco:method .
-
-#mbco:BLOCK_AVERAGING a mbco:uncertainty_quantification_method ;
-#    rdfs:label "Block averaging" .
-    
-mbco:ERROR_PROPAGATION a mbco:uncertainty_quantification_method ;
-    rdfs:label "Error propagation" .
-
-mbco:ERROR_ESTIMATE_VIA_STATISTICAL_METHODS a mbco:uncertainty_quantification_method ;
-    rdfs:label "Error estimate via statistical methods" .
-
-mbco:data_processing_method a owl:Class ;
-    rdfs:label "Data processing method" ;
-    rdfs:subClassOf mbco:method .
-
-# from CQ_DAT_3.1
-mbco:INCOMPLETE_DATASET_REMOVAL a mbco:data_processing_method ;
-    rdfs:comment "Removal of datasets that are incomplete (w.r.t. some data structure)"^^xs:string .    
-
-mbco:INCOMPLETE_DATASET_PADDING a mbco:data_processing_method ;
-    rdfs:comment "Padding of datasets that are incomplete (w.r.t. some data structure) with dummy values"^^xs:string .    
-
-# From RoMM and VISO
-mbco:EXTRACTION a mbco:data_processing_method ;
-     rdfs:comment """A method that enriches the dataset/state description by further information
-                   calculated based on the information already contained in the state.
-                   Examples include averaging, interpolation and the calculation of physical quantities (cf. RoMM)."""^^xs:string .
-
-mbco:CONVERSION a mbco:data_processing_method ;
-     rdfs:comment """A method that changes the data without altering the physical state itself
-		(e.g., it changes the numerical representation of a state, cf. RoMM)."""^^xs:string .
-
-### Object Properties ###
-
-mbco:is_compatible_with a owl:ObjectProperty ;
-    rdfs:label "is compatible with" ;
-    rdfs:domain mbco:dataset ; # TOSEE: use data_format instead???
-    rdfs:range mbco:software .
-    
-mbco:complies_with a owl:ObjectProperty ;
-    rdfs:domain mbco:dataset ; 
-    rdfs:range mbco:data_structure . # TOSEE: add metadata_scheme to range?
-
-mbco:is_generated_by a owl:ObjectProperty ; # TOSEE: use inverse (has_output) instead of defining this additional prop?
-    rdfs:label "is generated by" ;
-    rdfs:domain mbco:data ; 
-    rdfs:range [owl:unionOf (mbco:agent mbco:device mbco:software)] .
-
-mbco:has_data_processing_method a owl:ObjectProperty ;
-    rdfs:label "has data processing method" ;
-    rdfs:domain mbco:processed_data ;
-    rdfs:range mbco:data_processing_method .
-
-# CQ_DAT_8
-mbco:is_annotated_using_scheme a owl:ObjectProperty ;
-    rdfs:label "is_annotated_using_scheme" ;
-    rdfs:domain mbco:data ;
-    rdfs:range mbco:metadata_scheme .
-
-### Datatype Properties ###
-
-mbco:has_average a owl:DatatypeProperty ;
-    rdfs:label "has average" ;
-    rdfs:domain mbco:data ;
-    rdfs:comment "Only applicable to a homogeneous set of data (i.e., data with same units)"^^xs:string .
-
-mbco:has_error a owl:DatatypeProperty ;
-    rdfs:label "has error" ;
-    rdfs:domain mbco:data .
-
-# Should/could add:
-# systematic error
-# statistical error
-# random error
-# total? error
-# mbco:STANDARD_DEVIATION a mbco:error_type .
-# mbco:STANDARD_ERROR a mbco:error_type ;
-#    rdfs:comment "Error calculation based on standard deviation and the assumption of independent data points."^^xs:string .
-
-mbco:has_data_processing_info a owl:DatatypeProperty ;
-    rdfs:label "has data processing info" ;
-    rdfs:domain mbco:processed_data ;
-    rdfs:range xs:string .
-
-# CQ_DAT_1
-mbco:is_complete_dataset a owl:DatatypeProperty ;
-    rdfs:label "is_complete_dataset" ;
-    rdfs:domain mbco:dataset ;
-    rdfs:range xs:boolean ;
-    rdfs:comment """Given a dataset that complies with a data structure, specifies whether all fields are given (complete) or some are missing
-    (incomplete)"""^^xs:string .
-
-# CQ_DAT_2
-mbco:contains_dummy_values a owl:DatatypeProperty ;
-    rdfs:label "contains dummy values" ;
-    rdfs:domain mbco:dataset ;
-    rdfs:range xs:boolean .
-
-####################################################################################
-
-
-@prefix mbco: <https://batcat.info/semantics/core#> .
-
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
-
-<https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.10"^^xs:string ;
-  dcterms:modified "2025-12-08"^^xs:string ;
-  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
-  dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain, 
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-mbco:agent a owl:Class ;
-    rdfs:label "Agent" ;
-    owl:disjointUnionOf (mbco:human_agent mbco:machine_agent) ;
-    rdfs:comment "An entity that has the capability to act"^^xs:string .    
-
-mbco:human_agent a owl:Class ;
-    rdfs:label "Human agent" .
-
-mbco:machine_agent a owl:Class ;
-    rdfs:label "Machine agent" .
-
-mbco:data a owl:Class ;
-    rdfs:label "Data" .
-
-mbco:material a owl:Class ;
-    rdfs:label "Material" .
-
-mbco:substance a owl:Class ;
-    rdfs:label "Substance" ;
-    rdfs:subClassOf mbco:material .
-
-mbco:process a owl:Class ;
-    rdfs:label "Process" ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom owl:Thing] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom owl:Thing] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ; # TODO: clarify how different from input/output (cf. BVCO)??? E.g.: a machine+operator+sample are participants, input is certain data, output is other data.
-                   owl:someValuesFrom owl:Thing] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_setting ;
-                   owl:someValuesFrom owl:Thing] ;
-    rdfs:comment "A series of actions, can be broken down in process steps of given order"^^xs:string ;
-    rdfs:comment "Can be planned (not realized yet), or already realized"^^xs:string .		   
-
-mbco:process_step a owl:Class ;
-    rdfs:label "Process step" ;
-    rdfs:subClassOf mbco:process ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty [owl:inverseOf mbco:has_part] ;
-                   owl:someValuesFrom mbco:process] .
-
-mbco:software a owl:Class ;
-    rdfs:label "Software" .
-
-mbco:physical_object a owl:Class ;
-    rdfs:label "(Physical) Object" . 
-
-mbco:sample a owl:Class ;
-    rdfs:label "Sample" ;
-    rdfs:subClassOf mbco:physical_object .
-
-mbco:device a owl:Class ;
-    rdfs:label "Device" ;
-    rdfs:subClassOf mbco:physical_object ;
-    rdfs:comment "A physical object made for a given functionality"^^xs:string .
-
-mbco:computational_device a owl:Class ;
-    rdfs:label "Computational device" ;
-    rdfs:subClassOf mbco:device ;
-    rdfs:comment "A device that can perform a (digital) computational action."^^xs:string ;
-    rdfs:comment "E.g., a PC, a computational cluster."^^xs:string .
-
-mbco:characterization_device a owl:Class ;
-    rdfs:label "Characterization device" ;
-    rdfs:subClassOf mbco:device ;
-    rdfs:comment "A device that can perform a characterization action."^^xs:string ;
-    rdfs:comment "E.g., a potentiostat."^^xs:string .
-
-mbco:manufacturing_device a owl:Class ;
-    rdfs:label "Manufacturing device" ;
-    rdfs:subClassOf mbco:device ;
-    rdfs:comment "A device that can perform a manufacturing action"^^xs:string ;
-    rdfs:comment "E.g., a mixer, a calenderer."^^xs:string .    
-
-mbco:method a owl:Class ;
-    rdfs:label "Method" ;
-    rdfs:comment """a procedure, technique, or planned way of doing something (WordReference Random House
-    Learner's Dictionary of American English 2025"""^^xs:string ;
-    rdfs:comment "Could be a characterization method, a simulation method, a manufacturing method, etc."^^xs:string ;
-    rdfs:subClassOf mbco:process . 
-
-# mbco:compute_resource a owl:Class ;
-#     rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
-#     rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
-#     a owl:DeprecatedClass .
-
-mbco:statement a owl:Class ;
-    rdfs:label "Statement" . # Note: in EVMPO, statement is used for elementary communications. Here not, it is more general.   
-
-mbco:role a owl:Class ;
-    rdfs:label "Role" ;
-    rdfs:comment "A non-rigid category (i.e., during its lifespan, an entity can change role)."^^xs:string ;
-    rdfs:comment """For example: role of a human agent in an organization (employee/director), in a software repository (editor/owner); 
-    role of a variable in a mathematical problem (dependent/independent/parameter)."""^^xs:string .
-
-mbco:property a owl:Class ; #TOSEE: property is a keyword in OWL, add specifier?
-    rdfs:label "Property" ;
-    rdfs:comment "Observable property, such as a physical property of a material, the status of a device, etc"^^xs:string .
-
-mbco:status a owl:Class ;
-    rdfs:label "Status" ;
-    rdfs:comment "For a single object or a system. E.g.: the software is installed/not-installed; the device is on/off, operational/faulty, the agent is available/busy, etc."^^xs:string ;
-    rdfs:subClassOf mbco:property .
-
-mbco:physical_quantity a owl:Class ;
-     rdfs:label "Physical quantity" ;
-     rdfs:subClassOf mbco:property .
-
-mbco:annotation a owl:Class ;
-    rdfs:label "Annotation" ;
-    rdfs:comment "Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module"^^xs:string .
-
-mbco:physical_object_status a owl:Class ;
-    rdfs:label "Physical object status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:NEW mbco:OK mbco:BROKEN mbco:AGED) .
-
-mbco:object_analysis_status a owl:Class ;
-    rdfs:label "(Object) Analysis status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:ANALYZED mbco:NOT_ANALYZED) .
-
-mbco:physical_object_network_status a owl:Class ;
-    rdfs:label "Physical object network status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:ONLINE mbco:OFFLINE) .
-
-mbco:process_status a owl:Class ;
-    rdfs:label "Process status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:PLANNED mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
-
-mbco:batch a owl:Class ;
-     rdfs:label "Batch" ;
-     rdfs:comment "A batch is a set of experimental samples or products, acquired or manufactured/prepared together."^^xs:string ;
-     rdfs:subClassOf mbco:physical_object ;
-     rdfs:subClassOf [a owl:Restriction ;
-          owl:onProperty mbco:has_part ;
-          owl:someValuesFrom mbco:physical_object] .
-
-### Object Properties ###
-
-mbco:has_part a owl:ObjectProperty ;
-    rdfs:label "has part" . 
-
-mbco:has_participant a owl:ObjectProperty ;
-    rdfs:domain mbco:process ;
-    rdfs:range [owl:unionOf (mbco:agent mbco:physical_object mbco:software)] .
-
-mbco:follows a owl:ObjectProperty ;
-    rdfs:label "follows" ;
-    rdfs:domain mbco:process_step ;
-    rdfs:range mbco:process_step .
-
-mbco:follows_directly a owl:ObjectProperty ;
-    rdfs:label "follows directly" ;
-    rdfs:domain mbco:process_step ;
-    rdfs:range mbco:process_step ;
-    rdfs:subPropertyOf mbco:follows .
-
-mbco:has_input a owl:ObjectProperty ;
-   rdfs:label "has input" .
-
-mbco:has_output a owl:ObjectProperty ;
-   rdfs:label "has output" .
-
-mbco:has_setting a owl:ObjectProperty ;
-   rdfs:label "has setting" ;
-   rdfs:comment "Settings, conditions affecting the process."^^xs:string . # TODO: clarify how this is separate from "input" and how different from "constraint". E.g.: numerical parameters vs model parameters for a simulation
-
-mbco:uses_method a owl:ObjectProperty ;
-   rdfs:label "uses method" ;
-   rdfs:range mbco:method .
-
-mbco:answers a owl:ObjectProperty ;
-    rdfs:domain mbco:statement ; 
-    rdfs:range mbco:statement .
-    
-mbco:has_status a owl:ObjectProperty ;
-    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:software mbco:process)] ;
-    rdfs:range mbco:status .
-
-mbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
-    rdfs:range mbco:property .
-
-mbco:is_incompatible_with a owl:ObjectProperty ;
-   rdfs:label "is incompatible with" ;
-   rdfs:comment "E.g., it can be used to flag up incompatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
-
-# FA_CRO_3
-mbco:is_material_incompatible_with_material a owl:ObjectProperty ;
-   rdfs:label "is material incompatible with material" ;
-   rdfs:comment "To flag up between materials (e.g., mixtures that are unsafe, etc)"^^xs:string ;
-   rdfs:domain mbco:material ; 
-   rdfs:range mbco:material ;
-   rdfs:subPropertyOf mbco:is_incompatible_with .
-   
-### Datatype Properties ###
-
-mbco:has_batch_ID a owl:DatatypeProperty ;
-    rdfs:label "has batch ID" ;
-    rdfs:domain mbco:batch .
-
-# see also: EMMO-LITE, DOLCE-LITE, EVMPO.
-
-@prefix mbco: <https://batcat.info/semantics/core#> . 
-
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
-
-<https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.9"^^xs:string ;
-   dcterms:modified "2025-12-05"^^xs:string ;
-   owl:imports <https://batcat.info/semantics/core#> ;
-   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-### Classes ###
-
-mbco:manufacturing_line a owl:Class ;
-     rdfs:label "Manufacturing line" ;
-     rdfs:subClassOf mbco:manufacturing_device .
-
-mbco:whole_product a owl:Class ;
-     rdfs:label "Whole product" ;
-     rdfs:subClassOf mbco:physical_object ;
-     rdfs:subClassOf [a owl:Restriction ;
-          owl:onProperty [owl:inverseOf mbco:has_part] ;
-          owl:someValuesFrom mbco:batch] .
-
-mbco:intermediate_product a owl:Class ;
-     rdfs:label "Intermediate product" ;
-     rdfs:subClassOf mbco:physical_object .
-
-mbco:product_component a owl:Class ;
-     rdfs:label "Product component" ;
-     rdfs:subClassOf mbco:physical_object .
-
-# mbco:manufacturing_technique a owl:Class ;
-#      rdfs:label "Manufacturing technique" ;
-#      rdfs:subClassOf mbco:method .
-
-mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Characterization module
-     rdfs:label "Sensor" ;
-     rdfs:subClassOf mbco:device ;
-     rdfs:comment """From Merriam Webster: a device that responds to a physical stimulus
-     (such as heat, light, sound, pressure, magnetism, or a particular motion) and transmits
-     a resulting impulse (as for measurement or operating a control)
-     [Merriam-Webster.com Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/sensor. Accessed 13 Nov. 2025.]"""^^xs:string ;
-     rdfs:comment """In the SOSA (Sensor, Observation, Sample, and Actuator) Ontology, a device that responds to a physical stimulus
-     and generates a result"""^^xs:string .     
-
-mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Characterization module
-     rdfs:label "Actuator" ;
-     rdfs:subClassOf mbco:agent .
-
-mbco:manufacturing_process a owl:Class ;
-     rdfs:label "Manufacturing process" ;
-     rdfs:subClassOf mbco:process ;
-     rdfs:subClassOf [a owl:Restriction ; 
-     		     owl:onProperty mbco:has_process_kpi ;
-        	     owl:someValuesFrom mbco:production_cost_per_unit] ;
-     rdfs:subClassOf [a owl:Restriction ; 
-     		     owl:onProperty mbco:has_setting ;
-        	     owl:someValuesFrom mbco:electricity_unit_cost] ;
-     rdfs:subClassOf [a owl:Restriction ; 
-     		     owl:onProperty mbco:has_setting ;
-        	     owl:someValuesFrom mbco:personnel_unit_cost] .
-
-# sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
-# TO SEE: 
-
-mbco:temperature_sensor a owl:Class ;
-     rdfs:label "Temperature sensor" ;
-     rdfs:subClassOf mbco:sensor ;
-     rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:temperature] . # TOSEE: why is the reasoner not deducing that temperature is a mbco:property?
-	
-mbco:thermocouple a owl:Class ;
-     rdfs:label "Thermocouple" ;
-     rdfs:subClassOf mbco:temperature_sensor .
-
-mbco:accelerometer a owl:Class ;
-     rdfs:label "Accelerometer" ;
-     rdfs:subClassOf mbco:sensor ;
-    rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:acceleration] .
-
-mbco:vibration_sensor a owl:Class ;
-     rdfs:label "Vibration sensor" ;
-     rdfs:subClassOf mbco:sensor ;
-     rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:someValuesFrom mbco:vibration_amplitude] ; 
-     rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:someValuesFrom mbco:vibration_frequency] . 
-
-mbco:power_sensor a owl:Class ;
-     rdfs:label "Power sensor" ;
-     rdfs:subClassOf mbco:sensor ;
-    rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:power] .
-
-mbco:power_monitoring_clip a owl:Class ;
-     rdfs:label "Power monitoring clip" ;
-     rdfs:subClassOf mbco:power_sensor .
-
-mbco:gas_detection_sensor a owl:Class ;
-     rdfs:label "Gas detection sensor" ;
-     rdfs:subClassOf mbco:sensor ;
-    rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:gas_concentration] . 
-
-mbco:carbon_monoxide_sensor a owl:Class ;
-     rdfs:label "Carbon monoxide sensor" ;
-     skos:altTabel "CO sensor" ;
-     rdfs:subClassOf mbco:gas_detection_sensor .
-
-mbco:carbon_dioxide_sensor a owl:Class ;
-     rdfs:label "Carbon dioxide sensor" ;
-     skos:altTabel "CO2 sensor" ;
-     rdfs:subClassOf mbco:gas_detection_sensor .
-
-mbco:pressure_sensor a owl:Class ;
-     rdfs:label "Pressure sensor" ;
-     rdfs:subClassOf mbco:sensor ;
-    rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:pressure] .
-
-mbco:laser_profilometer a owl:Class ;
-     rdfs:label "Laser profilometer" ;
-     rdfs:subClassOf mbco:device ; 
-     rdfs:subClassOf mbco:characterization_device ; # TOSEE: not a sensor, OK? Should "on-line charaterization" be defined?
-     rdfs:comment "Can be used for on-line characterization (e.g., thickness measurement)"^^xs:string ;
-    rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:someValuesFrom mbco:thickness] ;
-    rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:someValuesFrom mbco:porosity] .
-
-# CQ_MAN_3
-mbco:connection a owl:Class ;
-     rdfs:label "Connection (type)" ;
-     owl:oneOf (mbco:WIRED_ELECTRICAL_CABLE mbco:BLUETOOTH mbco:OPTICAL_FIBRE) ;
-     rdfs:subClassOf mbco:annotation .
-     # Note: put there and not under mbco:device because we only see it as a property of another object.
-     # A related entity under mbco:device could be added if needed
-
-### Object Properties ###
-
-mbco:has_product_design_parameter a owl:ObjectProperty ;
-     rdfs:label "has product design parameter" ;
-     rdfs:domain mbco:whole_product .
-
-mbco:has_product_kpi a owl:ObjectProperty ;
-     rdfs:label "has product KPI" ;
-     rdfs:comment "Points to a product Key Performance Indicator"^^xs:string ;
-     rdfs:domain mbco:whole_product .
-     
-mbco:has_product_operating_condition a owl:ObjectProperty ;
-     rdfs:label "has product operating condition" ;
-     rdfs:domain mbco:whole_product .
-
-mbco:performs_action a owl:ObjectProperty ;
-     rdfs:label "performs action" ;
-     rdfs:domain mbco:actuator ;
-     rdfs:range mbco:process . # TOSEE: define "action" class under "process" in higer.ttl?
-
-mbco:has_process_kpi a owl:ObjectProperty ;
-     rdfs:label "has process KPI" ;
-     rdfs:domain mbco:process ;	
-     rdfs:comment "Points to a process Key Performance Indicator"^^xs:string .
-
-mbco:observes a owl:ObjectProperty ;
-     rdfs:label "observes" ;
-     rdfs:range mbco:property ;	
-     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string .
-
-### Datatype Properties ###
-
-mbco:has_trigger a owl:DatatypeProperty ;
-    rdfs:label "has trigger" ;
-    rdfs:domain mbco:actuator .
-
-### Restrictions ###
-
-mbco:whole_product
-	rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:has_part ;
-	owl:someValuesFrom mbco:product_component] ;
-	rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:has_part ;
-	owl:someValuesFrom mbco:material] .
-
-mbco:sensor
-	rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:observes ;
-	owl:allValuesFrom mbco:physical_quantity] ; 
-	rdfs:subClassOf [a owl:Restriction ;
-	owl:onProperty mbco:has_connection ;
-	owl:allValuesFrom mbco:connection] .
-
-# CQ_MAN_4
-mbco:manufacturing_process 
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:energy_consumption] ;
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:equipment_performance] ;
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:waste_produced] ; 
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:product_quality] .
-
-mbco:manufacturing_process 
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:manufacturing_device] ;
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom [owl:unionOf (mbco:material mbco:physical_object)]] ;
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:physical_object] ;
-	rdfs:subClassOf [a owl:Restriction ;
-			owl:onProperty mbco:has_output ;
-        	     	owl:someValuesFrom [owl:unionOf (mbco:whole_product mbco:intermediate_product mbco:product_component)] ] .
-
-mbco:equipment_performance a owl:Class ;
-	rdfs:subClassOf mbco:property .
-
-mbco:product_quality a owl:Class ;
-	rdfs:subClassOf mbco:property .
-
-mbco:waste_produced a owl:Class ;
-	rdfs:subClassOf mbco:property .
-
-mbco:energy_consumption a owl:Class ;
-	rdfs:subClassOf mbco:property .
-
-# mbco:whole_product
-# 	rdfs:subClassOf [a owl:Restriction ;
-# 	owl:onProperty mbco:has_product_design_parameter ;
-# 	owl:someValuesFrom owl:Thing] ;
-#     	rdfs:subClassOf [a owl:Restriction ;
-#     	owl:onProperty mbco:has_product_KPI ;
-#     	owl:someValuesFrom owl:Thing] ;
-#     	rdfs:subClassOf [a owl:Restriction ;
-#     	owl:onProperty mbco:has_product_operating_condition ;
-#     	owl:someValuesFrom owl:Thing] .
-	    
-# CQ_MAN_10
-mbco:personnel_unit_cost a owl:Class ;
-        rdfs:label "Personnel unit cost" ;
-        rdfs:comment "Personnel cost, e.g., per person per hour"^^xs:string ;
-	rdfs:subClassOf mbco:property .
-
-mbco:electricity_unit_cost a owl:Class ;
-        rdfs:label "Electricity unit cost" ;
-        rdfs:comment "E.g., cost per kWh"^^xs:string ;
-	rdfs:subClassOf mbco:property .
-
-mbco:production_cost_per_unit a owl:Class ; # NB: duplicated here from battery module
-     rdfs:label "Production cost per unit" ;
-     rdfs:subClassOf mbco:property . 
-
-####################################################################################
-
-# Physical quantities # TO SEE: move them elsewhere, higher or transversal module?
-# TO SEE: statements added explicitly as not deduced by the reasoner. Bug?
-
-mbco:temperature a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:acceleration a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:power a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:gas_concentration a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:pressure a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:thickness a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:vibration_frequency a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:vibration_amplitude a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-mbco:porosity a owl:Class ;
-	rdfs:subClassOf mbco:physical_quantity .
-
-@prefix mbco: <https://batcat.info/semantics/core#> . 
-
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-@prefix osmo: <https://purl.org/vimmp/osmo#> .
-
-<https://batcat.info/semantics/core/modelling#> a owl:Ontology .
-
-<https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.8"^^xs:string ;
-  dcterms:modified "2025-12-08"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  owl:imports <https://batcat.info/semantics/core/data#> ;
-  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Maria Bashir (ORCID 0009-0000-5452-4764)"^^xs:string ;
-  dcterms:contributor "Carlos Nieto-Draghi (ORCID 0000-0001-5956-9259)"^^xs:string ;
-  dcterms:contributor "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-### Classes ###
-
-mbco:model_parametrization a owl:Class ; 
-    rdfs:label "Model parametrization" ;
-    skos:altLabel "Model parameters" ;
-    skos:altLabel "Model" ;   # TO SEE: OK?
-    rdfs:comment "Set of model parameters"^^xs:string ;
-    rdfs:subClassOf mbco:data ;
-   rdfs:subClassOf [a owl:Restriction ;
-                  owl:onProperty mbco:has_action_type ;
-                  owl:someValuesFrom mbco:model_action] .
-
-mbco:simulation a owl:Class ;
-    rdfs:label "Simulation" ;
-    rdfs:subClassOf mbco:process ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:data] ;      
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:simulation_result] ;      
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:physical_quantity] ;      
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:physical_quantity] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ;
-                   owl:someValuesFrom mbco:software] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:model_parametrization] .
-
-mbco:simulation_result a owl:Class ;
-    rdfs:label "Simulation result" ;
-    rdfs:subClassOf mbco:data .
-
-mbco:computational_modelling_method a owl:Class ;
-    rdfs:label "Computational modelling method" ;
-    rdfs:subClassOf mbco:method .
-    
-mbco:digital_twinning a owl:Class ; # TOSEE: OK?
-    rdfs:label "Digital twinning" ;
-    rdfs:subClassOf mbco:computational_modelling_method .
-
-# cf. EQ_SIM_3
-mbco:model_validation_process a owl:Class ;
-    rdfs:label "Model validation process" ;
-    rdfs:subClassOf mbco:process ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:model_parametrization] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:data] ;      # e.g., experimental data
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:statement] ; # on the model validity
-    rdfs:comment"""Its input contains data (e.g., from experiments, modelling methods at a different scale) and
-    its output contains a statement about the model parametrization validity"""^^xs:string .
-
-# cf. EQ_SIM_2
-mbco:model_parametrization_process a owl:Class ;
-    rdfs:label "Model parametrization process" ;
-    rdfs:subClassOf mbco:process ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:model_parametrization] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:data] ; # e.g., experimental data
-    rdfs:comment"""Its input contains data (e.g., from experiments) and its output a model parametrization"""^^xs:string .
-
-# From CQ_CRO_3
-mbco:time_scale a owl:Class ;
-    owl:oneOf (mbco:INDUSTRIAL_SAFETY_TIME_SCALE mbco:INTERMEDIATE_TIME_SCALE mbco:PLANNING_TIME_SCALE) ;
-    rdfs:subClassOf mbco:annotation ;
-    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
- to specify which one it addresses"""^^xs:string .
-
-# From CQ_CRO_9. Move to battery module later?
-mbco:rfb_length_scale a owl:Class ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
-    rdfs:subClassOf mbco:annotation ;
-    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
-to specify which one it addresses"""^^xs:string .
-
-mbco:lib_length_scale a owl:Class ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
-    rdfs:subClassOf mbco:annotation ;
-    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
-to specify which one it addresses"""^^xs:string .
-
-# mbco:physical_quantity a owl:Class ;
-#     rdfs:label "Physical quantity" ;
-#     rdfs:subClassOf mbco:property .
-
-# CQ_SIM_9
-mbco:model_reproducibility_method a owl:Class ; 
-    rdfs:label "Model reproducibility method" ;
-    rdfs:comment "Methods to evaluate the robustness of models and modelling data"^^xs:string ;
-    rdfs:subClassOf mbco:data_quality_evaluation_method ; #TOSEE: OK?
-    rdfs:subClassOf mbco:method .
-
-mbco:VARYING_MODELLING_APPROACH a mbco:model_reproducibility_method ;
-    rdfs:seeAlso """E.g., see S. Stephan et al, Vapor−Liquid Interface of the Lennard-Jones Truncated and Shifted Fluid: Comparison of Molecular Simulation, Density Gradient Theory, and Density Functional Theory, J.  Phys. Chem. C 2018 122 (43),
-    4705-24715, DOI: 10.1021/acs.jpcc.8b06332 """^^xs:string .
-
-mbco:VARYING_NUMERICAL_METHOD a mbco:model_reproducibility_method .
-
-mbco:VARYING_MODELLING_SOFTWARE a mbco:model_reproducibility_method ;
-    rdfs:seeAlso """E.g., see M. Schappals et al., Round Robin Study: Molecular Simulation of Thermodynamic Properties from Models with Internal Degrees of Freedom,
-    J. Chem. Theory Comput. 2017 13 (9), 4270-4280, DOI: 10.1021/acs.jctc.7b00489"""^^xs:string .
-
-mbco:model_action a owl:Class ;
-    rdfs:label "Model action" ;
-    rdfs:subClassOf mbco:process .    
-
-mbco:PREDICT a mbco:model_action .
-mbco:CLASSIFY a mbco:model_action . 
-mbco:INTERPOLATE a mbco:model_action . 
-
-mbco:data_driven_model a owl:Class ;
-    rdfs:subClassOf mbco:model_parametrization ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:is_data_driven ;
-                   owl:hasValue true] .      
-
-mbco:physics_based_model a owl:Class ;
-    rdfs:subClassOf mbco:model_parametrization ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:is_physics_based ;
-                   owl:hasValue true] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_granularity_level ;
-                   owl:allValuesFrom osmo:granularity_level] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_physical_equation_type ;
-                   owl:allValuesFrom osmo:physical_equation_type] .
-
-mbco:hybrid_model a owl:Class ;
-    owl:equivalentClass [ owl:intersectionOf (mbco:physics_based_model mbco:data_driven_model ) ].
-
-mbco:neural_network_model a owl:Class ;
-    rdfs:subClassOf mbco:data_driven_model .
-
-### Object Properties ###
-
-mbco:implements a owl:ObjectProperty ; # TOSEE: use the same property for plan implementation into process???
-    rdfs:label "implements" ;
-    rdfs:domain mbco:software ; 
-    rdfs:range mbco:method . 
-
-mbco:is_model_for a owl:ObjectProperty ; 
-    rdfs:label "is model for" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] . # TODO: compare with mbco:represents in twinning.ttl. Merge?
-
-mbco:is_model_for_system_containing_material a owl:ObjectProperty ; 
-    rdfs:label "is model for system containing material" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range mbco:material .
-
-mbco:is_model_for_system_containing_substance a owl:ObjectProperty ; 
-    rdfs:label "is model for system containing substance" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range mbco:substance ;
-    rdfs:subPropertyOf mbco:is_model_for_system_containing_material .
-
-mbco:has_model_type a owl:ObjectProperty ; 
-    rdfs:label "has model type" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range mbco:computational_modelling_method .
-
-mbco:gives_modelling_value_for a owl:ObjectProperty ; #gives_prediction_for?
-    rdfs:label "gives modelling value for" ;
-    rdfs:domain mbco:computational_modelling_method ; #TOSEE: OK?
-    rdfs:range mbco:physical_quantity ;
-    rdfs:subPropertyOf mbco:gives_value_for .
-
-mbco:gives_value_for a owl:ObjectProperty ; # quantifies?
-    rdfs:label "gives value for" ;
-    rdfs:domain mbco:method ; #TOSEE: OK?
-    rdfs:range mbco:physical_quantity .
-
-mbco:has_modelled_time_scale a owl:ObjectProperty ;
-    rdfs:label "has modelled time scale" ;
-#    rdfs:domain mbco:computational_modelling_method ;
-    rdfs:range mbco:time_scale .
-
-mbco:has_modelled_length_scale a owl:ObjectProperty ;
-    rdfs:label "has modelled length scale" ;
-#    rdfs:domain mbco:computational_modelling_method ;
-    rdfs:range [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
-
-# mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
-#     rdfs:label "has action type" ;
-#     rdfs:comment "points to the action type an entity is built for"^^xs:string .
-
-mbco:has_granularity_level a owl:ObjectProperty ;
-     rdfs:label "has granularity level" ;
-     rdfs:comment "points to the MODA granularity level"^^xs:string ;
-     rdfs:comment "one of: Electronic, Atomistic, Mesoscopic (=from two atoms on), Continuum"^^xs:string ;
-     rdfs:seeAlso """CEN-CENELEC Management Centre, Materials modelling: terminology, classification and
-     metadata. CEN workshop agreement 17284, Brussels, Belgium (2018)"""^^xs:string.
-
-mbco:has_physical_equation_type a owl:ObjectProperty ;
-     rdfs:label "has physical equation type" ;
-     rdfs:comment "points to one of the 24/25 RoMM/OSMO PE types"^^xs:string ;
-     rdfs:comment "For example, PE type A.3: Molecular dynamics (atomistic)"^^xs:string ;
-     rdfs:seeAlso "A.F. De Baas (ed.), What makes a material function? (EU Publications Office, Luxembourg, Let me compute the ways, 2017)"^^xs:string ;
-     rdfs:seeAlso """M.T. Horsch, et al., Semantic interoperability and characterization of data provenance
-     in computational molecular engineering. J. Chem. Eng. Data 65(3), 1313–1329 (2020)."""^^xs:string .
-
-# Could add:
-#mbco:has_input_data 
-#mbco:has_input_training_data
-#mbco:has_input_runtime_data 
-
-### Datatype Properties ###
-
-mbco:is_physics_based a owl:DatatypeProperty ;
-    rdfs:label "is physics-based" ;
-    rdfs:range xs:boolean .
-
-mbco:is_data_driven a owl:DatatypeProperty ;
-    rdfs:label "is data-driven" ;
-    rdfs:range xs:boolean .
-
-# FA_SIM_1
-mbco:has_nn_input_dimensionality a owl:DatatypeProperty ;
-    rdfs:label "has NN input dimensionality" ;
-    rdfs:domain mbco:neural_network_model ;
-    rdfs:range xs:nonNegativeInteger ;
-    rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
-    rdfs:comment "For example, input can be numbers, geometry/image, a transient"^^xs:string .
-
-mbco:has_nn_output_dimensionality a owl:DatatypeProperty ;
-     rdfs:label "has NN output dimensionality" ;
-     rdfs:domain mbco:neural_network_model ;
-     rdfs:range xs:nonNegativeInteger ;
-     rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
-     rdfs:comment "For example, output can be a scalar quantity, a local quantity or replace an equation"^^xs:string .
-    
-mbco:has_applicability_range_info a owl:DatatypeProperty ;
-     rdfs:label "has_applicability_range_info" ;
-     rdfs:domain mbco:model_parametrization ;
-     rdfs:range xs:string ;
-     rdfs:comment "Gives informations on the range (e.g., temperature) in which the model can be (meaningfully) applied"^^xs:string .
-
-####################################################################################
-# Duplicated here from OSMO for convenience
-
-osmo:granularity_level a owl:Class ;
-   owl:oneOf (osmo:ELECTRONIC osmo:ATOMISTIC osmo:MESOSCOPIC osmo:CONTINUUM) ;
-   rdfs:comment "granularity level (from RoMM), i.e., electronic, atomistic, mesoscopic, or continuum level according to RoMM"^^xs:string .
-####################################################################################
-# alignment
-
-osmo:granularity_level rdfs:subClassOf mbco:annotation .
-osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
-####################################################################################
-# TODO: compare with VISO, MSO-EM, VOV
-@prefix mbco: <https://batcat.info/semantics/core#> . 
-
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://batcat.info/semantics/core/optimization#> a owl:Ontology .
-
-<https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.5"^^xs:string ;
-  dcterms:modified "2025-06-23"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
-  dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-### Classes ###
-
-mbco:problem a owl:Class ;
-    rdfs:label "Problem" ; # TODO: do we need this class? Or does it make the hierarchy too deep?
-    rdfs:subClassOf mbco:statement .
-
-mbco:solution a owl:Class ;
-    rdfs:label "Solution" ;
-    rdfs:comment "Answer addressing a problem. It should contain a quantification of error and confidence."^^xs:string ;
-    rdfs:subClassOf mbco:statement .
-
-mbco:solution rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_confidence ;
-                   owl:someValuesFrom mbco:coarse_amount_level] .
-
-mbco:optimization_problem a owl:Class ;
-    rdfs:label "Optimization problem" ;
-    rdfs:subClassOf mbco:problem .
-
-mbco:optimization_method a owl:Class ; # TOSEE: or are they "problem solving methods???"
-    rdfs:label "Optimization method" ;
-    rdfs:subClassOf mbco:method ;
-    a owl:DeprecatedClass .
-
-mbco:answer_set_programming a owl:Class ;
-    rdfs:label "Answer Set Programming (ASP)" ;
-    rdfs:subClassOf mbco:optimization_method ; # correct??? It is a "logic programming method/paradigm"
-    rdfs:comment "A logic programming paradigm, tailored to search problems. (See Wikipedia)"^^xs:string .
-
-mbco:multi_criteria_optimization a owl:Class ;
-    rdfs:label "Multi Criteria Optimization (MCO)" ;
-    rdfs:subClassOf mbco:optimization_method ;
-    rdfs:comment "Mathematical optimization problem, where multiple objective functions (criteria) are simultaneuosly optimized. (See Wikipedia)"^^xs:string .
-
-mbco:mathematical_role a owl:Class ;
-    rdfs:label "Mathematical role" ;
-    rdfs:subClassOf mbco:role .
-
-mbco:variable a owl:Class ;
-    rdfs:label "Variable" ;
-    owl:disjointUnionOf (mbco:discrete_variable mbco:continuum_variable) ;
-    rdfs:subClassOf mbco:mathematical_role .		
-
-mbco:discrete_variable a owl:Class ;
-    rdfs:label "Discrete variable" ;
-    rdfs:subClassOf mbco:variable .
-
-mbco:continuum_variable a owl:Class ;
-    rdfs:label "Continuum variable" ;
-    rdfs:subClassOf mbco:variable .
-
-mbco:target a owl:Class ;
-    rdfs:label "Target" ;
-    rdfs:subClassOf mbco:mathematical_role ;
-    rdfs:comment "In an optimization problem, a property which has to be attained exactly or approximatively by the solution."^^xs:string .
-
-mbco:goal a owl:Class ;
-    rdfs:label "Goal" ;
-    rdfs:altLabel "Exact target" ;
-    rdfs:subClassOf mbco:target ;
-    rdfs:comment "In an optimization problem, a property which must be attained exactly by a solution."^^xs:string ;
-    rdfs:comment "In an optimization problem, an exact target."^^xs:string .
-
-mbco:constraint a owl:Class ;
-    rdfs:label "Constraint" ;
-    rdfs:subClassOf mbco:statement ;		    
-    owl:disjointUnionOf (mbco:qualitative_constraint mbco:quantitative_constraint) ;
-    rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_part ;
-        owl:someValuesFrom mbco:variable] .
-
-mbco:qualitative_constraint a owl:Class ;
-    rdfs:label "Qualitative constraint" ;
-    rdfs:comment "Examples of qualitative constraints are: step X follows (directly) step Y; step X requires participant Y; step X requires input Y; physical location constraint."^^xs:string .
-
-mbco:quantitative_constraint a owl:Class ;
-    rdfs:label "Quantitative constraint" ;
-    rdfs:comment "Examples of quantitative constraints are equalities (e.g., the sum of some variables is constant) and inequalitites (variable X > value X0)."^^xs:string .
-
-mbco:optimization_problem  # TOSEE: Do these restrictions apply to all problems?
-	rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_part ;
-                   owl:someValuesFrom mbco:variable] ;
-	rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_part ;
-                   owl:someValuesFrom mbco:target] ;
-	rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_part ;
-                   owl:someValuesFrom mbco:constraint] ;
-	rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_part ;
-                   owl:someValuesFrom mbco:goal] ;
-	rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_part ;
-                   owl:someValuesFrom mbco:initial_status] .  
-		  
-mbco:coarse_amount_level a owl:Class ; # TOSEE: create a "quantifier" class? TOSEE: move this to "higher" module?
-    rdfs:label "(Coarse) Amount level" ;
-    owl:oneOf (mbco:LOW mbco:MEDIUM mbco:HIGH) ;
-    rdfs:subClassOf mbco:annotation ; # ok?
-    rdfs:comment """A coarse quantifier. It can be used as part of a traffic light system to enable users to select options 
-in an easy and coarse way, for properties where this is suitable."""^^xs:string .
-
-mbco:initial_status a owl:Class ; 
-    rdfs:label "Initial status" ;
-    rdfs:subClassOf mbco:status ;
-    rdfs:comment "Status of an object/system right at the start of a given process. E.g., before an optimization is done"^^xs:string .    
-
-mbco:final_status a owl:Class ; 
-    rdfs:label "Final status" ;
-    rdfs:subClassOf mbco:status ;
-    rdfs:comment "Status of an object/system right at the end of a given process. E.g., after an optimization is done"^^xs:string .    
-
-# Examples of general logic-based problems/activity. TOSEE: Are these really optimization problems??? Problems? Logic-based problems? Are these activities? goals? Tasks?
-# Taken from CQ_CRO_8
-
-mbco:logic_based_problem a owl:Class ;
-    rdfs:label "Logic-based problem" ;
-    rdfs:subClassOf mbco:problem .
-
-mbco:numerical_problem a owl:Class ;
-    rdfs:label "Numerical problem" ;
-    rdfs:subClassOf mbco:problem .
-
-mbco:scheduling a owl:Class ;
-    rdfs:label "Scheduling" ;
-    rdfs:comment "Scheduling (e.g., of maintenance)"^^xs:string ;
-    rdfs:subClassOf mbco:logic_based_problem .
-
-mbco:resource_allocation a owl:Class ;
-    rdfs:label "Resource allocation" ;
-    rdfs:comment "Allocation of resources (e.g., machines/humans for tasks)"^^xs:string ;
-    rdfs:subClassOf mbco:logic_based_problem .
-
-mbco:compatibility_check a owl:Class ;
-    rdfs:label "Compatibility check" ;
-    rdfs:comment "Compatibility checks (e.g., between materials)"^^xs:string ;
-    rdfs:subClassOf mbco:logic_based_problem .
-
-mbco:compliance_validation a owl:Class ;
-    rdfs:label "Compliance validation" ;
-    rdfs:comment "Compliance validation (e.g., of a process with regulation)"^^xs:string ;
-    rdfs:subClassOf mbco:logic_based_problem .
-
-mbco:process_design a owl:Class ;
-    rdfs:label "Process design" ;
-    rdfs:comment "Process design (e.g., simulation, experiment)"^^xs:string ;
-    rdfs:subClassOf mbco:logic_based_problem ;
-    rdfs:subClassOf mbco:numerical_problem . # right?
-
-mbco:process_sequence_validation a owl:Class ;
-    rdfs:label "Process sequence validation" ;
-    rdfs:comment "Process sequence validation (e.g., that the ordering of sub-processes does not break dependencies)"^^xs:string ;
-    rdfs:subClassOf mbco:logic_based_problem .
-
-mbco:model_parametrization_process a owl:Class ; # this is for MCO
-    rdfs:label "Model parametrization process" ;
-    rdfs:comment "Determining the numerical values of the parameters as those that best reproduce certain properties. "^^xs:string ;
-    rdfs:comment "Not to be confused with the resulting model parameterization (a set of parameters)."^^xs:string ;
-    rdfs:subClassOf mbco:numerical_problem .
-
-### Object Properties ###
-
-mbco:has_cost_level a owl:ObjectProperty ; # TOSEE: express it differently? Issue is: if we use more general verbs, the statements are more complex.
-    rdfs:comment "Points to the cost of an entity, in the broad sense. It could be monetary cost, computational cost, etc."^^xs:string ;
-    rdfs:range mbco:coarse_amount_level .
-
-mbco:has_precision_level a owl:ObjectProperty ;  # TOSEE: same as for has_cost_level
-    rdfs:range mbco:coarse_amount_level .
-
-mbco:has_confidence_level a owl:ObjectProperty ;
-    rdfs:comment "Points to the confidence in the correctness of a statement, and is generated by the same source."^^xs:string ;
-    rdfs:range mbco:coarse_amount_level ;
-    rdfs:domain mbco:statement .
-
-### Datatype Properties ###
-
-### Other tentative properties still under consideration ...
-
-# mbco:has_quantifier
-# mbco:has_confidence
-# mbco:has_error
-# mbco:has_assumption
-# mbco:has_variable
-# mbco:has_target
-# mbco:has_constraint 
-#
-# Other: design_parameters, operating conditions, cost, KPI
-
-# ####################################################################################
-# # EXAMPLES below: Put here temporarily only, just for simplicity -> moved to a separate file
-# ####################################################################################
-
-# @prefix ex: <https://batcat.info/semantics/example#> .
-
-# ex:GITT_TEST a mbco:method ;
-#     mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-#     mbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
-#     mbco:has_participant ex:POTENTIOSTAT ;
-#     mbco:has_participant [a mbco:sample] ;
-#     mbco:has_participant [a mbco:agent] ;
-#     mbco:has_cost_level mbco:HIGH ;
-#     mbco:has_precision_level mbco:HIGH .       
-
-# ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
-#     mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
-#     mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-#     mbco:has_participant [a mbco:computational_device] ;
-#     mbco:has_participant [a mbco:software] ; # E.g., license access needed
-#     mbco:has_cost_level mbco:MEDIUM ;
-#     mbco:has_precision_level mbco:LOW .       
-# #    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
-
-# ex:POTENTIOSTAT a mbco:characterization_device .
-# ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable .
-# ex:ACTIVE_MATERIAL_POTENTIALS a mbco:continuum_variable .
-# ex:DPD_MODEL_PARAMETRIZATION_1 a mbco:model_parametrization . 
-
-# ex:DPD_DATA_ANALYSIS a mbco:process ;
-#     mbco:has_participant [a mbco:agent] .		   
-
-# ex:DPD_SIMULATION_SETTING_UP a mbco:process ;
-#     mbco:has_participant [a mbco:agent] .
-
-# ex:EXPERIMENT_SETTING_UP a mbco:process ;
-#     mbco:has_participant [a mbco:agent] .		   
-
-# ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
-#     a mbco:logic_based_problem ;
-#     a mbco:optimization_problem ;
-#     rdfs:comment "An example about running simulations"^^xs:string ;
-#     mbco:has_part ex:GOAL_1 ;
-#     mbco:has_part ex:TARGET_2 ;
-#     mbco:has_part ex:CONSTRAINT_1 ;
-#     mbco:has_part ex:CONSTRAINT_2 ;
-#     mbco:has_part ex:CONSTRAINT_3 ;
-#     mbco:has_part ex:INITIAL_STATUS_1 .
-
-# ex:GOAL_1 a mbco:goal ;
-#    rdfs:comment "Allocate human and computational devices to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
-
-# ex:INITIAL_STATUS_1 a mbco:initial_status ;
-#    rdfs:comment "Human and computational devices are available and operational. Needed software is installed"^^xs:string .
-
-# ex:TARGET_2 a mbco:target ;
-#    rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
-
-# ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
-#     rdfs:comment "There is only one available agent"^^xs:string .
-
-# ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
-#     rdfs:comment "There are two available computational devices"^^xs:string .
-
-# ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
-#     rdfs:comment "A computational method must be used"^^xs:string .
-
-# ex:DPD_SIMULATION_RUN 
-#     mbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
-#     mbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
-
-# ex:DPD_DATA_ANALYSIS mbco:followsdirectly ex:DPD_SIMULATION_RUN .
-
-# ex:COMPARISON_EXAMPLE_PROBLEM
-#     a mbco:logic_based_problem ;
-#     a mbco:optimization_problem ;
-#     rdfs:comment "An example about comparing simulations or experiments"^^xs:string ;
-#     mbco:has_part ex:GOAL_2 ;
-#     mbco:has_part ex:TARGET_1 .
-
-# ex:GOAL_2 a mbco:qualitative_constraint ;
-#     rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string ;
-#     mbco:has_part ex:DIFFUSION_COEFFICIENT .
-
-# ex:TARGET_1 a mbco:target ;
-#    rdfs:comment "Maximize precision and minimize cost"^^xs:string .
-
-# ex:SOLUTION_COMPARISON a mbco:solution ;
-#    mbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
-#    mbco:uses_method [a mbco:answer_set_programming] .
-
-# ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
-#    mbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
-#    mbco:uses_method [a mbco:answer_set_programming] .
-
-####################################################################################
-# See also:
-# inequality # EMMO - Math module (under "disciplines") 
-# equality # EMMO - Math module (under "disciplines") - it has "equation"
-# variable from VOV could be used. Also present in EMMO "math"
-@prefix ex: <https://batcat.info/semantics/scenarios/optimization_example#> .
-
-@prefix mbco: <https://batcat.info/semantics/core#> . 
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://batcat.info/semantics/scenarios/optimization_example#> dcterms:title "BatCAT core ontologies: Optimization example"^^xs:string ;
-  owl:versionInfo "version 0.1.0"^^xs:string ;
-  dcterms:modified "2025-05-23"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  owl:imports <https://batcat.info/semantics/core/optimization#> ;
-  owl:imports <https://batcat.info/semantics/core/modelling#> ;
-  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
-  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
-  dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-
-ex:GITT_TEST a mbco:method ;
-    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-    mbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
-    mbco:has_participant ex:POTENTIOSTAT ;
-    mbco:has_participant [a mbco:sample] ;
-    mbco:has_participant [a mbco:agent] ;
-    mbco:has_cost_level mbco:HIGH ;
-    mbco:has_precision_level mbco:HIGH .       
-
-ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
-    mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
-    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-    mbco:has_participant [a mbco:computational_device] ;
-    mbco:has_participant [a mbco:software] ; # E.g., license access needed
-    mbco:has_cost_level mbco:MEDIUM ;
-    mbco:has_precision_level mbco:LOW .       
-#    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
-
-ex:POTENTIOSTAT a mbco:characterization_device .
-ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable ;
-			 a mbco:physical_quantity .
-ex:ACTIVE_MATERIAL_POTENTIALS a mbco:continuum_variable ;
-			 a mbco:physical_quantity .
-ex:DPD_MODEL_PARAMETRIZATION_1 a mbco:model_parametrization . 
-
-ex:DPD_DATA_ANALYSIS a mbco:process ;
-    mbco:has_participant [a mbco:agent] .		   
-
-ex:DPD_SIMULATION_SETTING_UP a mbco:process ;
-    mbco:has_participant [a mbco:agent] .
-
-ex:EXPERIMENT_SETTING_UP a mbco:process ;
-    mbco:has_participant [a mbco:agent] .		   
-
-ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
-    a mbco:logic_based_problem ;
-    a mbco:optimization_problem ;
-    rdfs:comment "An example about running simulations"^^xs:string ;
-    mbco:has_part ex:GOAL_1 ;
-    mbco:has_part ex:TARGET_2 ;
-    mbco:has_part ex:CONSTRAINT_1 ;
-    mbco:has_part ex:CONSTRAINT_2 ;
-    mbco:has_part ex:CONSTRAINT_3 ;
-    mbco:has_part ex:INITIAL_STATUS_1 .
-
-ex:GOAL_1 a mbco:goal ;
-   rdfs:comment "Allocate human and computational devices to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
-
-ex:INITIAL_STATUS_1 a mbco:initial_status ;
-   rdfs:comment "Human and computational devices are available and operational. Needed software is installed"^^xs:string .
-
-ex:TARGET_2 a mbco:target ;
-   rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
-
-ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
-    rdfs:comment "There is only one available agent"^^xs:string .
-
-ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
-    rdfs:comment "There are two available computational devices"^^xs:string .
-
-ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
-    rdfs:comment "A computational method must be used"^^xs:string .
-
-ex:DPD_SIMULATION_RUN 
-    mbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
-    mbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
-
-ex:DPD_DATA_ANALYSIS mbco:followsdirectly ex:DPD_SIMULATION_RUN .
-
-ex:COMPARISON_EXAMPLE_PROBLEM
-    a mbco:logic_based_problem ;
-    a mbco:optimization_problem ;
-    rdfs:comment "An example about comparing simulations or experiments"^^xs:string ;
-    mbco:has_part ex:GOAL_2 ;
-    mbco:has_part ex:TARGET_1 .
-
-ex:GOAL_2 a mbco:qualitative_constraint ;
-    rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string ;
-    mbco:has_part ex:DIFFUSION_COEFFICIENT .
-
-ex:TARGET_1 a mbco:target ;
-   rdfs:comment "Maximize precision and minimize cost"^^xs:string .
-
-ex:SOLUTION_COMPARISON a mbco:solution ;
-   mbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
-   mbco:uses_method [a mbco:answer_set_programming] .
-
-ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
-   mbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
-   mbco:uses_method [a mbco:answer_set_programming] .
-
-####################################################################################
-@prefix mbco: <https://batcat.info/semantics/core#> . 
-
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .  
-#@prefix mod: <https://w3id.org/mod#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://batcat.info/semantics/core/twinning#> a owl:Ontology .
-
-<https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
-  owl:versionInfo "version 0.0.3"^^xs:string ;
-  dcterms:modified "2025-12-03"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
-  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
-  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
-  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
-  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
-  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
-with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
-#  dcterms:bibliographicCitation ""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
-
-### Classes ###
-
-# CAVEAT: Duplicated here from modelling.ttl for convenience
-mbco:digital_twinning a owl:Class ; 
-    rdfs:label "Digital twinning" ;
-    rdfs:subClassOf mbco:computational_modelling_method .
-mbco:computational_modelling_method rdfs:subClassOf mbco:method .    
-# end of duplication
-
-mbco:digital_twin_model a owl:Class ; 
-    rdfs:label "Digital twin model" ;
-    rdfs:subClassOf mbco:data ; # TOSEE: define a model class?
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:represents ;
-                   owl:someValuesFrom owl:Thing] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_action_type ;
-                   owl:someValuesFrom mbco:digital_twin_action] ;
-    rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_synchronization_rate ;
-                   owl:someValuesFrom xs:decimal] .
-
-mbco:digital_twin_action a owl:Class ;
-    rdfs:label "Digital twin action" ;
-    owl:oneOf (mbco:VISUALIZE mbco:MONITOR mbco:PREDICT mbco:RECOMMEND) ;
-    rdfs:comment """Based on an extract of application-related terms from ISO/IEC 30173:2023, 
-    with an addition inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."""^^xs:string ;
-    rdfs:subClassOf mbco:process .
-
-mbco:generality_level a owl:Class ; 
-    owl:oneOf (mbco:UNIVERSAL mbco:TYPE mbco:INDIVIDUAL) ;
-    rdfs:comment "Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'. Note: There a fourth level is present."^^xs:string ;
-    rdfs:subClassOf mbco:annotation .
-
-mbco:UNIVERSAL rdfs:comment "Encompassing, e.g. for a very generic entity or process."^^xs:string .
-mbco:TYPE rdfs:comment "E.g., a car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
-mbco:INDIVIDUAL rdfs:comment "E.g., John's car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
-
-### Object Properties ###
-
-mbco:represents a owl:ObjectProperty ;
-    rdfs:label "represents" ;
-    rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] .
-
-#mbco:has_action_type a owl:ObjectProperty ; # now defined in modelling.ttl
-#    rdfs:label "has action type" .
-#    rdfs:range mbco:digital_twin_action .
-
-mbco:has_generality_level a owl:ObjectProperty ;
-    rdfs:label "has generality level" ;
-    rdfs:range mbco:generality_level .
-    
-### Datatype Properties ###
-
-mbco:has_synchronization_rate a owl:DatatypeProperty ;
-    rdfs:label "has synchronization rate" ;
-    rdfs:comment """(Average) Rate (in 1/seconds) at which communication (in either direction) between 
-    the digital entity and its target entity happens"""^^xs:string .
-
-####################################################################################
-# EXAMPLES below: Put here temporarily only, just for simplicity
-####################################################################################
-
-@prefix ex: <https://batcat.info/semantics/example#> .
-
-ex:DT_LIB_CELL_C032 a mbco:digital_twin_model ;
-    mbco:has_generality_level mbco:TYPE ;
-    rdfs:comment "Digital twin of a LiB cell of type C032"^^xs:string .
-
-ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
-    mbco:has_generality_level mbco:INDIVIDUAL ;
-    mbco:has_synchronization_rate 1.0 ;
-    rdfs:comment "Digital twin of a specific LiB cell of type C032, identified by its PID"^^xs:string .
-
-####################################################################################
