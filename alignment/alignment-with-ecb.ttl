@@ -74,9 +74,17 @@ emmo:Object owl:equivalentClass emmo:EMMO_90ae56e4_d197_49b6_be1a_0049e4756606 .
 emmo:Procedure owl:equivalentClass emmo:EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49 .
 emmo:Process owl:equivalentClass emmo:EMMO_43e9a05d_98af_41b4_92f6_00f79a09bfce .
 emmo:Property owl:equivalentClass emmo:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba .
+emmo:Agent owl:equivalentClass emmo:EMMO_2480b72b_db8d_460f_9a5f_c2912f979046 .
+emmo:Material owl:equivalentClass emmo:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 .
 
 # emmo:Information
 mbco:annotation rdfs:subClassOf emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36 .
+
+mbco:agent rdfs:subClassOf emmo:EMMO_2480b72b_db8d_460f_9a5f_c2912f979046 .
+
+mbco:data owl:equivalentClass emmo:EMMO_3e7add3d_e6ed_489a_a796_8e31fef9b490 .
+
+mbco:material owl:equivalentClass emmo:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 .
 
 # emmo:Procedure, look at the characterization techniques under that in CHAMEO (FunctionalIcon)...
 mbco:method rdfs:subClassOf emmo:EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49 .
@@ -95,5 +103,7 @@ mbco:role owl:equivalentClass emmo:EMMO_4f226cf3_6d02_4d35_8566_a9e641bc6ff3 .
 
 # emmo:Information
 mbco:statement rdfs:subClassOf emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36 .
+
+mbco:software rdfs:subClassOf emmo:EMMO_8681074a_e225_4e38_b586_e85b0f43ce38 .
 	
 	
