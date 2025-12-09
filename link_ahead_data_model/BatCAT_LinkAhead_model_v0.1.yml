@@ -44,9 +44,15 @@ Simulation_result:  # WP2 minimal record type
       datatype: TEXT  # or REFERENCE # or LIST?
       description: "one of: Electronic, Atomistic, Mesoscopic, Continuum"
       # Note: Mesoscopic = from two atoms on
+      # URI (non resolvable) of target class is:
+      # https://purl.vimmp.eu/semantics/osmo/osmo.ttl#granularity_level
     model_type_MODA_OSMO:
       datatype: REFERENCE  # or LIST?
       description: "one of MODA/OSMO Physical Equation (PE) types"
+      # URI (non resolvable) of target class is:
+      # https://purl.vimmp.eu/semantics/osmo/osmo.ttl#physical_equation_type
+      # URI (non resol.) of target class with the 25 model types as individuals:
+      # https://purl.vimmp.eu/semantics/alignment/vcl.ttl#codelist_pe_type
     compound:  # it should already be there as LinkAhead property, right?
       datatype: REFERENCE
       description: "Link to a compound/substance (from PubChem list)"
