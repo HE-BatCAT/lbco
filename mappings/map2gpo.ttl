@@ -11,13 +11,13 @@
 
 ######################### Header of this file ##########################################
 
-<https://batcat.info/semantics/mappings/map2gpo#> a owl:Ontology .
+<https://batcat.info/semantics/mappings/map2gpo> a owl:Ontology .
 
-<https://batcat.info/semantics/mappings/map2gpo#> dcterms:title
+<https://batcat.info/semantics/mappings/map2gpo> dcterms:title
   """Mapping of MBCO-Minimal BatCAT Ontologies to GPO-General Process Ontology"""^^xs:string ;
   owl:versionInfo "version 0.0.2"^^xs:string ;
   dcterms:modified "2025-11-19"^^xs:string ;
-#  owl:imports <https://batcat.info/semantics/core#> ; # OK? TO DO: check what (modules?) to import 
+#  owl:imports <https://batcat.info/semantics/core> ; # OK? TO DO: check what (modules?) to import 
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
