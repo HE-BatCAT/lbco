@@ -10,9 +10,9 @@
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
+<https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
-<https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
+<https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
   owl:versionInfo "version 0.1.10"^^xs:string ;
   dcterms:modified "2025-12-08"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
