@@ -88,8 +88,9 @@ mbco:has_sample_history a owl:ObjectProperty ;
      rdfs:domain mbco:sample ;
      rdfs:range mbco:sample_history .
 
-mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors?
+mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors? Move it to higher?
      rdfs:label "measures" ;
+     rdfs:domain mbco:device ;
      rdfs:range mbco:physical_quantity .
 
 ### Datatype Properties ###

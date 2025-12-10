@@ -14,7 +14,7 @@
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.11"^^xs:string ;
+  owl:versionInfo "version 0.0.12"^^xs:string ;
   dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -129,6 +129,21 @@ mbco:redox_flow_battery
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_product_kpi ;
 	owl:someValuesFrom mbco:full_cell_durability] . # TOSEE: durability -> full_cell_durability: OK?
+
+# From CQ_CRO_9.
+mbco:rfb_length_scale a owl:Class ;
+    rdfs:label "RFB length scale" ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
+    rdfs:subClassOf mbco:length_scale ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
+
+mbco:lib_length_scale a owl:Class ;
+    rdfs:label "LIB length scale" ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
+    rdfs:subClassOf mbco:length_scale ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
 
 ### Object Properties ###
 
@@ -317,7 +332,7 @@ mbco:round_trip_efficiency a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:full_cell_safety a owl:Class ;
-     rdfs:subClassOf mbco:annotation .
+     rdfs:subClassOf mbco:property . # OK? It was mbco:annotation .
 
 mbco:full_cell_electric_resistance a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .

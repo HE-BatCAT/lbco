@@ -53,8 +53,11 @@ mbco:digital_twin_model a owl:Class ;
                    owl:someValuesFrom mbco:digital_twin_action] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_synchronization_rate ;
-                   owl:someValuesFrom xs:decimal] .
-
+                   owl:someValuesFrom xs:decimal] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_generality_level ;
+                   owl:someValuesFrom mbco:generality_level] .
+		   
 mbco:digital_twin_action a owl:Class ;
     rdfs:label "Digital twin action" ;
     owl:oneOf (mbco:VISUALIZE mbco:MONITOR mbco:PREDICT mbco:RECOMMEND) ;

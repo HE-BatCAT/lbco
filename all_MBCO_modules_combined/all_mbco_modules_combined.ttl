@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.10"^^xs:string ;
+  owl:versionInfo "version 0.1.11"^^xs:string ;
   dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
@@ -201,10 +201,14 @@ mbco:follows_directly a owl:ObjectProperty ;
     rdfs:subPropertyOf mbco:follows .
 
 mbco:has_input a owl:ObjectProperty ;
-   rdfs:label "has input" .
-
+   rdfs:label "has input" ;
+    rdfs:domain [owl:unionOf (mbco:process mbco:software mbco:agent mbco:device)] ;
+    rdfs:range [owl:unionOf (mbco:data mbco:statement mbco:physical_object mbco:material mbco:property)] .
+   
 mbco:has_output a owl:ObjectProperty ;
-   rdfs:label "has output" .
+   rdfs:label "has output" ;
+   rdfs:domain [owl:unionOf (mbco:process mbco:software mbco:agent mbco:device)] ;
+   rdfs:range [owl:unionOf (mbco:data mbco:statement mbco:physical_object mbco:material mbco:property)] .
 
 mbco:has_setting a owl:ObjectProperty ;
    rdfs:label "has setting" ;
@@ -335,8 +339,9 @@ mbco:has_sample_history a owl:ObjectProperty ;
      rdfs:domain mbco:sample ;
      rdfs:range mbco:sample_history .
 
-mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors?
+mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors? Move it to higher?
      rdfs:label "measures" ;
+     rdfs:domain mbco:device ;
      rdfs:range mbco:physical_quantity .
 
 ### Datatype Properties ###
@@ -531,7 +536,8 @@ mbco:has_product_design_parameter a owl:ObjectProperty ;
 mbco:has_product_kpi a owl:ObjectProperty ;
      rdfs:label "has product KPI" ;
      rdfs:comment "Points to a product Key Performance Indicator"^^xs:string ;
-     rdfs:domain mbco:whole_product .
+     rdfs:domain mbco:whole_product ;
+     rdfs:range mbco:property .
      
 mbco:has_product_operating_condition a owl:ObjectProperty ;
      rdfs:label "has product operating condition" ;
@@ -544,14 +550,22 @@ mbco:performs_action a owl:ObjectProperty ;
 
 mbco:has_process_kpi a owl:ObjectProperty ;
      rdfs:label "has process KPI" ;
-     rdfs:domain mbco:process ;	
+     rdfs:domain mbco:process ;
+     rdfs:range mbco:property ;
      rdfs:comment "Points to a process Key Performance Indicator"^^xs:string .
 
 mbco:observes a owl:ObjectProperty ;
      rdfs:label "observes" ;
-     rdfs:range mbco:property ;	
-     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string .
+     rdfs:domain mbco:sensor ;	
+     rdfs:range mbco:physical_quantity ; # OK? it was: # mbco:property ;
+     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string ;
+     rdfs:subPropertyOf mbco:measures .
 
+mbco:has_connection a owl:ObjectProperty ; # TO SEE: move to higher?
+     rdfs:label "has connection" ;
+     rdfs:domain mbco:physical_object ;
+     rdfs:range mbco:connection .
+     
 ### Datatype Properties ###
 
 mbco:has_trigger a owl:DatatypeProperty ;
@@ -691,7 +705,7 @@ mbco:porosity a owl:Class ;
 <https://batcat.info/semantics/core/modelling> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.8"^^xs:string ;
+  owl:versionInfo "version 0.0.9"^^xs:string ;
   dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -724,9 +738,15 @@ mbco:model_parametrization a owl:Class ;
     skos:altLabel "Model" ;   # TO SEE: OK?
     rdfs:comment "Set of model parameters"^^xs:string ;
     rdfs:subClassOf mbco:data ;
-   rdfs:subClassOf [a owl:Restriction ;
+    rdfs:subClassOf [a owl:Restriction ;
                   owl:onProperty mbco:has_action_type ;
-                  owl:someValuesFrom mbco:model_action] .
+                  owl:someValuesFrom mbco:model_action] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                  owl:onProperty mbco:has_modelled_time_scale ;
+                  owl:someValuesFrom mbco:time_scale] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                  owl:onProperty mbco:has_modelled_length_scale ;
+                  owl:someValuesFrom mbco:length_scale] .
 
 mbco:simulation a owl:Class ;
     rdfs:label "Simulation" ;
@@ -798,20 +818,11 @@ mbco:time_scale a owl:Class ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
  to specify which one it addresses"""^^xs:string .
 
-# From CQ_CRO_9. Move to battery module later?
-mbco:rfb_length_scale a owl:Class ;
-    rdfs:label "RFB length scale" ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
+mbco:length_scale a owl:Class ;
+    rdfs:label "Length scale" ;
     rdfs:subClassOf mbco:annotation ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
-to specify which one it addresses"""^^xs:string .
-
-mbco:lib_length_scale a owl:Class ;
-    rdfs:label "LIB length scale" ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
-    rdfs:subClassOf mbco:annotation ;
-    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
-to specify which one it addresses"""^^xs:string .
+ to specify which one it addresses"""^^xs:string .
 
 # mbco:physical_quantity a owl:Class ;
 #     rdfs:label "Physical quantity" ;
@@ -917,14 +928,17 @@ mbco:has_modelled_time_scale a owl:ObjectProperty ;
 mbco:has_modelled_length_scale a owl:ObjectProperty ;
     rdfs:label "has modelled length scale" ;
 #    rdfs:domain mbco:computational_modelling_method ;
-    rdfs:range [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
+    rdfs:range mbco:length_scale . # [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
 
-# mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
-#     rdfs:label "has action type" ;
-#     rdfs:comment "points to the action type an entity is built for"^^xs:string .
+mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
+    rdfs:label "has action type" ;
+    rdfs:range mbco:process ;
+    rdfs:comment "points to the action type an entity is built for or can perform"^^xs:string .
 
 mbco:has_granularity_level a owl:ObjectProperty ;
      rdfs:label "has granularity level" ;
+     rdfs:domain mbco:model_parametrization ;
+     rdfs:range osmo:granularity_level ;
      rdfs:comment "points to the MODA granularity level"^^xs:string ;
      rdfs:comment "one of: Electronic, Atomistic, Mesoscopic (=from two atoms on), Continuum"^^xs:string ;
      rdfs:seeAlso """CEN-CENELEC Management Centre, Materials modelling: terminology, classification and
@@ -932,6 +946,8 @@ mbco:has_granularity_level a owl:ObjectProperty ;
 
 mbco:has_physical_equation_type a owl:ObjectProperty ;
      rdfs:label "has physical equation type" ;
+     rdfs:domain mbco:physics_based_model ;
+     rdfs:range osmo:physical_equation_type ;
      rdfs:comment "points to one of the 24/25 RoMM/OSMO PE types"^^xs:string ;
      rdfs:comment "For example, PE type A.3: Molecular dynamics (atomistic)"^^xs:string ;
      rdfs:seeAlso "A.F. De Baas (ed.), What makes a material function? (EU Publications Office, Luxembourg, Let me compute the ways, 2017)"^^xs:string ;
@@ -1002,7 +1018,7 @@ osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
 <https://batcat.info/semantics/core/data> a owl:Ontology .
 
 <https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
-  owl:versionInfo "version 0.0.8"^^xs:string ;
+  owl:versionInfo "version 0.0.9"^^xs:string ;
   dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1145,7 +1161,12 @@ mbco:complies_with a owl:ObjectProperty ;
 mbco:is_generated_by a owl:ObjectProperty ; # TOSEE: use inverse (has_output) instead of defining this additional prop?
     rdfs:label "is generated by" ;
     rdfs:domain mbco:data ; 
-    rdfs:range [owl:unionOf (mbco:agent mbco:device mbco:software)] .
+    rdfs:range [owl:unionOf (mbco:agent mbco:device mbco:software)] ;
+#    rdfs:subPropertyOf [owl:inverseOf mbco:has_output] .
+    rdfs:subPropertyOf mbco:is_output_of .
+
+mbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? Move to higher?
+		  owl:inverseOf mbco:has_output .
 
 mbco:has_data_processing_method a owl:ObjectProperty ;
     rdfs:label "has data processing method" ;
@@ -1582,8 +1603,11 @@ mbco:digital_twin_model a owl:Class ;
                    owl:someValuesFrom mbco:digital_twin_action] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:has_synchronization_rate ;
-                   owl:someValuesFrom xs:decimal] .
-
+                   owl:someValuesFrom xs:decimal] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_generality_level ;
+                   owl:someValuesFrom mbco:generality_level] .
+		   
 mbco:digital_twin_action a owl:Class ;
     rdfs:label "Digital twin action" ;
     owl:oneOf (mbco:VISUALIZE mbco:MONITOR mbco:PREDICT mbco:RECOMMEND) ;
@@ -1654,7 +1678,7 @@ ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.11"^^xs:string ;
+  owl:versionInfo "version 0.0.12"^^xs:string ;
   dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1769,6 +1793,21 @@ mbco:redox_flow_battery
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_product_kpi ;
 	owl:someValuesFrom mbco:full_cell_durability] . # TOSEE: durability -> full_cell_durability: OK?
+
+# From CQ_CRO_9.
+mbco:rfb_length_scale a owl:Class ;
+    rdfs:label "RFB length scale" ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
+    rdfs:subClassOf mbco:length_scale ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
+
+mbco:lib_length_scale a owl:Class ;
+    rdfs:label "LIB length scale" ;
+    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
+    rdfs:subClassOf mbco:length_scale ;
+    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
+to specify which one it addresses"""^^xs:string .
 
 ### Object Properties ###
 
@@ -1957,7 +1996,7 @@ mbco:round_trip_efficiency a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .
 
 mbco:full_cell_safety a owl:Class ;
-     rdfs:subClassOf mbco:annotation .
+     rdfs:subClassOf mbco:property . # OK? It was mbco:annotation .
 
 mbco:full_cell_electric_resistance a owl:Class ;
      rdfs:subClassOf mbco:physical_quantity .

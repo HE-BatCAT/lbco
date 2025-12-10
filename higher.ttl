@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.10"^^xs:string ;
+  owl:versionInfo "version 0.1.11"^^xs:string ;
   dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
@@ -201,10 +201,14 @@ mbco:follows_directly a owl:ObjectProperty ;
     rdfs:subPropertyOf mbco:follows .
 
 mbco:has_input a owl:ObjectProperty ;
-   rdfs:label "has input" .
-
+   rdfs:label "has input" ;
+    rdfs:domain [owl:unionOf (mbco:process mbco:software mbco:agent mbco:device)] ;
+    rdfs:range [owl:unionOf (mbco:data mbco:statement mbco:physical_object mbco:material mbco:property)] .
+   
 mbco:has_output a owl:ObjectProperty ;
-   rdfs:label "has output" .
+   rdfs:label "has output" ;
+   rdfs:domain [owl:unionOf (mbco:process mbco:software mbco:agent mbco:device)] ;
+   rdfs:range [owl:unionOf (mbco:data mbco:statement mbco:physical_object mbco:material mbco:property)] .
 
 mbco:has_setting a owl:ObjectProperty ;
    rdfs:label "has setting" ;

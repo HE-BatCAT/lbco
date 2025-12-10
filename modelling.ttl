@@ -14,7 +14,7 @@
 <https://batcat.info/semantics/core/modelling> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.8"^^xs:string ;
+  owl:versionInfo "version 0.0.9"^^xs:string ;
   dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -47,9 +47,15 @@ mbco:model_parametrization a owl:Class ;
     skos:altLabel "Model" ;   # TO SEE: OK?
     rdfs:comment "Set of model parameters"^^xs:string ;
     rdfs:subClassOf mbco:data ;
-   rdfs:subClassOf [a owl:Restriction ;
+    rdfs:subClassOf [a owl:Restriction ;
                   owl:onProperty mbco:has_action_type ;
-                  owl:someValuesFrom mbco:model_action] .
+                  owl:someValuesFrom mbco:model_action] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                  owl:onProperty mbco:has_modelled_time_scale ;
+                  owl:someValuesFrom mbco:time_scale] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                  owl:onProperty mbco:has_modelled_length_scale ;
+                  owl:someValuesFrom mbco:length_scale] .
 
 mbco:simulation a owl:Class ;
     rdfs:label "Simulation" ;
@@ -121,20 +127,11 @@ mbco:time_scale a owl:Class ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
  to specify which one it addresses"""^^xs:string .
 
-# From CQ_CRO_9. Move to battery module later?
-mbco:rfb_length_scale a owl:Class ;
-    rdfs:label "RFB length scale" ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
+mbco:length_scale a owl:Class ;
+    rdfs:label "Length scale" ;
     rdfs:subClassOf mbco:annotation ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
-to specify which one it addresses"""^^xs:string .
-
-mbco:lib_length_scale a owl:Class ;
-    rdfs:label "LIB length scale" ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
-    rdfs:subClassOf mbco:annotation ;
-    rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
-to specify which one it addresses"""^^xs:string .
+ to specify which one it addresses"""^^xs:string .
 
 # mbco:physical_quantity a owl:Class ;
 #     rdfs:label "Physical quantity" ;
@@ -240,14 +237,17 @@ mbco:has_modelled_time_scale a owl:ObjectProperty ;
 mbco:has_modelled_length_scale a owl:ObjectProperty ;
     rdfs:label "has modelled length scale" ;
 #    rdfs:domain mbco:computational_modelling_method ;
-    rdfs:range [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
+    rdfs:range mbco:length_scale . # [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
 
-# mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
-#     rdfs:label "has action type" ;
-#     rdfs:comment "points to the action type an entity is built for"^^xs:string .
+mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
+    rdfs:label "has action type" ;
+    rdfs:range mbco:process ;
+    rdfs:comment "points to the action type an entity is built for or can perform"^^xs:string .
 
 mbco:has_granularity_level a owl:ObjectProperty ;
      rdfs:label "has granularity level" ;
+     rdfs:domain mbco:model_parametrization ;
+     rdfs:range osmo:granularity_level ;
      rdfs:comment "points to the MODA granularity level"^^xs:string ;
      rdfs:comment "one of: Electronic, Atomistic, Mesoscopic (=from two atoms on), Continuum"^^xs:string ;
      rdfs:seeAlso """CEN-CENELEC Management Centre, Materials modelling: terminology, classification and
@@ -255,6 +255,8 @@ mbco:has_granularity_level a owl:ObjectProperty ;
 
 mbco:has_physical_equation_type a owl:ObjectProperty ;
      rdfs:label "has physical equation type" ;
+     rdfs:domain mbco:physics_based_model ;
+     rdfs:range osmo:physical_equation_type ;
      rdfs:comment "points to one of the 24/25 RoMM/OSMO PE types"^^xs:string ;
      rdfs:comment "For example, PE type A.3: Molecular dynamics (atomistic)"^^xs:string ;
      rdfs:seeAlso "A.F. De Baas (ed.), What makes a material function? (EU Publications Office, Luxembourg, Let me compute the ways, 2017)"^^xs:string ;

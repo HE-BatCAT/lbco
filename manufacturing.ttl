@@ -181,7 +181,8 @@ mbco:has_product_design_parameter a owl:ObjectProperty ;
 mbco:has_product_kpi a owl:ObjectProperty ;
      rdfs:label "has product KPI" ;
      rdfs:comment "Points to a product Key Performance Indicator"^^xs:string ;
-     rdfs:domain mbco:whole_product .
+     rdfs:domain mbco:whole_product ;
+     rdfs:range mbco:property .
      
 mbco:has_product_operating_condition a owl:ObjectProperty ;
      rdfs:label "has product operating condition" ;
@@ -194,14 +195,22 @@ mbco:performs_action a owl:ObjectProperty ;
 
 mbco:has_process_kpi a owl:ObjectProperty ;
      rdfs:label "has process KPI" ;
-     rdfs:domain mbco:process ;	
+     rdfs:domain mbco:process ;
+     rdfs:range mbco:property ;
      rdfs:comment "Points to a process Key Performance Indicator"^^xs:string .
 
 mbco:observes a owl:ObjectProperty ;
      rdfs:label "observes" ;
-     rdfs:range mbco:property ;	
-     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string .
+     rdfs:domain mbco:sensor ;	
+     rdfs:range mbco:physical_quantity ; # OK? it was: # mbco:property ;
+     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string ;
+     rdfs:subPropertyOf mbco:measures .
 
+mbco:has_connection a owl:ObjectProperty ; # TO SEE: move to higher?
+     rdfs:label "has connection" ;
+     rdfs:domain mbco:physical_object ;
+     rdfs:range mbco:connection .
+     
 ### Datatype Properties ###
 
 mbco:has_trigger a owl:DatatypeProperty ;
