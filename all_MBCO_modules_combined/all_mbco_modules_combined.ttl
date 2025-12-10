@@ -10,9 +10,9 @@
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core#> a owl:Ontology .                                                                                                                                   
+<https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
-<https://batcat.info/semantics/core#> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
+<https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
   owl:versionInfo "version 0.1.10"^^xs:string ;
   dcterms:modified "2025-12-08"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
@@ -256,13 +256,13 @@ mbco:has_batch_ID a owl:DatatypeProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/characterization#> a owl:Ontology .
+<https://batcat.info/semantics/core/characterization> a owl:Ontology .
 
-<https://batcat.info/semantics/core/characterization#> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
+<https://batcat.info/semantics/core/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
    owl:versionInfo "version 0.0.3"^^xs:string ;
    dcterms:modified "2025-12-05"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
-   owl:imports <https://batcat.info/semantics/core#> ;
+   owl:imports <https://batcat.info/semantics/core> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -358,13 +358,13 @@ mbco:has_sample_ID a owl:DatatypeProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/manufacturing#> a owl:Ontology .
+<https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
 
-<https://batcat.info/semantics/core/manufacturing#> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
+<https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
    owl:versionInfo "version 0.0.9"^^xs:string ;
    dcterms:modified "2025-12-05"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
-   owl:imports <https://batcat.info/semantics/core#> ;
+   owl:imports <https://batcat.info/semantics/core> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -685,14 +685,14 @@ mbco:porosity a owl:Class ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix osmo: <https://purl.org/vimmp/osmo#> .
 
-<https://batcat.info/semantics/core/modelling#> a owl:Ontology .
+<https://batcat.info/semantics/core/modelling> a owl:Ontology .
 
-<https://batcat.info/semantics/core/modelling#> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
+<https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
   owl:versionInfo "version 0.0.8"^^xs:string ;
   dcterms:modified "2025-12-08"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  owl:imports <https://batcat.info/semantics/core/data#> ;
+  owl:imports <https://batcat.info/semantics/core> ;
+  owl:imports <https://batcat.info/semantics/core/data> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -988,13 +988,13 @@ osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/data#> a owl:Ontology .
+<https://batcat.info/semantics/core/data> a owl:Ontology .
 
-<https://batcat.info/semantics/core/data#> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
+<https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
   owl:versionInfo "version 0.0.8"^^xs:string ;
   dcterms:modified "2025-12-04"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
+  owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1200,13 +1200,13 @@ mbco:contains_dummy_values a owl:DatatypeProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/optimization#> a owl:Ontology .
+<https://batcat.info/semantics/core/optimization> a owl:Ontology .
 
-<https://batcat.info/semantics/core/optimization#> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
+<https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
   owl:versionInfo "version 0.1.5"^^xs:string ;
   dcterms:modified "2025-06-23"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
+  owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1526,13 +1526,13 @@ mbco:has_confidence_level a owl:ObjectProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/twinning#> a owl:Ontology .
+<https://batcat.info/semantics/core/twinning> a owl:Ontology .
 
-<https://batcat.info/semantics/core/twinning#> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
+<https://batcat.info/semantics/core/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.0.3"^^xs:string ;
   dcterms:modified "2025-12-03"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
+  owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1636,16 +1636,16 @@ ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix osmo: <https://purl.org/vimmp/osmo#> .
 
-<https://batcat.info/semantics/core/battery#> a owl:Ontology .
+<https://batcat.info/semantics/core/battery> a owl:Ontology .
 
-<https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
+<https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.0.10"^^xs:string ;
   dcterms:modified "2025-12-08"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  owl:imports <https://batcat.info/semantics/core/manufacturing#> ;
-  owl:imports <https://batcat.info/semantics/core/characterization#> ;
-  owl:imports <https://batcat.info/semantics/core/modelling#> ;
+  owl:imports <https://batcat.info/semantics/core> ;
+  owl:imports <https://batcat.info/semantics/core/manufacturing> ;
+  owl:imports <https://batcat.info/semantics/core/characterization> ;
+  owl:imports <https://batcat.info/semantics/core/modelling> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
