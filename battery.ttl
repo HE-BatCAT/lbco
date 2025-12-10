@@ -14,8 +14,8 @@
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.10"^^xs:string ;
-  dcterms:modified "2025-12-08"^^xs:string ;
+  owl:versionInfo "version 0.0.11"^^xs:string ;
+  dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
@@ -136,6 +136,7 @@ mbco:redox_flow_battery
 # TODO: add labels, etc (and connect to BattINFO etc):
 
 mbco:active_material a owl:Class ;
+     rdfs:label "Active material" ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_property ;
@@ -148,18 +149,23 @@ mbco:active_material a owl:Class ;
 	owl:someValuesFrom mbco:active_material_diffusion_coefficient] .
 
 mbco:binder a owl:Class ;
+     rdfs:label "Binder" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:percolant a owl:Class ;
+     rdfs:label "Percolant" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:slurry_solvent a owl:Class ; # TOSEE: an object with this role?
+     rdfs:label "Slurry solvent" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:additive a owl:Class ;       # TOSEE: an object with this role?
+     rdfs:label "Additive" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:electrode a owl:Class ;
+     rdfs:label "Electrode" ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_property ;
@@ -187,15 +193,19 @@ mbco:electrode a owl:Class ;
 	owl:someValuesFrom mbco:electrode_exchange_current_rate] . # CQ_CRO_1
 
 mbco:positive_electrode a owl:Class ;
+     rdfs:label "Positive electrode" ;
      rdfs:subClassOf mbco:electrode .
 
 mbco:negative_electrode a owl:Class ;
+     rdfs:label "Negative electrode" ;
      rdfs:subClassOf mbco:electrode .
 
 mbco:separator a owl:Class ;
+     rdfs:label "Separator" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:electrolyte a owl:Class ;
+     rdfs:label "Electrolyte" ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_property ;
@@ -220,21 +230,26 @@ mbco:electrolyte a owl:Class ;
 	owl:someValuesFrom mbco:electrolyte_purity ] .
 
 mbco:collector a owl:Class ;
+     rdfs:label "Collector" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:casing a owl:Class ;
+     rdfs:label "Casing" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:coating_layer a owl:Class ;
+     rdfs:label "Coating layer" ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty mbco:has_property ;
 	owl:someValuesFrom mbco:coating_thickness] .
 
 mbco:bipolar_plate a owl:Class ;
+     rdfs:label "Bipolar plate" ;
      rdfs:subClassOf mbco:physical_object .
 
 mbco:membrane a owl:Class ;
+     rdfs:label "Membrane" ;
      rdfs:subClassOf mbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty mbco:has_property ;
@@ -324,38 +339,43 @@ mbco:battery a owl:Class ;
 	owl:someValuesFrom mbco:battery_lifespan] . # Added, inspired by CQ_CRO_6. TOSEE: OK ??? relation to full_cell_durability?
 
 mbco:number_of_cells a owl:Class ;
+     rdfs:label "Number of cells" ;
      rdfs:subClassOf mbco:property ;
      rdfs:comment "Number of cells in a battery"^^xs:string .     
 
 # intermediate products (from various sources, including WP1 master file, MIRO board)
 
 mbco:slurry a owl:Class ;
+     rdfs:label "Slurry" ;
      rdfs:subClassOf mbco:intermediate_product ;
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty mbco:has_property ;
 	owl:someValuesFrom mbco:slurry_solid_content] .
 
 mbco:coated_electrode a owl:Class ;
+     rdfs:label "Coated electrode" ;
      rdfs:subClassOf mbco:intermediate_product .
 
 mbco:dried_coated_electrode a owl:Class ;
+     rdfs:label "Dried coated electrode" ;
      rdfs:subClassOf mbco:intermediate_product .
 
 mbco:calendered_electrode a owl:Class ;
-     rdfs:subClassOf mbco:intermediate_product .
-
-mbco:calendered_electrode a owl:Class ;
+     rdfs:label "Calendered electrode" ;
      rdfs:subClassOf mbco:intermediate_product .
 
 mbco:thermally_activated_felt a owl:Class ;
+     rdfs:label "Thermally activated felt" ;
      rdfs:subClassOf mbco:intermediate_product ;
      rdfs:subClassOf mbco:carbon_felt . #?     
 
 mbco:pristine_felt a owl:Class ;
+     rdfs:label "Pristine felt" ;
      rdfs:subClassOf mbco:carbon_felt . #?     
 
 # TO SEE: how different from the coated electrode? both needed?
 mbco:coated_collector a owl:Class ;
+     rdfs:label "Coated collector" ;
      rdfs:subClassOf mbco:intermediate_product .
 
 mbco:half_cell a owl:Class ;
@@ -409,6 +429,7 @@ mbco:furnace_atmosphere_composition a owl:Class ;
 # manufacturing devices
 
 mbco:furnace a owl:Class ;
+     rdfs:label "Furnace" ;
      rdfs:subClassOf mbco:device. 
 
 ####################################################################################
@@ -865,7 +886,7 @@ mbco:stack_sealing a owl:Class ;
 	owl:someValuesFrom mbco:stack_compression] .
 
 mbco:tanks_assemblying a owl:Class ;
-        rdfs:label "Stack assemblying" ;
+        rdfs:label "Tanks assemblying" ;
 	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:follows_directly ;
@@ -897,12 +918,14 @@ mbco:palmer a owl:Class ;
 			owl:allValuesFrom mbco:thickness ]. # TO SEE: lenght?
 
 mbco:porosimeter a owl:Class ;
+	rdfs:label "Porosimeter"^^xs:string ;
 	rdfs:subClassOf mbco:characterization_device ;
 	rdfs:subClassOf [a owl:Restriction ;
         		owl:onProperty mbco:measures ;
 			owl:allValuesFrom mbco:porosity ]. 
 
 mbco:raman_spectrometer a owl:Class ;
+	rdfs:label "Raman spectrometer"^^xs:string ;
 	rdfs:subClassOf mbco:characterization_device .
 
 mbco:sem_device a owl:Class ;
@@ -920,15 +943,19 @@ mbco:xps_device a owl:Class ;
 # Device, output, high-level characterization type, battery type
 
 mbco:electrochemical_characterization_technique a owl:Class ;
+	rdfs:label "Electrochemical characterization technique"^^xs:string ;
 	rdfs:subClassOf mbco:characterization_technique .
 
 mbco:physicochemical_characterization_technique a owl:Class ;
+	rdfs:label "Physicochemical characterization technique"^^xs:string ;
 	rdfs:subClassOf mbco:characterization_technique .
 
 mbco:rheological_characterization_technique a owl:Class ;
+	rdfs:label "Rheological characterization technique"^^xs:string ;
 	rdfs:subClassOf mbco:characterization_technique .
 
 mbco:calendar_ageing a owl:Class ;
+	rdfs:label "Calendar ageing"^^xs:string ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -938,6 +965,7 @@ mbco:calendar_ageing a owl:Class ;
 	owl:someValuesFrom mbco:full_cell_ageing] .
 
 mbco:charge_test a owl:Class ;
+	rdfs:label "Charge test"^^xs:string ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -950,6 +978,7 @@ mbco:charge_test a owl:Class ;
 	owl:someValuesFrom mbco:full_cell_capacity] . # OK? What are "charge capabilities", capacity???
 
 mbco:cyclic_voltametry a owl:Class ;
+	rdfs:label "Cyclic voltametry"^^xs:string ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -962,6 +991,7 @@ mbco:cyclic_voltametry a owl:Class ;
 	owl:someValuesFrom mbco:electrolyte_ionic_conductivity] . # OK?
 
 mbco:cycling a owl:Class ;
+	rdfs:label "Cycling"^^xs:string ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -971,24 +1001,20 @@ mbco:cycling a owl:Class ;
 	owl:someValuesFrom mbco:full_cell_ageing] .
 
 mbco:discharge_test a owl:Class ;
+	rdfs:label "Discharge test"^^xs:string ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
 	owl:someValuesFrom mbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_capacity] .
-
-mbco:discharge_test a owl:Class ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
-	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+	owl:someValuesFrom mbco:full_cell_capacity] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_output ;
 	owl:someValuesFrom mbco:full_cell_initial_performance] . # OK?
 
 mbco:duty_profile_test a owl:Class ;
+	rdfs:label "Duty profile test"^^xs:string ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -1046,6 +1072,7 @@ mbco:hppc_test a owl:Class ;
 	owl:someValuesFrom mbco:full_cell_electric_resistance] . # TOSEE: OK? 
 
 mbco:road_profile_test a owl:Class ;
+	rdfs:label "Road profile test"^^xs:string ;
 	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -1055,6 +1082,7 @@ mbco:road_profile_test a owl:Class ;
 	owl:someValuesFrom mbco:round_trip_efficiency] . 
 
 mbco:bet_measurement a owl:Class ;
+	rdfs:label "BET measurement"^^xs:string ;
 	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -1064,6 +1092,7 @@ mbco:bet_measurement a owl:Class ;
 	owl:someValuesFrom mbco:electrode_surface_area] .  # TOSEE: OK? or should it be "active surface area"?
 
 mbco:direct_thickness_measurement a owl:Class ;
+	rdfs:label "Direct thickness measurement"^^xs:string ;
 	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -1079,6 +1108,7 @@ mbco:direct_thickness_measurement a owl:Class ;
 	owl:someValuesFrom mbco:membrane_thickness] .
 
 mbco:porosimetry a owl:Class ;
+	rdfs:label "Porosimetry"^^xs:string ;
 	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -1091,6 +1121,7 @@ mbco:porosimetry a owl:Class ;
 	owl:someValuesFrom mbco:felt_porosity] .  
 
 mbco:raman_spectrometry a owl:Class ;
+	rdfs:label "Raman spectrometry"^^xs:string ;
 	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty mbco:has_participant ;
@@ -1135,7 +1166,8 @@ mbco:XPS_technique a owl:Class ;
 # mbco:CLASSICAL_MC_MD
 
 mbco:electrolyte_model a owl:Class ;
-    owl:equivalentClass [a owl:Restriction ;
+	rdfs:label "Electrolyte model"^^xs:string ;
+    	owl:equivalentClass [a owl:Restriction ;
                    owl:onProperty mbco:is_model_for ;
                    owl:someValuesFrom mbco:electrolyte] .
 
@@ -1144,7 +1176,8 @@ mbco:DPD_ELECTROLYTE_MODEL a mbco:physics_based_model ;
 		    mbco:has_granularity_level osmo:MESOSCOPIC .
 
 mbco:full_cell_model a owl:Class ;
-    owl:equivalentClass [a owl:Restriction ;
+	rdfs:label "Full cell model"^^xs:string ;
+    	owl:equivalentClass [a owl:Restriction ;
                    owl:onProperty mbco:is_model_for ;
                    owl:someValuesFrom mbco:full_cell] .
 
@@ -1163,7 +1196,8 @@ mbco:SP_CIRCUIT_CELL_MODEL a mbco:physics_based_model ;
 		    mbco:has_granularity_level osmo:CONTINUUM .
 
 mbco:electrode_model a owl:Class ;
-    owl:equivalentClass [a owl:Restriction ;
+	rdfs:label "Electrode model"^^xs:string ;
+	owl:equivalentClass [a owl:Restriction ;
                    owl:onProperty mbco:is_model_for ;
                    owl:someValuesFrom mbco:electrode] .
 

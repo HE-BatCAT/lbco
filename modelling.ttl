@@ -15,7 +15,7 @@
 
 <https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
   owl:versionInfo "version 0.0.8"^^xs:string ;
-  dcterms:modified "2025-12-08"^^xs:string ;
+  dcterms:modified "2025-12-10"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/data> ;
@@ -114,6 +114,7 @@ mbco:model_parametrization_process a owl:Class ;
 
 # From CQ_CRO_3
 mbco:time_scale a owl:Class ;
+    rdfs:label "Time scale" ;
     owl:oneOf (mbco:INDUSTRIAL_SAFETY_TIME_SCALE mbco:INTERMEDIATE_TIME_SCALE mbco:PLANNING_TIME_SCALE) ;
     rdfs:subClassOf mbco:annotation ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
@@ -121,12 +122,14 @@ mbco:time_scale a owl:Class ;
 
 # From CQ_CRO_9. Move to battery module later?
 mbco:rfb_length_scale a owl:Class ;
+    rdfs:label "RFB length scale" ;
     owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
     rdfs:subClassOf mbco:annotation ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
 to specify which one it addresses"""^^xs:string .
 
 mbco:lib_length_scale a owl:Class ;
+    rdfs:label "LIB length scale" ;
     owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
     rdfs:subClassOf mbco:annotation ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
@@ -162,12 +165,14 @@ mbco:CLASSIFY a mbco:model_action .
 mbco:INTERPOLATE a mbco:model_action . 
 
 mbco:data_driven_model a owl:Class ;
+    rdfs:label "Data-driven model" ;
     rdfs:subClassOf mbco:model_parametrization ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:is_data_driven ;
                    owl:hasValue true] .      
 
 mbco:physics_based_model a owl:Class ;
+    rdfs:label "Physics-based model" ;
     rdfs:subClassOf mbco:model_parametrization ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty mbco:is_physics_based ;
@@ -180,9 +185,11 @@ mbco:physics_based_model a owl:Class ;
                    owl:allValuesFrom osmo:physical_equation_type] .
 
 mbco:hybrid_model a owl:Class ;
+    rdfs:label "Hybrid model" ;
     owl:equivalentClass [ owl:intersectionOf (mbco:physics_based_model mbco:data_driven_model ) ].
 
 mbco:neural_network_model a owl:Class ;
+    rdfs:label "Neural network model" ;
     rdfs:subClassOf mbco:data_driven_model .
 
 ### Object Properties ###
