@@ -30,7 +30,8 @@
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
-  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+#  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
   vann:preferredNamespacePrefix "mbco"^^xs:string ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
 with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
