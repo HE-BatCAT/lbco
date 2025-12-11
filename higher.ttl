@@ -13,8 +13,8 @@
 <https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.11"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  owl:versionInfo "version 0.1.12"^^xs:string ;
+  dcterms:modified "2025-12-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -117,7 +117,7 @@ mbco:manufacturing_device a owl:Class ;
 mbco:method a owl:Class ;
     rdfs:label "Method" ;
     rdfs:comment """a procedure, technique, or planned way of doing something (WordReference Random House
-    Learner's Dictionary of American English 2025"""^^xs:string ;
+    Learner's Dictionary of American English 2025)"""^^xs:string ;
     rdfs:comment "Could be a characterization method, a simulation method, a manufacturing method, etc."^^xs:string ;
     rdfs:subClassOf mbco:process . 
 
@@ -172,6 +172,11 @@ mbco:process_status a owl:Class ;
     rdfs:subClassOf mbco:status ;
     owl:oneOf (mbco:PLANNED mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
 
+mbco:agent_status a owl:Class ;
+    rdfs:label "Agent status" ;
+    rdfs:subClassOf mbco:status ;
+    owl:oneOf (mbco:AVAILABLE mbco:BUSY mbco:NOT_AVAILABLE) .
+
 mbco:batch a owl:Class ;
      rdfs:label "Batch" ;
      rdfs:comment "A batch is a set of experimental samples or products, acquired or manufactured/prepared together."^^xs:string ;
@@ -191,11 +196,13 @@ mbco:has_participant a owl:ObjectProperty ;
 
 mbco:follows a owl:ObjectProperty ;
     rdfs:label "follows" ;
+    rdfs:comment "refers to time ordering of process steps" ;
     rdfs:domain mbco:process_step ;
     rdfs:range mbco:process_step .
 
 mbco:follows_directly a owl:ObjectProperty ;
     rdfs:label "follows directly" ;
+    rdfs:comment "refers to time ordering of process steps" ;
     rdfs:domain mbco:process_step ;
     rdfs:range mbco:process_step ;
     rdfs:subPropertyOf mbco:follows .
@@ -212,10 +219,16 @@ mbco:has_output a owl:ObjectProperty ;
 
 mbco:has_setting a owl:ObjectProperty ;
    rdfs:label "has setting" ;
-   rdfs:comment "Settings, conditions affecting the process."^^xs:string . # TODO: clarify how this is separate from "input" and how different from "constraint". E.g.: numerical parameters vs model parameters for a simulation
+   rdfs:comment "Points to a property affecting the process"^^xs:string ;
+   rdfs:comment "E.g., in a manufacturing process step, points to the tunable properties (settings)"^^xs:string ;
+#   rdfs:comment "Settings, conditions affecting the process."^^xs:string ; # TODO: clarify how this is separate from "input" and how different from "constraint". E.g.: numerical parameters vs model parameters for a simulation
+   rdfs:domain mbco:process ; # TOSEE: extend it to include also software+agent+device?
+   rdfs:range mbco:property ; # TO SEE: extend it?
+   rdfs:subPropertyOf mbco:has_property . # TO SEE: adapt based on the above
 
 mbco:uses_method a owl:ObjectProperty ;
    rdfs:label "uses method" ;
+   rdfs:domain mbco:process ;
    rdfs:range mbco:method .
 
 mbco:answers a owl:ObjectProperty ;
@@ -224,9 +237,11 @@ mbco:answers a owl:ObjectProperty ;
     
 mbco:has_status a owl:ObjectProperty ;
     rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:software mbco:process)] ;
-    rdfs:range mbco:status .
+    rdfs:range mbco:status ;
+    rdfs:subPropertyOf mbco:has_property .
 
 mbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
+    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:software mbco:process)] ;
     rdfs:range mbco:property .
 
 mbco:is_incompatible_with a owl:ObjectProperty ;
@@ -245,7 +260,8 @@ mbco:is_material_incompatible_with_material a owl:ObjectProperty ;
 
 mbco:has_batch_ID a owl:DatatypeProperty ;
     rdfs:label "has batch ID" ;
-    rdfs:domain mbco:batch .
+    rdfs:domain mbco:batch ;
+    rdfs:range rdfs:Literal .
 
 # see also: EMMO-LITE, DOLCE-LITE, EVMPO.
 

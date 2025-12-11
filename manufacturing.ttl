@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.10"^^xs:string ;
+   owl:versionInfo "version 0.0.11"^^xs:string ;
    dcterms:modified "2025-12-11"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
@@ -176,17 +176,22 @@ mbco:connection a owl:Class ;
 
 mbco:has_product_design_parameter a owl:ObjectProperty ;
      rdfs:label "has product design parameter" ;
-     rdfs:domain mbco:whole_product .
+     rdfs:comment """points to a property that can be tuned in design phase.
+     If it points to a material/object, it indicates a materials/object choice"""^^xs:string ;     
+     rdfs:domain mbco:whole_product ;
+     rdfs:range [owl:unionOf (mbco:property mbco:material mbco:physical_object)] .
 
 mbco:has_product_kpi a owl:ObjectProperty ;
      rdfs:label "has product KPI" ;
      rdfs:comment "Points to a product Key Performance Indicator"^^xs:string ;
      rdfs:domain mbco:whole_product ;
-     rdfs:range mbco:property .
+     rdfs:range mbco:property ;
+     rdfs:subPropertyOf mbco:has_property .
      
 mbco:has_product_operating_condition a owl:ObjectProperty ;
      rdfs:label "has product operating condition" ;
-     rdfs:domain mbco:whole_product .
+     rdfs:domain mbco:whole_product ;
+     rdfs:range mbco:property .
 
 mbco:performs_action a owl:ObjectProperty ;
      rdfs:label "performs action" ;
@@ -197,7 +202,8 @@ mbco:has_process_kpi a owl:ObjectProperty ;
      rdfs:label "has process KPI" ;
      rdfs:domain mbco:process ;
      rdfs:range mbco:property ;
-     rdfs:comment "Points to a process Key Performance Indicator"^^xs:string .
+     rdfs:comment "Points to a process Key Performance Indicator"^^xs:string ;
+     rdfs:subPropertyOf mbco:has_property .
 
 mbco:observes a owl:ObjectProperty ;
      rdfs:label "observes" ;

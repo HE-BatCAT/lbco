@@ -14,8 +14,8 @@
 <https://batcat.info/semantics/core/modelling> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.9"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  owl:versionInfo "version 0.0.10"^^xs:string ;
+  dcterms:modified "2025-12-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/data> ;
@@ -272,10 +272,12 @@ mbco:has_physical_equation_type a owl:ObjectProperty ;
 
 mbco:is_physics_based a owl:DatatypeProperty ;
     rdfs:label "is physics-based" ;
+    rdfs:domain [owl:unionOf (mbco:model_parametrization mbco:computational_modelling_method)] ;    
     rdfs:range xs:boolean .
 
 mbco:is_data_driven a owl:DatatypeProperty ;
     rdfs:label "is data-driven" ;
+    rdfs:domain [owl:unionOf (mbco:model_parametrization mbco:computational_modelling_method)] ;
     rdfs:range xs:boolean .
 
 # FA_SIM_1

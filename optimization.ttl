@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core/optimization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.6"^^xs:string ;
+  owl:versionInfo "version 0.1.7"^^xs:string ;
   dcterms:modified "2025-12-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -48,7 +48,7 @@ mbco:solution a owl:Class ;
     rdfs:subClassOf mbco:statement .
 
 mbco:solution rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_confidence ;
+                   owl:onProperty mbco:has_confidence_level ;
                    owl:someValuesFrom mbco:coarse_amount_level] .
 
 mbco:optimization_problem a owl:Class ;
