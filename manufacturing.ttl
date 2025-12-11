@@ -13,8 +13,8 @@
 <https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.9"^^xs:string ;
-   dcterms:modified "2025-12-10"^^xs:string ;
+   owl:versionInfo "version 0.0.10"^^xs:string ;
+   dcterms:modified "2025-12-11"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -137,12 +137,12 @@ mbco:gas_detection_sensor a owl:Class ;
 
 mbco:carbon_monoxide_sensor a owl:Class ;
      rdfs:label "Carbon monoxide sensor" ;
-     skos:altTabel "CO sensor" ;
+     skos:altLabel "CO sensor" ;
      rdfs:subClassOf mbco:gas_detection_sensor .
 
 mbco:carbon_dioxide_sensor a owl:Class ;
      rdfs:label "Carbon dioxide sensor" ;
-     skos:altTabel "CO2 sensor" ;
+     skos:altLabel "CO2 sensor" ;
      rdfs:subClassOf mbco:gas_detection_sensor .
 
 mbco:pressure_sensor a owl:Class ;

@@ -13,8 +13,8 @@
 <https://batcat.info/semantics/core/optimization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.5"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  owl:versionInfo "version 0.1.6"^^xs:string ;
+  dcterms:modified "2025-12-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -94,7 +94,7 @@ mbco:target a owl:Class ;
 
 mbco:goal a owl:Class ;
     rdfs:label "Goal" ;
-    rdfs:altLabel "Exact target" ;
+    skos:altLabel "Exact target" ;
     rdfs:subClassOf mbco:target ;
     rdfs:comment "In an optimization problem, a property which must be attained exactly by a solution."^^xs:string ;
     rdfs:comment "In an optimization problem, an exact target."^^xs:string .

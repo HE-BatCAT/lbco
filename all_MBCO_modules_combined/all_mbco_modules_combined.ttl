@@ -368,8 +368,8 @@ mbco:has_sample_ID a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.9"^^xs:string ;
-   dcterms:modified "2025-12-10"^^xs:string ;
+   owl:versionInfo "version 0.0.10"^^xs:string ;
+   dcterms:modified "2025-12-11"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -492,12 +492,12 @@ mbco:gas_detection_sensor a owl:Class ;
 
 mbco:carbon_monoxide_sensor a owl:Class ;
      rdfs:label "Carbon monoxide sensor" ;
-     skos:altTabel "CO sensor" ;
+     skos:altLabel "CO sensor" ;
      rdfs:subClassOf mbco:gas_detection_sensor .
 
 mbco:carbon_dioxide_sensor a owl:Class ;
      rdfs:label "Carbon dioxide sensor" ;
-     skos:altTabel "CO2 sensor" ;
+     skos:altLabel "CO2 sensor" ;
      rdfs:subClassOf mbco:gas_detection_sensor .
 
 mbco:pressure_sensor a owl:Class ;
@@ -1236,8 +1236,8 @@ mbco:contains_dummy_values a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/optimization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.5"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  owl:versionInfo "version 0.1.6"^^xs:string ;
+  dcterms:modified "2025-12-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -1317,7 +1317,7 @@ mbco:target a owl:Class ;
 
 mbco:goal a owl:Class ;
     rdfs:label "Goal" ;
-    rdfs:altLabel "Exact target" ;
+    skos:altLabel "Exact target" ;
     rdfs:subClassOf mbco:target ;
     rdfs:comment "In an optimization problem, a property which must be attained exactly by a solution."^^xs:string ;
     rdfs:comment "In an optimization problem, an exact target."^^xs:string .
@@ -1678,8 +1678,8 @@ ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.12"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  owl:versionInfo "version 0.0.13"^^xs:string ;
+  dcterms:modified "2025-12-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
@@ -2899,27 +2899,27 @@ mbco:GRAPHITE a mbco:substance ;
 
 mbco:LFP a mbco:substance ;
     rdfs:label "LFP" ;
-    rdfs:altLabel "Lithium Iron Phosphate" .
+    skos:altLabel "Lithium Iron Phosphate" .
 
 mbco:NMC a mbco:substance ;
     rdfs:label "NMC" ;
-    rdfs:altLabel "Lithium Nickel Manganese Cobalt Oxide" .
+    skos:altLabel "Lithium Nickel Manganese Cobalt Oxide" .
 
 mbco:NMP a mbco:substance ;
     rdfs:label "NMP" ;
-    rdfs:altLabel "N-Methyl-2-Pyrrolidone" .
+    skos:altLabel "N-Methyl-2-Pyrrolidone" .
 
 mbco:PVDF a mbco:substance ;
     rdfs:label "PVDF" ;
-    rdfs:altLabel "Polyvinylidene Fluoride" .
+    skos:altLabel "Polyvinylidene Fluoride" .
 
 mbco:CMC a mbco:substance ;
     rdfs:label "CMC" ;
-    rdfs:altLabel "Carboxymethyl Cellulose" .
+    skos:altLabel "Carboxymethyl Cellulose" .
 
 mbco:SBR a mbco:substance ;
     rdfs:label "SBR" ;
-    rdfs:altLabel "Styrene Butadiene Rubber" .
+    skos:altLabel "Styrene Butadiene Rubber" .
 
 mbco:ARGON_GAS a mbco:substance ;
     rdfs:label "Argon gas" .

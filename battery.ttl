@@ -14,8 +14,8 @@
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.12"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  owl:versionInfo "version 0.0.13"^^xs:string ;
+  dcterms:modified "2025-12-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
@@ -1235,27 +1235,27 @@ mbco:GRAPHITE a mbco:substance ;
 
 mbco:LFP a mbco:substance ;
     rdfs:label "LFP" ;
-    rdfs:altLabel "Lithium Iron Phosphate" .
+    skos:altLabel "Lithium Iron Phosphate" .
 
 mbco:NMC a mbco:substance ;
     rdfs:label "NMC" ;
-    rdfs:altLabel "Lithium Nickel Manganese Cobalt Oxide" .
+    skos:altLabel "Lithium Nickel Manganese Cobalt Oxide" .
 
 mbco:NMP a mbco:substance ;
     rdfs:label "NMP" ;
-    rdfs:altLabel "N-Methyl-2-Pyrrolidone" .
+    skos:altLabel "N-Methyl-2-Pyrrolidone" .
 
 mbco:PVDF a mbco:substance ;
     rdfs:label "PVDF" ;
-    rdfs:altLabel "Polyvinylidene Fluoride" .
+    skos:altLabel "Polyvinylidene Fluoride" .
 
 mbco:CMC a mbco:substance ;
     rdfs:label "CMC" ;
-    rdfs:altLabel "Carboxymethyl Cellulose" .
+    skos:altLabel "Carboxymethyl Cellulose" .
 
 mbco:SBR a mbco:substance ;
     rdfs:label "SBR" ;
-    rdfs:altLabel "Styrene Butadiene Rubber" .
+    skos:altLabel "Styrene Butadiene Rubber" .
 
 mbco:ARGON_GAS a mbco:substance ;
     rdfs:label "Argon gas" .
