@@ -1706,8 +1706,8 @@ ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.13"^^xs:string ;
-  dcterms:modified "2025-12-11"^^xs:string ;
+  owl:versionInfo "version 0.0.14"^^xs:string ;
+  dcterms:modified "2025-12-12"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
@@ -2873,6 +2873,29 @@ mbco:XPS_technique a owl:Class ;
 # mbco:REACTIVE_MD
 # mbco:CLASSICAL_MC_MD
 
+mbco:lib_model a owl:Class ;
+     owl:equivalentClass [a owl:Restriction ; owl:onProperty mbco:is_model_for ;
+     owl:someValuesFrom mbco:lithium_ion_battery] .
+
+mbco:rfb_model a owl:Class ;
+     owl:equivalentClass [a owl:Restriction ; owl:onProperty mbco:is_model_for ;
+     owl:someValuesFrom mbco:redox_flow_battery] .
+
+mbco:sei_formation_process a owl:Class ;
+	rdfs:subClassOf mbco:process .
+
+mbco:sei_formation_model a owl:Class ;
+	rdfs:label "SEI formation model"^^xs:string ;
+    	owl:equivalentClass [a owl:Restriction ;
+                   owl:onProperty mbco:is_model_for ;
+                   owl:someValuesFrom mbco:sei_formation_process] .
+
+mbco:KOHN_SHAM_SEI_FORMATION_MODEL a mbco:physics_based_model ;
+		    a mbco:sei_formation_model ;
+		    a mbco:lib_model ;
+		    mbco:has_granularity_level osmo:ELECTRONIC ;
+		    mbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_EL.1 .
+
 mbco:electrolyte_model a owl:Class ;
 	rdfs:label "Electrolyte model"^^xs:string ;
     	owl:equivalentClass [a owl:Restriction ;
@@ -2881,7 +2904,8 @@ mbco:electrolyte_model a owl:Class ;
 
 mbco:DPD_ELECTROLYTE_MODEL a mbco:physics_based_model ;
 		    a mbco:electrolyte_model ;
-		    mbco:has_granularity_level osmo:MESOSCOPIC .
+		    mbco:has_granularity_level osmo:MESOSCOPIC ;
+		    mbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_M.3 .
 
 mbco:full_cell_model a owl:Class ;
 	rdfs:label "Full cell model"^^xs:string ;
@@ -2891,16 +2915,19 @@ mbco:full_cell_model a owl:Class ;
 
 mbco:P3D_CELL_MODEL a mbco:physics_based_model ;
 		    a mbco:full_cell_model ;
+		    a mbco:lib_model ;
 		    mbco:has_granularity_level osmo:CONTINUUM ;
 		    rdfs:comment "Pseudo 3 dimensional (P3D) cell model"^^xs:string .
 
 mbco:P2D_CELL_MODEL a mbco:physics_based_model ;
 		    a mbco:full_cell_model ;
+		    a mbco:lib_model ;
 		    mbco:has_granularity_level osmo:CONTINUUM ;
 		    rdfs:comment "Pseudo 2 dimensional (P3D) cell model"^^xs:string .
 
 mbco:SP_CIRCUIT_CELL_MODEL a mbco:physics_based_model ;
 		    a mbco:full_cell_model ;
+		    a mbco:lib_model ;
 		    mbco:has_granularity_level osmo:CONTINUUM .
 
 mbco:electrode_model a owl:Class ;
@@ -2911,10 +2938,30 @@ mbco:electrode_model a owl:Class ;
 
 mbco:4D_RESOLVED_PHASE_FIELD_ELECTRODE_MODEL a mbco:physics_based_model ;
 		    a mbco:electrode_model ;
+		    a mbco:lib_model ;
 		    mbco:has_granularity_level osmo:CONTINUUM .
 
 #mbco:CONTINUUM_FLOW_FIELD_MODEL
 #mbco:POISSON_NERNST_PLACK
+
+mbco:calendering_model a owl:Class ;
+	rdfs:label "Calendering model"^^xs:string ;
+    	owl:equivalentClass [a owl:Restriction ;
+                   owl:onProperty mbco:is_model_for ;
+                   owl:someValuesFrom mbco:calendering] .
+
+mbco:DIFFUSION_MECHANICAL_EQUATION_MODEL_FOR_CALENDERING
+	a mbco:physics_based_model ;
+	a mbco:calendering_model ;
+	a mbco:lib_model ;
+	mbco:has_granularity_level osmo:CONTINUUM .
+
+mbco:MD_MODEL_FOR_RFB_ELECTROLYTE_TRANSPORT_PROPERTIES 
+	a mbco:physics_based_model ;
+	a mbco:rfb_model ;
+	a mbco:electrolyte_model ; 
+	mbco:has_granularity_level osmo:ATOMISTIC ;
+	mbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_A.3 .
 
 ####################################################################################
 # Substances / materials
