@@ -1,4 +1,4 @@
-@prefix mbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -15,7 +15,7 @@
 
 <https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
   owl:versionInfo "version 0.0.10"^^xs:string ;
-  dcterms:modified "2025-12-11"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/data> ;
@@ -32,7 +32,7 @@
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
-  vann:preferredNamespacePrefix "mbco"^^xs:string ;
+  vann:preferredNamespacePrefix "lbco"^^xs:string ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
 with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
 #  dcterms:bibliographicCitation ""^^xs:string ;
@@ -41,221 +41,221 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:model_parametrization a owl:Class ; 
+lbco:model_parametrization a owl:Class ; 
     rdfs:label "Model parametrization" ;
     skos:altLabel "Model parameters" ;
     skos:altLabel "Model" ;   # TO SEE: OK?
     rdfs:comment "Set of model parameters"^^xs:string ;
-    rdfs:subClassOf mbco:data ;
+    rdfs:subClassOf lbco:data ;
     rdfs:subClassOf [a owl:Restriction ;
-                  owl:onProperty mbco:has_action_type ;
-                  owl:someValuesFrom mbco:model_action] ;
+                  owl:onProperty lbco:has_action_type ;
+                  owl:someValuesFrom lbco:model_action] ;
     rdfs:subClassOf [a owl:Restriction ;
-                  owl:onProperty mbco:has_modelled_time_scale ;
-                  owl:someValuesFrom mbco:time_scale] ;
+                  owl:onProperty lbco:has_modelled_time_scale ;
+                  owl:someValuesFrom lbco:time_scale] ;
     rdfs:subClassOf [a owl:Restriction ;
-                  owl:onProperty mbco:has_modelled_length_scale ;
-                  owl:someValuesFrom mbco:length_scale] .
+                  owl:onProperty lbco:has_modelled_length_scale ;
+                  owl:someValuesFrom lbco:length_scale] .
 
-mbco:simulation a owl:Class ;
+lbco:simulation a owl:Class ;
     rdfs:label "Simulation" ;
-    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf lbco:process ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:data] ;      
+                   owl:onProperty lbco:has_input ;
+                   owl:someValuesFrom lbco:data] ;      
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:simulation_result] ;      
+                   owl:onProperty lbco:has_output ;
+                   owl:someValuesFrom lbco:simulation_result] ;      
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:physical_quantity] ;      
+                   owl:onProperty lbco:has_input ;
+                   owl:someValuesFrom lbco:physical_quantity] ;      
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:physical_quantity] ;
+                   owl:onProperty lbco:has_output ;
+                   owl:someValuesFrom lbco:physical_quantity] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ;
-                   owl:someValuesFrom mbco:software] ;
+                   owl:onProperty lbco:has_participant ;
+                   owl:someValuesFrom lbco:software] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:model_parametrization] .
+                   owl:onProperty lbco:has_input ;
+                   owl:someValuesFrom lbco:model_parametrization] .
 
-mbco:simulation_result a owl:Class ;
+lbco:simulation_result a owl:Class ;
     rdfs:label "Simulation result" ;
-    rdfs:subClassOf mbco:data .
+    rdfs:subClassOf lbco:data .
 
-mbco:computational_modelling_method a owl:Class ;
+lbco:computational_modelling_method a owl:Class ;
     rdfs:label "Computational modelling method" ;
-    rdfs:subClassOf mbco:method .
+    rdfs:subClassOf lbco:method .
     
-mbco:digital_twinning a owl:Class ; # TOSEE: OK?
+lbco:digital_twinning a owl:Class ; # TOSEE: OK?
     rdfs:label "Digital twinning" ;
-    rdfs:subClassOf mbco:computational_modelling_method .
+    rdfs:subClassOf lbco:computational_modelling_method .
 
 # cf. EQ_SIM_3
-mbco:model_validation_process a owl:Class ;
+lbco:model_validation_process a owl:Class ;
     rdfs:label "Model validation process" ;
-    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf lbco:process ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:model_parametrization] ;
+                   owl:onProperty lbco:has_input ;
+                   owl:someValuesFrom lbco:model_parametrization] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:data] ;      # e.g., experimental data
+                   owl:onProperty lbco:has_input ;
+                   owl:someValuesFrom lbco:data] ;      # e.g., experimental data
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:statement] ; # on the model validity
+                   owl:onProperty lbco:has_output ;
+                   owl:someValuesFrom lbco:statement] ; # on the model validity
     rdfs:comment"""Its input contains data (e.g., from experiments, modelling methods at a different scale) and
     its output contains a statement about the model parametrization validity"""^^xs:string .
 
 # cf. EQ_SIM_2
-mbco:model_parametrization_process a owl:Class ;
+lbco:model_parametrization_process a owl:Class ;
     rdfs:label "Model parametrization process" ;
-    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf lbco:process ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
-                   owl:someValuesFrom mbco:model_parametrization] ;
+                   owl:onProperty lbco:has_output ;
+                   owl:someValuesFrom lbco:model_parametrization] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
-                   owl:someValuesFrom mbco:data] ; # e.g., experimental data
+                   owl:onProperty lbco:has_input ;
+                   owl:someValuesFrom lbco:data] ; # e.g., experimental data
     rdfs:comment"""Its input contains data (e.g., from experiments) and its output a model parametrization"""^^xs:string .
 
 # From CQ_CRO_3
-mbco:time_scale a owl:Class ;
+lbco:time_scale a owl:Class ;
     rdfs:label "Time scale" ;
-    owl:oneOf (mbco:INDUSTRIAL_SAFETY_TIME_SCALE mbco:INTERMEDIATE_TIME_SCALE mbco:PLANNING_TIME_SCALE) ;
-    rdfs:subClassOf mbco:annotation ;
+    owl:oneOf (lbco:INDUSTRIAL_SAFETY_TIME_SCALE lbco:INTERMEDIATE_TIME_SCALE lbco:PLANNING_TIME_SCALE) ;
+    rdfs:subClassOf lbco:annotation ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
  to specify which one it addresses"""^^xs:string .
 
-mbco:length_scale a owl:Class ;
+lbco:length_scale a owl:Class ;
     rdfs:label "Length scale" ;
-    rdfs:subClassOf mbco:annotation ;
+    rdfs:subClassOf lbco:annotation ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
  to specify which one it addresses"""^^xs:string .
 
-# mbco:physical_quantity a owl:Class ;
+# lbco:physical_quantity a owl:Class ;
 #     rdfs:label "Physical quantity" ;
-#     rdfs:subClassOf mbco:property .
+#     rdfs:subClassOf lbco:property .
 
 # CQ_SIM_9
-mbco:model_reproducibility_method a owl:Class ; 
+lbco:model_reproducibility_method a owl:Class ; 
     rdfs:label "Model reproducibility method" ;
     rdfs:comment "Methods to evaluate the robustness of models and modelling data"^^xs:string ;
-    rdfs:subClassOf mbco:data_quality_evaluation_method ; #TOSEE: OK?
-    rdfs:subClassOf mbco:method .
+    rdfs:subClassOf lbco:data_quality_evaluation_method ; #TOSEE: OK?
+    rdfs:subClassOf lbco:method .
 
-mbco:VARYING_MODELLING_APPROACH a mbco:model_reproducibility_method ;
+lbco:VARYING_MODELLING_APPROACH a lbco:model_reproducibility_method ;
     rdfs:seeAlso """E.g., see S. Stephan et al, Vapor−Liquid Interface of the Lennard-Jones Truncated and Shifted Fluid: Comparison of Molecular Simulation, Density Gradient Theory, and Density Functional Theory, J.  Phys. Chem. C 2018 122 (43),
     4705-24715, DOI: 10.1021/acs.jpcc.8b06332 """^^xs:string .
 
-mbco:VARYING_NUMERICAL_METHOD a mbco:model_reproducibility_method .
+lbco:VARYING_NUMERICAL_METHOD a lbco:model_reproducibility_method .
 
-mbco:VARYING_MODELLING_SOFTWARE a mbco:model_reproducibility_method ;
+lbco:VARYING_MODELLING_SOFTWARE a lbco:model_reproducibility_method ;
     rdfs:seeAlso """E.g., see M. Schappals et al., Round Robin Study: Molecular Simulation of Thermodynamic Properties from Models with Internal Degrees of Freedom,
     J. Chem. Theory Comput. 2017 13 (9), 4270-4280, DOI: 10.1021/acs.jctc.7b00489"""^^xs:string .
 
-mbco:model_action a owl:Class ;
+lbco:model_action a owl:Class ;
     rdfs:label "Model action" ;
-    rdfs:subClassOf mbco:process .    
+    rdfs:subClassOf lbco:process .    
 
-mbco:PREDICT a mbco:model_action .
-mbco:CLASSIFY a mbco:model_action . 
-mbco:INTERPOLATE a mbco:model_action . 
+lbco:PREDICT a lbco:model_action .
+lbco:CLASSIFY a lbco:model_action . 
+lbco:INTERPOLATE a lbco:model_action . 
 
-mbco:data_driven_model a owl:Class ;
+lbco:data_driven_model a owl:Class ;
     rdfs:label "Data-driven model" ;
-    rdfs:subClassOf mbco:model_parametrization ;
+    rdfs:subClassOf lbco:model_parametrization ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:is_data_driven ;
+                   owl:onProperty lbco:is_data_driven ;
                    owl:hasValue true] .      
 
-mbco:physics_based_model a owl:Class ;
+lbco:physics_based_model a owl:Class ;
     rdfs:label "Physics-based model" ;
-    rdfs:subClassOf mbco:model_parametrization ;
+    rdfs:subClassOf lbco:model_parametrization ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:is_physics_based ;
+                   owl:onProperty lbco:is_physics_based ;
                    owl:hasValue true] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_granularity_level ;
+                   owl:onProperty lbco:has_granularity_level ;
                    owl:allValuesFrom osmo:granularity_level] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_physical_equation_type ;
+                   owl:onProperty lbco:has_physical_equation_type ;
                    owl:allValuesFrom osmo:physical_equation_type] .
 
-mbco:hybrid_model a owl:Class ;
+lbco:hybrid_model a owl:Class ;
     rdfs:label "Hybrid model" ;
-    owl:equivalentClass [ owl:intersectionOf (mbco:physics_based_model mbco:data_driven_model ) ].
+    owl:equivalentClass [ owl:intersectionOf (lbco:physics_based_model lbco:data_driven_model ) ].
 
-mbco:neural_network_model a owl:Class ;
+lbco:neural_network_model a owl:Class ;
     rdfs:label "Neural network model" ;
-    rdfs:subClassOf mbco:data_driven_model .
+    rdfs:subClassOf lbco:data_driven_model .
 
 ### Object Properties ###
 
-mbco:implements a owl:ObjectProperty ; # TOSEE: use the same property for plan implementation into process???
+lbco:implements a owl:ObjectProperty ; # TOSEE: use the same property for plan implementation into process???
     rdfs:label "implements" ;
-    rdfs:domain mbco:software ; 
-    rdfs:range mbco:method . 
+    rdfs:domain lbco:software ; 
+    rdfs:range lbco:method . 
 
-mbco:is_model_for a owl:ObjectProperty ; 
+lbco:is_model_for a owl:ObjectProperty ; 
     rdfs:label "is model for" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] . # TODO: compare with mbco:represents in twinning.ttl. Merge?
+    rdfs:domain lbco:model_parametrization ;
+    rdfs:range [owl:unionOf (lbco:physical_object lbco:process)] . # TODO: compare with lbco:represents in twinning.ttl. Merge?
 
-mbco:is_model_for_system_containing_material a owl:ObjectProperty ; 
+lbco:is_model_for_system_containing_material a owl:ObjectProperty ; 
     rdfs:label "is model for system containing material" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range mbco:material .
+    rdfs:domain lbco:model_parametrization ;
+    rdfs:range lbco:material .
 
-mbco:is_model_for_system_containing_substance a owl:ObjectProperty ; 
+lbco:is_model_for_system_containing_substance a owl:ObjectProperty ; 
     rdfs:label "is model for system containing substance" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range mbco:substance ;
-    rdfs:subPropertyOf mbco:is_model_for_system_containing_material .
+    rdfs:domain lbco:model_parametrization ;
+    rdfs:range lbco:substance ;
+    rdfs:subPropertyOf lbco:is_model_for_system_containing_material .
 
-mbco:has_model_type a owl:ObjectProperty ; 
+lbco:has_model_type a owl:ObjectProperty ; 
     rdfs:label "has model type" ;
-    rdfs:domain mbco:model_parametrization ;
-    rdfs:range mbco:computational_modelling_method .
+    rdfs:domain lbco:model_parametrization ;
+    rdfs:range lbco:computational_modelling_method .
 
-mbco:gives_modelling_value_for a owl:ObjectProperty ; #gives_prediction_for?
+lbco:gives_modelling_value_for a owl:ObjectProperty ; #gives_prediction_for?
     rdfs:label "gives modelling value for" ;
-    rdfs:domain mbco:computational_modelling_method ; #TOSEE: OK?
-    rdfs:range mbco:physical_quantity ;
-    rdfs:subPropertyOf mbco:gives_value_for .
+    rdfs:domain lbco:computational_modelling_method ; #TOSEE: OK?
+    rdfs:range lbco:physical_quantity ;
+    rdfs:subPropertyOf lbco:gives_value_for .
 
-mbco:gives_value_for a owl:ObjectProperty ; # quantifies?
+lbco:gives_value_for a owl:ObjectProperty ; # quantifies?
     rdfs:label "gives value for" ;
-    rdfs:domain mbco:method ; #TOSEE: OK?
-    rdfs:range mbco:physical_quantity .
+    rdfs:domain lbco:method ; #TOSEE: OK?
+    rdfs:range lbco:physical_quantity .
 
-mbco:has_modelled_time_scale a owl:ObjectProperty ;
+lbco:has_modelled_time_scale a owl:ObjectProperty ;
     rdfs:label "has modelled time scale" ;
-#    rdfs:domain mbco:computational_modelling_method ;
-    rdfs:range mbco:time_scale .
+#    rdfs:domain lbco:computational_modelling_method ;
+    rdfs:range lbco:time_scale .
 
-mbco:has_modelled_length_scale a owl:ObjectProperty ;
+lbco:has_modelled_length_scale a owl:ObjectProperty ;
     rdfs:label "has modelled length scale" ;
-#    rdfs:domain mbco:computational_modelling_method ;
-    rdfs:range mbco:length_scale . # [owl:unionOf (mbco:lib_length_scale mbco:rfb_length_scale) ].
+#    rdfs:domain lbco:computational_modelling_method ;
+    rdfs:range lbco:length_scale . # [owl:unionOf (lbco:lib_length_scale lbco:rfb_length_scale) ].
 
-mbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
+lbco:has_action_type a owl:ObjectProperty ; # TO DO: cf. usage for actuator and twin
     rdfs:label "has action type" ;
-    rdfs:range mbco:process ;
+    rdfs:range lbco:process ;
     rdfs:comment "points to the action type an entity is built for or can perform"^^xs:string .
 
-mbco:has_granularity_level a owl:ObjectProperty ;
+lbco:has_granularity_level a owl:ObjectProperty ;
      rdfs:label "has granularity level" ;
-     rdfs:domain mbco:model_parametrization ;
+     rdfs:domain lbco:model_parametrization ;
      rdfs:range osmo:granularity_level ;
      rdfs:comment "points to the MODA granularity level"^^xs:string ;
      rdfs:comment "one of: Electronic, Atomistic, Mesoscopic (=from two atoms on), Continuum"^^xs:string ;
      rdfs:seeAlso """CEN-CENELEC Management Centre, Materials modelling: terminology, classification and
      metadata. CEN workshop agreement 17284, Brussels, Belgium (2018)"""^^xs:string.
 
-mbco:has_physical_equation_type a owl:ObjectProperty ;
+lbco:has_physical_equation_type a owl:ObjectProperty ;
      rdfs:label "has physical equation type" ;
-     rdfs:domain mbco:physics_based_model ;
+     rdfs:domain lbco:physics_based_model ;
      rdfs:range osmo:physical_equation_type ;
      rdfs:comment "points to one of the 24/25 RoMM/OSMO PE types"^^xs:string ;
      rdfs:comment "For example, PE type A.3: Molecular dynamics (atomistic)"^^xs:string ;
@@ -264,40 +264,40 @@ mbco:has_physical_equation_type a owl:ObjectProperty ;
      in computational molecular engineering. J. Chem. Eng. Data 65(3), 1313–1329 (2020)."""^^xs:string .
 
 # Could add:
-#mbco:has_input_data 
-#mbco:has_input_training_data
-#mbco:has_input_runtime_data 
+#lbco:has_input_data 
+#lbco:has_input_training_data
+#lbco:has_input_runtime_data 
 
 ### Datatype Properties ###
 
-mbco:is_physics_based a owl:DatatypeProperty ;
+lbco:is_physics_based a owl:DatatypeProperty ;
     rdfs:label "is physics-based" ;
-    rdfs:domain [owl:unionOf (mbco:model_parametrization mbco:computational_modelling_method)] ;    
+    rdfs:domain [owl:unionOf (lbco:model_parametrization lbco:computational_modelling_method)] ;    
     rdfs:range xs:boolean .
 
-mbco:is_data_driven a owl:DatatypeProperty ;
+lbco:is_data_driven a owl:DatatypeProperty ;
     rdfs:label "is data-driven" ;
-    rdfs:domain [owl:unionOf (mbco:model_parametrization mbco:computational_modelling_method)] ;
+    rdfs:domain [owl:unionOf (lbco:model_parametrization lbco:computational_modelling_method)] ;
     rdfs:range xs:boolean .
 
 # FA_SIM_1
-mbco:has_nn_input_dimensionality a owl:DatatypeProperty ;
+lbco:has_nn_input_dimensionality a owl:DatatypeProperty ;
     rdfs:label "has NN input dimensionality" ;
-    rdfs:domain mbco:neural_network_model ;
+    rdfs:domain lbco:neural_network_model ;
     rdfs:range xs:nonNegativeInteger ;
     rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
     rdfs:comment "For example, input can be numbers, geometry/image, a transient"^^xs:string .
 
-mbco:has_nn_output_dimensionality a owl:DatatypeProperty ;
+lbco:has_nn_output_dimensionality a owl:DatatypeProperty ;
      rdfs:label "has NN output dimensionality" ;
-     rdfs:domain mbco:neural_network_model ;
+     rdfs:domain lbco:neural_network_model ;
      rdfs:range xs:nonNegativeInteger ;
      rdfs:comment "NN models (e.g., surrogate models) can be classified by the dimensionality of input and output fed to the NN."^^xs:string ;
      rdfs:comment "For example, output can be a scalar quantity, a local quantity or replace an equation"^^xs:string .
     
-mbco:has_applicability_range_info a owl:DatatypeProperty ;
+lbco:has_applicability_range_info a owl:DatatypeProperty ;
      rdfs:label "has_applicability_range_info" ;
-     rdfs:domain mbco:model_parametrization ;
+     rdfs:domain lbco:model_parametrization ;
      rdfs:range xs:string ;
      rdfs:comment "Gives informations on the range (e.g., temperature) in which the model can be (meaningfully) applied"^^xs:string .
 
@@ -310,7 +310,7 @@ osmo:granularity_level a owl:Class ;
 ####################################################################################
 # alignment
 
-osmo:granularity_level rdfs:subClassOf mbco:annotation .
-osmo:physical_equation_type rdfs:subClassOf mbco:annotation .
+osmo:granularity_level rdfs:subClassOf lbco:annotation .
+osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 ####################################################################################
 # TODO: compare with VISO, MSO-EM, VOV

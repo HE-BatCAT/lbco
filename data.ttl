@@ -1,4 +1,4 @@
-@prefix mbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -14,7 +14,7 @@
 
 <https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
   owl:versionInfo "version 0.0.9"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -27,7 +27,7 @@
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
-  vann:preferredNamespacePrefix "mbco"^^xs:string ;
+  vann:preferredNamespacePrefix "lbco"^^xs:string ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
 with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
 #  dcterms:bibliographicCitation ""^^xs:string ;
@@ -36,181 +36,181 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:dataset a owl:Class ;
+lbco:dataset a owl:Class ;
     rdfs:label "Dataset" ;
-    rdfs:subClassOf mbco:data .
+    rdfs:subClassOf lbco:data .
 
-mbco:data_mapping a owl:Class ;
+lbco:data_mapping a owl:Class ;
     rdfs:label "Data mapping" .
 
-mbco:metadata_mapping a owl:Class ;
+lbco:metadata_mapping a owl:Class ;
     rdfs:label "Metadata mapping" .
 
-mbco:metadata_scheme a owl:Class ;
+lbco:metadata_scheme a owl:Class ;
     rdfs:label "Metadata scheme" ;
     rdfs:comment "Also called data model or schema"^^xs:string .
 
-mbco:file_format a owl:Class ;
+lbco:file_format a owl:Class ;
     rdfs:label "File format" .
 
-mbco:data_quality_evaluation_method a owl:Class ;
+lbco:data_quality_evaluation_method a owl:Class ;
     rdfs:label "Data quality evaluation method" ;
-    rdfs:subClassOf mbco:method .
+    rdfs:subClassOf lbco:method .
 
 # From CQ_DAT_4
-mbco:HUMAN_ASSESSMENT a mbco:data_quality_evaluation_method ;
+lbco:HUMAN_ASSESSMENT a lbco:data_quality_evaluation_method ;
     rdfs:label "Human assessment" .
 
-mbco:QUALITY_INSURANCE_PROCEDURE a mbco:data_quality_evaluation_method ;
+lbco:QUALITY_INSURANCE_PROCEDURE a lbco:data_quality_evaluation_method ;
     rdfs:label "Quality insurance procedure" ;
     rdfs:comment "E.g., regular calibration checks."^^xs:string .
 
-mbco:AUTOMATED_REPEATABILITY_TEST a mbco:data_quality_evaluation_method ;
+lbco:AUTOMATED_REPEATABILITY_TEST a lbco:data_quality_evaluation_method ;
     rdfs:label "Automated repeatability test" .
 
-mbco:metadata_quality_evaluation_method a owl:Class ;
+lbco:metadata_quality_evaluation_method a owl:Class ;
     rdfs:label "Metadata quality evaluation method" ;
-    rdfs:subClassOf mbco:method .
+    rdfs:subClassOf lbco:method .
 
-mbco:SCANNING_BY_OOPS a mbco:metadata_quality_evaluation_method ;
+lbco:SCANNING_BY_OOPS a lbco:metadata_quality_evaluation_method ;
     rdfs:comment "OOPS! Ontology Pitfall Scanner"^^xs:string ;
     rdfs:seeAlso "https://oops.linkeddata.es/index.jsp"^^xs:anyURI ;
     rdfs:comment """Poveda-Villalón, María; Gómez-Pérez, Asunción; and Suárez-Figueroa,
     Mari Carmen. "OOPS! (Ontology Pitfall Scanner!): An on-line tool for ontology evaluation."
     International Journal on Semantic Web and Information Systems (IJSWIS) 10.2 (2014): 7-34."""^^xs:string .
 
-mbco:SCANNING_BY_FOOPS a mbco:metadata_quality_evaluation_method ;
-		       a mbco:data_fairness_evaluation_method ;
+lbco:SCANNING_BY_FOOPS a lbco:metadata_quality_evaluation_method ;
+		       a lbco:data_fairness_evaluation_method ;
     rdfs:comment "FOOPS! - Ontology Pitfall Scanner for FAIR"^^xs:string ;
     rdfs:seeAlso "https://foops.linkeddata.es/FAIR_validator.html"^^xs:anyURI ;
     rdfs:seeAlso "https://ceur-ws.org/Vol-2980/paper321.pdf"^^xs:anyURI .
 
-mbco:data_fairness_evaluation_method a owl:Class ;
+lbco:data_fairness_evaluation_method a owl:Class ;
     rdfs:label "Data FAIRness evaluation method" ;
-    rdfs:subClassOf mbco:method .
+    rdfs:subClassOf lbco:method .
 
-mbco:SCANNING_BY_FUJI a mbco:data_fairness_evaluation_method ;
+lbco:SCANNING_BY_FUJI a lbco:data_fairness_evaluation_method ;
     rdfs:comment "F-UJI - Automated FAIR Data Assessment Tool"^^xs:string ;
     rdfs:seeAlso "https://www.f-uji.net/"^^xs:anyURI ;
     rdfs:comment "https://doi.org/10.5281/zenodo.6461229"^^xs:string .
 
-mbco:raw_data a owl:Class ;
+lbco:raw_data a owl:Class ;
     rdfs:label "Raw data" ;
-    rdfs:subClassOf mbco:data ;
+    rdfs:subClassOf lbco:data ;
     rdfs:comment "Data as it is generated (e.g., from a software or device)"^^xs:string .
 
-mbco:processed_data a owl:Class ;
+lbco:processed_data a owl:Class ;
     rdfs:label "Processed data" ;
-    rdfs:subClassOf mbco:data ;
+    rdfs:subClassOf lbco:data ;
     rdfs:comment "At variance with raw data, processed data, after generation, was modified, either to clean, extract, transform it etc."^^xs:string .
 
-mbco:data_structure a owl:Class ;
+lbco:data_structure a owl:Class ;
     rdfs:label "Data structure" ;
     rdfs:comment "E.g., includes data shapes, as SHACL or OO-LD shapes."^^xs:string .    
 
-mbco:uncertainty_quantification_method a owl:Class ;
+lbco:uncertainty_quantification_method a owl:Class ;
     rdfs:label "Uncertainty quantification method" ;
-    rdfs:subClassOf mbco:method .
+    rdfs:subClassOf lbco:method .
 
-#mbco:BLOCK_AVERAGING a mbco:uncertainty_quantification_method ;
+#lbco:BLOCK_AVERAGING a lbco:uncertainty_quantification_method ;
 #    rdfs:label "Block averaging" .
     
-mbco:ERROR_PROPAGATION a mbco:uncertainty_quantification_method ;
+lbco:ERROR_PROPAGATION a lbco:uncertainty_quantification_method ;
     rdfs:label "Error propagation" .
 
-mbco:ERROR_ESTIMATE_VIA_STATISTICAL_METHODS a mbco:uncertainty_quantification_method ;
+lbco:ERROR_ESTIMATE_VIA_STATISTICAL_METHODS a lbco:uncertainty_quantification_method ;
     rdfs:label "Error estimate via statistical methods" .
 
-mbco:data_processing_method a owl:Class ;
+lbco:data_processing_method a owl:Class ;
     rdfs:label "Data processing method" ;
-    rdfs:subClassOf mbco:method .
+    rdfs:subClassOf lbco:method .
 
 # from CQ_DAT_3.1
-mbco:INCOMPLETE_DATASET_REMOVAL a mbco:data_processing_method ;
+lbco:INCOMPLETE_DATASET_REMOVAL a lbco:data_processing_method ;
     rdfs:comment "Removal of datasets that are incomplete (w.r.t. some data structure)"^^xs:string .    
 
-mbco:INCOMPLETE_DATASET_PADDING a mbco:data_processing_method ;
+lbco:INCOMPLETE_DATASET_PADDING a lbco:data_processing_method ;
     rdfs:comment "Padding of datasets that are incomplete (w.r.t. some data structure) with dummy values"^^xs:string .    
 
 # From RoMM and VISO
-mbco:EXTRACTION a mbco:data_processing_method ;
+lbco:EXTRACTION a lbco:data_processing_method ;
      rdfs:comment """A method that enriches the dataset/state description by further information
                    calculated based on the information already contained in the state.
                    Examples include averaging, interpolation and the calculation of physical quantities (cf. RoMM)."""^^xs:string .
 
-mbco:CONVERSION a mbco:data_processing_method ;
+lbco:CONVERSION a lbco:data_processing_method ;
      rdfs:comment """A method that changes the data without altering the physical state itself
 		(e.g., it changes the numerical representation of a state, cf. RoMM)."""^^xs:string .
 
 ### Object Properties ###
 
-mbco:is_compatible_with a owl:ObjectProperty ;
+lbco:is_compatible_with a owl:ObjectProperty ;
     rdfs:label "is compatible with" ;
-    rdfs:domain mbco:dataset ; # TOSEE: use data_format instead???
-    rdfs:range mbco:software .
+    rdfs:domain lbco:dataset ; # TOSEE: use data_format instead???
+    rdfs:range lbco:software .
     
-mbco:complies_with a owl:ObjectProperty ;
-    rdfs:domain mbco:dataset ; 
-    rdfs:range mbco:data_structure . # TOSEE: add metadata_scheme to range?
+lbco:complies_with a owl:ObjectProperty ;
+    rdfs:domain lbco:dataset ; 
+    rdfs:range lbco:data_structure . # TOSEE: add metadata_scheme to range?
 
-mbco:is_generated_by a owl:ObjectProperty ; # TOSEE: use inverse (has_output) instead of defining this additional prop?
+lbco:is_generated_by a owl:ObjectProperty ; # TOSEE: use inverse (has_output) instead of defining this additional prop?
     rdfs:label "is generated by" ;
-    rdfs:domain mbco:data ; 
-    rdfs:range [owl:unionOf (mbco:agent mbco:device mbco:software)] ;
-#    rdfs:subPropertyOf [owl:inverseOf mbco:has_output] .
-    rdfs:subPropertyOf mbco:is_output_of .
+    rdfs:domain lbco:data ; 
+    rdfs:range [owl:unionOf (lbco:agent lbco:device lbco:software)] ;
+#    rdfs:subPropertyOf [owl:inverseOf lbco:has_output] .
+    rdfs:subPropertyOf lbco:is_output_of .
 
-mbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? Move to higher?
-		  owl:inverseOf mbco:has_output .
+lbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? Move to higher?
+		  owl:inverseOf lbco:has_output .
 
-mbco:has_data_processing_method a owl:ObjectProperty ;
+lbco:has_data_processing_method a owl:ObjectProperty ;
     rdfs:label "has data processing method" ;
-    rdfs:domain mbco:processed_data ;
-    rdfs:range mbco:data_processing_method .
+    rdfs:domain lbco:processed_data ;
+    rdfs:range lbco:data_processing_method .
 
 # CQ_DAT_8
-mbco:is_annotated_using_scheme a owl:ObjectProperty ;
+lbco:is_annotated_using_scheme a owl:ObjectProperty ;
     rdfs:label "is_annotated_using_scheme" ;
-    rdfs:domain mbco:data ;
-    rdfs:range mbco:metadata_scheme .
+    rdfs:domain lbco:data ;
+    rdfs:range lbco:metadata_scheme .
 
 ### Datatype Properties ###
 
-mbco:has_average a owl:DatatypeProperty ;
+lbco:has_average a owl:DatatypeProperty ;
     rdfs:label "has average" ;
-    rdfs:domain mbco:data ;
+    rdfs:domain lbco:data ;
     rdfs:comment "Only applicable to a homogeneous set of data (i.e., data with same units)"^^xs:string .
 
-mbco:has_error a owl:DatatypeProperty ;
+lbco:has_error a owl:DatatypeProperty ;
     rdfs:label "has error" ;
-    rdfs:domain mbco:data .
+    rdfs:domain lbco:data .
 
 # Should/could add:
 # systematic error
 # statistical error
 # random error
 # total? error
-# mbco:STANDARD_DEVIATION a mbco:error_type .
-# mbco:STANDARD_ERROR a mbco:error_type ;
+# lbco:STANDARD_DEVIATION a lbco:error_type .
+# lbco:STANDARD_ERROR a lbco:error_type ;
 #    rdfs:comment "Error calculation based on standard deviation and the assumption of independent data points."^^xs:string .
 
-mbco:has_data_processing_info a owl:DatatypeProperty ;
+lbco:has_data_processing_info a owl:DatatypeProperty ;
     rdfs:label "has data processing info" ;
-    rdfs:domain mbco:processed_data ;
+    rdfs:domain lbco:processed_data ;
     rdfs:range xs:string .
 
 # CQ_DAT_1
-mbco:is_complete_dataset a owl:DatatypeProperty ;
+lbco:is_complete_dataset a owl:DatatypeProperty ;
     rdfs:label "is_complete_dataset" ;
-    rdfs:domain mbco:dataset ;
+    rdfs:domain lbco:dataset ;
     rdfs:range xs:boolean ;
     rdfs:comment """Given a dataset that complies with a data structure, specifies whether all fields are given (complete) or some are missing
     (incomplete)"""^^xs:string .
 
 # CQ_DAT_2
-mbco:contains_dummy_values a owl:DatatypeProperty ;
+lbco:contains_dummy_values a owl:DatatypeProperty ;
     rdfs:label "contains dummy values" ;
-    rdfs:domain mbco:dataset ;
+    rdfs:domain lbco:dataset ;
     rdfs:range xs:boolean .
 
 ####################################################################################

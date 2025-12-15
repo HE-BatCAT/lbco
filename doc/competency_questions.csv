@@ -1,4 +1,4 @@
-ID, Competency Question (CQ) / Natural language sentence (fact) (FA) / Example Query (EQ) , Answer [for questions only] , IRI of MBCO most relevant classes/properties
+ID, Competency Question (CQ) / Natural language sentence (fact) (FA) / Example Query (EQ) , Answer [for questions only] , IRI of LBCO most relevant classes/properties
 CQ_CRO_1, What are the main properties of the electrode?, surface chemical composition ; surface area ; conductivity ; surface hydrophilicity ; exchange current rate ; tortuosity ;  porosity ; surface stability (towards modifications) , https://batcat.info/semantics/core#electrode ; https://batcat.info/semantics/core#has_property
 CQ_CRO_2, What are the main properties of the electrolyte? , Composition (salts; solvents); purity; transport properties (viscosity; ionic conductivity); mass density, https://batcat.info/semantics/core#electrolyte ; https://batcat.info/semantics/core#has_property
 CQ_CRO_3, What are the major time scales for process industry? (to classify various types of DTs), Industrial safety ; intermediate; planning , https://batcat.info/semantics/core#time_scale
@@ -31,7 +31,7 @@ CQ_MAN_8.2, What are the variables to evaluate (=process KPIs) the RFB manufactu
 CQ_MAN_9.1, What are the LIB/NIB battery product main properties (KPIs)?, Full cell Initial performance; Full cell Ageing; Full cell Safety ,  https://batcat.info/semantics/core#lithium_ion_battery; https://batcat.info/semantics/core#has_product_kpi
 CQ_MAN_9.2, What are the RFB battery product main properties (KPIs)?, Full cell efficiency ; Full cell Capacity ; Full cell Durability ,  https://batcat.info/semantics/core#redox_flow_battery; https://batcat.info/semantics/core#has_product_kpi
 CQ_MAN_10, What are other general input parameters (settings) of the manufacturing process?, Electricity unit cost; Personnel unit cost, https://batcat.info/semantics/core#manufacturing_process; https://batcat.info/semantics/core#has_setting 
-CQ_SIM_6, What is the range of applicability of a given Model (Digital Twin)?, n/a - case specific, https://batcat.info/semantics/core#mbco:has_applicability_range_info
+CQ_SIM_6, What is the range of applicability of a given Model (Digital Twin)?, n/a - case specific, https://batcat.info/semantics/core#has_applicability_range_info
 CQ_SIM_9, What type of reproducibility tests are available in general for modelling data?, Varying modelling approach; Varying numerical method; varying software , https://batcat.info/semantics/core#model_reproducibility_method
 FA_SIM_1, Neural network models can be classified by the dimensionality of input and output fed to the neural network, n/a - fact,  https://batcat.info/semantics/core#has_nn_input_dimensionality ; https://batcat.info/semantics/core#has_nn_output_dimensionality; https://batcat.info/semantics/core#neural_network_model
 EQ_SIM_2, What data was used to define this model parametrization?, n/a - answer will be case specific, https://batcat.info/semantics/core#model_parametrization_process ; https://batcat.info/semantics/core#has_input
@@ -39,4 +39,4 @@ EQ_SIM_3, What data was used to validate this model parametrization?, n/a - answ
 [CQ_CRO_10], What are the main electrochemical components in LiB/NiB manufacturing processes?, Active material ; Binder ; Percolant ; Slurry solvent; Electrode; Separator; Electrolyte; Collector; Battery cell; Casing; Coating layer; Full cell, IRI
 [CQ_EXP_3], , , 
 [CQ_EXP_3.2], , , 
-[CQ_SIM_3], What are the modelling approaches for LiB?, , wip-partially addressed (mbco:P2D_CELL_MODEL etc.)
+[CQ_SIM_3], What are the modelling approaches for LiB?, , wip-partially addressed (lbco:P2D_CELL_MODEL etc.)

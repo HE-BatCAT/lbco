@@ -1,7 +1,7 @@
-# mbco
-(Minimal) BatCAT Core Ontologies
+# lbco
+Lightweight BatCAT Core Ontologies
 
-Tentative modules will cover:
+Modules cover:
 
 - Higher level concept (-> higher.ttl)
 
@@ -26,5 +26,5 @@ Alignment directory:
 - Alignment to EMMO-LITE (-> abel.ttl)
 - Alignment to EVMPO and VIPRS (-> abovemp.ttl)
 
-* [Overview of MBCO](overview.md)
+* [Overview of LBCO](overview.md)
 

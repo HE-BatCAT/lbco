@@ -1,4 +1,4 @@
-@prefix mbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -14,7 +14,7 @@
 
 <https://batcat.info/semantics/core/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.0.3"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -26,7 +26,7 @@
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
-  vann:preferredNamespacePrefix "mbco"^^xs:string ;
+  vann:preferredNamespacePrefix "lbco"^^xs:string ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
 with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
 #  dcterms:bibliographicCitation ""^^xs:string ;
@@ -36,62 +36,62 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 ### Classes ###
 
 # CAVEAT: Duplicated here from modelling.ttl for convenience
-mbco:digital_twinning a owl:Class ; 
+lbco:digital_twinning a owl:Class ; 
     rdfs:label "Digital twinning" ;
-    rdfs:subClassOf mbco:computational_modelling_method .
-mbco:computational_modelling_method rdfs:subClassOf mbco:method .    
+    rdfs:subClassOf lbco:computational_modelling_method .
+lbco:computational_modelling_method rdfs:subClassOf lbco:method .    
 # end of duplication
 
-mbco:digital_twin_model a owl:Class ; 
+lbco:digital_twin_model a owl:Class ; 
     rdfs:label "Digital twin model" ;
-    rdfs:subClassOf mbco:data ; # TOSEE: define a model class?
+    rdfs:subClassOf lbco:data ; # TOSEE: define a model class?
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:represents ;
+                   owl:onProperty lbco:represents ;
                    owl:someValuesFrom owl:Thing] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_action_type ;
-                   owl:someValuesFrom mbco:digital_twin_action] ;
+                   owl:onProperty lbco:has_action_type ;
+                   owl:someValuesFrom lbco:digital_twin_action] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_synchronization_rate ;
+                   owl:onProperty lbco:has_synchronization_rate ;
                    owl:someValuesFrom xs:decimal] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_generality_level ;
-                   owl:someValuesFrom mbco:generality_level] .
+                   owl:onProperty lbco:has_generality_level ;
+                   owl:someValuesFrom lbco:generality_level] .
 		   
-mbco:digital_twin_action a owl:Class ;
+lbco:digital_twin_action a owl:Class ;
     rdfs:label "Digital twin action" ;
-    owl:oneOf (mbco:VISUALIZE mbco:MONITOR mbco:PREDICT mbco:RECOMMEND) ;
+    owl:oneOf (lbco:VISUALIZE lbco:MONITOR lbco:PREDICT lbco:RECOMMEND) ;
     rdfs:comment """Based on an extract of application-related terms from ISO/IEC 30173:2023, 
     with an addition inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."""^^xs:string ;
-    rdfs:subClassOf mbco:process .
+    rdfs:subClassOf lbco:process .
 
-mbco:generality_level a owl:Class ;
+lbco:generality_level a owl:Class ;
     rdfs:label "Generality level" ;
-    owl:oneOf (mbco:UNIVERSAL mbco:TYPE mbco:INDIVIDUAL) ;
+    owl:oneOf (lbco:UNIVERSAL lbco:TYPE lbco:INDIVIDUAL) ;
     rdfs:comment "Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'. Note: There a fourth level is present."^^xs:string ;
-    rdfs:subClassOf mbco:annotation .
+    rdfs:subClassOf lbco:annotation .
 
-mbco:UNIVERSAL rdfs:comment "Encompassing, e.g. for a very generic entity or process."^^xs:string .
-mbco:TYPE rdfs:comment "E.g., a car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
-mbco:INDIVIDUAL rdfs:comment "E.g., John's car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
+lbco:UNIVERSAL rdfs:comment "Encompassing, e.g. for a very generic entity or process."^^xs:string .
+lbco:TYPE rdfs:comment "E.g., a car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
+lbco:INDIVIDUAL rdfs:comment "E.g., John's car. Inspired by Barros et al. 2021, 'Requirements for an Ontology of Digital Twins'."^^xs:string .
 
 ### Object Properties ###
 
-mbco:represents a owl:ObjectProperty ;
+lbco:represents a owl:ObjectProperty ;
     rdfs:label "represents" ;
-    rdfs:range [owl:unionOf (mbco:physical_object mbco:process)] .
+    rdfs:range [owl:unionOf (lbco:physical_object lbco:process)] .
 
-#mbco:has_action_type a owl:ObjectProperty ; # now defined in modelling.ttl
+#lbco:has_action_type a owl:ObjectProperty ; # now defined in modelling.ttl
 #    rdfs:label "has action type" .
-#    rdfs:range mbco:digital_twin_action .
+#    rdfs:range lbco:digital_twin_action .
 
-mbco:has_generality_level a owl:ObjectProperty ;
+lbco:has_generality_level a owl:ObjectProperty ;
     rdfs:label "has generality level" ;
-    rdfs:range mbco:generality_level .
+    rdfs:range lbco:generality_level .
     
 ### Datatype Properties ###
 
-mbco:has_synchronization_rate a owl:DatatypeProperty ;
+lbco:has_synchronization_rate a owl:DatatypeProperty ;
     rdfs:label "has synchronization rate" ;
     rdfs:comment """(Average) Rate (in 1/seconds) at which communication (in either direction) between 
     the digital entity and its target entity happens"""^^xs:string .
@@ -102,13 +102,13 @@ mbco:has_synchronization_rate a owl:DatatypeProperty ;
 
 @prefix ex: <https://batcat.info/semantics/example#> .
 
-ex:DT_LIB_CELL_C032 a mbco:digital_twin_model ;
-    mbco:has_generality_level mbco:TYPE ;
+ex:DT_LIB_CELL_C032 a lbco:digital_twin_model ;
+    lbco:has_generality_level lbco:TYPE ;
     rdfs:comment "Digital twin of a LiB cell of type C032"^^xs:string .
 
-ex:DT_LIB_CELL_C032_PID123456 a mbco:digital_twin_model ;
-    mbco:has_generality_level mbco:INDIVIDUAL ;
-    mbco:has_synchronization_rate 1.0 ;
+ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
+    lbco:has_generality_level lbco:INDIVIDUAL ;
+    lbco:has_synchronization_rate 1.0 ;
     rdfs:comment "Digital twin of a specific LiB cell of type C032, identified by its PID"^^xs:string .
 
 ####################################################################################

@@ -1,4 +1,4 @@
-@prefix mbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -15,7 +15,7 @@
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.0.14"^^xs:string ;
-  dcterms:modified "2025-12-12"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
@@ -32,7 +32,7 @@
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
-  vann:preferredNamespacePrefix "mbco"^^xs:string ;
+  vann:preferredNamespacePrefix "lbco"^^xs:string ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
 with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
 #  dcterms:bibliographicCitation ""^^xs:string ;
@@ -41,107 +41,107 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:lithium_ion_battery a owl:Class ;
+lbco:lithium_ion_battery a owl:Class ;
      rdfs:label "Lithium-ion battery (LiB)" ;
-     rdfs:subClassOf mbco:physical_object ;
-     rdfs:subClassOf mbco:whole_product ;
-     rdfs:subClassOf mbco:battery .    
+     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf lbco:whole_product ;
+     rdfs:subClassOf lbco:battery .    
      
-mbco:redox_flow_battery a owl:Class ;
+lbco:redox_flow_battery a owl:Class ;
      rdfs:label "Redox-flow battery (RFB)" ;
-     rdfs:subClassOf mbco:physical_object ;
-     rdfs:subClassOf mbco:whole_product ;
-     rdfs:subClassOf mbco:battery .    
+     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf lbco:whole_product ;
+     rdfs:subClassOf lbco:battery .    
 
 # LiB main components. based on CQ_CRO_10 (from Excel sheet) NB: not all entries included. Coating added (from MIRO)
 # (CQ_CRO_10: Active material, Binder, Percolant, slurry solvent, slurry, coated electrode, calendered electrode, electrode, separator, electrolyte, collector, battery cell, casing)
 # NB: I am not adding slurry and coated electrode as I think they belong elsewhere, maybe intermediate products?
-mbco:lithium_ion_battery
+lbco:lithium_ion_battery
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:active_material] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:active_material] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:binder] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:binder] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:percolant] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:percolant] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:slurry_solvent] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:slurry_solvent] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:electrode] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:electrode] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:separator] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:separator] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:electrolyte] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:electrolyte] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:collector] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:collector] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:casing] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:casing] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:coating_layer] ;
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:coating_layer] ;
      rdfs:subClassOf [a owl:Restriction ;
-     owl:onProperty mbco:has_part ;
-     owl:someValuesFrom mbco:full_cell] . # battery_cell -> full cell . OK? or better to rename it?
+     owl:onProperty lbco:has_part ;
+     owl:someValuesFrom lbco:full_cell] . # battery_cell -> full cell . OK? or better to rename it?
 
 # CQ_CRO_4: RFB main components
-mbco:redox_flow_battery
+lbco:redox_flow_battery
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_part ;
-	owl:someValuesFrom mbco:bipolar_plate] ;
+        owl:onProperty lbco:has_part ;
+	owl:someValuesFrom lbco:bipolar_plate] ;
         rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_part ;
-	owl:someValuesFrom mbco:membrane] ;
+        owl:onProperty lbco:has_part ;
+	owl:someValuesFrom lbco:membrane] ;
         rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_part ;
-	owl:someValuesFrom mbco:carbon_felt] ;
+        owl:onProperty lbco:has_part ;
+	owl:someValuesFrom lbco:carbon_felt] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_part ;
-	owl:someValuesFrom mbco:electrolyte] .
+        owl:onProperty lbco:has_part ;
+	owl:someValuesFrom lbco:electrolyte] .
 
 # CQ_MAN_9.1: LiB product KPIs.
-mbco:lithium_ion_battery
+lbco:lithium_ion_battery
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_kpi ;
-	owl:someValuesFrom mbco:full_cell_initial_performance] ; # TOSEE: initial_performance -> full_cell_*: OK?
+        owl:onProperty lbco:has_product_kpi ;
+	owl:someValuesFrom lbco:full_cell_initial_performance] ; # TOSEE: initial_performance -> full_cell_*: OK?
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_kpi ;
-	owl:someValuesFrom mbco:full_cell_ageing] ; # TOSEE: keep it???
+        owl:onProperty lbco:has_product_kpi ;
+	owl:someValuesFrom lbco:full_cell_ageing] ; # TOSEE: keep it???
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_kpi ;
-	owl:someValuesFrom mbco:full_cell_safety] . # TOSEE: keep it???
+        owl:onProperty lbco:has_product_kpi ;
+	owl:someValuesFrom lbco:full_cell_safety] . # TOSEE: keep it???
 
 # CQ_MAN_9.2: RFB product KPIs. TOSEE: add "efficiency"? (removed currently)
-mbco:redox_flow_battery
+lbco:redox_flow_battery
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_kpi ;
-	owl:someValuesFrom mbco:round_trip_efficiency] ;
+        owl:onProperty lbco:has_product_kpi ;
+	owl:someValuesFrom lbco:round_trip_efficiency] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_kpi ;
-	owl:someValuesFrom mbco:full_cell_capacity] ; # TOSEE: capacity -> full_cell_capacity: OK?
+        owl:onProperty lbco:has_product_kpi ;
+	owl:someValuesFrom lbco:full_cell_capacity] ; # TOSEE: capacity -> full_cell_capacity: OK?
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_kpi ;
-	owl:someValuesFrom mbco:full_cell_durability] . # TOSEE: durability -> full_cell_durability: OK?
+        owl:onProperty lbco:has_product_kpi ;
+	owl:someValuesFrom lbco:full_cell_durability] . # TOSEE: durability -> full_cell_durability: OK?
 
 # From CQ_CRO_9.
-mbco:rfb_length_scale a owl:Class ;
+lbco:rfb_length_scale a owl:Class ;
     rdfs:label "RFB length scale" ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:FIBER_SCALE mbco:PORE_SCALE mbco:CELL_SCALE mbco:STACK_SCALE mbco:BATTERY_SYSTEM_SCALE mbco:ENERGY_SYSTEM_SCALE) ;
-    rdfs:subClassOf mbco:length_scale ;
+    owl:oneOf (lbco:MOLECULAR_SCALE lbco:FIBER_SCALE lbco:PORE_SCALE lbco:CELL_SCALE lbco:STACK_SCALE lbco:BATTERY_SYSTEM_SCALE lbco:ENERGY_SYSTEM_SCALE) ;
+    rdfs:subClassOf lbco:length_scale ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
 to specify which one it addresses"""^^xs:string .
 
-mbco:lib_length_scale a owl:Class ;
+lbco:lib_length_scale a owl:Class ;
     rdfs:label "LIB length scale" ;
-    owl:oneOf (mbco:MOLECULAR_SCALE mbco:CELL_SCALE) ; # TODO: Check
-    rdfs:subClassOf mbco:length_scale ;
+    owl:oneOf (lbco:MOLECULAR_SCALE lbco:CELL_SCALE) ; # TODO: Check
+    rdfs:subClassOf lbco:length_scale ;
     rdfs:comment"""length and time scale can be used to annotate and classify a model, software or digital twin,
 to specify which one it addresses"""^^xs:string .
 
@@ -151,383 +151,383 @@ to specify which one it addresses"""^^xs:string .
 # NB: these classes below (for physical objects and properties) are just stubs
 # TODO: add labels, etc (and connect to BattINFO etc):
 
-mbco:active_material a owl:Class ;
+lbco:active_material a owl:Class ;
      rdfs:label "Active material" ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:active_material_potential] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:active_material_potential] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:active_material_granulometry] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:active_material_granulometry] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:active_material_diffusion_coefficient] .
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:active_material_diffusion_coefficient] .
 
-mbco:binder a owl:Class ;
+lbco:binder a owl:Class ;
      rdfs:label "Binder" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:percolant a owl:Class ;
+lbco:percolant a owl:Class ;
      rdfs:label "Percolant" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:slurry_solvent a owl:Class ; # TOSEE: an object with this role?
+lbco:slurry_solvent a owl:Class ; # TOSEE: an object with this role?
      rdfs:label "Slurry solvent" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:additive a owl:Class ;       # TOSEE: an object with this role?
+lbco:additive a owl:Class ;       # TOSEE: an object with this role?
      rdfs:label "Additive" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:electrode a owl:Class ;
+lbco:electrode a owl:Class ;
      rdfs:label "Electrode" ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_porosity] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_porosity] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_conductivity] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_conductivity] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_tortuosity] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_tortuosity] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_surface_area] ; # CQ_CRO_1
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_surface_area] ; # CQ_CRO_1
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_surface_chemical_composition] ; # CQ_CRO_1
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_surface_chemical_composition] ; # CQ_CRO_1
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_surface_hydrophilicity] ; # CQ_CRO_1
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_surface_hydrophilicity] ; # CQ_CRO_1
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_surface_stability] ; # CQ_CRO_1
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_surface_stability] ; # CQ_CRO_1
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrode_exchange_current_rate] . # CQ_CRO_1
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrode_exchange_current_rate] . # CQ_CRO_1
 
-mbco:positive_electrode a owl:Class ;
+lbco:positive_electrode a owl:Class ;
      rdfs:label "Positive electrode" ;
-     rdfs:subClassOf mbco:electrode .
+     rdfs:subClassOf lbco:electrode .
 
-mbco:negative_electrode a owl:Class ;
+lbco:negative_electrode a owl:Class ;
      rdfs:label "Negative electrode" ;
-     rdfs:subClassOf mbco:electrode .
+     rdfs:subClassOf lbco:electrode .
 
-mbco:separator a owl:Class ;
+lbco:separator a owl:Class ;
      rdfs:label "Separator" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:electrolyte a owl:Class ;
+lbco:electrolyte a owl:Class ;
      rdfs:label "Electrolyte" ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_composition] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrolyte_composition] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_formulation] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrolyte_formulation] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_viscosity] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrolyte_viscosity] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_cyclic_voltametry] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrolyte_cyclic_voltametry] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_ionic_conductivity] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrolyte_ionic_conductivity] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_mass_density] ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrolyte_mass_density] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:electrolyte_purity ] .
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:electrolyte_purity ] .
 
-mbco:collector a owl:Class ;
+lbco:collector a owl:Class ;
      rdfs:label "Collector" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:casing a owl:Class ;
+lbco:casing a owl:Class ;
      rdfs:label "Casing" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:coating_layer a owl:Class ;
+lbco:coating_layer a owl:Class ;
      rdfs:label "Coating layer" ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:coating_thickness] .
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:coating_thickness] .
 
-mbco:bipolar_plate a owl:Class ;
+lbco:bipolar_plate a owl:Class ;
      rdfs:label "Bipolar plate" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
-mbco:membrane a owl:Class ;
+lbco:membrane a owl:Class ;
      rdfs:label "Membrane" ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:membrane_thickness] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:membrane_thickness] ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:membrane_conductivity] .
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:membrane_conductivity] .
 
-mbco:carbon_felt a owl:Class ; # TODO: Add "surface properties". What are they?
+lbco:carbon_felt a owl:Class ; # TODO: Add "surface properties". What are they?
      rdfs:label "Carbon felt" ;
      skos:altLabel "Felt" ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:felt_porosity] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:felt_porosity] ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:felt_thickness] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:felt_thickness] ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:felt_conductivity] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:felt_conductivity] ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:felt_hydraulic_resistance] .
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:felt_hydraulic_resistance] .
 
-mbco:full_cell a owl:Class ;
+lbco:full_cell a owl:Class ;
      rdfs:label "Full cell" ;
      skos:altLabel "Cell" ;
      skos:altLabel "Battery cell" ; # correct?
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:full_cell_initial_performance] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_initial_performance] ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:full_cell_ageing] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_ageing] ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:full_cell_capacity] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_capacity] ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:full_cell_durability] ;	# TOSEE: relation to battery_lifespan???
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_durability] ;	# TOSEE: relation to battery_lifespan???
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:full_cell_open_circuit_voltage] ; # TO SEE: OK?
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_open_circuit_voltage] ; # TO SEE: OK?
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:full_cell_electric_resistance] . # TO SEE: OK?
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_electric_resistance] . # TO SEE: OK?
 
 
-mbco:full_cell_initial_performance a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:full_cell_initial_performance a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:full_cell_ageing a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:full_cell_ageing a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:full_cell_capacity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:full_cell_capacity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:full_cell_durability a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:full_cell_durability a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:round_trip_efficiency a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:round_trip_efficiency a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:full_cell_safety a owl:Class ;
-     rdfs:subClassOf mbco:property . # OK? It was mbco:annotation .
+lbco:full_cell_safety a owl:Class ;
+     rdfs:subClassOf lbco:property . # OK? It was lbco:annotation .
 
-mbco:full_cell_electric_resistance a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:full_cell_electric_resistance a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:battery_lifespan a owl:Class ; # TOSEE: is it a cell or a battery property?
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:battery_lifespan a owl:Class ; # TOSEE: is it a cell or a battery property?
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:battery a owl:Class ;
+lbco:battery a owl:Class ;
      rdfs:label "Battery" ;
-     rdfs:subClassOf mbco:device ;
+     rdfs:subClassOf lbco:device ;
      rdfs:comment "A battery contains one of more (battery) cells."^^xs:string ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:number_of_cells] ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:number_of_cells] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_part ;
-        owl:someValuesFrom mbco:full_cell] ;
+        owl:onProperty lbco:has_part ;
+        owl:someValuesFrom lbco:full_cell] ;
      rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_kpi ;
-	owl:someValuesFrom mbco:battery_lifespan] . # Added, inspired by CQ_CRO_6. TOSEE: OK ??? relation to full_cell_durability?
+        owl:onProperty lbco:has_product_kpi ;
+	owl:someValuesFrom lbco:battery_lifespan] . # Added, inspired by CQ_CRO_6. TOSEE: OK ??? relation to full_cell_durability?
 
-mbco:number_of_cells a owl:Class ;
+lbco:number_of_cells a owl:Class ;
      rdfs:label "Number of cells" ;
-     rdfs:subClassOf mbco:property ;
+     rdfs:subClassOf lbco:property ;
      rdfs:comment "Number of cells in a battery"^^xs:string .     
 
 # intermediate products (from various sources, including WP1 master file, MIRO board)
 
-mbco:slurry a owl:Class ;
+lbco:slurry a owl:Class ;
      rdfs:label "Slurry" ;
-     rdfs:subClassOf mbco:intermediate_product ;
+     rdfs:subClassOf lbco:intermediate_product ;
      rdfs:subClassOf [a owl:Restriction ;
-     	owl:onProperty mbco:has_property ;
-	owl:someValuesFrom mbco:slurry_solid_content] .
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:slurry_solid_content] .
 
-mbco:coated_electrode a owl:Class ;
+lbco:coated_electrode a owl:Class ;
      rdfs:label "Coated electrode" ;
-     rdfs:subClassOf mbco:intermediate_product .
+     rdfs:subClassOf lbco:intermediate_product .
 
-mbco:dried_coated_electrode a owl:Class ;
+lbco:dried_coated_electrode a owl:Class ;
      rdfs:label "Dried coated electrode" ;
-     rdfs:subClassOf mbco:intermediate_product .
+     rdfs:subClassOf lbco:intermediate_product .
 
-mbco:calendered_electrode a owl:Class ;
+lbco:calendered_electrode a owl:Class ;
      rdfs:label "Calendered electrode" ;
-     rdfs:subClassOf mbco:intermediate_product .
+     rdfs:subClassOf lbco:intermediate_product .
 
-mbco:thermally_activated_felt a owl:Class ;
+lbco:thermally_activated_felt a owl:Class ;
      rdfs:label "Thermally activated felt" ;
-     rdfs:subClassOf mbco:intermediate_product ;
-     rdfs:subClassOf mbco:carbon_felt . #?     
+     rdfs:subClassOf lbco:intermediate_product ;
+     rdfs:subClassOf lbco:carbon_felt . #?     
 
-mbco:pristine_felt a owl:Class ;
+lbco:pristine_felt a owl:Class ;
      rdfs:label "Pristine felt" ;
-     rdfs:subClassOf mbco:carbon_felt . #?     
+     rdfs:subClassOf lbco:carbon_felt . #?     
 
 # TO SEE: how different from the coated electrode? both needed?
-mbco:coated_collector a owl:Class ;
+lbco:coated_collector a owl:Class ;
      rdfs:label "Coated collector" ;
-     rdfs:subClassOf mbco:intermediate_product .
+     rdfs:subClassOf lbco:intermediate_product .
 
-mbco:half_cell a owl:Class ;
+lbco:half_cell a owl:Class ;
      rdfs:label "Half cell" ;
-     rdfs:subClassOf mbco:physical_object .
+     rdfs:subClassOf lbco:physical_object .
 
 # manufacturing settings
 
-mbco:mixing_speed a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:mixing_speed a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:mixing_order a owl:Class ;
-     rdfs:subClassOf mbco:property . 
+lbco:mixing_order a owl:Class ;
+     rdfs:subClassOf lbco:property . 
 
-mbco:coating_speed a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:coating_speed a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:wet_coating_gap a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:wet_coating_gap a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:coating_targeted_area_capacity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:coating_targeted_area_capacity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:calendering_speed a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:calendering_speed a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:calendering_temperature a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:calendering_temperature a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:calendering_thickness a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:calendering_thickness a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:cutting_shape a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:cutting_shape a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:cutting_size a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:cutting_size a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:furnace_temperature a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:furnace_temperature a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:time_at_furnace a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:time_at_furnace a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:cooling_time a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:cooling_time a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
-mbco:furnace_atmosphere_composition a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity . 
+lbco:furnace_atmosphere_composition a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
 
 # manufacturing devices
 
-mbco:furnace a owl:Class ;
+lbco:furnace a owl:Class ;
      rdfs:label "Furnace" ;
-     rdfs:subClassOf mbco:device. 
+     rdfs:subClassOf lbco:device. 
 
 ####################################################################################
 # Based (partially) on CQ_EXP_3 and CQ_EXP_3.2. CQ_CRO_1 and CQ_CRO_2
 
-mbco:electrode_porosity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrode_porosity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrode_conductivity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity ;
-     rdfs:subClassOf mbco:conductivity .     
+lbco:electrode_conductivity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity ;
+     rdfs:subClassOf lbco:conductivity .     
 
-mbco:conductivity a owl:Class ; # TO SEE: electrical for all of them? or is heat conductivity relevant as well?
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:conductivity a owl:Class ; # TO SEE: electrical for all of them? or is heat conductivity relevant as well?
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrode_tortuosity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrode_tortuosity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrode_surface_area a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrode_surface_area a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrode_surface_chemical_composition a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrode_surface_chemical_composition a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrode_surface_hydrophilicity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrode_surface_hydrophilicity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrode_surface_stability a owl:Class ;
-     rdfs:subClassOf mbco:property .
+lbco:electrode_surface_stability a owl:Class ;
+     rdfs:subClassOf lbco:property .
      
-mbco:electrode_exchange_current_rate a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrode_exchange_current_rate a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:coating_thickness a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:coating_thickness a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:active_material_potential a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:active_material_potential a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:active_material_granulometry a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:active_material_granulometry a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:active_material_diffusion_coefficient a owl:Class ; # TOSEE: "coefficient" added: OK?
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:active_material_diffusion_coefficient a owl:Class ; # TOSEE: "coefficient" added: OK?
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:full_cell_power a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:full_cell_power a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:felt_porosity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:felt_porosity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:felt_thickness a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:felt_thickness a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:felt_conductivity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity ;
-     rdfs:subClassOf mbco:conductivity .     
+lbco:felt_conductivity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity ;
+     rdfs:subClassOf lbco:conductivity .     
 
-mbco:felt_hydraulic_resistance a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:felt_hydraulic_resistance a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:membrane_thickness a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:membrane_thickness a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:membrane_conductivity a owl:Class ; # TOSEE: electrical?
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:membrane_conductivity a owl:Class ; # TOSEE: electrical?
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrolyte_viscosity a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrolyte_viscosity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrolyte_cyclic_voltametry a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrolyte_cyclic_voltametry a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrolyte_ionic_conductivity a owl:Class ; # CQ_CRO_2
-     rdfs:subClassOf mbco:physical_quantity ;
-     rdfs:subClassOf mbco:conductivity .     
+lbco:electrolyte_ionic_conductivity a owl:Class ; # CQ_CRO_2
+     rdfs:subClassOf lbco:physical_quantity ;
+     rdfs:subClassOf lbco:conductivity .     
 
-mbco:electrolyte_mass_density a owl:Class ; # CQ_CRO_2
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrolyte_mass_density a owl:Class ; # CQ_CRO_2
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrolyte_purity a owl:Class ; # CQ_CRO_2
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrolyte_purity a owl:Class ; # CQ_CRO_2
+     rdfs:subClassOf lbco:physical_quantity .
 
 # Slurry properties, Coating thickness, Active materials
 # potential, Active material granulometry, Active
@@ -543,335 +543,335 @@ mbco:electrolyte_purity a owl:Class ; # CQ_CRO_2
 
 # Addiditional quantities (from the Characterization Master File):
 
-mbco:slurry_solid_content a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:slurry_solid_content a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
 # Additional quantities from Table 7, D4.1
 
-mbco:impedance a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:impedance a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:open_circuit_voltage a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:open_circuit_voltage a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:full_cell_open_circuit_voltage a owl:Class ;
-     rdfs:subClassOf mbco:open_circuit_voltage .
+lbco:full_cell_open_circuit_voltage a owl:Class ;
+     rdfs:subClassOf lbco:open_circuit_voltage .
 
 ####################################################################################
-# mbco:physical_quantity a owl:Class ; # Duplicated here from modelling. To be updated
-#      rdfs:subClassOf mbco:property .
+# lbco:physical_quantity a owl:Class ; # Duplicated here from modelling. To be updated
+#      rdfs:subClassOf lbco:property .
 ####################################################################################
 
 # product design parameters
 # CQ_MAN_6.1: LiB product design parameters: Active material choice, Elecrtolyte Formulation, Particle Size Disitribution (PSD), Electrolyte composition, Separator, Cell Size
 
-mbco:electrolyte_formulation a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrolyte_formulation a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrolyte_composition a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrolyte_composition a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:particle_size_distribution a owl:Class ; # TOSEE: of what particles?
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:particle_size_distribution a owl:Class ; # TOSEE: of what particles?
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:cell_size a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:cell_size a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:current_density a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:current_density a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:ion_species_concentration a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:ion_species_concentration a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:electrode_base_material a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:electrode_base_material a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:volume_flow_rate a owl:Class ;
-     rdfs:subClassOf mbco:physical_quantity .
+lbco:volume_flow_rate a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
 
-mbco:lithium_ion_battery
+lbco:lithium_ion_battery
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:active_material] ;
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:active_material] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:electrolyte_formulation] ; # TOSEE: "electrolyte" added. OK?
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:electrolyte_formulation] ; # TOSEE: "electrolyte" added. OK?
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:particle_size_distribution] ;
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:particle_size_distribution] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:electrolyte_composition] ;
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:electrolyte_composition] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:separator] ; # TOSEE: what needs to be chosen? The separator material? or?
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:separator] ; # TOSEE: what needs to be chosen? The separator material? or?
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:cell_size] . # TOSEE: "cell" added. OK?
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:cell_size] . # TOSEE: "cell" added. OK?
 
 # CQ_MAN_6.2: RFB product design parameters: Current density, Ion species concentration, Electrode base material, Volume flow rate, Cell size (Product dimensions)
 
-mbco:redox_flow_battery
+lbco:redox_flow_battery
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:current_density] ;
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:current_density] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:ion_species_concentration] ;
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:ion_species_concentration] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:electrode_base_material] ;
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:electrode_base_material] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:volume_flow_rate] ;
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:volume_flow_rate] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_product_design_parameter ;
-	owl:someValuesFrom mbco:cell_size] . # TOSEE: renamed from "product dimensions" -> cell size
+        owl:onProperty lbco:has_product_design_parameter ;
+	owl:someValuesFrom lbco:cell_size] . # TOSEE: renamed from "product dimensions" -> cell size
 
 # Manufacturing process KPIs
 # CQ_MAN_8.1 KPIs for LiB man. process: Scrap (rate), Production cost (per unit)
 # CQ_MAN_8.2 KPIs for RFB man. process: Production performance, Production cost, Throughput failure rate
 
-mbco:lib_manufacturing_process a owl:Class ;
+lbco:lib_manufacturing_process a owl:Class ;
      rdfs:label "LiB manufacturing process" ;
-     rdfs:subClassOf mbco:manufacturing_process .
+     rdfs:subClassOf lbco:manufacturing_process .
 
-mbco:rfb_manufacturing_process a owl:Class ;
+lbco:rfb_manufacturing_process a owl:Class ;
      rdfs:label "RFB manufacturing process" ;
-     rdfs:subClassOf mbco:manufacturing_process .
+     rdfs:subClassOf lbco:manufacturing_process .
 
-mbco:scrap_rate a owl:Class ;
+lbco:scrap_rate a owl:Class ;
      rdfs:label "Scrap rate" ;
-     rdfs:subClassOf mbco:property .
+     rdfs:subClassOf lbco:property .
 
-mbco:production_performance a owl:Class ;
+lbco:production_performance a owl:Class ;
      rdfs:label "Production performance" ;
-     rdfs:subClassOf mbco:property ;
+     rdfs:subClassOf lbco:property ;
      rdfs:comment "The performance/efficiency of production."^^xs:string . # TODO: quantify better
 
-mbco:production_cost_per_unit a owl:Class ; # duplicated in manufacturing module
+lbco:production_cost_per_unit a owl:Class ; # duplicated in manufacturing module
      rdfs:label "Production cost per unit" ;
-     rdfs:subClassOf mbco:property . # TOSEE: annotation?
+     rdfs:subClassOf lbco:property . # TOSEE: annotation?
 
-mbco:throughput_failure_rate a owl:Class ;
+lbco:throughput_failure_rate a owl:Class ;
      rdfs:label "Throughput failure rate" ;
-     rdfs:subClassOf mbco:property . # TOSEE: annotation?
+     rdfs:subClassOf lbco:property . # TOSEE: annotation?
 
-mbco:lib_manufacturing_process
+lbco:lib_manufacturing_process
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:scrap_rate] ;
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:scrap_rate] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:production_cost_per_unit] .
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:production_cost_per_unit] .
 
-mbco:rfb_manufacturing_process 
+lbco:rfb_manufacturing_process 
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:production_cost_per_unit] ;
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:production_cost_per_unit] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:throughput_failure_rate] ;
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:throughput_failure_rate] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_process_kpi ;
-	owl:someValuesFrom mbco:production_performance] .
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:production_performance] .
 
-mbco:lib_manufacturing_process_step a owl:Class ;
-	rdfs:subClassOf mbco:process_step, mbco:lib_manufacturing_process .
+lbco:lib_manufacturing_process_step a owl:Class ;
+	rdfs:subClassOf lbco:process_step, lbco:lib_manufacturing_process .
 
-mbco:rfb_manufacturing_process_step a owl:Class ;
-	rdfs:subClassOf mbco:process_step, mbco:rfb_manufacturing_process .
+lbco:rfb_manufacturing_process_step a owl:Class ;
+	rdfs:subClassOf lbco:process_step, lbco:rfb_manufacturing_process .
 
 #CQ_MAN_5.1.
 #Main ordered steps of LiB/NiB manufacturing: Mixing, Coating, Drying, Calendering, Cutting, Assembly, Filling, Forming, Degasing
 
-mbco:mixing a owl:Class ;
+lbco:mixing a owl:Class ;
         rdfs:label "Mixing" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:active_material] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:active_material] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:binder] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:binder] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:percolant] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:percolant] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:additive] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:additive] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:slurry_solvent] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:slurry_solvent] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:slurry] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:slurry] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:mixing_speed] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:mixing_speed] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:mixing_order] .
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:mixing_order] .
 
-mbco:coating_process a owl:Class ;
+lbco:coating_process a owl:Class ;
         rdfs:label "Coating (process)" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:mixing] ;
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:mixing] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:slurry] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:slurry] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:collector] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:collector] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:coated_collector] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:coated_collector] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:coating_speed] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:coating_speed] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:wet_coating_gap] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:wet_coating_gap] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:coating_targeted_area_capacity] .
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:coating_targeted_area_capacity] .
 
-mbco:drying a owl:Class ;
+lbco:drying a owl:Class ;
         rdfs:label "Drying" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:coating_process] ;
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:coating_process] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:coated_collector] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:coated_collector] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:dried_coated_electrode] .
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:dried_coated_electrode] .
 
-mbco:calendering a owl:Class ;
+lbco:calendering a owl:Class ;
         rdfs:label "Calendering" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:drying] ;
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:drying] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:dried_coated_electrode] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:dried_coated_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:calendered_electrode] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:calendered_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:calendering_speed] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:calendering_speed] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:calendering_temperature] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:calendering_temperature] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:calendering_thickness] .
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:calendering_thickness] .
 
-mbco:cutting a owl:Class ;
+lbco:cutting a owl:Class ;
         rdfs:label "Cutting" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:calendering] ;
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:calendering] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:calendered_electrode] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:calendered_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:electrode] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:cutting_shape] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:cutting_shape] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:cutting_size] .
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:cutting_size] .
 
-mbco:assemblying a owl:Class ;
+lbco:assemblying a owl:Class ;
         rdfs:label "(Full cell) Assemblying" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:cutting] ;
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:cutting] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:positive_electrode] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:positive_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:negative_electrode] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:negative_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:separator] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:separator] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:electrolyte] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:electrolyte] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell] .
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell] .
 
-mbco:filling a owl:Class ;
+lbco:filling a owl:Class ;
         rdfs:label "Filling" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:assemblying] .
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:assemblying] .
 
-mbco:forming a owl:Class ;
+lbco:forming a owl:Class ;
         rdfs:label "Forming" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:filling] .
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:filling] .
 
-mbco:degassing a owl:Class ;
+lbco:degassing a owl:Class ;
         rdfs:label "Degassing" ;
-	rdfs:subClassOf mbco:lib_manufacturing_process_step ;
+	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:allValuesFrom mbco:forming] .
+        owl:onProperty lbco:follows_directly ;
+	owl:allValuesFrom lbco:forming] .
 
 #CQ_MAN_5.2. Main ordered steps in RFB manufacturing process: (Incoming goods inspection), Stack assembly, Stack
 #compression, Stack sealing (glueing), (Stack testing), Tanks: Assembly stacks+Piping+Periphery, (Tanks testing)
 # slighlty modified: added "Electrode activation"
 
-mbco:electrode_activation a owl:Class ;
+lbco:electrode_activation a owl:Class ;
         rdfs:label "Electrode activation"^^xs:string ;
 	rdfs:comment "Process to increase the reactivity or activity of the electrode material" ;
-	rdfs:subClassOf mbco:rfb_manufacturing_process_step .
+	rdfs:subClassOf lbco:rfb_manufacturing_process_step .
 
-mbco:electrode_chemical_activation a owl:Class ;
+lbco:electrode_chemical_activation a owl:Class ;
         rdfs:label "Electrode chemical activation" ;
-	rdfs:subClassOf mbco:electrode_activation .
+	rdfs:subClassOf lbco:electrode_activation .
 
-mbco:electrode_thermal_activation a owl:Class ;
+lbco:electrode_thermal_activation a owl:Class ;
         rdfs:label "Electrode thermal activation" ;
-	rdfs:subClassOf mbco:electrode_activation ;
+	rdfs:subClassOf lbco:electrode_activation ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_input ;
-	owl:someValuesFrom mbco:pristine_felt] ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:pristine_felt] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:thermally_activated_felt] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:thermally_activated_felt] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:furnace_temperature] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:furnace_temperature] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:time_at_furnace] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:time_at_furnace] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:cooling_time] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:cooling_time] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_setting ;
-	owl:someValuesFrom mbco:furnace_atmosphere_composition] ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:furnace_atmosphere_composition] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:furnace] .
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:furnace] .
 
 # Could add (from SDT, CQ spreadsheet):
 # material_activation
@@ -880,77 +880,77 @@ mbco:electrode_thermal_activation a owl:Class ;
 # electrochemical oxidation
 # electrochemical deposition of additives
 
-mbco:stack_assemblying a owl:Class ;
+lbco:stack_assemblying a owl:Class ;
         rdfs:label "Stack assemblying" ;
-	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf lbco:rfb_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:someValuesFrom mbco:electrode_activation] .
+        owl:onProperty lbco:follows_directly ;
+	owl:someValuesFrom lbco:electrode_activation] .
 
-mbco:stack_compression a owl:Class ;
+lbco:stack_compression a owl:Class ;
         rdfs:label "Stack compression" ;
-	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf lbco:rfb_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:someValuesFrom mbco:stack_assemblying] .
+        owl:onProperty lbco:follows_directly ;
+	owl:someValuesFrom lbco:stack_assemblying] .
 
-mbco:stack_sealing a owl:Class ;
+lbco:stack_sealing a owl:Class ;
         rdfs:label "Stack sealing (glueing)" ;
-	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf lbco:rfb_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:someValuesFrom mbco:stack_compression] .
+        owl:onProperty lbco:follows_directly ;
+	owl:someValuesFrom lbco:stack_compression] .
 
-mbco:tanks_assemblying a owl:Class ;
+lbco:tanks_assemblying a owl:Class ;
         rdfs:label "Tanks assemblying" ;
-	rdfs:subClassOf mbco:rfb_manufacturing_process_step ;
+	rdfs:subClassOf lbco:rfb_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:follows_directly ;
-	owl:someValuesFrom mbco:stack_sealing] .
+        owl:onProperty lbco:follows_directly ;
+	owl:someValuesFrom lbco:stack_sealing] .
 
 ####################################################################################
 # From table 7: Characterization devices 
 
-mbco:potentiostat a owl:Class ;
-	rdfs:subClassOf mbco:characterization_device .
+lbco:potentiostat a owl:Class ;
+	rdfs:subClassOf lbco:characterization_device .
 
-mbco:conductivity_probe a owl:Class ;
-	rdfs:subClassOf mbco:characterization_device ;
+lbco:conductivity_probe a owl:Class ;
+	rdfs:subClassOf lbco:characterization_device ;
 	rdfs:subClassOf [a owl:Restriction ;
-        		owl:onProperty mbco:measures ;
-			owl:allValuesFrom mbco:conductivity ]. 
+        		owl:onProperty lbco:measures ;
+			owl:allValuesFrom lbco:conductivity ]. 
 
-mbco:bet_surface_area_analyzer a owl:Class ;
+lbco:bet_surface_area_analyzer a owl:Class ;
 	rdfs:label "BET surface area analyzer"^^xs:string ;
 	rdfs:comment "Brunauer-Emmett-Teller (BET) surface area analyzer"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_device .
+	rdfs:subClassOf lbco:characterization_device .
 
-mbco:palmer a owl:Class ;
+lbco:palmer a owl:Class ;
 	rdfs:label "Palmer"^^xs:string ;
 	rdfs:comment "Palmer callipers, micrometer"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_device ;
+	rdfs:subClassOf lbco:characterization_device ;
 	rdfs:subClassOf [a owl:Restriction ;
-        		owl:onProperty mbco:measures ;
-			owl:allValuesFrom mbco:thickness ]. # TO SEE: lenght?
+        		owl:onProperty lbco:measures ;
+			owl:allValuesFrom lbco:thickness ]. # TO SEE: lenght?
 
-mbco:porosimeter a owl:Class ;
+lbco:porosimeter a owl:Class ;
 	rdfs:label "Porosimeter"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_device ;
+	rdfs:subClassOf lbco:characterization_device ;
 	rdfs:subClassOf [a owl:Restriction ;
-        		owl:onProperty mbco:measures ;
-			owl:allValuesFrom mbco:porosity ]. 
+        		owl:onProperty lbco:measures ;
+			owl:allValuesFrom lbco:porosity ]. 
 
-mbco:raman_spectrometer a owl:Class ;
+lbco:raman_spectrometer a owl:Class ;
 	rdfs:label "Raman spectrometer"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_device .
+	rdfs:subClassOf lbco:characterization_device .
 
-mbco:sem_device a owl:Class ;
-	rdfs:subClassOf mbco:characterization_device ;
+lbco:sem_device a owl:Class ;
+	rdfs:subClassOf lbco:characterization_device ;
 	rdfs:label "SEM device"^^xs:string ;
 	rdfs:comment "Scanning electron microscope (SEM)"^^xs:string .
 
-mbco:xps_device a owl:Class ;
-	rdfs:subClassOf mbco:characterization_device ;
+lbco:xps_device a owl:Class ;
+	rdfs:subClassOf lbco:characterization_device ;
 	rdfs:label "XPS device"^^xs:string ;
 	rdfs:comment "X-ray photoelectron spectroscopy (XPS)"^^xs:string .
 
@@ -958,361 +958,361 @@ mbco:xps_device a owl:Class ;
 # From table 7: Characterization techniques
 # Device, output, high-level characterization type, battery type
 
-mbco:electrochemical_characterization_technique a owl:Class ;
+lbco:electrochemical_characterization_technique a owl:Class ;
 	rdfs:label "Electrochemical characterization technique"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_technique .
+	rdfs:subClassOf lbco:characterization_technique .
 
-mbco:physicochemical_characterization_technique a owl:Class ;
+lbco:physicochemical_characterization_technique a owl:Class ;
 	rdfs:label "Physicochemical characterization technique"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_technique .
+	rdfs:subClassOf lbco:characterization_technique .
 
-mbco:rheological_characterization_technique a owl:Class ;
+lbco:rheological_characterization_technique a owl:Class ;
 	rdfs:label "Rheological characterization technique"^^xs:string ;
-	rdfs:subClassOf mbco:characterization_technique .
+	rdfs:subClassOf lbco:characterization_technique .
 
-mbco:calendar_ageing a owl:Class ;
+lbco:calendar_ageing a owl:Class ;
 	rdfs:label "Calendar ageing"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_ageing] .
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_ageing] .
 
-mbco:charge_test a owl:Class ;
+lbco:charge_test a owl:Class ;
 	rdfs:label "Charge test"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_initial_performance] ; # OK? What are "charge capabilities", capacity???
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_initial_performance] ; # OK? What are "charge capabilities", capacity???
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_capacity] . # OK? What are "charge capabilities", capacity???
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_capacity] . # OK? What are "charge capabilities", capacity???
 
-mbco:cyclic_voltametry a owl:Class ;
+lbco:cyclic_voltametry a owl:Class ;
 	rdfs:label "Cyclic voltametry"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:electrolyte_cyclic_voltametry] ; # OK?
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:electrolyte_cyclic_voltametry] ; # OK?
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:electrolyte_ionic_conductivity] . # OK?
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:electrolyte_ionic_conductivity] . # OK?
 
-mbco:cycling a owl:Class ;
+lbco:cycling a owl:Class ;
 	rdfs:label "Cycling"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_ageing] .
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_ageing] .
 
-mbco:discharge_test a owl:Class ;
+lbco:discharge_test a owl:Class ;
 	rdfs:label "Discharge test"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_capacity] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_capacity] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_initial_performance] . # OK?
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_initial_performance] . # OK?
 
-mbco:duty_profile_test a owl:Class ;
+lbco:duty_profile_test a owl:Class ;
 	rdfs:label "Duty profile test"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:round_trip_efficiency] . 
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:round_trip_efficiency] . 
 
-mbco:eis_test a owl:Class ;
+lbco:eis_test a owl:Class ;
 	rdfs:label "EIS test"^^xs:string ;
 	rdfs:comment "Electrochemical impedance spectroscopy (EIS)"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:impedance] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:impedance] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:felt_conductivity] . 
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:felt_conductivity] . 
 
-mbco:gitt_test a owl:Class ;
+lbco:gitt_test a owl:Class ;
 	rdfs:label "GITT test"^^xs:string ;
 	rdfs:comment "Galvanostatic Intermittent Titration Technique (GITT)"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:active_material_potential] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:active_material_potential] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:active_material_diffusion_coefficient] . 
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:active_material_diffusion_coefficient] . 
 
-mbco:hppc_test a owl:Class ;
+lbco:hppc_test a owl:Class ;
 	rdfs:label "HPPC test"^^xs:string ;
 	rdfs:comment "Hybrid Pulse Power Characterization (HPPC)"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:active_material_potential] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:active_material_potential] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_power] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_power] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_open_circuit_voltage] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_open_circuit_voltage] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:full_cell_electric_resistance] . # TOSEE: OK? 
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_electric_resistance] . # TOSEE: OK? 
 
-mbco:road_profile_test a owl:Class ;
+lbco:road_profile_test a owl:Class ;
 	rdfs:label "Road profile test"^^xs:string ;
-	rdfs:subClassOf mbco:electrochemical_characterization_technique ;
+	rdfs:subClassOf lbco:electrochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:potentiostat] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:round_trip_efficiency] . 
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:round_trip_efficiency] . 
 
-mbco:bet_measurement a owl:Class ;
+lbco:bet_measurement a owl:Class ;
 	rdfs:label "BET measurement"^^xs:string ;
-	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
+	rdfs:subClassOf lbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:bet_surface_area_analyzer] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:bet_surface_area_analyzer] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:electrode_surface_area] .  # TOSEE: OK? or should it be "active surface area"?
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:electrode_surface_area] .  # TOSEE: OK? or should it be "active surface area"?
 
-mbco:direct_thickness_measurement a owl:Class ;
+lbco:direct_thickness_measurement a owl:Class ;
 	rdfs:label "Direct thickness measurement"^^xs:string ;
-	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
+	rdfs:subClassOf lbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:palmer] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:palmer] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:felt_thickness] ; # OK?
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:felt_thickness] ; # OK?
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:coating_thickness] ; 
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:coating_thickness] ; 
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:membrane_thickness] .
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:membrane_thickness] .
 
-mbco:porosimetry a owl:Class ;
+lbco:porosimetry a owl:Class ;
 	rdfs:label "Porosimetry"^^xs:string ;
-	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
+	rdfs:subClassOf lbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:porosimeter] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:porosimeter] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:electrode_porosity] ;  # TOSEE: is it important to say "Hg porosity"?
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:electrode_porosity] ;  # TOSEE: is it important to say "Hg porosity"?
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:felt_porosity] .  
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:felt_porosity] .  
 
-mbco:raman_spectrometry a owl:Class ;
+lbco:raman_spectrometry a owl:Class ;
 	rdfs:label "Raman spectrometry"^^xs:string ;
-	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
+	rdfs:subClassOf lbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:raman_spectrometer] .
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:raman_spectrometer] .
 #	rdfs:subClassOf [a owl:Restriction ;
-#        owl:onProperty mbco:has_output ;
-#	owl:someValuesFrom mbco:] . #TOSEE: Morphology and compositon: of what? Felt surface properties: what are those?
+#        owl:onProperty lbco:has_output ;
+#	owl:someValuesFrom lbco:] . #TOSEE: Morphology and compositon: of what? Felt surface properties: what are those?
 
-mbco:sem_technique a owl:Class ;
+lbco:sem_technique a owl:Class ;
 	rdfs:label "SEM technique"^^xs:string ;
 	rdfs:comment "Scanning electron microscopy (SEM)"^^xs:string ;
-	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
+	rdfs:subClassOf lbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:sem_device] ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:sem_device] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:active_material_granulometry] ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:active_material_granulometry] ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_output ;
-	owl:someValuesFrom mbco:electrode_tortuosity] . # TOSEE:microscopic geometry: what quantities?
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:electrode_tortuosity] . # TOSEE:microscopic geometry: what quantities?
 
-mbco:XPS_technique a owl:Class ;
+lbco:XPS_technique a owl:Class ;
 	rdfs:label "XPS technique"^^xs:string ;
 	rdfs:comment "X-ray photoelectron spectroscopy (XPS)"^^xs:string ;
-	rdfs:subClassOf mbco:physicochemical_characterization_technique ;
+	rdfs:subClassOf lbco:physicochemical_characterization_technique ;
 	rdfs:subClassOf [a owl:Restriction ;
-        owl:onProperty mbco:has_participant ;
-	owl:someValuesFrom mbco:xps_device] .
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:xps_device] .
 #	rdfs:subClassOf [a owl:Restriction ;
-#        owl:onProperty mbco:has_output ;
-#	owl:someValuesFrom mbco:] . #TOSEE: Morphology and compositon: of what? Felt surface properties: what are those?
+#        owl:onProperty lbco:has_output ;
+#	owl:someValuesFrom lbco:] . #TOSEE: Morphology and compositon: of what? Felt surface properties: what are those?
 
-#        mbco:has_participant [a mbco:sample] ;
-#	mbco:has_participant [a mbco:agent] ;
+#        lbco:has_participant [a lbco:sample] ;
+#	lbco:has_participant [a lbco:agent] ;
 
 ####################################################################################
 # Modelling approaches, from D4.1, cf. CQ_SIM_3 and CQ_SIM_4, partially covered (TO DO: complete / check)
 
-# mbco:AB_INITIO_DFT
-# mbco:REACTIVE_MD
-# mbco:CLASSICAL_MC_MD
+# lbco:AB_INITIO_DFT
+# lbco:REACTIVE_MD
+# lbco:CLASSICAL_MC_MD
 
-mbco:lib_model a owl:Class ;
-     owl:equivalentClass [a owl:Restriction ; owl:onProperty mbco:is_model_for ;
-     owl:someValuesFrom mbco:lithium_ion_battery] .
+lbco:lib_model a owl:Class ;
+     owl:equivalentClass [a owl:Restriction ; owl:onProperty lbco:is_model_for ;
+     owl:someValuesFrom lbco:lithium_ion_battery] .
 
-mbco:rfb_model a owl:Class ;
-     owl:equivalentClass [a owl:Restriction ; owl:onProperty mbco:is_model_for ;
-     owl:someValuesFrom mbco:redox_flow_battery] .
+lbco:rfb_model a owl:Class ;
+     owl:equivalentClass [a owl:Restriction ; owl:onProperty lbco:is_model_for ;
+     owl:someValuesFrom lbco:redox_flow_battery] .
 
-mbco:sei_formation_process a owl:Class ;
-	rdfs:subClassOf mbco:process .
+lbco:sei_formation_process a owl:Class ;
+	rdfs:subClassOf lbco:process .
 
-mbco:sei_formation_model a owl:Class ;
+lbco:sei_formation_model a owl:Class ;
 	rdfs:label "SEI formation model"^^xs:string ;
     	owl:equivalentClass [a owl:Restriction ;
-                   owl:onProperty mbco:is_model_for ;
-                   owl:someValuesFrom mbco:sei_formation_process] .
+                   owl:onProperty lbco:is_model_for ;
+                   owl:someValuesFrom lbco:sei_formation_process] .
 
-mbco:KOHN_SHAM_SEI_FORMATION_MODEL a mbco:physics_based_model ;
-		    a mbco:sei_formation_model ;
-		    a mbco:lib_model ;
-		    mbco:has_granularity_level osmo:ELECTRONIC ;
-		    mbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_EL.1 .
+lbco:KOHN_SHAM_SEI_FORMATION_MODEL a lbco:physics_based_model ;
+		    a lbco:sei_formation_model ;
+		    a lbco:lib_model ;
+		    lbco:has_granularity_level osmo:ELECTRONIC ;
+		    lbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_EL.1 .
 
-mbco:electrolyte_model a owl:Class ;
+lbco:electrolyte_model a owl:Class ;
 	rdfs:label "Electrolyte model"^^xs:string ;
     	owl:equivalentClass [a owl:Restriction ;
-                   owl:onProperty mbco:is_model_for ;
-                   owl:someValuesFrom mbco:electrolyte] .
+                   owl:onProperty lbco:is_model_for ;
+                   owl:someValuesFrom lbco:electrolyte] .
 
-mbco:DPD_ELECTROLYTE_MODEL a mbco:physics_based_model ;
-		    a mbco:electrolyte_model ;
-		    mbco:has_granularity_level osmo:MESOSCOPIC ;
-		    mbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_M.3 .
+lbco:DPD_ELECTROLYTE_MODEL a lbco:physics_based_model ;
+		    a lbco:electrolyte_model ;
+		    lbco:has_granularity_level osmo:MESOSCOPIC ;
+		    lbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_M.3 .
 
-mbco:full_cell_model a owl:Class ;
+lbco:full_cell_model a owl:Class ;
 	rdfs:label "Full cell model"^^xs:string ;
     	owl:equivalentClass [a owl:Restriction ;
-                   owl:onProperty mbco:is_model_for ;
-                   owl:someValuesFrom mbco:full_cell] .
+                   owl:onProperty lbco:is_model_for ;
+                   owl:someValuesFrom lbco:full_cell] .
 
-mbco:P3D_CELL_MODEL a mbco:physics_based_model ;
-		    a mbco:full_cell_model ;
-		    a mbco:lib_model ;
-		    mbco:has_granularity_level osmo:CONTINUUM ;
+lbco:P3D_CELL_MODEL a lbco:physics_based_model ;
+		    a lbco:full_cell_model ;
+		    a lbco:lib_model ;
+		    lbco:has_granularity_level osmo:CONTINUUM ;
 		    rdfs:comment "Pseudo 3 dimensional (P3D) cell model"^^xs:string .
 
-mbco:P2D_CELL_MODEL a mbco:physics_based_model ;
-		    a mbco:full_cell_model ;
-		    a mbco:lib_model ;
-		    mbco:has_granularity_level osmo:CONTINUUM ;
+lbco:P2D_CELL_MODEL a lbco:physics_based_model ;
+		    a lbco:full_cell_model ;
+		    a lbco:lib_model ;
+		    lbco:has_granularity_level osmo:CONTINUUM ;
 		    rdfs:comment "Pseudo 2 dimensional (P3D) cell model"^^xs:string .
 
-mbco:SP_CIRCUIT_CELL_MODEL a mbco:physics_based_model ;
-		    a mbco:full_cell_model ;
-		    a mbco:lib_model ;
-		    mbco:has_granularity_level osmo:CONTINUUM .
+lbco:SP_CIRCUIT_CELL_MODEL a lbco:physics_based_model ;
+		    a lbco:full_cell_model ;
+		    a lbco:lib_model ;
+		    lbco:has_granularity_level osmo:CONTINUUM .
 
-mbco:electrode_model a owl:Class ;
+lbco:electrode_model a owl:Class ;
 	rdfs:label "Electrode model"^^xs:string ;
 	owl:equivalentClass [a owl:Restriction ;
-                   owl:onProperty mbco:is_model_for ;
-                   owl:someValuesFrom mbco:electrode] .
+                   owl:onProperty lbco:is_model_for ;
+                   owl:someValuesFrom lbco:electrode] .
 
-mbco:4D_RESOLVED_PHASE_FIELD_ELECTRODE_MODEL a mbco:physics_based_model ;
-		    a mbco:electrode_model ;
-		    a mbco:lib_model ;
-		    mbco:has_granularity_level osmo:CONTINUUM .
+lbco:4D_RESOLVED_PHASE_FIELD_ELECTRODE_MODEL a lbco:physics_based_model ;
+		    a lbco:electrode_model ;
+		    a lbco:lib_model ;
+		    lbco:has_granularity_level osmo:CONTINUUM .
 
-#mbco:CONTINUUM_FLOW_FIELD_MODEL
-#mbco:POISSON_NERNST_PLACK
+#lbco:CONTINUUM_FLOW_FIELD_MODEL
+#lbco:POISSON_NERNST_PLACK
 
-mbco:calendering_model a owl:Class ;
+lbco:calendering_model a owl:Class ;
 	rdfs:label "Calendering model"^^xs:string ;
     	owl:equivalentClass [a owl:Restriction ;
-                   owl:onProperty mbco:is_model_for ;
-                   owl:someValuesFrom mbco:calendering] .
+                   owl:onProperty lbco:is_model_for ;
+                   owl:someValuesFrom lbco:calendering] .
 
-mbco:DIFFUSION_MECHANICAL_EQUATION_MODEL_FOR_CALENDERING
-	a mbco:physics_based_model ;
-	a mbco:calendering_model ;
-	a mbco:lib_model ;
-	mbco:has_granularity_level osmo:CONTINUUM .
+lbco:DIFFUSION_MECHANICAL_EQUATION_MODEL_FOR_CALENDERING
+	a lbco:physics_based_model ;
+	a lbco:calendering_model ;
+	a lbco:lib_model ;
+	lbco:has_granularity_level osmo:CONTINUUM .
 
-mbco:MD_MODEL_FOR_RFB_ELECTROLYTE_TRANSPORT_PROPERTIES 
-	a mbco:physics_based_model ;
-	a mbco:rfb_model ;
-	a mbco:electrolyte_model ; 
-	mbco:has_granularity_level osmo:ATOMISTIC ;
-	mbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_A.3 .
+lbco:MD_MODEL_FOR_RFB_ELECTROLYTE_TRANSPORT_PROPERTIES 
+	a lbco:physics_based_model ;
+	a lbco:rfb_model ;
+	a lbco:electrolyte_model ; 
+	lbco:has_granularity_level osmo:ATOMISTIC ;
+	lbco:has_physical_equation_type osmo:INDIVIDUAL_OF_PE_TYPE_A.3 .
 
 ####################################################################################
 # Substances / materials
 
-mbco:CARBON_BLACK a mbco:substance ;
+lbco:CARBON_BLACK a lbco:substance ;
     rdfs:label "Carbon black" .
 
-mbco:GRAPHITE a mbco:substance ;
+lbco:GRAPHITE a lbco:substance ;
     rdfs:label "Graphite" .
 
-mbco:LFP a mbco:substance ;
+lbco:LFP a lbco:substance ;
     rdfs:label "LFP" ;
     skos:altLabel "Lithium Iron Phosphate" .
 
-mbco:NMC a mbco:substance ;
+lbco:NMC a lbco:substance ;
     rdfs:label "NMC" ;
     skos:altLabel "Lithium Nickel Manganese Cobalt Oxide" .
 
-mbco:NMP a mbco:substance ;
+lbco:NMP a lbco:substance ;
     rdfs:label "NMP" ;
     skos:altLabel "N-Methyl-2-Pyrrolidone" .
 
-mbco:PVDF a mbco:substance ;
+lbco:PVDF a lbco:substance ;
     rdfs:label "PVDF" ;
     skos:altLabel "Polyvinylidene Fluoride" .
 
-mbco:CMC a mbco:substance ;
+lbco:CMC a lbco:substance ;
     rdfs:label "CMC" ;
     skos:altLabel "Carboxymethyl Cellulose" .
 
-mbco:SBR a mbco:substance ;
+lbco:SBR a lbco:substance ;
     rdfs:label "SBR" ;
     skos:altLabel "Styrene Butadiene Rubber" .
 
-mbco:ARGON_GAS a mbco:substance ;
+lbco:ARGON_GAS a lbco:substance ;
     rdfs:label "Argon gas" .
 
-mbco:HYDROGEN_GAS a mbco:substance ;
+lbco:HYDROGEN_GAS a lbco:substance ;
     rdfs:label "Hydrogen gas" .
 
-mbco:CARBON_MONOXIDE a mbco:substance ;
+lbco:CARBON_MONOXIDE a lbco:substance ;
     rdfs:label "Carbon monoxide" .
 
-mbco:CARBON_DIOXIDE a mbco:substance ;
+lbco:CARBON_DIOXIDE a lbco:substance ;
     rdfs:label "Carbon dioxide" .
 

@@ -1,4 +1,4 @@
-@prefix mbco: <https://batcat.info/semantics/core#> .
+@prefix lbco: <https://batcat.info/semantics/core#> .
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -14,7 +14,7 @@
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
   owl:versionInfo "version 0.1.12"^^xs:string ;
-  dcterms:modified "2025-12-11"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -29,238 +29,238 @@
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
-  vann:preferredNamespacePrefix "mbco"^^xs:string ;
+  vann:preferredNamespacePrefix "lbco"^^xs:string ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain, 
 with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
 #  dcterms:bibliographicCitation ""^^xs:string ;
   rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
 innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
 
-mbco:agent a owl:Class ;
+lbco:agent a owl:Class ;
     rdfs:label "Agent" ;
-    owl:disjointUnionOf (mbco:human_agent mbco:machine_agent) ;
+    owl:disjointUnionOf (lbco:human_agent lbco:machine_agent) ;
     rdfs:comment "An entity that has the capability to act"^^xs:string .    
 
-mbco:human_agent a owl:Class ;
+lbco:human_agent a owl:Class ;
     rdfs:label "Human agent" .
 
-mbco:machine_agent a owl:Class ;
+lbco:machine_agent a owl:Class ;
     rdfs:label "Machine agent" .
 
-mbco:data a owl:Class ;
+lbco:data a owl:Class ;
     rdfs:label "Data" .
 
-mbco:material a owl:Class ;
+lbco:material a owl:Class ;
     rdfs:label "Material" .
 
-mbco:substance a owl:Class ;
+lbco:substance a owl:Class ;
     rdfs:label "Substance" ;
-    rdfs:subClassOf mbco:material .
+    rdfs:subClassOf lbco:material .
 
-mbco:process a owl:Class ;
+lbco:process a owl:Class ;
     rdfs:label "Process" ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_input ;
+                   owl:onProperty lbco:has_input ;
                    owl:someValuesFrom owl:Thing] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ;
+                   owl:onProperty lbco:has_output ;
                    owl:someValuesFrom owl:Thing] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ; # TODO: clarify how different from input/output (cf. BVCO)??? E.g.: a machine+operator+sample are participants, input is certain data, output is other data.
+                   owl:onProperty lbco:has_participant ; # TODO: clarify how different from input/output (cf. BVCO)??? E.g.: a machine+operator+sample are participants, input is certain data, output is other data.
                    owl:someValuesFrom owl:Thing] ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_setting ;
+                   owl:onProperty lbco:has_setting ;
                    owl:someValuesFrom owl:Thing] ;
     rdfs:comment "A series of actions, can be broken down in process steps of given order"^^xs:string ;
     rdfs:comment "Can be planned (not realized yet), or already realized"^^xs:string .		   
 
-mbco:process_step a owl:Class ;
+lbco:process_step a owl:Class ;
     rdfs:label "Process step" ;
-    rdfs:subClassOf mbco:process ;
+    rdfs:subClassOf lbco:process ;
     rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty [owl:inverseOf mbco:has_part] ;
-                   owl:someValuesFrom mbco:process] .
+                   owl:onProperty [owl:inverseOf lbco:has_part] ;
+                   owl:someValuesFrom lbco:process] .
 
-mbco:software a owl:Class ;
+lbco:software a owl:Class ;
     rdfs:label "Software" .
 
-mbco:physical_object a owl:Class ;
+lbco:physical_object a owl:Class ;
     rdfs:label "(Physical) Object" . 
 
-mbco:sample a owl:Class ;
+lbco:sample a owl:Class ;
     rdfs:label "Sample" ;
-    rdfs:subClassOf mbco:physical_object .
+    rdfs:subClassOf lbco:physical_object .
 
-mbco:device a owl:Class ;
+lbco:device a owl:Class ;
     rdfs:label "Device" ;
-    rdfs:subClassOf mbco:physical_object ;
+    rdfs:subClassOf lbco:physical_object ;
     rdfs:comment "A physical object made for a given functionality"^^xs:string .
 
-mbco:computational_device a owl:Class ;
+lbco:computational_device a owl:Class ;
     rdfs:label "Computational device" ;
-    rdfs:subClassOf mbco:device ;
+    rdfs:subClassOf lbco:device ;
     rdfs:comment "A device that can perform a (digital) computational action."^^xs:string ;
     rdfs:comment "E.g., a PC, a computational cluster."^^xs:string .
 
-mbco:characterization_device a owl:Class ;
+lbco:characterization_device a owl:Class ;
     rdfs:label "Characterization device" ;
-    rdfs:subClassOf mbco:device ;
+    rdfs:subClassOf lbco:device ;
     rdfs:comment "A device that can perform a characterization action."^^xs:string ;
     rdfs:comment "E.g., a potentiostat."^^xs:string .
 
-mbco:manufacturing_device a owl:Class ;
+lbco:manufacturing_device a owl:Class ;
     rdfs:label "Manufacturing device" ;
-    rdfs:subClassOf mbco:device ;
+    rdfs:subClassOf lbco:device ;
     rdfs:comment "A device that can perform a manufacturing action"^^xs:string ;
     rdfs:comment "E.g., a mixer, a calenderer."^^xs:string .    
 
-mbco:method a owl:Class ;
+lbco:method a owl:Class ;
     rdfs:label "Method" ;
     rdfs:comment """a procedure, technique, or planned way of doing something (WordReference Random House
     Learner's Dictionary of American English 2025)"""^^xs:string ;
     rdfs:comment "Could be a characterization method, a simulation method, a manufacturing method, etc."^^xs:string ;
-    rdfs:subClassOf mbco:process . 
+    rdfs:subClassOf lbco:process . 
 
-# mbco:compute_resource a owl:Class ;
+# lbco:compute_resource a owl:Class ;
 #     rdfs:label "Compute resource" ; # we mean it as infrastrucure. Maybe should be renamed
 #     rdfs:comment "A physical or virtual machine on which software can be run."^^xs:string ;
 #     a owl:DeprecatedClass .
 
-mbco:statement a owl:Class ;
+lbco:statement a owl:Class ;
     rdfs:label "Statement" . # Note: in EVMPO, statement is used for elementary communications. Here not, it is more general.   
 
-mbco:role a owl:Class ;
+lbco:role a owl:Class ;
     rdfs:label "Role" ;
     rdfs:comment "A non-rigid category (i.e., during its lifespan, an entity can change role)."^^xs:string ;
     rdfs:comment """For example: role of a human agent in an organization (employee/director), in a software repository (editor/owner); 
     role of a variable in a mathematical problem (dependent/independent/parameter)."""^^xs:string .
 
-mbco:property a owl:Class ; #TOSEE: property is a keyword in OWL, add specifier?
+lbco:property a owl:Class ; #TOSEE: property is a keyword in OWL, add specifier?
     rdfs:label "Property" ;
     rdfs:comment "Observable property, such as a physical property of a material, the status of a device, etc"^^xs:string .
 
-mbco:status a owl:Class ;
+lbco:status a owl:Class ;
     rdfs:label "Status" ;
     rdfs:comment "For a single object or a system. E.g.: the software is installed/not-installed; the device is on/off, operational/faulty, the agent is available/busy, etc."^^xs:string ;
-    rdfs:subClassOf mbco:property .
+    rdfs:subClassOf lbco:property .
 
-mbco:physical_quantity a owl:Class ;
+lbco:physical_quantity a owl:Class ;
      rdfs:label "Physical quantity" ;
-     rdfs:subClassOf mbco:property .
+     rdfs:subClassOf lbco:property .
 
-mbco:annotation a owl:Class ;
+lbco:annotation a owl:Class ;
     rdfs:label "Annotation" ;
     rdfs:comment "Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module"^^xs:string .
 
-mbco:physical_object_status a owl:Class ;
+lbco:physical_object_status a owl:Class ;
     rdfs:label "Physical object status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:NEW mbco:OK mbco:BROKEN mbco:AGED) .
+    rdfs:subClassOf lbco:status ;
+    owl:oneOf (lbco:NEW lbco:OK lbco:BROKEN lbco:AGED) .
 
-mbco:object_analysis_status a owl:Class ;
+lbco:object_analysis_status a owl:Class ;
     rdfs:label "(Object) Analysis status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:ANALYZED mbco:NOT_ANALYZED) .
+    rdfs:subClassOf lbco:status ;
+    owl:oneOf (lbco:ANALYZED lbco:NOT_ANALYZED) .
 
-mbco:physical_object_network_status a owl:Class ;
+lbco:physical_object_network_status a owl:Class ;
     rdfs:label "Physical object network status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:ONLINE mbco:OFFLINE) .
+    rdfs:subClassOf lbco:status ;
+    owl:oneOf (lbco:ONLINE lbco:OFFLINE) .
 
-mbco:process_status a owl:Class ;
+lbco:process_status a owl:Class ;
     rdfs:label "Process status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:PLANNED mbco:RUNNING mbco:SUCCESS mbco:FAIL mbco:NEEDS_TO_BE_REDONE) .
+    rdfs:subClassOf lbco:status ;
+    owl:oneOf (lbco:PLANNED lbco:RUNNING lbco:SUCCESS lbco:FAIL lbco:NEEDS_TO_BE_REDONE) .
 
-mbco:agent_status a owl:Class ;
+lbco:agent_status a owl:Class ;
     rdfs:label "Agent status" ;
-    rdfs:subClassOf mbco:status ;
-    owl:oneOf (mbco:AVAILABLE mbco:BUSY mbco:NOT_AVAILABLE) .
+    rdfs:subClassOf lbco:status ;
+    owl:oneOf (lbco:AVAILABLE lbco:BUSY lbco:NOT_AVAILABLE) .
 
-mbco:batch a owl:Class ;
+lbco:batch a owl:Class ;
      rdfs:label "Batch" ;
      rdfs:comment "A batch is a set of experimental samples or products, acquired or manufactured/prepared together."^^xs:string ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-          owl:onProperty mbco:has_part ;
-          owl:someValuesFrom mbco:physical_object] .
+          owl:onProperty lbco:has_part ;
+          owl:someValuesFrom lbco:physical_object] .
 
 ### Object Properties ###
 
-mbco:has_part a owl:ObjectProperty ;
+lbco:has_part a owl:ObjectProperty ;
     rdfs:label "has part" . 
 
-mbco:has_participant a owl:ObjectProperty ;
-    rdfs:domain mbco:process ;
-    rdfs:range [owl:unionOf (mbco:agent mbco:physical_object mbco:software)] .
+lbco:has_participant a owl:ObjectProperty ;
+    rdfs:domain lbco:process ;
+    rdfs:range [owl:unionOf (lbco:agent lbco:physical_object lbco:software)] .
 
-mbco:follows a owl:ObjectProperty ;
+lbco:follows a owl:ObjectProperty ;
     rdfs:label "follows" ;
     rdfs:comment "refers to time ordering of process steps" ;
-    rdfs:domain mbco:process_step ;
-    rdfs:range mbco:process_step .
+    rdfs:domain lbco:process_step ;
+    rdfs:range lbco:process_step .
 
-mbco:follows_directly a owl:ObjectProperty ;
+lbco:follows_directly a owl:ObjectProperty ;
     rdfs:label "follows directly" ;
     rdfs:comment "refers to time ordering of process steps" ;
-    rdfs:domain mbco:process_step ;
-    rdfs:range mbco:process_step ;
-    rdfs:subPropertyOf mbco:follows .
+    rdfs:domain lbco:process_step ;
+    rdfs:range lbco:process_step ;
+    rdfs:subPropertyOf lbco:follows .
 
-mbco:has_input a owl:ObjectProperty ;
+lbco:has_input a owl:ObjectProperty ;
    rdfs:label "has input" ;
-    rdfs:domain [owl:unionOf (mbco:process mbco:software mbco:agent mbco:device)] ;
-    rdfs:range [owl:unionOf (mbco:data mbco:statement mbco:physical_object mbco:material mbco:property)] .
+    rdfs:domain [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
+    rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
    
-mbco:has_output a owl:ObjectProperty ;
+lbco:has_output a owl:ObjectProperty ;
    rdfs:label "has output" ;
-   rdfs:domain [owl:unionOf (mbco:process mbco:software mbco:agent mbco:device)] ;
-   rdfs:range [owl:unionOf (mbco:data mbco:statement mbco:physical_object mbco:material mbco:property)] .
+   rdfs:domain [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
+   rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
 
-mbco:has_setting a owl:ObjectProperty ;
+lbco:has_setting a owl:ObjectProperty ;
    rdfs:label "has setting" ;
    rdfs:comment "Points to a property affecting the process"^^xs:string ;
    rdfs:comment "E.g., in a manufacturing process step, points to the tunable properties (settings)"^^xs:string ;
 #   rdfs:comment "Settings, conditions affecting the process."^^xs:string ; # TODO: clarify how this is separate from "input" and how different from "constraint". E.g.: numerical parameters vs model parameters for a simulation
-   rdfs:domain mbco:process ; # TOSEE: extend it to include also software+agent+device?
-   rdfs:range mbco:property ; # TO SEE: extend it?
-   rdfs:subPropertyOf mbco:has_property . # TO SEE: adapt based on the above
+   rdfs:domain lbco:process ; # TOSEE: extend it to include also software+agent+device?
+   rdfs:range lbco:property ; # TO SEE: extend it?
+   rdfs:subPropertyOf lbco:has_property . # TO SEE: adapt based on the above
 
-mbco:uses_method a owl:ObjectProperty ;
+lbco:uses_method a owl:ObjectProperty ;
    rdfs:label "uses method" ;
-   rdfs:domain mbco:process ;
-   rdfs:range mbco:method .
+   rdfs:domain lbco:process ;
+   rdfs:range lbco:method .
 
-mbco:answers a owl:ObjectProperty ;
-    rdfs:domain mbco:statement ; 
-    rdfs:range mbco:statement .
+lbco:answers a owl:ObjectProperty ;
+    rdfs:domain lbco:statement ; 
+    rdfs:range lbco:statement .
     
-mbco:has_status a owl:ObjectProperty ;
-    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:software mbco:process)] ;
-    rdfs:range mbco:status ;
-    rdfs:subPropertyOf mbco:has_property .
+lbco:has_status a owl:ObjectProperty ;
+    rdfs:domain [owl:unionOf (lbco:agent lbco:physical_object lbco:software lbco:process)] ;
+    rdfs:range lbco:status ;
+    rdfs:subPropertyOf lbco:has_property .
 
-mbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
-    rdfs:domain [owl:unionOf (mbco:agent mbco:physical_object mbco:software mbco:process)] ;
-    rdfs:range mbco:property .
+lbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
+    rdfs:domain [owl:unionOf (lbco:agent lbco:physical_object lbco:software lbco:process)] ;
+    rdfs:range lbco:property .
 
-mbco:is_incompatible_with a owl:ObjectProperty ;
+lbco:is_incompatible_with a owl:ObjectProperty ;
    rdfs:label "is incompatible with" ;
    rdfs:comment "E.g., it can be used to flag up incompatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
 
 # FA_CRO_3
-mbco:is_material_incompatible_with_material a owl:ObjectProperty ;
+lbco:is_material_incompatible_with_material a owl:ObjectProperty ;
    rdfs:label "is material incompatible with material" ;
    rdfs:comment "To flag up between materials (e.g., mixtures that are unsafe, etc)"^^xs:string ;
-   rdfs:domain mbco:material ; 
-   rdfs:range mbco:material ;
-   rdfs:subPropertyOf mbco:is_incompatible_with .
+   rdfs:domain lbco:material ; 
+   rdfs:range lbco:material ;
+   rdfs:subPropertyOf lbco:is_incompatible_with .
    
 ### Datatype Properties ###
 
-mbco:has_batch_ID a owl:DatatypeProperty ;
+lbco:has_batch_ID a owl:DatatypeProperty ;
     rdfs:label "has batch ID" ;
-    rdfs:domain mbco:batch ;
+    rdfs:domain lbco:batch ;
     rdfs:range rdfs:Literal .
 
 # see also: EMMO-LITE, DOLCE-LITE, EVMPO.

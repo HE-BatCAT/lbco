@@ -1,6 +1,6 @@
 @prefix abel: <https://batcat.info/semantics/abel#> .
 
-@prefix mbco: <https://batcat.info/semantics/core#> .
+@prefix lbco: <https://batcat.info/semantics/core#> .
 
 @prefix emmol: <https://w3id.org/emmo/emmo-lite#> .
 
@@ -16,7 +16,7 @@
 <https://batcat.info/semantics/abel> dcterms:title "Alignment of BatCAT to EMMO-LITE (ABEL)"^^xs:string ;
   owl:versionInfo "version 0.0.3"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
-  dcterms:modified "2025-05-12"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:creator "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -31,46 +31,46 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:agent rdfs:subClassOf emmol:IntentionalAgent .
+lbco:agent rdfs:subClassOf emmol:IntentionalAgent .
 
-mbco:data rdfs:subClassOf emmol:Data .
+lbco:data rdfs:subClassOf emmol:Data .
 
-mbco:material rdfs:subClassOf emmol:Material .
+lbco:material rdfs:subClassOf emmol:Material .
 
-mbco:process rdfs:subClassOf emmol:Process .
+lbco:process rdfs:subClassOf emmol:Process .
 
-mbco:software rdfs:subClassOf emmol:DigitalData . # OK?
+lbco:software rdfs:subClassOf emmol:DigitalData . # OK?
 
-mbco:physical_object rdfs:subClassOf emmol:PhysicalObject . # or PhysicalEntity ?
+lbco:physical_object rdfs:subClassOf emmol:PhysicalObject . # or PhysicalEntity ?
 
-mbco:compute_resource rdfs:subClassOf emmol:Object . # OK? What about virtual machines?
+lbco:compute_resource rdfs:subClassOf emmol:Object . # OK? What about virtual machines?
 
-mbco:statement rdfs:subClassOf emmol:Data . # OK?
+lbco:statement rdfs:subClassOf emmol:Data . # OK?
 
-mbco:role rdfs:subClassOf emmol:Role . #OK?
+lbco:role rdfs:subClassOf emmol:Role . #OK?
 
-mbco:status rdfs:subClassOf emmol:Status . #OK?
+lbco:status rdfs:subClassOf emmol:Status . #OK?
 
-mbco:annotation rdfs:subClassOf emmol:Sign . #OK?
+lbco:annotation rdfs:subClassOf emmol:Sign . #OK?
 
 ### Object Properties ###
 
-mbco:has_part rdfs:subPropertyOf emmol:hasPart .
+lbco:has_part rdfs:subPropertyOf emmol:hasPart .
 
-mbco:has_participant rdfs:subPropertyOf emmol:hasParticipant .
+lbco:has_participant rdfs:subPropertyOf emmol:hasParticipant .
 
-mbco:follows rdfs:subPropertyOf emmol:follows .
+lbco:follows rdfs:subPropertyOf emmol:follows .
 
-mbco:has_input rdfs:subPropertyOf emmol:hasInput .
+lbco:has_input rdfs:subPropertyOf emmol:hasInput .
 
-mbco:has_output rdfs:subPropertyOf emmol:hasOutput .
+lbco:has_output rdfs:subPropertyOf emmol:hasOutput .
 
-mbco:has_setting rdfs:subPropertyOf emmol:hasPart . # OK?
+lbco:has_setting rdfs:subPropertyOf emmol:hasPart . # OK?
 
-mbco:uses_method rdfs:subPropertyOf emmol:hasPart . # OK?
+lbco:uses_method rdfs:subPropertyOf emmol:hasPart . # OK?
 
-mbco:answers rdfs:subPropertyOf emmol:isSemioticallyRelatedTo . # OK?
+lbco:answers rdfs:subPropertyOf emmol:isSemioticallyRelatedTo . # OK?
 
-mbco:has_status rdfs:subPropertyOf emmol:hasStatus . # OK?
+lbco:has_status rdfs:subPropertyOf emmol:hasStatus . # OK?
     
 

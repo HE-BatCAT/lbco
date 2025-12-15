@@ -1,6 +1,6 @@
-# Overview of MBCO
+# Overview of LBCO
 
-The MBCO set of ontologies contains a modules for: (a) Higher level; (b) Optimization, decision support, design; (c) Twinning; (d) Data and
+The LBCO set of ontologies contains a modules for: (a) Higher level; (b) Optimization, decision support, design; (c) Twinning; (d) Data and
 metadata; (e) Modelling and simulation; (f) Characterization; (g) Manufacturing; (h) Battery (LiB and
 RFB). All modules (b) - (h) are aligned with (a), however some are vertical [(e) - (g)] and other transversal [(b) - (d) and (h)]:
 this means that, for example, the data module (e.g., describing uncertainties and data quality protocols)
@@ -8,11 +8,11 @@ needs to address corresponding issues from modelling, characterization and manuf
 
 Below we briefly describe the scope of each module, also to clarify the boundaries between them.
 
-Also, the competency questions (CQs) addressed by MBCO are tracked [here](doc/competency_questions.csv).
+Also, the competency questions (CQs) addressed by LBCO are tracked [here](doc/competency_questions.csv).
 
 ## Higher level concept (-> higher.ttl) 
 
-A module to facilitate a structuring of and connection between the lower modules, and a possible alignment of MBCO with top level ontologies.
+A module to facilitate a structuring of and connection between the lower modules, and a possible alignment of LBCO with top level ontologies.
 
 ## Optimization, decision support, design (-> optimization.ttl)
 

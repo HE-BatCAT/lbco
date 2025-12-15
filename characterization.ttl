@@ -1,4 +1,4 @@
-@prefix mbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -14,7 +14,7 @@
 
 <https://batcat.info/semantics/core/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
    owl:versionInfo "version 0.0.4"^^xs:string ;
-   dcterms:modified "2025-12-11"^^xs:string ;
+   dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -27,7 +27,7 @@
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
-  vann:preferredNamespacePrefix "mbco"^^xs:string ;
+  vann:preferredNamespacePrefix "lbco"^^xs:string ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
 with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
 #  dcterms:bibliographicCitation ""^^xs:string ;
@@ -36,71 +36,71 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:sample a owl:Class ;
+lbco:sample a owl:Class ;
      rdfs:label "Sample" ;
-     rdfs:subClassOf mbco:physical_object ;
+     rdfs:subClassOf lbco:physical_object ;
      rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty [owl:inverseOf mbco:has_part] ;
-                   owl:someValuesFrom mbco:batch] .
+                   owl:onProperty [owl:inverseOf lbco:has_part] ;
+                   owl:someValuesFrom lbco:batch] .
 
-mbco:sample_history a owl:Class ;
+lbco:sample_history a owl:Class ;
      rdfs:label "Sample history" ;
-     rdfs:subClassOf mbco:data ;
+     rdfs:subClassOf lbco:data ;
      rdfs:comment """Track the whole history (across laboratories) of each experimental sample being 
 characterized in BatCAT. It includes input and preparation conditions, records all processes undergone by a sample, 
 including its artificial / accelerated ageing."""^^xs:string. 
 
-mbco:characterization_technique a owl:Class ;
+lbco:characterization_technique a owl:Class ;
      rdfs:label "Characterization technique" ;
-     rdfs:subClassOf mbco:method ;
+     rdfs:subClassOf lbco:method ;
      rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ; 
-                   owl:someValuesFrom mbco:characterization_device] ;
+                   owl:onProperty lbco:has_participant ; 
+                   owl:someValuesFrom lbco:characterization_device] ;
      rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_participant ; 
-                   owl:someValuesFrom mbco:sample] ;
+                   owl:onProperty lbco:has_participant ; 
+                   owl:someValuesFrom lbco:sample] ;
      rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:has_output ; 
-                   owl:someValuesFrom mbco:physical_quantity] .
+                   owl:onProperty lbco:has_output ; 
+                   owl:someValuesFrom lbco:physical_quantity] .
 
-mbco:characterization_measurement a owl:Class ;
+lbco:characterization_measurement a owl:Class ;
      rdfs:label "Characterization measurement" ;
-     rdfs:subClassOf mbco:process ;
+     rdfs:subClassOf lbco:process ;
      rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:uses_method ; 
-                   owl:someValuesFrom mbco:characterization_technique] .
+                   owl:onProperty lbco:uses_method ; 
+                   owl:someValuesFrom lbco:characterization_technique] .
      
-mbco:characterization_device a owl:Class ;
+lbco:characterization_device a owl:Class ;
      rdfs:label "Characterization device" ;
      rdfs:subClassOf [a owl:Restriction ;
-                   owl:onProperty mbco:measures ; 
-                   owl:someValuesFrom mbco:physical_quantity] .
+                   owl:onProperty lbco:measures ; 
+                   owl:someValuesFrom lbco:physical_quantity] .
 
-mbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA
+lbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA
      rdfs:label "Sensor" ;
-     rdfs:subClassOf mbco:device .     
+     rdfs:subClassOf lbco:device .     
 
-mbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TOSEE: duplicated in Manufacturing module
+lbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TOSEE: duplicated in Manufacturing module
      rdfs:label "Actuator" ;
-     rdfs:subClassOf mbco:device .     
+     rdfs:subClassOf lbco:device .     
 
 ### Object Properties ###
 
-mbco:has_sample_history a owl:ObjectProperty ;
+lbco:has_sample_history a owl:ObjectProperty ;
      rdfs:label "has sample history" ;
-     rdfs:domain mbco:sample ;
-     rdfs:range mbco:sample_history .
+     rdfs:domain lbco:sample ;
+     rdfs:range lbco:sample_history .
 
-mbco:measures a owl:ObjectProperty ; # TO SEE: connect to mbco:observes, used for sensors? Move it to higher?
+lbco:measures a owl:ObjectProperty ; # TO SEE: connect to lbco:observes, used for sensors? Move it to higher?
      rdfs:label "measures" ;
-     rdfs:domain mbco:device ;
-     rdfs:range mbco:physical_quantity .
+     rdfs:domain lbco:device ;
+     rdfs:range lbco:physical_quantity .
 
 ### Datatype Properties ###
 
-mbco:has_sample_ID a owl:DatatypeProperty ;
+lbco:has_sample_ID a owl:DatatypeProperty ;
     rdfs:label "has sample ID" ;
-    rdfs:domain mbco:sample ;
+    rdfs:domain lbco:sample ;
     rdfs:range rdfs:Literal .
 
 ####################################################################################
