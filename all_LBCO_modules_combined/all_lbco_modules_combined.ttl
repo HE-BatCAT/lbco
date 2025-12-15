@@ -14,7 +14,7 @@
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
   owl:versionInfo "version 0.1.12"^^xs:string ;
-  dcterms:modified "2025-12-11"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -281,7 +281,7 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
 
 <https://batcat.info/semantics/core/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
    owl:versionInfo "version 0.0.4"^^xs:string ;
-   dcterms:modified "2025-12-11"^^xs:string ;
+   dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -389,7 +389,7 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
 
 <https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
    owl:versionInfo "version 0.0.11"^^xs:string ;
-   dcterms:modified "2025-12-11"^^xs:string ;
+   dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -732,7 +732,7 @@ lbco:porosity a owl:Class ;
 
 <https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
   owl:versionInfo "version 0.0.10"^^xs:string ;
-  dcterms:modified "2025-12-11"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/data> ;
@@ -1047,7 +1047,7 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 
 <https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
   owl:versionInfo "version 0.0.9"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -1265,7 +1265,7 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
 
 <https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
   owl:versionInfo "version 0.1.7"^^xs:string ;
-  dcterms:modified "2025-12-11"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -1592,7 +1592,7 @@ lbco:has_confidence_level a owl:ObjectProperty ;
 
 <https://batcat.info/semantics/core/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.0.3"^^xs:string ;
-  dcterms:modified "2025-12-10"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -1707,7 +1707,7 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.0.14"^^xs:string ;
-  dcterms:modified "2025-12-12"^^xs:string ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
