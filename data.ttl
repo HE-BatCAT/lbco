@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core/data> a owl:Ontology .
 
 <https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
-  owl:versionInfo "version 0.0.9"^^xs:string ;
+  owl:versionInfo "version 0.0.10"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -144,10 +144,11 @@ lbco:CONVERSION a lbco:data_processing_method ;
 
 ### Object Properties ###
 
-lbco:is_compatible_with a owl:ObjectProperty ;
-    rdfs:label "is compatible with" ;
+lbco:is_dataset_compatible_with_software a owl:ObjectProperty ;
+    rdfs:label "is dataset compatible with software" ;
     rdfs:domain lbco:dataset ; # TOSEE: use data_format instead???
-    rdfs:range lbco:software .
+    rdfs:range lbco:software ;
+    rdfs:subPropertyOf lbco:is_compatible_with .
     
 lbco:complies_with a owl:ObjectProperty ;
     rdfs:domain lbco:dataset ; 
@@ -159,9 +160,6 @@ lbco:is_generated_by a owl:ObjectProperty ; # TOSEE: use inverse (has_output) in
     rdfs:range [owl:unionOf (lbco:agent lbco:device lbco:software)] ;
 #    rdfs:subPropertyOf [owl:inverseOf lbco:has_output] .
     rdfs:subPropertyOf lbco:is_output_of .
-
-lbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? Move to higher?
-		  owl:inverseOf lbco:has_output .
 
 lbco:has_data_processing_method a owl:ObjectProperty ;
     rdfs:label "has data processing method" ;
@@ -179,11 +177,15 @@ lbco:is_annotated_using_scheme a owl:ObjectProperty ;
 lbco:has_average a owl:DatatypeProperty ;
     rdfs:label "has average" ;
     rdfs:domain lbco:data ;
+    rdfs:range xs:decimal ;
+#    rdfs:range [owl:unionOf (xs:integer xs:decimal)] ;
     rdfs:comment "Only applicable to a homogeneous set of data (i.e., data with same units)"^^xs:string .
 
 lbco:has_error a owl:DatatypeProperty ;
     rdfs:label "has error" ;
-    rdfs:domain lbco:data .
+    rdfs:domain lbco:data ;
+    rdfs:range xs:decimal .
+#    rdfs:range [owl:unionOf (xs:integer xs:decimal)] .
 
 # Should/could add:
 # systematic error

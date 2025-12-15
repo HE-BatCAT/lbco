@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.12"^^xs:string ;
+  owl:versionInfo "version 0.1.13"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
@@ -217,6 +217,11 @@ lbco:has_output a owl:ObjectProperty ;
    rdfs:domain [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
    rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
 
+lbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? 
+                  owl:inverseOf lbco:has_output ;
+   rdfs:range [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
+   rdfs:domain [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
+
 lbco:has_setting a owl:ObjectProperty ;
    rdfs:label "has setting" ;
    rdfs:comment "Points to a property affecting the process"^^xs:string ;
@@ -246,7 +251,13 @@ lbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, a
 
 lbco:is_incompatible_with a owl:ObjectProperty ;
    rdfs:label "is incompatible with" ;
+   rdfs:comment "relation between two entities that cannot meaningfully/correctly work together"^^xs:string ;
    rdfs:comment "E.g., it can be used to flag up incompatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
+
+lbco:is_compatible_with a owl:ObjectProperty ;
+   rdfs:label "is compatible with" ;
+   rdfs:comment "relation between two entities that can meaningfully/correctly work together"^^xs:string ;
+   rdfs:comment "E.g., it can be used to point out compatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
 
 # FA_CRO_3
 lbco:is_material_incompatible_with_material a owl:ObjectProperty ;
@@ -254,6 +265,7 @@ lbco:is_material_incompatible_with_material a owl:ObjectProperty ;
    rdfs:comment "To flag up between materials (e.g., mixtures that are unsafe, etc)"^^xs:string ;
    rdfs:domain lbco:material ; 
    rdfs:range lbco:material ;
+   a owl:SymmetricProperty ;
    rdfs:subPropertyOf lbco:is_incompatible_with .
    
 ### Datatype Properties ###

@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core/optimization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.7"^^xs:string ;
+  owl:versionInfo "version 0.1.8"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -201,9 +201,11 @@ lbco:model_parametrization_process a owl:Class ; # this is for MCO
 
 lbco:has_cost_level a owl:ObjectProperty ; # TOSEE: express it differently? Issue is: if we use more general verbs, the statements are more complex.
     rdfs:comment "Points to the cost of an entity, in the broad sense. It could be monetary cost, computational cost, etc."^^xs:string ;
+    rdfs:domain [owl:unionOf (lbco:method lbco:data lbco:software lbco:physical_object lbco:material)] ; # TO SEE: add statement?
     rdfs:range lbco:coarse_amount_level .
 
 lbco:has_precision_level a owl:ObjectProperty ;  # TOSEE: same as for has_cost_level
+    rdfs:domain [owl:unionOf (lbco:method lbco:data lbco:software lbco:statement lbco:device)] ;
     rdfs:range lbco:coarse_amount_level .
 
 lbco:has_confidence_level a owl:ObjectProperty ;

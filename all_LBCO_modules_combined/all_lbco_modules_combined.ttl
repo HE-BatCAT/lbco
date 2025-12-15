@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.12"^^xs:string ;
+  owl:versionInfo "version 0.1.13"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
@@ -217,6 +217,11 @@ lbco:has_output a owl:ObjectProperty ;
    rdfs:domain [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
    rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
 
+lbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? 
+                  owl:inverseOf lbco:has_output ;
+   rdfs:range [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
+   rdfs:domain [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
+
 lbco:has_setting a owl:ObjectProperty ;
    rdfs:label "has setting" ;
    rdfs:comment "Points to a property affecting the process"^^xs:string ;
@@ -246,7 +251,13 @@ lbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, a
 
 lbco:is_incompatible_with a owl:ObjectProperty ;
    rdfs:label "is incompatible with" ;
+   rdfs:comment "relation between two entities that cannot meaningfully/correctly work together"^^xs:string ;
    rdfs:comment "E.g., it can be used to flag up incompatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
+
+lbco:is_compatible_with a owl:ObjectProperty ;
+   rdfs:label "is compatible with" ;
+   rdfs:comment "relation between two entities that can meaningfully/correctly work together"^^xs:string ;
+   rdfs:comment "E.g., it can be used to point out compatibilities (e.g., between materials, softwares, methods, etc.)"^^xs:string . 
 
 # FA_CRO_3
 lbco:is_material_incompatible_with_material a owl:ObjectProperty ;
@@ -254,6 +265,7 @@ lbco:is_material_incompatible_with_material a owl:ObjectProperty ;
    rdfs:comment "To flag up between materials (e.g., mixtures that are unsafe, etc)"^^xs:string ;
    rdfs:domain lbco:material ; 
    rdfs:range lbco:material ;
+   a owl:SymmetricProperty ;
    rdfs:subPropertyOf lbco:is_incompatible_with .
    
 ### Datatype Properties ###
@@ -388,7 +400,7 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.11"^^xs:string ;
+   owl:versionInfo "version 0.0.12"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
@@ -547,6 +559,12 @@ lbco:connection a owl:Class ;
      # Note: put there and not under lbco:device because we only see it as a property of another object.
      # A related entity under lbco:device could be added if needed
 
+lbco:quantitative_condition a owl:Class ;
+     rdfs:label "Quantitative condition" ;
+     rdfs:comment "Examples of quantitative conditions are equalities (e.g., a variable equals a constant) and inequalitites (variable X > value X0)."^^xs:string ;
+     rdfs:comment "See also quantitative constraint in the LBCO optimization module and condition in the W3C SSN/SOSA ontology for sensors"^^xs:string ;
+     rdfs:subClassOf lbco:statement .
+
 ### Object Properties ###
 
 lbco:has_product_design_parameter a owl:ObjectProperty ;
@@ -591,12 +609,13 @@ lbco:has_connection a owl:ObjectProperty ; # TO SEE: move to higher?
      rdfs:label "has connection" ;
      rdfs:domain lbco:physical_object ;
      rdfs:range lbco:connection .
-     
-### Datatype Properties ###
 
-lbco:has_trigger a owl:DatatypeProperty ;
+lbco:has_trigger a owl:ObjectProperty ;
     rdfs:label "has trigger" ;
-    rdfs:domain lbco:actuator .
+    rdfs:domain lbco:actuator ;
+    rdfs:range lbco:quantitative_condition .
+
+### Datatype Properties ###
 
 ### Restrictions ###
 
@@ -1046,7 +1065,7 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 <https://batcat.info/semantics/core/data> a owl:Ontology .
 
 <https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
-  owl:versionInfo "version 0.0.9"^^xs:string ;
+  owl:versionInfo "version 0.0.10"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1177,10 +1196,11 @@ lbco:CONVERSION a lbco:data_processing_method ;
 
 ### Object Properties ###
 
-lbco:is_compatible_with a owl:ObjectProperty ;
-    rdfs:label "is compatible with" ;
+lbco:is_dataset_compatible_with_software a owl:ObjectProperty ;
+    rdfs:label "is dataset compatible with software" ;
     rdfs:domain lbco:dataset ; # TOSEE: use data_format instead???
-    rdfs:range lbco:software .
+    rdfs:range lbco:software ;
+    rdfs:subPropertyOf lbco:is_compatible_with .
     
 lbco:complies_with a owl:ObjectProperty ;
     rdfs:domain lbco:dataset ; 
@@ -1192,9 +1212,6 @@ lbco:is_generated_by a owl:ObjectProperty ; # TOSEE: use inverse (has_output) in
     rdfs:range [owl:unionOf (lbco:agent lbco:device lbco:software)] ;
 #    rdfs:subPropertyOf [owl:inverseOf lbco:has_output] .
     rdfs:subPropertyOf lbco:is_output_of .
-
-lbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? Move to higher?
-		  owl:inverseOf lbco:has_output .
 
 lbco:has_data_processing_method a owl:ObjectProperty ;
     rdfs:label "has data processing method" ;
@@ -1212,11 +1229,15 @@ lbco:is_annotated_using_scheme a owl:ObjectProperty ;
 lbco:has_average a owl:DatatypeProperty ;
     rdfs:label "has average" ;
     rdfs:domain lbco:data ;
+    rdfs:range xs:decimal ;
+#    rdfs:range [owl:unionOf (xs:integer xs:decimal)] ;
     rdfs:comment "Only applicable to a homogeneous set of data (i.e., data with same units)"^^xs:string .
 
 lbco:has_error a owl:DatatypeProperty ;
     rdfs:label "has error" ;
-    rdfs:domain lbco:data .
+    rdfs:domain lbco:data ;
+    rdfs:range xs:decimal .
+#    rdfs:range [owl:unionOf (xs:integer xs:decimal)] .
 
 # Should/could add:
 # systematic error
@@ -1264,7 +1285,7 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/optimization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.7"^^xs:string ;
+  owl:versionInfo "version 0.1.8"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1452,9 +1473,11 @@ lbco:model_parametrization_process a owl:Class ; # this is for MCO
 
 lbco:has_cost_level a owl:ObjectProperty ; # TOSEE: express it differently? Issue is: if we use more general verbs, the statements are more complex.
     rdfs:comment "Points to the cost of an entity, in the broad sense. It could be monetary cost, computational cost, etc."^^xs:string ;
+    rdfs:domain [owl:unionOf (lbco:method lbco:data lbco:software lbco:physical_object lbco:material)] ; # TO SEE: add statement?
     rdfs:range lbco:coarse_amount_level .
 
 lbco:has_precision_level a owl:ObjectProperty ;  # TOSEE: same as for has_cost_level
+    rdfs:domain [owl:unionOf (lbco:method lbco:data lbco:software lbco:statement lbco:device)] ;
     rdfs:range lbco:coarse_amount_level .
 
 lbco:has_confidence_level a owl:ObjectProperty ;
@@ -1591,7 +1614,7 @@ lbco:has_confidence_level a owl:ObjectProperty ;
 <https://batcat.info/semantics/core/twinning> a owl:Ontology .
 
 <https://batcat.info/semantics/core/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
-  owl:versionInfo "version 0.0.3"^^xs:string ;
+  owl:versionInfo "version 0.0.4"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1672,7 +1695,9 @@ lbco:has_generality_level a owl:ObjectProperty ;
 lbco:has_synchronization_rate a owl:DatatypeProperty ;
     rdfs:label "has synchronization rate" ;
     rdfs:comment """(Average) Rate (in 1/seconds) at which communication (in either direction) between 
-    the digital entity and its target entity happens"""^^xs:string .
+    the digital entity and its target entity happens"""^^xs:string ;
+    rdfs:domain lbco:digital_twin_model ;
+    rdfs:range xs:decimal .
 
 ####################################################################################
 # EXAMPLES below: Put here temporarily only, just for simplicity

@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core/twinning> a owl:Ontology .
 
 <https://batcat.info/semantics/core/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
-  owl:versionInfo "version 0.0.3"^^xs:string ;
+  owl:versionInfo "version 0.0.4"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -94,7 +94,9 @@ lbco:has_generality_level a owl:ObjectProperty ;
 lbco:has_synchronization_rate a owl:DatatypeProperty ;
     rdfs:label "has synchronization rate" ;
     rdfs:comment """(Average) Rate (in 1/seconds) at which communication (in either direction) between 
-    the digital entity and its target entity happens"""^^xs:string .
+    the digital entity and its target entity happens"""^^xs:string ;
+    rdfs:domain lbco:digital_twin_model ;
+    rdfs:range xs:decimal .
 
 ####################################################################################
 # EXAMPLES below: Put here temporarily only, just for simplicity
