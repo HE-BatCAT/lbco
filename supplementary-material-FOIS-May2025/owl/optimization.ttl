@@ -1,0 +1,208 @@
+@prefix mbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/optimization#> a owl:Ontology .
+
+<https://batcat.info/semantics/core/optimization#> dcterms:title "Minimal BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
+  owl:versionInfo "version 0.1.5"^^xs:string ;
+  dcterms:modified "2025-05-23"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core#> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
+  dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
+  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+mbco:problem a owl:Class ;
+    rdfs:label "Problem" ; 
+    rdfs:subClassOf mbco:statement .
+
+mbco:solution a owl:Class ;
+    rdfs:label "Solution" ;
+    rdfs:comment "Answer addressing a problem. It should contain a quantification of error and confidence."^^xs:string ;
+    rdfs:subClassOf mbco:statement .
+
+mbco:solution rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_confidence ;
+                   owl:someValuesFrom mbco:coarse_amount_level] .
+
+mbco:optimization_problem a owl:Class ;
+    rdfs:label "Optimization problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:optimization_method a owl:Class ; 
+    rdfs:label "Optimization method" ;
+    rdfs:subClassOf mbco:method ;
+    a owl:DeprecatedClass .
+
+mbco:answer_set_programming a owl:Class ;
+    rdfs:label "Answer Set Programming (ASP)" ;
+    rdfs:subClassOf mbco:optimization_method ; 
+    rdfs:comment "A logic programming paradigm, tailored to search problems. (See Wikipedia)"^^xs:string .
+
+mbco:multi_criteria_optimization a owl:Class ;
+    rdfs:label "Multi Criteria Optimization (MCO)" ;
+    rdfs:subClassOf mbco:optimization_method ;
+    rdfs:comment "Mathematical optimization problem, where multiple objective functions (criteria) are simultaneuosly optimized. (See Wikipedia)"^^xs:string .
+
+mbco:mathematical_role a owl:Class ;
+    rdfs:label "Mathematical role" ;
+    rdfs:subClassOf mbco:role .
+
+mbco:variable a owl:Class ;
+    rdfs:label "Variable" ;
+    owl:disjointUnionOf (mbco:discrete_variable mbco:continuum_variable) ;
+    rdfs:subClassOf mbco:mathematical_role .		
+
+mbco:discrete_variable a owl:Class ;
+    rdfs:label "Discrete variable" ;
+    rdfs:subClassOf mbco:variable .
+
+mbco:continuum_variable a owl:Class ;
+    rdfs:label "Continuum variable" ;
+    rdfs:subClassOf mbco:variable .
+
+mbco:target a owl:Class ;
+    rdfs:label "Target" ;
+    rdfs:subClassOf mbco:mathematical_role ;
+    rdfs:comment "In an optimization problem, a property which has to be attained exactly or approximatively by the solution."^^xs:string .
+
+mbco:goal a owl:Class ;
+    rdfs:label "Goal" ;
+    rdfs:altLabel "Exact target" ;
+    rdfs:subClassOf mbco:target ;
+    rdfs:comment "In an optimization problem, a property which must be attained exactly by a solution."^^xs:string ;
+    rdfs:comment "In an optimization problem, an exact target."^^xs:string .
+
+mbco:constraint a owl:Class ;
+    rdfs:label "Constraint" ;
+    rdfs:subClassOf mbco:statement ;		    
+    owl:disjointUnionOf (mbco:qualitative_constraint mbco:quantitative_constraint) ;
+    rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty mbco:has_part ;
+        owl:someValuesFrom mbco:variable] .
+
+mbco:qualitative_constraint a owl:Class ;
+    rdfs:label "Qualitative constraint" ;
+    rdfs:comment "Examples of qualitative constraints are: step X follows (directly) step Y; step X requires participant Y; step X requires input Y; physical location constraint."^^xs:string .
+
+mbco:quantitative_constraint a owl:Class ;
+    rdfs:label "Quantitative constraint" ;
+    rdfs:comment "Examples of quantitative constraints are equalities (e.g., the sum of some variables is constant) and inequalitites (variable X > value X0)."^^xs:string .
+
+mbco:optimization_problem 
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:variable] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:target] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:constraint] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:goal] ;
+	rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty mbco:has_part ;
+                   owl:someValuesFrom mbco:initial_status] .  
+		  
+mbco:coarse_amount_level a owl:Class ; 
+    rdfs:label "(Coarse) Amount level" ;
+    owl:oneOf (mbco:LOW mbco:MEDIUM mbco:HIGH) ;
+    rdfs:subClassOf mbco:annotation . 
+
+mbco:initial_status a owl:Class ; 
+    rdfs:label "Initial status" ;
+    rdfs:subClassOf mbco:status ;
+    rdfs:comment "Status of an object/system right at the start of a given process. E.g., before an optimization is done"^^xs:string .    
+
+mbco:final_status a owl:Class ; 
+    rdfs:label "Final status" ;
+    rdfs:subClassOf mbco:status ;
+    rdfs:comment "Status of an object/system right at the end of a given process. E.g., after an optimization is done"^^xs:string .    
+
+# Examples of general logic-based problems/activity. 
+# Taken from CQ_CRO_8
+
+mbco:logic_based_problem a owl:Class ;
+    rdfs:label "Logic-based problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:numerical_problem a owl:Class ;
+    rdfs:label "Numerical problem" ;
+    rdfs:subClassOf mbco:problem .
+
+mbco:scheduling a owl:Class ;
+    rdfs:label "Scheduling" ;
+    rdfs:comment "Scheduling (e.g., of maintenance)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:resource_allocation a owl:Class ;
+    rdfs:label "Resource allocation" ;
+    rdfs:comment "Allocation of resources (e.g., machines/humans for tasks)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:compatibility_check a owl:Class ;
+    rdfs:label "Compatibility check" ;
+    rdfs:comment "Compatibility checks (e.g., between materials)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:compliance_validation a owl:Class ;
+    rdfs:label "Compliance validation" ;
+    rdfs:comment "Compliance validation (e.g., of a process with regulation)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:process_design a owl:Class ;
+    rdfs:label "Process design" ;
+    rdfs:comment "Process design (e.g., simulation, experiment)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem ;
+    rdfs:subClassOf mbco:numerical_problem . 
+
+mbco:process_sequence_validation a owl:Class ;
+    rdfs:label "Process sequence validation" ;
+    rdfs:comment "Process sequence validation (e.g., that the ordering of sub-processes does not break dependencies)"^^xs:string ;
+    rdfs:subClassOf mbco:logic_based_problem .
+
+mbco:model_parametrization_process a owl:Class ; # this is for MCO
+    rdfs:label "Model parametrization process" ;
+    rdfs:comment "Determining the numerical values of the parameters as those that best reproduce certain properties. "^^xs:string ;
+    rdfs:comment "Not to be confused with the resulting model parameterization (a set of parameters)."^^xs:string ;
+    rdfs:subClassOf mbco:numerical_problem .
+
+### Object Properties ###
+
+mbco:has_cost_level a owl:ObjectProperty ; 
+    rdfs:comment "Points to the cost of an entity, in the broad sense. It could be monetary cost, computational cost, etc."^^xs:string ;
+    rdfs:range mbco:coarse_amount_level .
+
+mbco:has_precision_level a owl:ObjectProperty ;  
+    rdfs:range mbco:coarse_amount_level .
+
+mbco:has_confidence_level a owl:ObjectProperty ;
+    rdfs:comment "Points to the confidence in the correctness of a statement, and is generated by the same source."^^xs:string ;
+    rdfs:range mbco:coarse_amount_level ;
+    rdfs:domain mbco:statement .
+
+### Datatype Properties ###
+

@@ -1,6 +1,6 @@
 @prefix ex: <https://batcat.info/semantics/scenarios/optimization_example#> .
 
-@prefix mbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://batcat.info/semantics/core#> . 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
 #@prefix mod: <https://w3id.org/mod#> .
@@ -10,12 +10,12 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/scenarios/optimization_example#> dcterms:title "BatCAT core ontologies: Optimization example"^^xs:string ;
+<https://batcat.info/semantics/scenarios/optimization_example> dcterms:title "BatCAT core ontologies: Optimization example"^^xs:string ;
   owl:versionInfo "version 0.1.0"^^xs:string ;
   dcterms:modified "2025-05-23"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  owl:imports <https://batcat.info/semantics/core/optimization#> ;
-  owl:imports <https://batcat.info/semantics/core/modelling#> ;
+  owl:imports <https://batcat.info/semantics/core> ;
+  owl:imports <https://batcat.info/semantics/core/optimization> ;
+  owl:imports <https://batcat.info/semantics/core/modelling> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -23,7 +23,7 @@
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
   dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
-  dcterms:contributor "Noel Vizcaino"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
@@ -33,95 +33,95 @@ with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases.
 innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
 
 
-ex:GITT_TEST a mbco:method ;
-    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-    mbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
-    mbco:has_participant ex:POTENTIOSTAT ;
-    mbco:has_participant [a mbco:sample] ;
-    mbco:has_participant [a mbco:agent] ;
-    mbco:has_cost_level mbco:HIGH ;
-    mbco:has_precision_level mbco:HIGH .       
+ex:GITT_TEST a lbco:method ;
+    lbco:has_output ex:DIFFUSION_COEFFICIENT ;
+    lbco:has_output ex:ACTIVE_MATERIAL_POTENTIALS ;
+    lbco:has_participant ex:POTENTIOSTAT ;
+    lbco:has_participant [a lbco:sample] ;
+    lbco:has_participant [a lbco:agent] ;
+    lbco:has_cost_level lbco:HIGH ;
+    lbco:has_precision_level lbco:HIGH .       
 
-ex:DISSIPATIVE_PARTICLE_DYNAMICS a mbco:method ;
-    mbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
-    mbco:has_output ex:DIFFUSION_COEFFICIENT ;
-    mbco:has_participant [a mbco:computational_device] ;
-    mbco:has_participant [a mbco:software] ; # E.g., license access needed
-    mbco:has_cost_level mbco:MEDIUM ;
-    mbco:has_precision_level mbco:LOW .       
-#    mbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
+ex:DISSIPATIVE_PARTICLE_DYNAMICS a lbco:method ;
+    lbco:has_input ex:DPD_MODEL_PARAMETRIZATION_1 ;
+    lbco:has_output ex:DIFFUSION_COEFFICIENT ;
+    lbco:has_participant [a lbco:computational_device] ;
+    lbco:has_participant [a lbco:software] ; # E.g., license access needed
+    lbco:has_cost_level lbco:MEDIUM ;
+    lbco:has_precision_level lbco:LOW .       
+#    lbco:has_property ex:DPD_COST, ex:DPD_PRECISION .
 
-ex:POTENTIOSTAT a mbco:characterization_device .
-ex:DIFFUSION_COEFFICIENT a mbco:continuum_variable ;
-			 a mbco:physical_quantity .
-ex:ACTIVE_MATERIAL_POTENTIALS a mbco:continuum_variable ;
-			 a mbco:physical_quantity .
-ex:DPD_MODEL_PARAMETRIZATION_1 a mbco:model_parametrization . 
+ex:POTENTIOSTAT a lbco:characterization_device .
+ex:DIFFUSION_COEFFICIENT a lbco:continuum_variable ;
+			 a lbco:physical_quantity .
+ex:ACTIVE_MATERIAL_POTENTIALS a lbco:continuum_variable ;
+			 a lbco:physical_quantity .
+ex:DPD_MODEL_PARAMETRIZATION_1 a lbco:model_parametrization . 
 
-ex:DPD_DATA_ANALYSIS a mbco:process ;
-    mbco:has_participant [a mbco:agent] .		   
+ex:DPD_DATA_ANALYSIS a lbco:process ;
+    lbco:has_participant [a lbco:agent] .		   
 
-ex:DPD_SIMULATION_SETTING_UP a mbco:process ;
-    mbco:has_participant [a mbco:agent] .
+ex:DPD_SIMULATION_SETTING_UP a lbco:process ;
+    lbco:has_participant [a lbco:agent] .
 
-ex:EXPERIMENT_SETTING_UP a mbco:process ;
-    mbco:has_participant [a mbco:agent] .		   
+ex:EXPERIMENT_SETTING_UP a lbco:process ;
+    lbco:has_participant [a lbco:agent] .		   
 
 ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM
-    a mbco:logic_based_problem ;
-    a mbco:optimization_problem ;
+    a lbco:logic_based_problem ;
+    a lbco:optimization_problem ;
     rdfs:comment "An example about running simulations"^^xs:string ;
-    mbco:has_part ex:GOAL_1 ;
-    mbco:has_part ex:TARGET_2 ;
-    mbco:has_part ex:CONSTRAINT_1 ;
-    mbco:has_part ex:CONSTRAINT_2 ;
-    mbco:has_part ex:CONSTRAINT_3 ;
-    mbco:has_part ex:INITIAL_STATUS_1 .
+    lbco:has_part ex:GOAL_1 ;
+    lbco:has_part ex:TARGET_2 ;
+    lbco:has_part ex:CONSTRAINT_1 ;
+    lbco:has_part ex:CONSTRAINT_2 ;
+    lbco:has_part ex:CONSTRAINT_3 ;
+    lbco:has_part ex:INITIAL_STATUS_1 .
 
-ex:GOAL_1 a mbco:goal ;
+ex:GOAL_1 a lbco:goal ;
    rdfs:comment "Allocate human and computational devices to run 2 DPD simulations, respecting the ordering of steps."^^xs:string .
 
-ex:INITIAL_STATUS_1 a mbco:initial_status ;
+ex:INITIAL_STATUS_1 a lbco:initial_status ;
    rdfs:comment "Human and computational devices are available and operational. Needed software is installed"^^xs:string .
 
-ex:TARGET_2 a mbco:target ;
+ex:TARGET_2 a lbco:target ;
    rdfs:comment "Maximize usage of resources (minimize their idle time)."^^xs:string .
 
-ex:CONSTRAINT_1 a mbco:quantitative_constraint ;
+ex:CONSTRAINT_1 a lbco:quantitative_constraint ;
     rdfs:comment "There is only one available agent"^^xs:string .
 
-ex:CONSTRAINT_2 a mbco:quantitative_constraint ;
+ex:CONSTRAINT_2 a lbco:quantitative_constraint ;
     rdfs:comment "There are two available computational devices"^^xs:string .
 
-ex:CONSTRAINT_3 a mbco:qualitative_constraint ;
+ex:CONSTRAINT_3 a lbco:qualitative_constraint ;
     rdfs:comment "A computational method must be used"^^xs:string .
 
 ex:DPD_SIMULATION_RUN 
-    mbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
-    mbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
+    lbco:uses_method ex:DISSIPATIVE_PARTICLE_DYNAMICS ;
+    lbco:followsdirectly ex:DPD_SIMULATION_SETTING_UP .
 
-ex:DPD_DATA_ANALYSIS mbco:followsdirectly ex:DPD_SIMULATION_RUN .
+ex:DPD_DATA_ANALYSIS lbco:followsdirectly ex:DPD_SIMULATION_RUN .
 
 ex:COMPARISON_EXAMPLE_PROBLEM
-    a mbco:logic_based_problem ;
-    a mbco:optimization_problem ;
+    a lbco:logic_based_problem ;
+    a lbco:optimization_problem ;
     rdfs:comment "An example about comparing simulations or experiments"^^xs:string ;
-    mbco:has_part ex:GOAL_2 ;
-    mbco:has_part ex:TARGET_1 .
+    lbco:has_part ex:GOAL_2 ;
+    lbco:has_part ex:TARGET_1 .
 
-ex:GOAL_2 a mbco:qualitative_constraint ;
+ex:GOAL_2 a lbco:qualitative_constraint ;
     rdfs:comment "Evaluate the diffusion coefficient of a substance"^^xs:string ;
-    mbco:has_part ex:DIFFUSION_COEFFICIENT .
+    lbco:has_part ex:DIFFUSION_COEFFICIENT .
 
-ex:TARGET_1 a mbco:target ;
+ex:TARGET_1 a lbco:target ;
    rdfs:comment "Maximize precision and minimize cost"^^xs:string .
 
-ex:SOLUTION_COMPARISON a mbco:solution ;
-   mbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
-   mbco:uses_method [a mbco:answer_set_programming] .
+ex:SOLUTION_COMPARISON a lbco:solution ;
+   lbco:answers ex:COMPARISON_EXAMPLE_PROBLEM ;
+   lbco:uses_method [a lbco:answer_set_programming] .
 
-ex:SOLUTION_RESOURCE_ALLOCATION a mbco:solution ;
-   mbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
-   mbco:uses_method [a mbco:answer_set_programming] .
+ex:SOLUTION_RESOURCE_ALLOCATION a lbco:solution ;
+   lbco:answers ex:RESOURCE_ALLOCATION_EXAMPLE_PROBLEM ;
+   lbco:uses_method [a lbco:answer_set_programming] .
 
 ####################################################################################

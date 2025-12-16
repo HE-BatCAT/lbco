@@ -1,7 +1,7 @@
-# mbco
-(Minimal) BatCAT Core Ontologies
+# lbco
+Lightweight BatCAT Core Ontologies
 
-Tentative modules will cover:
+Modules cover:
 
 - Higher level concept (-> higher.ttl)
 
@@ -12,11 +12,11 @@ Transversal modules:
 
 Vertical modules:
 - Modelling and simulation (-> modelling.ttl)
-- Characterization
-- Manufacturing
+- Characterization (-> characterization.ttl)
+- Manufacturing (-> manufacturing.ttl)
 
 Battery specific modules:
-- Battery (LiB and RFB)
+- Battery (LiB and RFB) (-> battery.ttl)
 
 =========================================
 
@@ -25,3 +25,6 @@ Alignment directory:
 - Alignment to DOLCE-LITE (-> abdul.ttl)
 - Alignment to EMMO-LITE (-> abel.ttl)
 - Alignment to EVMPO and VIPRS (-> abovemp.ttl)
+
+* [Overview of LBCO](overview.md)
+

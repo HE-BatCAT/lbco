@@ -1,6 +1,6 @@
 @prefix abovemp: <https://batcat.info/semantics/abovemp#> .
 
-@prefix mbco: <https://batcat.info/semantics/core#> .
+@prefix lbco: <https://batcat.info/semantics/core#> .
 
 @prefix evmpo: <https://emmc.eu/semantics/evmpo/evmpo.ttl#> .
 @prefix viprs: <https://purl.vimmp.eu/semantics/alignment/viprs.ttl#> .
@@ -14,10 +14,10 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/abovemp#> dcterms:title "Alignment of BatCAT to EVMPO and VIPRS (ABOVEMP)"^^xs:string ;
+<https://batcat.info/semantics/abovemp> dcterms:title "Alignment of BatCAT to EVMPO and VIPRS (ABOVEMP)"^^xs:string ;
   owl:versionInfo "version 0.0.2"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core#> ;
-  dcterms:modified "2025-05-12"^^xs:string ;
+  owl:imports <https://batcat.info/semantics/core> ;
+  dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:creator "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -32,44 +32,44 @@ innovation programme under grant agreement no. 101137725, Battery Cell Assembly 
 
 ### Classes ###
 
-mbco:agent rdfs:subClassOf evmpo:agent . 
+lbco:agent rdfs:subClassOf evmpo:agent . 
 
-mbco:data rdfs:subClassOf evmpo:information_content_entity . # OK? 
+lbco:data rdfs:subClassOf evmpo:information_content_entity . # OK? 
 
-mbco:material rdfs:subClassOf evmpo:material . # OK?
+lbco:material rdfs:subClassOf evmpo:material . # OK?
 
-mbco:process rdfs:subClassOf evmpo:process .
+lbco:process rdfs:subClassOf evmpo:process .
 
-mbco:software rdfs:subClassOf evmpo:software_infrastructure .
+lbco:software rdfs:subClassOf evmpo:software_infrastructure .
 
-mbco:physical_object rdfs:subClassOf evmpo:good . # OK?
+lbco:physical_object rdfs:subClassOf evmpo:good . # OK?
 
-mbco:statement rdfs:subClassOf evmpo:information_content_entity . # OK? 
+lbco:statement rdfs:subClassOf evmpo:information_content_entity . # OK? 
 
-mbco:role rdfs:subClassOf evmpo:annotation . 
+lbco:role rdfs:subClassOf evmpo:annotation . 
 
-mbco:status rdfs:subClassOf evmpo:annotation .
+lbco:status rdfs:subClassOf evmpo:annotation .
 
-mbco:annotation rdfs:subClassOf evmpo:annotation .
+lbco:annotation rdfs:subClassOf evmpo:annotation .
 
 ### Object Properties ###
 
-mbco:has_part rdfs:subPropertyOf viprs:has_proper_part . # OK? or viceversa? Do we need proper parthood or generic one?
+lbco:has_part rdfs:subPropertyOf viprs:has_proper_part . # OK? or viceversa? Do we need proper parthood or generic one?
 
-mbco:has_participant rdfs:subPropertyOf viprs:has_proper_part . # OK?
+lbco:has_participant rdfs:subPropertyOf viprs:has_proper_part . # OK?
 
-mbco:follows rdfs:subPropertyOf viprs:immanent_relation . # OK? Should it be viprs:trascendent_relation ?
+lbco:follows rdfs:subPropertyOf viprs:immanent_relation . # OK? Should it be viprs:trascendent_relation ?
 
-mbco:has_input rdfs:subPropertyOf viprs:has_proper_part .
+lbco:has_input rdfs:subPropertyOf viprs:has_proper_part .
 
-mbco:has_output rdfs:subPropertyOf viprs:has_proper_part .
+lbco:has_output rdfs:subPropertyOf viprs:has_proper_part .
 
-mbco:has_setting rdfs:subPropertyOf viprs:has_proper_part .
+lbco:has_setting rdfs:subPropertyOf viprs:has_proper_part .
 
-mbco:uses_method rdfs:subPropertyOf viprs:has_proper_part .
+lbco:uses_method rdfs:subPropertyOf viprs:has_proper_part .
 
-mbco:has_status rdfs:subPropertyOf viprs:has_annotation_property .
+lbco:has_status rdfs:subPropertyOf viprs:has_annotation_property .
 
-mbco:answers rdfs:subPropertyOf viprs:immanent_relation .
+lbco:answers rdfs:subPropertyOf viprs:immanent_relation .
     
 

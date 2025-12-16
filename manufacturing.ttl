@@ -1,0 +1,349 @@
+@prefix lbco: <https://batcat.info/semantics/core#> . 
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
+
+<https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
+   owl:versionInfo "version 0.0.12"^^xs:string ;
+   dcterms:modified "2025-12-15"^^xs:string ;
+   dcterms:created "2025"^^xs:string ;
+   owl:imports <https://batcat.info/semantics/core> ;
+   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
+#  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
+  vann:preferredNamespacePrefix "lbco"^^xs:string ;
+  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+### Classes ###
+
+lbco:manufacturing_line a owl:Class ;
+     rdfs:label "Manufacturing line" ;
+     rdfs:subClassOf lbco:manufacturing_device .
+
+lbco:whole_product a owl:Class ;
+     rdfs:label "Whole product" ;
+     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf [a owl:Restriction ;
+          owl:onProperty [owl:inverseOf lbco:has_part] ;
+          owl:someValuesFrom lbco:batch] .
+
+lbco:intermediate_product a owl:Class ;
+     rdfs:label "Intermediate product" ;
+     rdfs:subClassOf lbco:physical_object .
+
+lbco:product_component a owl:Class ;
+     rdfs:label "Product component" ;
+     rdfs:subClassOf lbco:physical_object .
+
+# lbco:manufacturing_technique a owl:Class ;
+#      rdfs:label "Manufacturing technique" ;
+#      rdfs:subClassOf lbco:method .
+
+lbco:sensor a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Characterization module
+     rdfs:label "Sensor" ;
+     rdfs:subClassOf lbco:device ;
+     rdfs:comment """From Merriam Webster: a device that responds to a physical stimulus
+     (such as heat, light, sound, pressure, magnetism, or a particular motion) and transmits
+     a resulting impulse (as for measurement or operating a control)
+     [Merriam-Webster.com Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/sensor. Accessed 13 Nov. 2025.]"""^^xs:string ;
+     rdfs:comment """In the SOSA (Sensor, Observation, Sample, and Actuator) Ontology, a device that responds to a physical stimulus
+     and generates a result"""^^xs:string .     
+
+lbco:actuator a owl:Class ; # TODO: connect to SSN/SOSA. TO SEE: duplicated in Characterization module
+     rdfs:label "Actuator" ;
+     rdfs:subClassOf lbco:agent .
+
+lbco:manufacturing_process a owl:Class ;
+     rdfs:label "Manufacturing process" ;
+     rdfs:subClassOf lbco:process ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty lbco:has_process_kpi ;
+        	     owl:someValuesFrom lbco:production_cost_per_unit] ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty lbco:has_setting ;
+        	     owl:someValuesFrom lbco:electricity_unit_cost] ;
+     rdfs:subClassOf [a owl:Restriction ; 
+     		     owl:onProperty lbco:has_setting ;
+        	     owl:someValuesFrom lbco:personnel_unit_cost] .
+
+# sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
+# TO SEE: 
+
+lbco:temperature_sensor a owl:Class ;
+     rdfs:label "Temperature sensor" ;
+     rdfs:subClassOf lbco:sensor ;
+     rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:allValuesFrom lbco:temperature] . # TOSEE: why is the reasoner not deducing that temperature is a lbco:property?
+	
+lbco:thermocouple a owl:Class ;
+     rdfs:label "Thermocouple" ;
+     rdfs:subClassOf lbco:temperature_sensor .
+
+lbco:accelerometer a owl:Class ;
+     rdfs:label "Accelerometer" ;
+     rdfs:subClassOf lbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:allValuesFrom lbco:acceleration] .
+
+lbco:vibration_sensor a owl:Class ;
+     rdfs:label "Vibration sensor" ;
+     rdfs:subClassOf lbco:sensor ;
+     rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:someValuesFrom lbco:vibration_amplitude] ; 
+     rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:someValuesFrom lbco:vibration_frequency] . 
+
+lbco:power_sensor a owl:Class ;
+     rdfs:label "Power sensor" ;
+     rdfs:subClassOf lbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:allValuesFrom lbco:power] .
+
+lbco:power_monitoring_clip a owl:Class ;
+     rdfs:label "Power monitoring clip" ;
+     rdfs:subClassOf lbco:power_sensor .
+
+lbco:gas_detection_sensor a owl:Class ;
+     rdfs:label "Gas detection sensor" ;
+     rdfs:subClassOf lbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:allValuesFrom lbco:gas_concentration] . 
+
+lbco:carbon_monoxide_sensor a owl:Class ;
+     rdfs:label "Carbon monoxide sensor" ;
+     skos:altLabel "CO sensor" ;
+     rdfs:subClassOf lbco:gas_detection_sensor .
+
+lbco:carbon_dioxide_sensor a owl:Class ;
+     rdfs:label "Carbon dioxide sensor" ;
+     skos:altLabel "CO2 sensor" ;
+     rdfs:subClassOf lbco:gas_detection_sensor .
+
+lbco:pressure_sensor a owl:Class ;
+     rdfs:label "Pressure sensor" ;
+     rdfs:subClassOf lbco:sensor ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:allValuesFrom lbco:pressure] .
+
+lbco:laser_profilometer a owl:Class ;
+     rdfs:label "Laser profilometer" ;
+     rdfs:subClassOf lbco:device ; 
+     rdfs:subClassOf lbco:characterization_device ; # TOSEE: not a sensor, OK? Should "on-line charaterization" be defined?
+     rdfs:comment "Can be used for on-line characterization (e.g., thickness measurement)"^^xs:string ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:someValuesFrom lbco:thickness] ;
+    rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:someValuesFrom lbco:porosity] .
+
+# CQ_MAN_3
+lbco:connection a owl:Class ;
+     rdfs:label "Connection (type)" ;
+     owl:oneOf (lbco:WIRED_ELECTRICAL_CABLE lbco:BLUETOOTH lbco:OPTICAL_FIBRE) ;
+     rdfs:subClassOf lbco:annotation .
+     # Note: put there and not under lbco:device because we only see it as a property of another object.
+     # A related entity under lbco:device could be added if needed
+
+lbco:quantitative_condition a owl:Class ;
+     rdfs:label "Quantitative condition" ;
+     rdfs:comment "Examples of quantitative conditions are equalities (e.g., a variable equals a constant) and inequalitites (variable X > value X0)."^^xs:string ;
+     rdfs:comment "See also quantitative constraint in the LBCO optimization module and condition in the W3C SSN/SOSA ontology for sensors"^^xs:string ;
+     rdfs:subClassOf lbco:statement .
+
+### Object Properties ###
+
+lbco:has_product_design_parameter a owl:ObjectProperty ;
+     rdfs:label "has product design parameter" ;
+     rdfs:comment """points to a property that can be tuned in design phase.
+     If it points to a material/object, it indicates a materials/object choice"""^^xs:string ;     
+     rdfs:domain lbco:whole_product ;
+     rdfs:range [owl:unionOf (lbco:property lbco:material lbco:physical_object)] .
+
+lbco:has_product_kpi a owl:ObjectProperty ;
+     rdfs:label "has product KPI" ;
+     rdfs:comment "Points to a product Key Performance Indicator"^^xs:string ;
+     rdfs:domain lbco:whole_product ;
+     rdfs:range lbco:property ;
+     rdfs:subPropertyOf lbco:has_property .
+     
+lbco:has_product_operating_condition a owl:ObjectProperty ;
+     rdfs:label "has product operating condition" ;
+     rdfs:domain lbco:whole_product ;
+     rdfs:range lbco:property .
+
+lbco:performs_action a owl:ObjectProperty ;
+     rdfs:label "performs action" ;
+     rdfs:domain lbco:actuator ;
+     rdfs:range lbco:process . # TOSEE: define "action" class under "process" in higer.ttl?
+
+lbco:has_process_kpi a owl:ObjectProperty ;
+     rdfs:label "has process KPI" ;
+     rdfs:domain lbco:process ;
+     rdfs:range lbco:property ;
+     rdfs:comment "Points to a process Key Performance Indicator"^^xs:string ;
+     rdfs:subPropertyOf lbco:has_property .
+
+lbco:observes a owl:ObjectProperty ;
+     rdfs:label "observes" ;
+     rdfs:domain lbco:sensor ;	
+     rdfs:range lbco:physical_quantity ; # OK? it was: # lbco:property ;
+     rdfs:comment "Inspired by W3C SSN/SOSA ontology for sensors"^^xs:string ;
+     rdfs:subPropertyOf lbco:measures .
+
+lbco:has_connection a owl:ObjectProperty ; # TO SEE: move to higher?
+     rdfs:label "has connection" ;
+     rdfs:domain lbco:physical_object ;
+     rdfs:range lbco:connection .
+
+lbco:has_trigger a owl:ObjectProperty ;
+    rdfs:label "has trigger" ;
+    rdfs:domain lbco:actuator ;
+    rdfs:range lbco:quantitative_condition .
+
+### Datatype Properties ###
+
+### Restrictions ###
+
+lbco:whole_product
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:has_part ;
+	owl:someValuesFrom lbco:product_component] ;
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:has_part ;
+	owl:someValuesFrom lbco:material] .
+
+lbco:sensor
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:observes ;
+	owl:allValuesFrom lbco:physical_quantity] ; 
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:has_connection ;
+	owl:allValuesFrom lbco:connection] .
+
+# CQ_MAN_4
+lbco:manufacturing_process 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:energy_consumption] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:equipment_performance] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:waste_produced] ; 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_process_kpi ;
+	owl:someValuesFrom lbco:product_quality] .
+
+lbco:manufacturing_process 
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:manufacturing_device] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom [owl:unionOf (lbco:material lbco:physical_object)]] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:physical_object] ;
+	rdfs:subClassOf [a owl:Restriction ;
+			owl:onProperty lbco:has_output ;
+        	     	owl:someValuesFrom [owl:unionOf (lbco:whole_product lbco:intermediate_product lbco:product_component)] ] .
+
+lbco:equipment_performance a owl:Class ;
+	rdfs:subClassOf lbco:property .
+
+lbco:product_quality a owl:Class ;
+	rdfs:subClassOf lbco:property .
+
+lbco:waste_produced a owl:Class ;
+	rdfs:subClassOf lbco:property .
+
+lbco:energy_consumption a owl:Class ;
+	rdfs:subClassOf lbco:property .
+
+# lbco:whole_product
+# 	rdfs:subClassOf [a owl:Restriction ;
+# 	owl:onProperty lbco:has_product_design_parameter ;
+# 	owl:someValuesFrom owl:Thing] ;
+#     	rdfs:subClassOf [a owl:Restriction ;
+#     	owl:onProperty lbco:has_product_KPI ;
+#     	owl:someValuesFrom owl:Thing] ;
+#     	rdfs:subClassOf [a owl:Restriction ;
+#     	owl:onProperty lbco:has_product_operating_condition ;
+#     	owl:someValuesFrom owl:Thing] .
+	    
+# CQ_MAN_10
+lbco:personnel_unit_cost a owl:Class ;
+        rdfs:label "Personnel unit cost" ;
+        rdfs:comment "Personnel cost, e.g., per person per hour"^^xs:string ;
+	rdfs:subClassOf lbco:property .
+
+lbco:electricity_unit_cost a owl:Class ;
+        rdfs:label "Electricity unit cost" ;
+        rdfs:comment "E.g., cost per kWh"^^xs:string ;
+	rdfs:subClassOf lbco:property .
+
+lbco:production_cost_per_unit a owl:Class ; # NB: duplicated here from battery module
+     rdfs:label "Production cost per unit" ;
+     rdfs:subClassOf lbco:property . 
+
+####################################################################################
+
+# Physical quantities # TO SEE: move them elsewhere, higher or transversal module?
+# TO SEE: statements added explicitly as not deduced by the reasoner. Bug?
+
+lbco:temperature a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:acceleration a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:power a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:gas_concentration a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:pressure a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:thickness a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:vibration_frequency a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:vibration_amplitude a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
+lbco:porosity a owl:Class ;
+	rdfs:subClassOf lbco:physical_quantity .
+
