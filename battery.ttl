@@ -9,9 +9,9 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/battery#> a owl:Ontology .
+<https://batcat.info/semantics/core/battery> a owl:Ontology .
 
-<https://batcat.info/semantics/core/battery#> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
+<https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.0.7"^^xs:string ;
   dcterms:modified "2025-10-27"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
