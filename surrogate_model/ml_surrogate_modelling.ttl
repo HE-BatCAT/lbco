@@ -1,0 +1,177 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lbco:   <https://batcat.info/semantics/core#> .
+@prefix mod:    <https://w3id.org/mod#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann:   <http://purl.org/vocab/vann/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+# Ontology metadata
+
+<https://w3id.org/batcat/core/ml_surrogate_modelling> a owl:Ontology ;
+    dcterms:title "BatCAT core ontologies: module for ML surrogate modelling"^^xsd:string ;
+    dcterms:description "Ontology module to describe machine-learning surrogate models (non-deep-learning focus), including algorithm family, feature representation, preprocessing, hyperparameters, and evaluation protocol metadata. Extends the surrogate_modelling module."^^xsd:string ;
+    dcterms:creator "BatCAT consortium"^^xsd:string ;
+    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xsd:string ;
+    dcterms:license <https://spdx.org/licenses/LGPL-3.0-only.html> ;
+    dcterms:created "2025-12-16"^^xsd:date ;
+    dcterms:creator "Liyanapathiranage Sudeepika Wajirakumari Samarathunga (ORCID 0009-0006-6799-7193)"^^xsd:string ;
+    dcterms:issued  "2025-12-16"^^xsd:date ;
+    dcterms:modified "2025-12-16"^^xsd:date ;
+    dcterms:bibliographicCitation "BatCAT core ontologies (ML surrogate modelling module), v0.0.1, 2025."^^xsd:string ;
+    vann:preferredNamespacePrefix "lbco"^^xsd:string ;
+    vann:preferredNamespaceUri "https://batcat.info/semantics/core#"^^xsd:anyURI ;
+    owl:versionIRI <https://w3id.org/batcat/core/ml_surrogate_modelling/0.0.1> ;
+    owl:versionInfo "0.0.1"^^xsd:string ;
+    mod:status "draft"^^xsd:string ;
+    owl:imports
+        <https://batcat.info/semantics/core>,
+        <https://batcat.info/semantics/core/data>,
+        <https://batcat.info/semantics/core/modelling>,
+        <https://w3id.org/batcat/core/surrogate_modelling> .
+
+# Classes
+
+lbco:ml_surrogate_model a owl:Class ;
+    rdfs:label "ML surrogate model"^^xsd:string ;
+    rdfs:comment "A surrogate model built using classical machine-learning methods (e.g., kernel methods, tree ensembles, Gaussian processes). Subclass of surrogate_model."^^xsd:string ;
+    rdfs:subClassOf lbco:surrogate_model .
+
+lbco:ml_algorithm a owl:Class ;
+    rdfs:label "ML algorithm"^^xsd:string ;
+    rdfs:comment "A machine-learning algorithm or algorithm family used to train an ML surrogate model."^^xsd:string ;
+    rdfs:subClassOf lbco:method .
+
+# Lightweight algorithm families (individuals recommended, not required)
+lbco:gaussian_process_regression a owl:Class ;
+    rdfs:label "Gaussian process regression"^^xsd:string ;
+    rdfs:comment "Gaussian process regression (Kriging) models used as surrogates."^^xsd:string ;
+    rdfs:subClassOf lbco:ml_algorithm .
+
+lbco:support_vector_regression a owl:Class ;
+    rdfs:label "Support vector regression"^^xsd:string ;
+    rdfs:comment "Support vector regression (SVR) models used as surrogates."^^xsd:string ;
+    rdfs:subClassOf lbco:ml_algorithm .
+
+lbco:tree_ensemble_regression a owl:Class ;
+    rdfs:label "Tree ensemble regression"^^xsd:string ;
+    rdfs:comment "Tree-ensemble regression models (e.g., random forest, gradient boosting) used as surrogates."^^xsd:string ;
+    rdfs:subClassOf lbco:ml_algorithm .
+
+lbco:linear_regression_model a owl:Class ;
+    rdfs:label "Linear regression model"^^xsd:string ;
+    rdfs:comment "Linear regression and regularized linear models used as surrogates."^^xsd:string ;
+    rdfs:subClassOf lbco:ml_algorithm .
+
+lbco:feature_representation a owl:Class ;
+    rdfs:label "Feature representation"^^xsd:string ;
+    rdfs:comment "A representation of inputs used by an ML surrogate (e.g., engineered scalar features, embeddings)."^^xsd:string ;
+    rdfs:subClassOf lbco:annotation .
+
+lbco:training_protocol a owl:Class ;
+    rdfs:label "Training protocol"^^xsd:string ;
+    rdfs:comment "A description of training configuration and procedure (e.g., data split strategy, CV scheme, preprocessing)."^^xsd:string ;
+    rdfs:subClassOf lbco:method .
+
+lbco:data_split_strategy a owl:Class ;
+    rdfs:label "Data split strategy"^^xsd:string ;
+    rdfs:comment "A strategy for splitting data into training/validation/test sets (e.g., random split, time-based split, k-fold CV)."^^xsd:string ;
+    rdfs:subClassOf lbco:training_protocol .
+
+# Object properties
+
+lbco:uses_ml_algorithm a owl:ObjectProperty ;
+    rdfs:label "Uses ML algorithm"^^xsd:string ;
+    rdfs:comment "Links an ML surrogate model to the ML algorithm or algorithm family used to train it."^^xsd:string ;
+    rdfs:domain lbco:ml_surrogate_model ;
+    rdfs:range lbco:ml_algorithm .
+
+lbco:has_feature_representation a owl:ObjectProperty ;
+    rdfs:label "Has feature representation"^^xsd:string ;
+    rdfs:comment "Links an ML surrogate model to the feature representation used for its inputs."^^xsd:string ;
+    rdfs:domain lbco:ml_surrogate_model ;
+    rdfs:range lbco:feature_representation .
+
+lbco:trained_with_protocol a owl:ObjectProperty ;
+    rdfs:label "Trained with protocol"^^xsd:string ;
+    rdfs:comment "Links an ML surrogate model to a training protocol description (preprocessing, split strategy, CV, etc.)."^^xsd:string ;
+    rdfs:domain lbco:ml_surrogate_model ;
+    rdfs:range lbco:training_protocol .
+
+lbco:has_data_split_strategy a owl:ObjectProperty ;
+    rdfs:label "Has data split strategy"^^xsd:string ;
+    rdfs:comment "Links a training protocol to the data splitting strategy used for training/validation/testing."^^xsd:string ;
+    rdfs:domain lbco:training_protocol ;
+    rdfs:range lbco:data_split_strategy .
+
+# Datatype properties
+
+lbco:has_hyperparameter_json a owl:DatatypeProperty ;
+    rdfs:label "Has hyperparameter JSON"^^xsd:string ;
+    rdfs:comment "Hyperparameters of the ML model, encoded as a JSON string (lightweight, avoids a heavy parameter hierarchy)."^^xsd:string ;
+    rdfs:domain lbco:ml_surrogate_model ;
+    rdfs:range xsd:string .
+
+lbco:has_preprocessing_description a owl:DatatypeProperty ;
+    rdfs:label "Has preprocessing description"^^xsd:string ;
+    rdfs:comment "Textual description of preprocessing steps (e.g., scaling, normalization, feature selection)."^^xsd:string ;
+    rdfs:domain lbco:training_protocol ;
+    rdfs:range xsd:string .
+
+lbco:has_train_fraction a owl:DatatypeProperty ;
+    rdfs:label "Has train fraction"^^xsd:string ;
+    rdfs:comment "Fraction of data used for training (0..1), when applicable."^^xsd:string ;
+    rdfs:domain lbco:training_protocol ;
+    rdfs:range xsd:decimal .
+
+lbco:has_validation_fraction a owl:DatatypeProperty ;
+    rdfs:label "Has validation fraction"^^xsd:string ;
+    rdfs:comment "Fraction of data used for validation (0..1), when applicable."^^xsd:string ;
+    rdfs:domain lbco:training_protocol ;
+    rdfs:range xsd:decimal .
+
+lbco:has_test_fraction a owl:DatatypeProperty ;
+    rdfs:label "Has test fraction"^^xsd:string ;
+    rdfs:comment "Fraction of data used for test (0..1), when applicable."^^xsd:string ;
+    rdfs:domain lbco:training_protocol ;
+    rdfs:range xsd:decimal .
+
+
+# Controlled vocabulary
+
+
+lbco:ENGINEERED_SCALAR_FEATURES a lbco:feature_representation ;
+    rdfs:label "Engineered scalar features"^^xsd:string .
+
+lbco:K_FOLD_CV a lbco:data_split_strategy ;
+    rdfs:label "k-fold cross-validation"^^xsd:string .
+
+lbco:RANDOM_TRAIN_TEST_SPLIT a lbco:data_split_strategy ;
+    rdfs:label "Random train/test split"^^xsd:string .
+
+# Example instance 
+
+<https://batcat.info/semantics/example#ML_SURROGATE_MODEL_001> a lbco:ml_surrogate_model ;
+    rdfs:label "Example ML surrogate model 001"^^xsd:string ;
+    dcterms:modified "2025-12-16"^^xsd:date ;
+    lbco:has_framework "scikit-learn"^^xsd:string ;
+    lbco:uses_ml_algorithm <https://batcat.info/semantics/example#ALGO_RF_001> ;
+    lbco:has_feature_representation lbco:ENGINEERED_SCALAR_FEATURES ;
+    lbco:has_hyperparameter_json "{\"n_estimators\":500,\"max_depth\":12,\"random_state\":42}"^^xsd:string ;
+    lbco:has_applicability_range_info "Valid for 20–60°C"^^xsd:string ;
+    lbco:has_r2 9.6e-01 ;
+    lbco:has_rmse 2.10e-02 ;
+    lbco:trained_with_protocol <https://batcat.info/semantics/example#TRAIN_PROTOCOL_001> .
+
+<https://batcat.info/semantics/example#ALGO_RF_001> a lbco:tree_ensemble_regression ;
+    rdfs:label "Random forest regression"^^xsd:string ;
+    rdfs:comment "Random forest regression used to train the surrogate."^^xsd:string .
+
+<https://batcat.info/semantics/example#TRAIN_PROTOCOL_001> a lbco:training_protocol ;
+    rdfs:label "Training protocol 001"^^xsd:string ;
+    lbco:has_preprocessing_description "StandardScaler on inputs; no feature selection."^^xsd:string ;
+    lbco:has_data_split_strategy lbco:RANDOM_TRAIN_TEST_SPLIT ;
+    lbco:has_train_fraction 0.8 ;
+    lbco:has_test_fraction 0.2 .

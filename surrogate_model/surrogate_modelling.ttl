@@ -1,0 +1,91 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lbco: <https://batcat.info/semantics/core#> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+lbco:has_framework a owl:DatatypeProperty ;
+    rdfs:label "Has framework"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:domain lbco:surrogate_model ;
+    rdfs:range xsd:string .
+
+lbco:has_model_artifact_uri a owl:DatatypeProperty ;
+    rdfs:label "Has model artifact uri"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:domain lbco:surrogate_model ;
+    rdfs:range xsd:anyURI .
+
+lbco:has_r2 a owl:DatatypeProperty ;
+    rdfs:label "Has r2"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:domain lbco:surrogate_model ;
+    rdfs:range xsd:double .
+
+lbco:has_rmse a owl:DatatypeProperty ;
+    rdfs:label "Has rmse"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:domain lbco:surrogate_model ;
+    rdfs:range xsd:double .
+
+lbco:has_uncertainty_quantification_method a owl:ObjectProperty ;
+    rdfs:label "Has uncertainty quantification method"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:domain lbco:surrogate_model ;
+    rdfs:range lbco:uncertainty_quantification_method .
+
+lbco:is_surrogate_of a owl:ObjectProperty ;
+    rdfs:label "Is surrogate of"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:domain lbco:surrogate_model ;
+    rdfs:range lbco:computational_modelling_method .
+
+lbco:surrogate_training_process a owl:Class ;
+    rdfs:label "Surrogate training process"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:subClassOf lbco:model_parametrization_process .
+
+lbco:surrogate_validation_process a owl:Class ;
+    rdfs:label "Surrogate validation process"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:subClassOf lbco:model_validation_process .
+
+lbco:trained_on_dataset a owl:ObjectProperty ;
+    rdfs:label "Trained on dataset"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:domain lbco:surrogate_model ;
+    rdfs:range lbco:dataset .
+
+<https://batcat.info/semantics/example#SURROGATE_MODEL_001> a lbco:surrogate_model ;
+    dcterms:modified "2025-12-16"^^xsd:date ;
+    lbco:has_applicability_range_info "Valid for 20–60°C"^^xsd:string ;
+    lbco:has_framework "PyTorch"^^xsd:string ;
+    lbco:has_r2 9.8e-01 ;
+    lbco:has_rmse 1.23e-02 .
+
+<https://w3id.org/batcat/core/surrogate_modelling> a owl:Ontology ;
+    dcterms:bibliographicCitation "BatCAT core ontologies (Surrogate modelling module), v0.0.1, 2025."^^xsd:string ;
+    dcterms:created "2025-12-16"^^xsd:date ;
+    dcterms:creator "Liyanapathiranage Sudeepika Wajirakumari Samarathunga (ORCID 0009-0006-6799-7193)"^^xsd:string ;
+    dcterms:description "Ontology module to describe surrogate models (data-driven approximations of computational models), their training/validation processes, datasets, quality metrics, and uncertainty quantification."^^xsd:string ;
+    dcterms:issued "2025-12-16"^^xsd:date ;
+    dcterms:license <https://spdx.org/licenses/LGPL-3.0-only.html> ;
+    dcterms:modified "2025-12-16"^^xsd:date ;
+    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xsd:string ;
+    dcterms:title "BatCAT core ontologies: module for Surrogate modelling"^^xsd:string ;
+    vann:preferredNamespacePrefix "lbco"^^xsd:string ;
+    vann:preferredNamespaceUri "https://batcat.info/semantics/core#"^^xsd:anyURI ;
+    owl:imports <https://batcat.info/semantics/core>,
+        <https://batcat.info/semantics/core/data>,
+        <https://batcat.info/semantics/core/modelling> ;
+    owl:versionIRI <https://w3id.org/batcat/core/surrogate_modelling/0.0.1> ;
+    owl:versionInfo "0.0.1"^^xsd:string ;
+    mod:status "draft"^^xsd:string .
+
+lbco:surrogate_model a owl:Class ;
+    rdfs:label "Surrogate model"^^xsd:string ;
+    rdfs:comment "TODO: add definition."^^xsd:string ;
+    rdfs:subClassOf lbco:data_driven_model .
+

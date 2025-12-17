@@ -1,0 +1,226 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lbco:   <https://batcat.info/semantics/core#> .
+@prefix mod:    <https://w3id.org/mod#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann:   <http://purl.org/vocab/vann/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+
+# Ontology metadata
+
+<https://w3id.org/batcat/core/dl_surrogate_modelling> a owl:Ontology ;
+    dcterms:title "BatCAT core ontologies: module for Deep learning surrogate modelling"^^xsd:string ;
+    dcterms:description "Ontology module to describe deep-learning surrogate models (NN-based approximations of computational models), including architecture family, training configuration, loss/optimizer, and dataset split/protocol metadata. Extends the surrogate_modelling module."^^xsd:string ;
+    dcterms:creator "BatCAT consortium"^^xsd:string ;
+    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xsd:string ;
+    dcterms:license <https://spdx.org/licenses/LGPL-3.0-only.html> ;
+    dcterms:created "2025-12-16"^^xsd:date ;
+    dcterms:creator "Liyanapathiranage Sudeepika Wajirakumari Samarathunga (ORCID 0009-0006-6799-7193)"^^xsd:string ;
+    dcterms:issued  "2025-12-16"^^xsd:date ;
+    dcterms:modified "2025-12-16"^^xsd:date ;
+    dcterms:bibliographicCitation "BatCAT core ontologies (Deep learning surrogate modelling module), v0.0.1, 2025."^^xsd:string ;
+    vann:preferredNamespacePrefix "lbco"^^xsd:string ;
+    vann:preferredNamespaceUri "https://batcat.info/semantics/core#"^^xsd:anyURI ;
+    owl:versionIRI <https://w3id.org/batcat/core/dl_surrogate_modelling/0.0.1> ;
+    owl:versionInfo "0.0.1"^^xsd:string ;
+    mod:status "draft"^^xsd:string ;
+    owl:imports
+        <https://batcat.info/semantics/core>,
+        <https://batcat.info/semantics/core/data>,
+        <https://batcat.info/semantics/core/modelling>,
+        <https://w3id.org/batcat/core/surrogate_modelling> .
+
+# Classes
+
+lbco:dl_surrogate_model a owl:Class ;
+    rdfs:label "Deep learning surrogate model"^^xsd:string ;
+    rdfs:comment "A surrogate model built using deep neural networks (e.g., MLP, CNN, RNN, Transformer, PINN). Subclass of surrogate_model."^^xsd:string ;
+    rdfs:subClassOf lbco:surrogate_model .
+
+lbco:dl_architecture a owl:Class ;
+    rdfs:label "Deep learning architecture"^^xsd:string ;
+    rdfs:comment "A neural network architecture family used to implement a deep-learning surrogate."^^xsd:string ;
+    rdfs:subClassOf lbco:method .
+
+lbco:training_configuration a owl:Class ;
+    rdfs:label "Training configuration"^^xsd:string ;
+    rdfs:comment "Configuration for training a deep-learning surrogate (loss, optimizer, batch size, epochs, early stopping, etc.)."^^xsd:string ;
+    rdfs:subClassOf lbco:method .
+
+lbco:loss_function a owl:Class ;
+    rdfs:label "Loss function"^^xsd:string ;
+    rdfs:comment "Loss function used to train a deep-learning surrogate model."^^xsd:string ;
+    rdfs:subClassOf lbco:method .
+
+lbco:optimizer a owl:Class ;
+    rdfs:label "Optimizer"^^xsd:string ;
+    rdfs:comment "Optimizer used to train a deep-learning surrogate model (e.g., Adam, SGD)."^^xsd:string ;
+    rdfs:subClassOf lbco:method .
+
+lbco:regularization_method a owl:Class ;
+    rdfs:label "Regularization method"^^xsd:string ;
+    rdfs:comment "A regularization method used during training (e.g., dropout, weight decay, early stopping)."^^xsd:string ;
+    rdfs:subClassOf lbco:method .
+
+lbco:data_split_strategy a owl:Class ;
+    rdfs:label "Data split strategy"^^xsd:string ;
+    rdfs:comment "A strategy for splitting data into training/validation/test sets (e.g., random split, k-fold CV, time-based split)."^^xsd:string ;
+    rdfs:subClassOf lbco:training_configuration .
+
+lbco:MLP a lbco:dl_architecture ;
+    rdfs:label "Multi-layer perceptron (MLP)"^^xsd:string ;
+    rdfs:comment "Fully-connected feed-forward neural network architecture."^^xsd:string .
+
+lbco:CNN a lbco:dl_architecture ;
+    rdfs:label "Convolutional neural network (CNN)"^^xsd:string ;
+    rdfs:comment "CNN architecture (useful when inputs are images/grids/fields)."^^xsd:string .
+
+lbco:RNN a lbco:dl_architecture ;
+    rdfs:label "Recurrent neural network (RNN)"^^xsd:string ;
+    rdfs:comment "RNN/LSTM/GRU architecture (useful for sequences/time series)."^^xsd:string .
+
+lbco:TRANSFORMER a lbco:dl_architecture ;
+    rdfs:label "Transformer"^^xsd:string ;
+    rdfs:comment "Transformer-based architecture (attention models)."^^xsd:string .
+
+lbco:PINN a lbco:dl_architecture ;
+    rdfs:label "Physics-informed neural network (PINN)"^^xsd:string ;
+    rdfs:comment "Neural network trained with physics-informed loss terms (data + equation residuals)."^^xsd:string .
+
+# Object properties
+
+lbco:uses_dl_architecture a owl:ObjectProperty ;
+    rdfs:label "Uses DL architecture"^^xsd:string ;
+    rdfs:comment "Links a deep-learning surrogate model to the neural network architecture family used."^^xsd:string ;
+    rdfs:domain lbco:dl_surrogate_model ;
+    rdfs:range lbco:dl_architecture .
+
+lbco:trained_with_configuration a owl:ObjectProperty ;
+    rdfs:label "Trained with configuration"^^xsd:string ;
+    rdfs:comment "Links a deep-learning surrogate model to its training configuration."^^xsd:string ;
+    rdfs:domain lbco:dl_surrogate_model ;
+    rdfs:range lbco:training_configuration .
+
+lbco:uses_loss_function a owl:ObjectProperty ;
+    rdfs:label "Uses loss function"^^xsd:string ;
+    rdfs:comment "Links a training configuration to the loss function used."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range lbco:loss_function .
+
+lbco:uses_optimizer a owl:ObjectProperty ;
+    rdfs:label "Uses optimizer"^^xsd:string ;
+    rdfs:comment "Links a training configuration to the optimizer used."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range lbco:optimizer .
+
+lbco:uses_regularization_method a owl:ObjectProperty ;
+    rdfs:label "Uses regularization method"^^xsd:string ;
+    rdfs:comment "Links a training configuration to a regularization method used."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range lbco:regularization_method .
+
+lbco:has_data_split_strategy a owl:ObjectProperty ;
+    rdfs:label "Has data split strategy"^^xsd:string ;
+    rdfs:comment "Links a training configuration to the data split strategy used."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range lbco:data_split_strategy .
+
+# Datatype properties 
+
+lbco:has_architecture_description a owl:DatatypeProperty ;
+    rdfs:label "Has architecture description"^^xsd:string ;
+    rdfs:comment "Text description of the network architecture (layers/widths/activations). Useful when not modelling layers explicitly."^^xsd:string ;
+    rdfs:domain lbco:dl_surrogate_model ;
+    rdfs:range xsd:string .
+
+lbco:has_training_hyperparameter_json a owl:DatatypeProperty ;
+    rdfs:label "Has training hyperparameter JSON"^^xsd:string ;
+    rdfs:comment "Training hyperparameters encoded as a JSON string (e.g., learning rate, batch size, epochs, scheduler)."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range xsd:string .
+
+lbco:has_preprocessing_description a owl:DatatypeProperty ;
+    rdfs:label "Has preprocessing description"^^xsd:string ;
+    rdfs:comment "Textual description of preprocessing steps (e.g., normalization, scaling, augmentation)."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range xsd:string .
+
+lbco:has_train_fraction a owl:DatatypeProperty ;
+    rdfs:label "Has train fraction"^^xsd:string ;
+    rdfs:comment "Fraction of data used for training (0..1), when applicable."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range xsd:decimal .
+
+lbco:has_validation_fraction a owl:DatatypeProperty ;
+    rdfs:label "Has validation fraction"^^xsd:string ;
+    rdfs:comment "Fraction of data used for validation (0..1), when applicable."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range xsd:decimal .
+
+lbco:has_test_fraction a owl:DatatypeProperty ;
+    rdfs:label "Has test fraction"^^xsd:string ;
+    rdfs:comment "Fraction of data used for test (0..1), when applicable."^^xsd:string ;
+    rdfs:domain lbco:training_configuration ;
+    rdfs:range xsd:decimal .
+
+# loss/optimizer 
+
+lbco:MSE_LOSS a lbco:loss_function ;
+    rdfs:label "Mean squared error (MSE)"^^xsd:string ;
+    rdfs:comment "Standard regression loss: mean squared error."^^xsd:string .
+
+lbco:MAE_LOSS a lbco:loss_function ;
+    rdfs:label "Mean absolute error (MAE)"^^xsd:string ;
+    rdfs:comment "Regression loss: mean absolute error."^^xsd:string .
+
+lbco:ADAM a lbco:optimizer ;
+    rdfs:label "Adam optimizer"^^xsd:string ;
+    rdfs:comment "Adaptive Moment Estimation (Adam) optimizer."^^xsd:string .
+
+lbco:SGD a lbco:optimizer ;
+    rdfs:label "Stochastic gradient descent (SGD)"^^xsd:string ;
+    rdfs:comment "Stochastic gradient descent optimizer."^^xsd:string .
+
+lbco:DROPOUT a lbco:regularization_method ;
+    rdfs:label "Dropout"^^xsd:string ;
+    rdfs:comment "Dropout regularization."^^xsd:string .
+
+lbco:EARLY_STOPPING a lbco:regularization_method ;
+    rdfs:label "Early stopping"^^xsd:string ;
+    rdfs:comment "Stop training when validation metric stops improving."^^xsd:string .
+
+lbco:RANDOM_TRAIN_TEST_SPLIT a lbco:data_split_strategy ;
+    rdfs:label "Random train/test split"^^xsd:string ;
+    rdfs:comment "Random split into train/validation/test (fractions specified separately if needed)."^^xsd:string .
+
+lbco:K_FOLD_CV a lbco:data_split_strategy ;
+    rdfs:label "k-fold cross-validation"^^xsd:string ;
+    rdfs:comment "k-fold CV for evaluation/training where applicable."^^xsd:string .
+
+# instance 
+
+<https://batcat.info/semantics/example#DL_SURROGATE_MODEL_001> a lbco:dl_surrogate_model ;
+    rdfs:label "Example DL surrogate model 001"^^xsd:string ;
+    dcterms:modified "2025-12-16"^^xsd:date ;
+    lbco:has_framework "PyTorch"^^xsd:string ;
+    lbco:uses_dl_architecture lbco:MLP ;
+    lbco:has_architecture_description "MLP with 6 hidden layers, width 128, GELU activations; output layer linear."^^xsd:string ;
+    lbco:has_applicability_range_info "Valid for 20–60°C"^^xsd:string ;
+    lbco:has_r2 9.8e-01 ;
+    lbco:has_rmse 1.23e-02 ;
+    lbco:trained_with_configuration <https://batcat.info/semantics/example#TRAIN_CFG_001> .
+
+<https://batcat.info/semantics/example#TRAIN_CFG_001> a lbco:training_configuration ;
+    rdfs:label "Training configuration 001"^^xsd:string ;
+    lbco:uses_loss_function lbco:MSE_LOSS ;
+    lbco:uses_optimizer lbco:ADAM ;
+    lbco:uses_regularization_method lbco:EARLY_STOPPING ;
+    lbco:has_data_split_strategy lbco:RANDOM_TRAIN_TEST_SPLIT ;
+    lbco:has_preprocessing_description "Inputs standardized (z-score); outputs min-max scaled."^^xsd:string ;
+    lbco:has_training_hyperparameter_json "{\"learning_rate\":0.001,\"batch_size\":256,\"epochs\":500,\"patience\":30}"^^xsd:string ;
+    lbco:has_train_fraction 0.8 ;
+    lbco:has_validation_fraction 0.1 ;
+    lbco:has_test_fraction 0.1 .
