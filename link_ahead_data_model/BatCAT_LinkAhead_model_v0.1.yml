@@ -34,7 +34,7 @@ Simulation_result:  # WP2 minimal record type
   inherit_from_recommended:
     - BatCAT_record
   recommended_properties:
-    intput_physical_property:
+    input_physical_property:
       datatype: LIST  # ? REFERENCE?
     output_physical_property:
       datatype: LIST  # ? REFERENCE?
