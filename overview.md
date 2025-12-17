@@ -24,7 +24,7 @@ It allows to state a problem and its solution.
 A module about twinning, a particular type of computational modelling. In fact, digital twinning in particular involves models (typically data-driven, or hybrid, but not necessarily) that are synchronized with the physical world making use of sensor or characterization data.
 It allows to describe the twin functionalities.
 
-## Data & metadata (-> data.ttl)
+## Data and metadata (-> data.ttl)
 
 A module about (meta)data aspects, such as uncertainties, data quality protocols, and metadata schemas used to annotate data.
 
@@ -34,7 +34,7 @@ A module about computational modelling and related processes, as model parametri
 
 ## Characterization (-> characterization.ttl)
 
-Focuses on off-line characterization. On-line characterization (i.e., that is integrated with the manufacturing process itself, e.g., vis sensors) is addressed in the manufacturing module.
+Focuses on off-line characterization. On-line characterization (i.e., that is integrated with the manufacturing process itself, e.g., via sensors) is addressed in the manufacturing module.
 
 ## Manufacturing (-> manufacturing.ttl)
 
