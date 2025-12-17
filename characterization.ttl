@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core/characterization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
-   owl:versionInfo "version 0.0.4"^^xs:string ;
+   owl:versionInfo "version 0.7.0"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;

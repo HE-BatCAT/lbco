@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
 <https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 0.1.13"^^xs:string ;
+  owl:versionInfo "version 1.0.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
@@ -292,7 +292,7 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/characterization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
-   owl:versionInfo "version 0.0.4"^^xs:string ;
+   owl:versionInfo "version 0.7.0"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
@@ -400,7 +400,7 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
 
 <https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.0.12"^^xs:string ;
+   owl:versionInfo "version 0.7.0"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://batcat.info/semantics/core> ;
@@ -750,7 +750,7 @@ lbco:porosity a owl:Class ;
 <https://batcat.info/semantics/core/modelling> a owl:Ontology .
 
 <https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.0.10"^^xs:string ;
+  owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1065,7 +1065,7 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 <https://batcat.info/semantics/core/data> a owl:Ontology .
 
 <https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
-  owl:versionInfo "version 0.0.10"^^xs:string ;
+  owl:versionInfo "version 0.6.0"^^xs:string ;
   dcterms:modified "2025-12-17"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1290,7 +1290,7 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
 <https://batcat.info/semantics/core/optimization> a owl:Ontology .
 
 <https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
-  owl:versionInfo "version 0.1.8"^^xs:string ;
+  owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1619,7 +1619,7 @@ lbco:has_confidence_level a owl:ObjectProperty ;
 <https://batcat.info/semantics/core/twinning> a owl:Ontology .
 
 <https://batcat.info/semantics/core/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
-  owl:versionInfo "version 0.0.4"^^xs:string ;
+  owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1736,7 +1736,7 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.14"^^xs:string ;
+  owl:versionInfo "version 0.8.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -1777,7 +1777,7 @@ lbco:redox_flow_battery a owl:Class ;
 
 # LiB main components. based on CQ_CRO_10 (from Excel sheet) NB: not all entries included. Coating added (from MIRO)
 # (CQ_CRO_10: Active material, Binder, Percolant, slurry solvent, slurry, coated electrode, calendered electrode, electrode, separator, electrolyte, collector, battery cell, casing)
-# NB: I am not adding slurry and coated electrode as I think they belong elsewhere, maybe intermediate products?
+# NB: I am not adding slurry and coated electrode as I think they belong elsewhere: intermediate products
 lbco:lithium_ion_battery
      rdfs:subClassOf [a owl:Restriction ;
      owl:onProperty lbco:has_part ;

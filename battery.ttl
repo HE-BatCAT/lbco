@@ -14,7 +14,7 @@
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.0.14"^^xs:string ;
+  owl:versionInfo "version 0.8.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
@@ -55,7 +55,7 @@ lbco:redox_flow_battery a owl:Class ;
 
 # LiB main components. based on CQ_CRO_10 (from Excel sheet) NB: not all entries included. Coating added (from MIRO)
 # (CQ_CRO_10: Active material, Binder, Percolant, slurry solvent, slurry, coated electrode, calendered electrode, electrode, separator, electrolyte, collector, battery cell, casing)
-# NB: I am not adding slurry and coated electrode as I think they belong elsewhere, maybe intermediate products?
+# NB: I am not adding slurry and coated electrode as I think they belong elsewhere: intermediate products
 lbco:lithium_ion_battery
      rdfs:subClassOf [a owl:Restriction ;
      owl:onProperty lbco:has_part ;
