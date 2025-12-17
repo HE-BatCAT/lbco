@@ -1049,7 +1049,7 @@ osmo:granularity_level a owl:Class ;
 osmo:granularity_level rdfs:subClassOf lbco:annotation .
 osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 ####################################################################################
-# TODO: compare with VISO, MSO-EM, VOV
+# Could do: connect with VISO, MSO-EM, VOV
 @prefix lbco: <https://batcat.info/semantics/core#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -1066,7 +1066,7 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 
 <https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
   owl:versionInfo "version 0.0.10"^^xs:string ;
-  dcterms:modified "2025-12-15"^^xs:string ;
+  dcterms:modified "2025-12-17"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -1093,17 +1093,21 @@ lbco:dataset a owl:Class ;
     rdfs:subClassOf lbco:data .
 
 lbco:data_mapping a owl:Class ;
-    rdfs:label "Data mapping" .
+    rdfs:label "Data mapping" ;
+    rdfs:subClassOf lbco:annotation .
 
 lbco:metadata_mapping a owl:Class ;
-    rdfs:label "Metadata mapping" .
+    rdfs:label "Metadata mapping" ;
+    rdfs:subClassOf lbco:annotation .
 
 lbco:metadata_scheme a owl:Class ;
     rdfs:label "Metadata scheme" ;
-    rdfs:comment "Also called data model or schema"^^xs:string .
+    rdfs:comment "Also called data model or schema"^^xs:string ;
+    rdfs:subClassOf lbco:annotation .
 
 lbco:file_format a owl:Class ;
-    rdfs:label "File format" .
+    rdfs:label "File format" ;
+    rdfs:subClassOf lbco:annotation .
 
 lbco:data_quality_evaluation_method a owl:Class ;
     rdfs:label "Data quality evaluation method" ;
@@ -1158,7 +1162,8 @@ lbco:processed_data a owl:Class ;
 
 lbco:data_structure a owl:Class ;
     rdfs:label "Data structure" ;
-    rdfs:comment "E.g., includes data shapes, as SHACL or OO-LD shapes."^^xs:string .    
+    rdfs:comment "E.g., includes data shapes, as SHACL or OO-LD shapes."^^xs:string ;
+    rdfs:subClassOf lbco:annotation .
 
 lbco:uncertainty_quantification_method a owl:Class ;
     rdfs:label "Uncertainty quantification method" ;

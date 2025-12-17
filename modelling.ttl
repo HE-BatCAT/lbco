@@ -313,4 +313,4 @@ osmo:granularity_level a owl:Class ;
 osmo:granularity_level rdfs:subClassOf lbco:annotation .
 osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 ####################################################################################
-# TODO: compare with VISO, MSO-EM, VOV
+# Could do: connect with VISO, MSO-EM, VOV
