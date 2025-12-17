@@ -18,7 +18,8 @@ Vertical modules:
 Battery specific modules:
 - Battery (LiB and RFB) (-> battery.ttl)
 
-* [Overview of LBCO](overview.md)
+For more details on the scope of each module, see [Overview of LBCO](overview.md). For
+convenience, a file containing all modules is given [here](all_LBCO_modules_combined/all_LBCO_modules_combined.ttl).
 
 =========================================
 
@@ -37,7 +38,7 @@ Mappings directory:
 
 It contains mappings of ontologies to ASP and between ontologies (LBCO and external)
 
-- [map2asp](mappings/map2asp) Mapping from OWL/TTL to Answer Set Programming (ASP). See [documentation](mappings/map2asp/README.md)
+- [Mapping from OWL/TTL to Answer Set Programming (ASP).](mappings/map2asp)
 - Example mapping of LBCO to GPO (-> map2gpo.ttl)
 
 =========================================
