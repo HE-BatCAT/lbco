@@ -58,26 +58,38 @@
 	skos:hiddenLabel "awe" .
 	
 ### Location of EMMO elements ###############################################################
-# emmo:Software		disciplines/computerscience	EMMO_8681074a_e225_4e38_b586_e85b0f43ce38
+# emmo:Software			disciplines/computerscience		EMMO_8681074a_e225_4e38_b586_e85b0f43ce38
 
-# emmo:Data			perspectives/contrast		EMMO_3e7add3d_e6ed_489a_a796_8e31fef9b490	
-# emmo:Material		perspectives/contrast		EMMO_4207e895_8b83_4318_996a_72cfb32acd94
+# emmo:Data				perspectives/contrast			EMMO_3e7add3d_e6ed_489a_a796_8e31fef9b490	
+# emmo:Material			perspectives/contrast			EMMO_4207e895_8b83_4318_996a_72cfb32acd94
 
-# emmo:Role			perspectives/holistic		EMMO_4f226cf3_6d02_4d35_8566_a9e641bc6ff3
+# emmo:Role				perspectives/holistic			EMMO_4f226cf3_6d02_4d35_8566_a9e641bc6ff3
 
-# emmo:Object 		perspective/persistence		EMMO_90ae56e4_d197_49b6_be1a_0049e4756606
-# emmo:Process		perspectives/persistence	EMMO_43e9a05d_98af_41b4_92f6_00f79a09bfce
+# emmo:Object 			perspective/persistence			EMMO_90ae56e4_d197_49b6_be1a_0049e4756606
+# emmo:Process			perspectives/persistence		EMMO_43e9a05d_98af_41b4_92f6_00f79a09bfce
 
-# emmo:Property		perspectives/semiotics		EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba
+# emmo:Property			perspectives/semiotics			EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba
 
-# emmo:Information 	reference/information		EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36
+# emmo:Information 		reference/information			EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36
 
-# emmo:Agent		reference/agency			EMMO_2480b72b_db8d_460f_9a5f_c2912f979046
+# emmo:Agent			reference/agency				EMMO_2480b72b_db8d_460f_9a5f_c2912f979046
 
-# emmo:Procedure	reference/workflow			EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49
+# emmo:Procedure		reference/workflow				EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49
 
 
-### Potentially useful equivalent classes for EMMO elements with human-readable URIs ########
+
+# emmo:follows			mereocausality/mereocausality	EMMO_60c57607_c9e7_4e75_a3d1_7a1f1f9928e4
+# emmo:hasPart			mereocausality/mereocausality	EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f
+
+# emmo:hasInput			perspectives/persistence		EMMO_36e69413_8c59_4799_946c_10b05d266e22
+# emmo:hasOutput		perspectives/persistence		EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840
+# emmo:hasParticipant	perspectives/persistence		EMMO_ae2d1a96_bfa1_409a_a7d2_03d69e8a125a
+
+# emmo:hasProperty		perspectives/semiotics			EMMO_e1097637_70d2_4895_973f_2396f04fa204
+
+
+
+### Potentially useful equivalent classes and properties for EMMO elements with human-readable URIs ########
 emmo:Software owl:equivalentClass emmo:EMMO_8681074a_e225_4e38_b586_e85b0f43ce38 .
 
 emmo:Data owl:equivalentClass emmo:EMMO_3e7add3d_e6ed_489a_a796_8e31fef9b490 .
@@ -95,8 +107,18 @@ emmo:Information owl:equivalentClass emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50ac
 emmo:Agent owl:equivalentClass emmo:EMMO_2480b72b_db8d_460f_9a5f_c2912f979046 .
 
 emmo:Procedure owl:equivalentClass emmo:EMMO_472a0ca2_58bf_4618_b561_6fe68bd9fd49 .
+
+emmo:follows owl:equivalentProperty emmo:EMMO_60c57607_c9e7_4e75_a3d1_7a1f1f9928e4 .
+emmo:hasPart owl:equivalentProperty emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f .
+
+emmo:hasInput owl:equivalentProperty emmo:EMMO_36e69413_8c59_4799_946c_10b05d266e22 .
+emmo:hasOutput owl:equivalentProperty emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 .
+emmo:hasParticipant owl:equivalentProperty emmo:EMMO_ae2d1a96_bfa1_409a_a7d2_03d69e8a125a .
+
+emmo:hasProperty owl:equivalentProperty emmo:EMMO_e1097637_70d2_4895_973f_2396f04fa204 .
 #############################################################################################
 
+### Classes ###
 
 # emmo:Information
 lbco:annotation rdfs:subClassOf emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36 .
@@ -107,6 +129,7 @@ lbco:agent rdfs:subClassOf emmo:EMMO_2480b72b_db8d_460f_9a5f_c2912f979046 .
 # emmo:Data
 lbco:data owl:equivalentClass emmo:EMMO_3e7add3d_e6ed_489a_a796_8e31fef9b490 .
 
+# emmo:Material
 lbco:material owl:equivalentClass emmo:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 .
 
 # emmo:Procedure, look at the characterization techniques under that in CHAMEO (FunctionalIcon)...
@@ -129,3 +152,23 @@ lbco:statement rdfs:subClassOf emmo:EMMO_64c72d00_7582_44ea_a0b5_3a14e50acc36 .
 
 # emmo:Software
 lbco:software rdfs:subClassOf emmo:EMMO_8681074a_e225_4e38_b586_e85b0f43ce38 .
+
+### Object Properties ###
+
+# emmo:follows
+lbco:follows owl:equivalentProperty emmo:EMMO_60c57607_c9e7_4e75_a3d1_7a1f1f9928e4 .
+
+# emmo:hasInput
+lbco:hasInput rdfs:subPropertyOf emmo:EMMO_36e69413_8c59_4799_946c_10b05d266e22 .
+
+# emmo:hasOutput
+lbco:hasOutput rdfs:subPropertyOf emmo:EMMO_c4bace1d_4db0_4cd3_87e9_18122bae2840 .
+
+# emmo:hasPart
+lbco:hasPart rdfs:subPropertyOf emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f .
+
+# emmo:hasParticipant
+lbco:hasParticipant rdfs:subPropertyOf emmo:EMMO_ae2d1a96_bfa1_409a_a7d2_03d69e8a125a .
+
+# emmo:hasProperty
+lbco:hasProperty owl:equivalentProperty emmo:EMMO_e1097637_70d2_4895_973f_2396f04fa204 .
