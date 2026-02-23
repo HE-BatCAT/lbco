@@ -57,6 +57,30 @@ Simulation_result:  # WP2 minimal record type
       datatype: REFERENCE
       description: "Link to a compound/substance (from PubChem list)"
 
+Simulation_workflow_description:  # WP2 minimal record type
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+    - Process
+
+Model:  # WP2 minimal record type (model parametrization)
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+  recommended_properties:
+    is_data_driven:
+      datatype: BOOLEAN  # ?
+    is_physics_based:
+      datatype: BOOLEAN  # ?
+#    granularity_level_MODA_OSMO:
+#      datatype: TEXT  # or REFERENCE # or LIST?
+#      description: "one of: Electronic, Atomistic, Mesoscopic, Continuum"
+#    model_type_MODA_OSMO:
+#      datatype: REFERENCE  # or LIST?
+#      description: "one of MODA/OSMO Physical Equation (PE) types"
+
 Characterization_result:  # WP1 minimal record type
   inherit_from_obligatory:
     - BatCAT_record
