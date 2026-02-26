@@ -1,0 +1,473 @@
+# Run `python -m caosadvancedtools.models.parser --sync datamodel.yml`
+# Entity:
+# # Equivalent class of prov:Entity
+  # version (built-in)
+  # creator -> version.transactor (pav:createdBy
+  # created -> version.date (pav:createdOn)
+  # updated -> version.date
+  #
+  #
+
+State:
+  recommended_properties:
+    color:
+      datatype: TEXT
+Transition:
+  recommended_properties:
+    color:
+    from:
+      datatype: State
+    to:
+      datatype: State
+StateModel:
+  recommended_properties:
+    Transition:
+      datatype: LIST<Transition>
+    initial:
+      datatype: State
+    final:
+      datatype: State
+
+Process:
+  recommended_properties:
+    input:
+      datatype: REFERENCE
+    output:
+      datatype: REFERENCE
+    comment:
+      datatype: TEXT
+
+Mixing:
+  inherit_from_recommended:
+    - Process
+  recommended_properties:
+    active_material:
+      datatype: TEXT
+    active_material_target:
+      datatype: DOUBLE
+      unit: "g"
+    active_material_dispensed:
+      datatype: DOUBLE
+      unit: "g"
+    conductive_additive:
+      datatype: TEXT
+    conductive_additive_target:
+      datatype: DOUBLE
+      unit: "g"
+    conductive_additive_dispensed:
+      datatype: DOUBLE
+      unit: "g"
+    conductive_additive_mass:
+      datatype: DOUBLE
+      unit: "g"
+    conductive_additive_solvent_mass:
+      datatype: DOUBLE
+      unit: "g"
+    binder:
+      datatype: TEXT
+    binder_target:
+      datatype: DOUBLE
+      unit: "g"
+    binder_dispensed:
+      datatype: DOUBLE
+      unit: "g"
+    binder_mass:
+      datatype: DOUBLE
+      unit: "g"
+    binder_solvent_mass:
+      datatype: DOUBLE
+      unit: "g"
+    solvent:
+      datatype: TEXT
+    solvent_target_mass:
+      datatype: DOUBLE
+      unit: "g"
+    solvent_dispensed_mass:
+      datatype: DOUBLE
+      unit: "g"
+
+
+CoatingAndDrying:
+  inherit_from_recommended:
+    - Process
+  recommended_properties:
+    wet_coating_thickness:
+      datatype: DOUBLE
+      unit: "µm"
+    oven_temperature:
+      datatype: DOUBLE
+      unit: "°C"
+    oven_time:
+      datatype: DOUBLE
+      unit: "min"
+
+Calendering:
+  inherit_from_recommended:
+    - Process
+  recommended_properties:
+    target_electrode_density_low:
+      datatype: DOUBLE
+      unit: "g/cm^3"
+    target_electrode_density_high:
+      datatype: DOUBLE
+      unit: "g/cm^3"
+    calender_temperature:
+      datatype: DOUBLE
+      unit: "°C"
+    target_coating_thickness_low:
+      datatype: DOUBLE
+      unit: "µm"
+    target_coating_thickness_high:
+      datatype: DOUBLE
+      unit: "µm"
+    target_electrode_thickness_low:
+      datatype: DOUBLE
+      unit: "µm"
+    target_electrode_thickness_high:
+      datatype: DOUBLE
+      unit: "µm"
+
+
+
+Construction:
+  inherit_from_recommended:
+    - Process
+  recommended_properties:
+    theoretical_capacity:
+      datatype: DOUBLE
+      unit: "mA*h/g"
+    separator_type:
+      datatype: TEXT
+    spacer_1_height:
+      datatype: DOUBLE
+      unit: "mm"
+    spacer_2_height:
+      datatype: DOUBLE
+      unit: "mm"
+    electrolyte_type:
+      datatype: TEXT
+    electrolyte_amount:
+      datatype: DOUBLE
+      unit: "µl"
+
+Sample:
+  recommended_properties:
+    sample_id:
+      datatype: TEXT
+
+Slurry:
+  inherit_from_recommended:
+    - Sample
+  recommended_properties:
+    pot_barcode:
+      datatype: TEXT
+    solids_total_mass:
+      datatype: DOUBLE
+      unit: "g"
+    liquid_total_mass:
+      datatype: DOUBLE
+      unit: "g"
+    solids_content:
+      datatype: DOUBLE
+      unit: "%"
+    active_content:
+      datatype: DOUBLE
+      unit: "%"
+    conductive_content:
+      datatype: DOUBLE
+      unit: "%"
+    binder_content:
+      datatype: DOUBLE
+      unit: "%"
+
+DriedCoatedElectrode:
+  inherit_from_recommended:
+    - Sample
+  recommended_properties:
+    average_thickness:
+      datatype: DOUBLE
+      unit: "µm"
+    stdev_thickness:
+      datatype: DOUBLE
+      unit: "µm"
+    disc_weight:
+      datatype: DOUBLE
+      unit: "g/cm^2"
+
+
+
+CalenderedElectrode:
+  inherit_from_recommended:
+    - Sample
+  recommended_properties:
+    average_thickness:
+    stdev_thickness:
+    coating_thickness:
+      datatype: DOUBLE
+      unit: "µm"
+    electrode_density:
+      datatype: DOUBLE
+      unit: "g/cm^3"
+
+
+
+HalfCell:
+  inherit_from_recommended:
+    - Sample
+  recommended_properties:
+    electrode_mass:
+      datatype: DOUBLE
+      unit: "g"
+    cell_capacity:
+      datatype: DOUBLE
+      unit: "g/cm^2"
+    c_20_current:
+      datatype: DOUBLE
+      unit: "mA"
+
+
+Dataset:
+  # Equivalent class of sdo:Dataset
+  recommended_properties:
+    license:
+      # sdo:license
+      datatype: TEXT  # URL
+      description: 'License (please use a resolvable URL or IRI for it)'
+
+SensorData:
+  inherit_from_recommended:
+    - Dataset
+  recommended_properties:
+    Sensor:
+    frame_rate:
+      description: "Nominal frame rate. Actual frame rate can be different"
+      datatype: DOUBLE
+      unit: "1/s"
+    rows:
+      datatype: INTEGER
+    start_time:
+      datatype: DATETIME
+    end_time:
+      datatype: DATETIME
+    min_temperature:
+      datatype: DOUBLE
+      unit: "°C"
+    max_temperature:
+      datatype: DOUBLE
+      unit: "°C"
+    median_temperature:
+      datatype: DOUBLE
+      unit: "°C"
+
+
+
+Sensor:
+TemperatureSensor:
+  description: "This is a temperature sensor"
+  inherit_from_recommended:
+    - Sensor
+  role: Record
+
+Metric:
+  description: "Metric measured by a sensor"
+
+Temperature:
+  description: "Temperature in °C or K"
+  inherit_from_recommended:
+    - Metric
+
+
+Readme:
+DataFile:
+ExcelFile:
+  inherit_from_recommended:
+    - DataFile
+CSVTable:
+  inherit_from_recommended:
+    - DataFile
+
+SimulationResult:
+  inherit_from_recommended:
+    - Dataset
+  recommended_properties:
+    input_physical_property:
+      datatype: LIST<TEXT>
+    output_physical_property:
+      datatype: LIST<TEXT>
+    software:
+      datatype: TEXT
+    c_rate:
+      datatype: TEXT
+      unit: "V"
+    Geometry:
+    GranularityLevel:
+    PhysicalEquationType:
+
+Geometry:
+  description: "Geometry of SimulationResult"
+
+Ellipsoids:
+  inherit_from_recommended:
+    - Geometry
+  role: Record
+SpheresMono:
+  inherit_from_recommended:
+    - Geometry
+  role: Record
+SpheresPoly:
+  inherit_from_recommended:
+    - Geometry
+  role: Record
+
+GranularityLevel:
+  description: "Granularity level (from RoMM), i.e., electronic, atomistic, mesoscopic, or continuum level according to RoMM See https://github.com/HE-BatCAT/lbco/blob/main/external/osmo.ttl#granularity_level"
+
+ELECTRONIC:
+  description: "granularity level label: electronic materials modelling"
+  inherit_from_recommended:
+    - GranularityLevel
+  role: Record
+ATOMISTIC:
+  description: "granularity level label: atomistic materials modelling"
+  inherit_from_recommended:
+    - GranularityLevel
+  role: Record
+MESOSCOPIC:
+  description: "granularity level label: mesoscopic materials modelling"
+  inherit_from_recommended:
+    - GranularityLevel
+  role: Record
+CONTINUUM:
+  description: "granularity level label: continuum materials modelling"
+  inherit_from_recommended:
+    - GranularityLevel
+  role: Record
+
+PhysicalEquationType:
+  description: "Physical equation type, i.e., a symbol referring to the physical equation underlying a model, mostly following RoMM (n.b., these entities are not models, they are descriptors of models). See https://github.com/HE-BatCAT/lbco/blob/main/external/osmo.ttl#physical_equation_type"
+
+PE_TYPE_A.1:
+  description: "PE type A.1: Classical-mechanical density functional theory (atomistic)"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_A.2:
+  description: "PE type A.2: Molecular statics (atomistic), energy minimization"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_A.3:
+  description: "PE type A.3: Molecular dynamics (atomistic)"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_A.4:
+  description: "PE type A.4: Partition function (atomistic), e.g., for a Monte Carlo solver"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_A.5:
+  description: "PE type A.5: Atomistic spin model"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_A.6:
+  description: "PE type A.6: Statistical transport model (atomistic)"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.1:
+  description: "PE type CO.1: Continuum solid mechanics"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.2:
+  description: "PE type CO.2: Continuum fluid mechanics"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.3:
+  description: "PE type CO.3: Continuum modelling of heat transfer and thermomechanics"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.4:
+  description: "PE type CO.4: Phase field model or continuum density gradient theory"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.5:
+  description: "PE type CO.5: Continuum thermodynamics"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.6:
+  description: "PE type CO.6: Continuum modelling of chemical reaction kinetics"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.7:
+  description: "PE type CO.7: Continuum electromagnetism model (including optics, magnetism, etc.)"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_CO.8:
+  description: "PE type CO.8: Continuum process model (including devices and components of chemical/mechanical processes, flow-chart models, etc.)"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_EL.1:
+  description: "PE type EL.1: Ab-initio quantum mechanical (or first principle) model"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_EL.2:
+  description: "PE type EL.2: Electronic many-body and/or effective Hamiltonian model"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_EL.3:
+  description: "PE type EL.3: QM model of the response to time-dependent fields"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_EL.4:
+  description: "PE type EL.4: Statistical charge transport model"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_EL.5:
+  description: "PE type EL.5: Statistical electron spin transport model"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_M.1:
+  description: "PE type M.1: Classical-mechanical density functional theory (mesoscopic)"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_M.2:
+  description: "PE type M.2: Molecular statics (mesoscopic), i.e., energy minimization"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_M.3:
+  description: "PE type M.3: Molecular dynamics (mesoscopic), i.e., coarse-grained or united-atom modelling"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_M.4:
+  description: "PE type M.4: Partition function (mesoscopic), e.g., for a Monte Carlo solver"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_M.5:
+  description: "PE type M.5: Micromagnetism model"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
+PE_TYPE_M.6:
+  description: "PE type M.6: Statistical transport model (mesoscopic)"
+  inherit_from_recommended:
+    - PhysicalEquationType
+  role: Record
