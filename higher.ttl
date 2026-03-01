@@ -1,4 +1,4 @@
-@prefix lbco: <https://purl.org/lbco#> .
+@prefix lbco: <https://batcat.info/semantics/core#> .
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -10,9 +10,9 @@
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://purl.org/lbco> a owl:Ontology .                                                                                                                                   
+<https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
 
-<https://purl.org/lbco> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
+<https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
   owl:versionInfo "version 1.0.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
