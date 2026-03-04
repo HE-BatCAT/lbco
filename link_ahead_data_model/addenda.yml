@@ -1,0 +1,51 @@
+---  # BatCAT Data model addition first line
+Model:  # WP2 minimal record type (model parametrization)
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+  recommended_properties:
+    is_data_driven:  # https://batcat.info/semantics/core#is_data_driven
+      datatype: BOOLEAN
+    is_physics_based:  # https://batcat.info/semantics/core#is_physics_based
+      datatype: BOOLEAN
+    is_model_for:   #  https://batcat.info/semantics/core#is_model_for . OR represents: https://batcat.info/semantics/core#represents
+      datatype: TEXT  #? REFERENCE?  # Allowed types: lbco:physical_object OR lbco:process
+    is_model_for_system_containing_material:   # https://batcat.info/semantics/core#is_model_for_system_containing_material
+      datatype: TEXT  #? REFERENCE?
+    is_model_for_system_containing_substance:   # https://batcat.info/semantics/core#is_model_for_system_containing_substance
+      datatype: TEXT  #? REFERENCE?
+# IF (is_physics_based = TRUE) THEN:
+    granularity_level_MODA_OSMO:
+    model_type_MODA_OSMO:
+# IF (is_data_driven = TRUE) THEN:
+    data_driven_model_type:  # see list of sub-classes of lbco:ml_algorithm class, here: https://github.com/HE-BatCAT/lbco/blob/surrogate_model/surrogate_model/ml_surrogate_modelling.ttl # OK? More to add?
+    has_action_type:  # https://batcat.info/semantics/core#has_action_type
+# Allowed values: PREDICT, INTERPOLATE, CLASSIFY, cf. https://batcat.info/semantics/core#model_action
+    has_applicability_range_info:  # https://batcat.info/semantics/core#has_applicability_range_info
+      datatype: TEXT
+    seeAlso:  # rdfs:seeAlso A pointer to, e.g., a paper or preprint about the model
+
+Surrogate_model:  # WP2 minimal record type 
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+    - Model
+# TODO: add fields from the surrogate model survey
+
+Simulation_workflow_description:  # WP2 minimal record type
+  inherit_from_obligatory:
+    - BatCAT_record
+  inherit_from_recommended:
+    - BatCAT_record
+    - Process
+  recommended_properties:
+    has_input_model:  # https://batcat.info/semantics/core#has_input (more generic property)
+      datatype: REFERENCE  # Allowed type: model
+    has_input_data:   # https://batcat.info/semantics/core#has_input (more generic property)
+      datatype: REFERENCE  # Allowed type: data
+    seeAlso:  # rdfs:seeAlso A pointer to, e.g., a paper or preprint about the workflow
+# Should/could add: information about the linking/coupling/mapping between models
+
+---  # BatCAT Data model addition end line
