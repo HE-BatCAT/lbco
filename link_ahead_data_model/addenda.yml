@@ -45,6 +45,8 @@ Simulation_workflow_description:  # WP2 minimal record type
       datatype: REFERENCE  # Allowed type: model
     has_input_data:   # https://batcat.info/semantics/core#has_input (more generic property)
       datatype: REFERENCE  # Allowed type: data
+    has_output:   # https://batcat.info/semantics/core#has_output 
+      datatype: REFERENCE  # Allowed type: Simulation_result
     seeAlso:  # rdfs:seeAlso A pointer to, e.g., a paper or preprint about the workflow
 # Should/could add: information about the linking/coupling/mapping between models
 
