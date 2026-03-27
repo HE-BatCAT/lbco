@@ -1644,8 +1644,8 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 <https://batcat.info/semantics/core/battery> a owl:Ontology .
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.8.0"^^xs:string ;
-  dcterms:modified "2025-12-15"^^xs:string ;
+  owl:versionInfo "version 0.8.1"^^xs:string ;
+  dcterms:modified "2026-03-27"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
@@ -1800,6 +1800,7 @@ lbco:binder a owl:Class ;
 
 lbco:percolant a owl:Class ;
      rdfs:label "Percolant" ;
+     skos:altLabel "Conductive additive" ;
      rdfs:subClassOf lbco:physical_object .
 
 lbco:slurry_solvent a owl:Class ; # TOSEE: an object with this role?
@@ -2040,6 +2041,8 @@ lbco:coating_speed a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity . 
 
 lbco:wet_coating_gap a owl:Class ;
+     rdfs:label "Wet coating gap" ;
+     skos:atlLabel "Wet coating thickness" ;
      rdfs:subClassOf lbco:physical_quantity . 
 
 lbco:coating_targeted_area_capacity a owl:Class ;
@@ -2066,17 +2069,31 @@ lbco:furnace_temperature a owl:Class ;
 lbco:time_at_furnace a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity . 
 
+lbco:oven_temperature a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:time_at_oven a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
 lbco:cooling_time a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity . 
 
 lbco:furnace_atmosphere_composition a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity . 
 
+lbco:charging_rate a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
 # manufacturing devices
 
 lbco:furnace a owl:Class ;
      rdfs:label "Furnace" ;
-     rdfs:subClassOf lbco:device. 
+     rdfs:subClassOf lbco:manufacturing_device;
+     rdfs:comment "As compared to an oven, a furnace allows to reach higher temperatures (several hundred degrees celsius)."^^xs:string . 
+
+lbco:oven a owl:Class ;
+     rdfs:label "Oven" ;
+     rdfs:subClassOf lbco:manufacturing_device. 
 
 ####################################################################################
 # Based (partially) on CQ_EXP_3 and CQ_EXP_3.2. CQ_CRO_1 and CQ_CRO_2
@@ -2110,6 +2127,8 @@ lbco:electrode_exchange_current_rate a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity .
 
 lbco:coating_thickness a owl:Class ;
+     rdfs:label "Coating thickness" ;
+     rdfs:label "Dry coating thickness" ;
      rdfs:subClassOf lbco:physical_quantity .
 
 lbco:active_material_potential a owl:Class ;
@@ -2379,7 +2398,16 @@ lbco:drying a owl:Class ;
 	owl:someValuesFrom lbco:coated_collector] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_output ;
-	owl:someValuesFrom lbco:dried_coated_electrode] .
+	owl:someValuesFrom lbco:dried_coated_electrode] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:lbco:oven_temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:time_at_oven] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:oven] .
 
 lbco:calendering a owl:Class ;
         rdfs:label "Calendering" ;
@@ -2424,6 +2452,7 @@ lbco:cutting a owl:Class ;
 
 lbco:assemblying a owl:Class ;
         rdfs:label "(Full cell) Assemblying" ;
+	skos:altLabel "(Full cell) Construction" ;
 	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:follows_directly ;
@@ -2453,10 +2482,15 @@ lbco:filling a owl:Class ;
 
 lbco:forming a owl:Class ;
         rdfs:label "Forming" ;
+	skos:altLabel "SEI Forming" ;
+	skos:altLabel "SEI Formation" ;
 	rdfs:subClassOf lbco:lib_manufacturing_process_step ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:follows_directly ;
-	owl:allValuesFrom lbco:filling] .
+	owl:allValuesFrom lbco:filling] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:charging_rate] .
 
 lbco:degassing a owl:Class ;
         rdfs:label "Degassing" ;
