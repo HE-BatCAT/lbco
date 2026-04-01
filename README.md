@@ -47,6 +47,7 @@ It contains mappings of ontologies to ASP and between ontologies (LBCO and exter
 
 - [Mapping from OWL/TTL to Answer Set Programming (ASP).](mappings/map2asp)
 - Example mapping of LBCO to GPO (-> map2gpo.ttl)
+- Example mapping of LBCO to CHAMEO (-> map2chameo.ttl)
 
 ### External directory:
 

@@ -1,0 +1,69 @@
+@prefix map2chameo: <https://batcat.info/semantics/mappings/map2gpo#> . # non-resolvable URI
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lbco: <https://batcat.info/semantics/core#> . # non-resolvable URI
+@prefix chameo: <https://w3id.org/emmo/domain/characterisation-methodology/chameo#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+######################### Header of this file ##########################################
+
+<https://batcat.info/semantics/mappings/map2chameo> a owl:Ontology .
+
+<https://batcat.info/semantics/mappings/map2chameo> dcterms:title
+  """Mapping of characterization techniques from LBCO-Lightweight BatCAT Ontologies to
+  CHAMEO-CHAracterization MEthodology Ontology"""^^xs:string ;
+  owl:versionInfo "version 0.0.1"^^xs:string ;
+  dcterms:modified "2026-04-01"^^xs:string ;
+#  owl:imports <https://batcat.info/semantics/core> ; # OK? TO DO: check what (modules?) to import 
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:creator "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Sara Drvaric Talian (ORCID 0000-0003-1355-2843)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+#  dcterms:description ""^^xs:string ;
+  dcterms:bibliographicCitation """S. Chiacchiera, M. Gebser, G. Goldbeck, M. Petit, D. Toti, F. Al Machot,
+  I. E. Castelli, S. Drvarič Talian, P. Dubatouka, M. El Bahnasawi, L. Liu, C. Nieto-Draghi, S. Stephan,
+  I. T. Todorov, N. Vizcaino, X. Zhang, & M. T. Horsch (2025). BatCAT deliverable 4.4: Semantic artefacts,
+  schema alignments and mappings. BatCAT consortium. [https://doi.org/10.5281/zenodo.18059132]"""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+########################################################################################
+# Battery characterization techniques, for LiB and RFB
+########################################################################################
+
+lbco:calendar_ageing rdfs:subClassOf chameo:CharacterisationTechnique ;
+		     rdfs:seeAlso "https://w3id.org/emmo/domain/electrochemistry#electrochemistry_c91164b8_5e56_4c94_bad1_d7ada576b0e7"^^xs:anyURI .  # class for StorageTest 
+lbco:charge_test rdfs:subClassOf chameo:Chronopotentiometry . 
+lbco:discharge_test rdfs:subClassOf chameo:Chronopotentiometry .
+lbco:road_profile_test rdfs:subClassOf chameo:CharacterisationTechnique ;
+		       rdfs:seeAlso "https://w3id.org/emmo/domain/electrochemistry#electrochemistry_dc1af38d_438e_40c2_8a68_0d631a8f46f2"^^xs:anyURI ;  # class for PowerControlledProcess
+		       rdfs:comment "Not limited to constant power, power mixed with CC/CV phases can be used"^^xs:string .
+lbco:duty_profile_test rdfs:subClassOf chameo:CharacterisationTechnique ;
+		       rdfs:seeAlso "https://w3id.org/emmo/domain/electrochemistry#electrochemistry_dc1af38d_438e_40c2_8a68_0d631a8f46f2"^^xs:anyURI ;  # class for PowerControlledProcess
+		       rdfs:comment "Not limited to constant power, power mixed with CC/CV phases can be used"^^xs:string .
+lbco:cycling rdfs:subClassOf chameo:CharacterisationTechnique ;
+		       rdfs:seeAlso "https://w3id.org/emmo/domain/electrochemistry#electrochemistry_435b22d4_c441_45ea_8c79_0cbec11fd287"^^xs:anyURI . # class for CyclingTest
+
+lbco:bet_measurement rdfs:subClassOf chameo:BrunauerEmmettTellerMethod . # equivalentClass, we use subClassOf for simplicity
+lbco:cyclic_voltametry rdfs:subClassOf chameo:CyclicVoltammetry .  # equivalentClass, we use subClassOf for simplicity
+lbco:eis_test rdfs:subClassOf chameo:ElectrochemicalImpedanceSpectroscopy .  # equivalentClass, we use subClassOf for simplicity
+lbco:gitt_test rdfs:subClassOf chameo:GalvanostaticIntermittentTitrationTechnique .  # equivalentClass, we use subClassOf for simplicity
+lbco:hppc_test rdfs:subClassOf chameo:HPPC .  # equivalentClass, we use subClassOf for simplicity
+lbco:porosimetry rdfs:subClassOf chameo:Porosimetry .  # equivalentClass, we use subClassOf for simplicity
+lbco:raman_spectrometry rdfs:subClassOf chameo:RamanSpectroscopy .  # equivalentClass, we use subClassOf for simplicity
+lbco:sem_technique rdfs:subClassOf chameo:ScanningElectronMicroscopy .  # equivalentClass, we use subClassOf for simplicity
+lbco:XPS_technique rdfs:subClassOf chameo:XpsVariableKinetic .  # equivalentClass, we use subClassOf for simplicity
+
+# skos:relatedMatch # NB: this will cause punning (creating individuals with same name as the classes)
+########################################################################################
+# Main relations (relevant for characterization techniques)
+########################################################################################
+# lbco:has_output
+# lbco:has_participant 
+########################################################################################
