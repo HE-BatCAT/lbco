@@ -1645,7 +1645,7 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 
 <https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.8.1"^^xs:string ;
-  dcterms:modified "2026-03-27"^^xs:string ;
+  dcterms:modified "2026-05-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://batcat.info/semantics/core> ;
   owl:imports <https://batcat.info/semantics/core/manufacturing> ;
@@ -2401,7 +2401,7 @@ lbco:drying a owl:Class ;
 	owl:someValuesFrom lbco:dried_coated_electrode] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_setting ;
-	owl:someValuesFrom lbco:lbco:oven_temperature] ;
+	owl:someValuesFrom lbco:oven_temperature] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_setting ;
 	owl:someValuesFrom lbco:time_at_oven] ;
