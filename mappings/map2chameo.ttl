@@ -1,7 +1,7 @@
-@prefix map2chameo: <https://batcat.info/semantics/mappings/map2gpo#> . # non-resolvable URI
+@prefix map2chameo: <https://w3id.org/batcat/mappings/map2gpo#> . # non-resolvable URI
 
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix lbco: <https://batcat.info/semantics/core#> . # non-resolvable URI
+@prefix lbco: <https://w3id.org/batcat#> . # non-resolvable URI
 @prefix chameo: <https://w3id.org/emmo/domain/characterisation-methodology/chameo#> .
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -11,19 +11,20 @@
 
 ######################### Header of this file ##########################################
 
-<https://batcat.info/semantics/mappings/map2chameo> a owl:Ontology .
+<https://w3id.org/batcat/mappings/map2chameo> a owl:Ontology .
 
-<https://batcat.info/semantics/mappings/map2chameo> dcterms:title
+<https://w3id.org/batcat/mappings/map2chameo> dcterms:title
   """Mapping of characterization techniques from LBCO-Lightweight BatCAT Ontologies to
   CHAMEO-CHAracterization MEthodology Ontology"""^^xs:string ;
   owl:versionInfo "version 0.0.1"^^xs:string ;
   dcterms:modified "2026-04-01"^^xs:string ;
-#  owl:imports <https://batcat.info/semantics/core> ; # OK? TO DO: check what (modules?) to import 
+#  owl:imports <https://w3id.org/batcat> ; # OK? TO DO: check what (modules?) to import 
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:creator "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Sara Drvaric Talian (ORCID 0000-0003-1355-2843)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
 #  dcterms:description ""^^xs:string ;
   dcterms:bibliographicCitation """S. Chiacchiera, M. Gebser, G. Goldbeck, M. Petit, D. Toti, F. Al Machot,
