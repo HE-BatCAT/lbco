@@ -13,7 +13,7 @@
 <https://batcat.info/semantics/scenarios/optimization_example> dcterms:title "BatCAT core ontologies: Optimization example"^^xs:string ;
   owl:versionInfo "version 0.1.0"^^xs:string ;
   dcterms:modified "2025-05-23"^^xs:string ;
-  owl:imports <https://w3id.org/batcat> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   owl:imports <https://w3id.org/batcat/optimization> ;
   owl:imports <https://w3id.org/batcat/modelling> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
