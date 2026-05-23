@@ -1,7 +1,7 @@
 @prefix lbco: <https://w3id.org/batcat#> .
-
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 #@prefix mod: <https://w3id.org/mod#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
@@ -9,10 +9,10 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+@base <https://w3id.org/batcat> .
 
-<https://w3id.org/batcat> a owl:Ontology .                                                                                                                                   
-
-<https://w3id.org/batcat> dcterms:title "BatCAT ontologies"^^xs:string ;
+<https://w3id.org/batcat> a owl:Ontology ;                                                                                                                                   
+  owl:versionIRI <https://w3id.org/batcat> ;
   owl:versionInfo "version 1.0.0"^^xs:string ;
   owl:imports <https://w3id.org/batcat/higher> ,
   			  <https://w3id.org/batcat/manufacturing> ,
@@ -23,9 +23,11 @@
   			  <https://w3id.org/batcat/twinning> ,
   			  <https://w3id.org/batcat/battery> ;
   
-  dcterms:modified "2026-05-20"^^xs:string ;
-  dcterms:created "2026"^^xs:string ;
-  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
+  dcterms:abstract "" ;
+  dcterms:bibliographicCitation """S. Chiacchiera, M. Gebser, G. Goldbeck, M. Petit, D. Toti, F. Al Machot,
+  I. E. Castelli, S. Drvarič Talian, P. Dubatouka, M. El Bahnasawi, L. Liu, C. Nieto-Draghi, S. Stephan,
+  I. T. Todorov, N. Vizcaino, X. Zhang, & M. T. Horsch (2025). BatCAT deliverable 4.4: Semantic artefacts,
+  schema alignments and mappings. BatCAT consortium. [https://doi.org/10.5281/zenodo.18059132]"""^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
@@ -36,14 +38,21 @@
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
   dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
-  dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
-#  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
-  dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
-  vann:preferredNamespacePrefix "lbco"^^xs:string ;
+  dcterms:created "2026"^^xs:string ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
   dcterms:description """BatCAT ontologies."""^^xs:string ;
-  dcterms:bibliographicCitation """S. Chiacchiera, M. Gebser, G. Goldbeck, M. Petit, D. Toti, F. Al Machot,
-  I. E. Castelli, S. Drvarič Talian, P. Dubatouka, M. El Bahnasawi, L. Liu, C. Nieto-Draghi, S. Stephan,
-  I. T. Todorov, N. Vizcaino, X. Zhang, & M. T. Horsch (2025). BatCAT deliverable 4.4: Semantic artefacts,
-  schema alignments and mappings. BatCAT consortium. [https://doi.org/10.5281/zenodo.18059132]"""^^xs:string ;
-  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
-innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+  dcterms:issued "" ;
+  dcterms:modified "2026-05-20"^^xs:string ;
+# dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
+  dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
+  dcterms:source "" ;
+  dcterms:title "BatCAT ontologies"^^xs:string ;
+  owl:backwardCompatibleWith "" ;
+  owl:priorVersion "" ;
+  foaf:logo "" ;
+  <http://purl.org/ontology/bibo/status> "" ;
+  <http://purl.org/ontology/bibo/doi> "" ;
+  <http://purl.org/vocab/vann/preferredNamespacePrefix> "lbco"@en ;
+  <http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/batcat" ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
