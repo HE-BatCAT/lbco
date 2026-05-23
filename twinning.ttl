@@ -103,7 +103,7 @@ lbco:has_synchronization_rate a owl:DatatypeProperty ;
 # EXAMPLES below: Put here temporarily only, just for simplicity
 ####################################################################################
 
-@prefix ex: <https://batcat.info/semantics/example#> .
+@prefix ex: <https://w3id.org/batcat/example#> .
 
 ex:DT_LIB_CELL_C032 a lbco:digital_twin_model ;
     lbco:has_generality_level lbco:TYPE ;

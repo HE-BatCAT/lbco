@@ -10,9 +10,9 @@
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/batcat> a owl:Ontology .                                                                                                                                   
+<https://w3id.org/batcat/higher> a owl:Ontology .                                                                                                                                   
 
-<https://w3id.org/batcat> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
+<https://w3id.org/batcat/higher> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
   owl:versionInfo "version 1.0.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
@@ -26,6 +26,7 @@
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -298,7 +299,7 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
    owl:versionInfo "version 0.7.0"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
-   owl:imports <https://w3id.org/batcat> ;
+   owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -306,6 +307,7 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -406,7 +408,7 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
    owl:versionInfo "version 0.7.0"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
-   owl:imports <https://w3id.org/batcat> ;
+   owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -414,6 +416,7 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -756,7 +759,7 @@ lbco:porosity a owl:Class ;
   owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://w3id.org/batcat> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   owl:imports <https://w3id.org/batcat/data> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -768,6 +771,7 @@ lbco:porosity a owl:Class ;
   dcterms:contributor "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1071,7 +1075,7 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
   owl:versionInfo "version 0.6.0"^^xs:string ;
   dcterms:modified "2025-12-17"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://w3id.org/batcat> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1079,6 +1083,7 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1296,7 +1301,7 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
   owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://w3id.org/batcat> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1306,6 +1311,7 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
   dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1530,13 +1536,14 @@ lbco:has_confidence_level a owl:ObjectProperty ;
   owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://w3id.org/batcat> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1616,7 +1623,7 @@ lbco:has_synchronization_rate a owl:DatatypeProperty ;
 # EXAMPLES below: Put here temporarily only, just for simplicity
 ####################################################################################
 
-@prefix ex: <https://batcat.info/semantics/example#> .
+@prefix ex: <https://w3id.org/batcat/example#> .
 
 ex:DT_LIB_CELL_C032 a lbco:digital_twin_model ;
     lbco:has_generality_level lbco:TYPE ;
@@ -1647,10 +1654,10 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
   owl:versionInfo "version 0.8.1"^^xs:string ;
   dcterms:modified "2026-05-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://w3id.org/batcat> ;
-  owl:imports <https://w3id.org/batcat/manufacturing> ;
-  owl:imports <https://w3id.org/batcat/characterization> ;
-  owl:imports <https://w3id.org/batcat/modelling> ;
+  owl:imports <https://w3id.org/batcat/higher> ,
+  			  <https://w3id.org/batcat/manufacturing> ,
+  			  <https://w3id.org/batcat/characterization> ,
+  			  <https://w3id.org/batcat/modelling> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1659,6 +1666,7 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
   dcterms:contributor "Sara Drvaric Talian (ORCID 0000-0003-1355-2843)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
