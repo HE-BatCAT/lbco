@@ -1,4 +1,4 @@
-@prefix lbco: <https://batcat.info/semantics/core#> .
+@prefix lbco: <https://w3id.org/batcat#> .
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -10,9 +10,9 @@
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core> a owl:Ontology .                                                                                                                                   
+<https://w3id.org/batcat/higher> a owl:Ontology .                                                                                                                                   
 
-<https://batcat.info/semantics/core> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
+<https://w3id.org/batcat/higher> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
   owl:versionInfo "version 1.0.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
@@ -26,6 +26,7 @@
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
   dcterms:contributor "Martin Gebser (ORCID 0000-0002-8010-4752)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -280,7 +281,7 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
 
 # see also: EMMO-LITE, DOLCE-LITE, EVMPO.
 
-@prefix lbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://w3id.org/batcat#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -292,13 +293,13 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/characterization> a owl:Ontology .
+<https://w3id.org/batcat/characterization> a owl:Ontology .
 
-<https://batcat.info/semantics/core/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
+<https://w3id.org/batcat/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
    owl:versionInfo "version 0.7.0"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
-   owl:imports <https://batcat.info/semantics/core> ;
+   owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -306,6 +307,7 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -388,7 +390,7 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
 ####################################################################################
 
 
-@prefix lbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://w3id.org/batcat#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -400,13 +402,13 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/manufacturing> a owl:Ontology .
+<https://w3id.org/batcat/manufacturing> a owl:Ontology .
 
-<https://batcat.info/semantics/core/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
+<https://w3id.org/batcat/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
    owl:versionInfo "version 0.7.0"^^xs:string ;
    dcterms:modified "2025-12-15"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
-   owl:imports <https://batcat.info/semantics/core> ;
+   owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -414,6 +416,7 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -737,7 +740,7 @@ lbco:vibration_amplitude a owl:Class ;
 lbco:porosity a owl:Class ;
 	rdfs:subClassOf lbco:physical_quantity .
 
-@prefix lbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://w3id.org/batcat#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -750,14 +753,14 @@ lbco:porosity a owl:Class ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix osmo: <https://purl.org/vimmp/osmo#> .
 
-<https://batcat.info/semantics/core/modelling> a owl:Ontology .
+<https://w3id.org/batcat/modelling> a owl:Ontology .
 
-<https://batcat.info/semantics/core/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
+<https://w3id.org/batcat/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
   owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core> ;
-  owl:imports <https://batcat.info/semantics/core/data> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
+  owl:imports <https://w3id.org/batcat/data> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -768,6 +771,7 @@ lbco:porosity a owl:Class ;
   dcterms:contributor "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1053,7 +1057,7 @@ osmo:granularity_level rdfs:subClassOf lbco:annotation .
 osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 ####################################################################################
 # Could do: connect with VISO, MSO-EM, VOV
-@prefix lbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://w3id.org/batcat#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -1065,13 +1069,13 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/data> a owl:Ontology .
+<https://w3id.org/batcat/data> a owl:Ontology .
 
-<https://batcat.info/semantics/core/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
+<https://w3id.org/batcat/data> dcterms:title "BatCAT core ontologies: module for Data and Metadata"^^xs:string ;
   owl:versionInfo "version 0.6.0"^^xs:string ;
   dcterms:modified "2025-12-17"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1079,6 +1083,7 @@ osmo:physical_equation_type rdfs:subClassOf lbco:annotation .
   dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1278,7 +1283,7 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
 ####################################################################################
 
 
-@prefix lbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://w3id.org/batcat#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -1290,13 +1295,13 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/optimization> a owl:Ontology .
+<https://w3id.org/batcat/optimization> a owl:Ontology .
 
-<https://batcat.info/semantics/core/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
+<https://w3id.org/batcat/optimization> dcterms:title "BatCAT core ontologies: module for Optimization, decision support and design"^^xs:string ;
   owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1306,6 +1311,7 @@ lbco:contains_dummy_values a owl:DatatypeProperty ;
   dcterms:contributor "Mohamed El Bahnasawi (ORCID 0000-0001-9600-3182)"^^xs:string ;  
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1512,7 +1518,7 @@ lbco:has_confidence_level a owl:ObjectProperty ;
 # inequality # EMMO - Math module (under "disciplines") 
 # equality # EMMO - Math module (under "disciplines") - it has "equation"
 # variable from VOV could be used. Also present in EMMO "math"
-@prefix lbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://w3id.org/batcat#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -1524,19 +1530,20 @@ lbco:has_confidence_level a owl:ObjectProperty ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/core/twinning> a owl:Ontology .
+<https://w3id.org/batcat/twinning> a owl:Ontology .
 
-<https://batcat.info/semantics/core/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
+<https://w3id.org/batcat/twinning> dcterms:title "BatCAT core ontologies: module for (Digital) Twinning"^^xs:string ;
   owl:versionInfo "version 0.7.0"^^xs:string ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core> ;
+  owl:imports <https://w3id.org/batcat/higher> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;
@@ -1616,7 +1623,7 @@ lbco:has_synchronization_rate a owl:DatatypeProperty ;
 # EXAMPLES below: Put here temporarily only, just for simplicity
 ####################################################################################
 
-@prefix ex: <https://batcat.info/semantics/example#> .
+@prefix ex: <https://w3id.org/batcat/example#> .
 
 ex:DT_LIB_CELL_C032 a lbco:digital_twin_model ;
     lbco:has_generality_level lbco:TYPE ;
@@ -1628,7 +1635,7 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
     rdfs:comment "Digital twin of a specific LiB cell of type C032, identified by its PID"^^xs:string .
 
 ####################################################################################
-@prefix lbco: <https://batcat.info/semantics/core#> . 
+@prefix lbco: <https://w3id.org/batcat#> . 
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .  
@@ -1641,16 +1648,16 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix osmo: <https://purl.org/vimmp/osmo#> .
 
-<https://batcat.info/semantics/core/battery> a owl:Ontology .
+<https://w3id.org/batcat/battery> a owl:Ontology .
 
-<https://batcat.info/semantics/core/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
+<https://w3id.org/batcat/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
   owl:versionInfo "version 0.8.1"^^xs:string ;
   dcterms:modified "2026-05-15"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core> ;
-  owl:imports <https://batcat.info/semantics/core/manufacturing> ;
-  owl:imports <https://batcat.info/semantics/core/characterization> ;
-  owl:imports <https://batcat.info/semantics/core/modelling> ;
+  owl:imports <https://w3id.org/batcat/higher> ,
+  			  <https://w3id.org/batcat/manufacturing> ,
+  			  <https://w3id.org/batcat/characterization> ,
+  			  <https://w3id.org/batcat/modelling> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -1659,6 +1666,7 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
   dcterms:contributor "Sara Drvaric Talian (ORCID 0000-0003-1355-2843)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
 #  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
   dcterms:license "https://spdx.org/licenses/LGPL-3.0-only.html"^^xs:anyURI ;

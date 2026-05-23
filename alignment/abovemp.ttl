@@ -1,6 +1,6 @@
-@prefix abovemp: <https://batcat.info/semantics/abovemp#> .
+@prefix abovemp: <https://w3id.org/batcat/alignment/abovemp#> .
 
-@prefix lbco: <https://batcat.info/semantics/core#> .
+@prefix lbco: <https://w3id.org/batcat#> .
 
 @prefix evmpo: <https://emmc.eu/semantics/evmpo/evmpo.ttl#> .
 @prefix viprs: <https://purl.vimmp.eu/semantics/alignment/viprs.ttl#> .
@@ -14,9 +14,9 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://batcat.info/semantics/abovemp> dcterms:title "Alignment of BatCAT to EVMPO and VIPRS (ABOVEMP)"^^xs:string ;
+<https://w3id.org/batcat/alignment/abovemp> dcterms:title "Alignment of BatCAT to EVMPO and VIPRS (ABOVEMP)"^^xs:string ;
   owl:versionInfo "version 0.0.2"^^xs:string ;
-  owl:imports <https://batcat.info/semantics/core> ;
+  owl:imports <https://w3id.org/batcat> ;
   dcterms:modified "2025-12-15"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:creator "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
@@ -24,6 +24,7 @@
   dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
   dcterms:contributor "Noel Vizcaino"^^xs:string ;
   dcterms:contributor "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
   dcterms:license "https://creativecommons.org/licenses/by/4.0/legalcode"^^xs:anyURI ;
   rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
 innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .

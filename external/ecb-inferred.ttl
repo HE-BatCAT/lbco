@@ -1,12 +1,12 @@
-@prefix : <https://w3id.org/emmo/application/batcat/ecb#> .
+@prefix : <https://w3id.org/batcat/external/ecb#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <https://w3id.org/emmo/application/batcat/ecb> .
+@base <https://w3id.org/batcat/external/ecb> .
 
-<https://w3id.org/emmo/application/batcat/ecb> rdf:type owl:Ontology ;
+<https://w3id.org/batcat/external/ecb> rdf:type owl:Ontology ;
 	<http://purl.org/dc/terms/abstract> ""@en ,
 	"CHAMEO is a domain ontology designed to model the common aspects across the different characterisation techniques and methodologies."@en ,
 	"Container for the EMMO, CHAMEO, Battery, Chemical Substance, Electrochemistry and Battery Testing ontologies (asserted version)."@en ,
@@ -127,7 +127,7 @@ The represeantion is part of the EMMO framework and makes use of mereocausality 
 	 "ecb"@en ;
 	<http://purl.org/dc/terms/hasFormat> <https://www.w3.org/TR/turtle> ,
 	 <https://www.w3.org/TR/turtle/> ;
-	<http://purl.org/dc/terms/identifier> "https://w3id.org/emmo/application/batcat/ecb" ,
+	<http://purl.org/dc/terms/identifier> "https://w3id.org/batcat/external/ecb" ,
 	"https://w3id.org/emmo/domain/characterisation-methodology/chameo" ;
 	<http://purl.org/dc/terms/issued> "2025-02-12"^^xsd:date ,
 	"2025-04-08"^^xsd:date ,
@@ -204,7 +204,7 @@ The represeantion is part of the EMMO framework and makes use of mereocausality 
 	"emmo" ;
 	<http://purl.org/vocab/vann/preferredNamespaceUri> "http://w3id.org/emmo-bto/bto" ,
 	 "https://w3id.org/emmo" ,
-	 "https://w3id.org/emmo/application/batcat/ecb" ,
+	 "https://w3id.org/batcat/external/ecb" ,
 	 "https://w3id.org/emmo/domain/battery" ,
 	 "https://w3id.org/emmo/domain/characterisation-methodology/chameo" ,
 	 "https://w3id.org/emmo/domain/chemical-substance" ,
