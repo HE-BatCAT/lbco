@@ -13,8 +13,8 @@
 <https://w3id.org/batcat/manufacturing> a owl:Ontology .
 
 <https://w3id.org/batcat/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.7.0"^^xs:string ;
-   dcterms:modified "2025-12-15"^^xs:string ;
+   owl:versionInfo "version 0.7.1"^^xs:string ;
+   dcterms:modified "2026-05-28"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -85,7 +85,18 @@ lbco:manufacturing_process a owl:Class ;
         	     owl:someValuesFrom lbco:electricity_unit_cost] ;
      rdfs:subClassOf [a owl:Restriction ; 
      		     owl:onProperty lbco:has_setting ;
-        	     owl:someValuesFrom lbco:personnel_unit_cost] .
+        	     owl:someValuesFrom lbco:personnel_unit_cost] ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty lbco:uses_method ;
+                   owl:someValuesFrom lbco:manufacturing_protocol] .
+
+lbco:manufacturing_protocol a owl:Class ;
+     rdfs:label "Manufacturing protocol" ;
+     rdfs:subClassOf lbco:method .
+
+lbco:sensor_data a owl:Class ;
+     rdfs:label "Sensor data" ;
+     rdfs:subClassOf lbco:data .
 
 # sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
 # TO SEE: 
@@ -247,7 +258,10 @@ lbco:sensor
 	owl:allValuesFrom lbco:physical_quantity] ; 
 	rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty lbco:has_connection ;
-	owl:allValuesFrom lbco:connection] .
+	owl:allValuesFrom lbco:connection] ;
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:has_output ;
+	owl:allValuesFrom lbco:sensor_data] .
 
 # CQ_MAN_4
 lbco:manufacturing_process 

@@ -296,8 +296,8 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
 <https://w3id.org/batcat/characterization> a owl:Ontology .
 
 <https://w3id.org/batcat/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
-   owl:versionInfo "version 0.7.0"^^xs:string ;
-   dcterms:modified "2025-12-15"^^xs:string ;
+   owl:versionInfo "version 0.7.1"^^xs:string ;
+   dcterms:modified "2026-05-28"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    # owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -334,6 +334,10 @@ lbco:sample_history a owl:Class ;
 characterized in BatCAT. It includes input and preparation conditions, records all processes undergone by a sample, 
 including its artificial / accelerated ageing."""^^xs:string. 
 
+lbco:characterization_result a owl:Class ;
+     rdfs:label "Characterization result" ;
+     rdfs:subClassOf lbco:data .
+
 lbco:characterization_technique a owl:Class ;
      rdfs:label "Characterization technique" ;
      rdfs:subClassOf lbco:method ;
@@ -352,8 +356,18 @@ lbco:characterization_measurement a owl:Class ;
      rdfs:subClassOf lbco:process ;
      rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty lbco:uses_method ; 
+                   owl:someValuesFrom [owl:unionOf (lbco:characterization_technique lbco:characterization_protocol)]] ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty lbco:has_output ; 
+                   owl:someValuesFrom lbco:characterization_result] .
+
+lbco:characterization_protocol a owl:Class ;
+     rdfs:label "Characterization protocol" ;
+     rdfs:subClassOf lbco:method ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty lbco:has_part ; 
                    owl:someValuesFrom lbco:characterization_technique] .
-     
+
 lbco:characterization_device a owl:Class ;
      rdfs:label "Characterization device" ;
      rdfs:subClassOf [a owl:Restriction ;
@@ -405,8 +419,8 @@ lbco:has_sample_ID a owl:DatatypeProperty ;
 <https://w3id.org/batcat/manufacturing> a owl:Ontology .
 
 <https://w3id.org/batcat/manufacturing> dcterms:title "BatCAT core ontologies: module for Manufacturing"^^xs:string ;
-   owl:versionInfo "version 0.7.0"^^xs:string ;
-   dcterms:modified "2025-12-15"^^xs:string ;
+   owl:versionInfo "version 0.7.1"^^xs:string ;
+   dcterms:modified "2026-05-28"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    # owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -477,7 +491,18 @@ lbco:manufacturing_process a owl:Class ;
         	     owl:someValuesFrom lbco:electricity_unit_cost] ;
      rdfs:subClassOf [a owl:Restriction ; 
      		     owl:onProperty lbco:has_setting ;
-        	     owl:someValuesFrom lbco:personnel_unit_cost] .
+        	     owl:someValuesFrom lbco:personnel_unit_cost] ;
+     rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty lbco:uses_method ;
+                   owl:someValuesFrom lbco:manufacturing_protocol] .
+
+lbco:manufacturing_protocol a owl:Class ;
+     rdfs:label "Manufacturing protocol" ;
+     rdfs:subClassOf lbco:method .
+
+lbco:sensor_data a owl:Class ;
+     rdfs:label "Sensor data" ;
+     rdfs:subClassOf lbco:data .
 
 # sensors from CQ_MAN_3.2 (Thermocouples, Accelerometer + vibration sensor, Power monitoring clip, CO / CO2 sensor, Pressure sensor, Laser profilometer)
 # TO SEE: 
@@ -639,7 +664,10 @@ lbco:sensor
 	owl:allValuesFrom lbco:physical_quantity] ; 
 	rdfs:subClassOf [a owl:Restriction ;
 	owl:onProperty lbco:has_connection ;
-	owl:allValuesFrom lbco:connection] .
+	owl:allValuesFrom lbco:connection] ;
+	rdfs:subClassOf [a owl:Restriction ;
+	owl:onProperty lbco:has_output ;
+	owl:allValuesFrom lbco:sensor_data] .
 
 # CQ_MAN_4
 lbco:manufacturing_process 
@@ -1656,7 +1684,7 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
   dcterms:created "2025"^^xs:string ;
   # owl:imports <https://w3id.org/batcat/higher> ,
   #			  <https://w3id.org/batcat/manufacturing> ,
-  # 			  <https://w3id.org/batcat/characterization> ,
+  #			  <https://w3id.org/batcat/characterization> ,
   #			  <https://w3id.org/batcat/modelling> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
