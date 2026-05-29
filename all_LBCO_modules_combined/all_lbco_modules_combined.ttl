@@ -13,8 +13,8 @@
 <https://w3id.org/batcat/higher> a owl:Ontology .                                                                                                                                   
 
 <https://w3id.org/batcat/higher> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 1.0.0"^^xs:string ;
-  dcterms:modified "2025-12-15"^^xs:string ;
+  owl:versionInfo "version 1.0.1"^^xs:string ;
+  dcterms:modified "2026-05-29"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -139,6 +139,10 @@ lbco:role a owl:Class ;
     rdfs:comment """For example: role of a human agent in an organization (employee/director), in a software repository (editor/owner); 
     role of a variable in a mathematical problem (dependent/independent/parameter)."""^^xs:string .
 
+lbco:physico_chemical_role a owl:Class ;
+    rdfs:label "Physico-chemical role" ;
+     rdfs:subClassOf lbco:role .
+
 lbco:property a owl:Class ; #TOSEE: property is a keyword in OWL, add specifier?
     rdfs:label "Property" ;
     rdfs:comment "Observable property, such as a physical property of a material, the status of a device, etc"^^xs:string .
@@ -250,7 +254,7 @@ lbco:has_status a owl:ObjectProperty ;
     rdfs:subPropertyOf lbco:has_property .
 
 lbco:has_property a owl:ObjectProperty ; #TOSEE: property is a keyword in OWL, add specifier?
-    rdfs:domain [owl:unionOf (lbco:agent lbco:physical_object lbco:software lbco:process)] ;
+    rdfs:domain [owl:unionOf (lbco:agent lbco:physical_object lbco:software lbco:process lbco:material)] ;
     rdfs:range lbco:property .
 
 lbco:is_incompatible_with a owl:ObjectProperty ;
@@ -1679,8 +1683,8 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 <https://w3id.org/batcat/battery> a owl:Ontology .
 
 <https://w3id.org/batcat/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.8.1"^^xs:string ;
-  dcterms:modified "2026-05-15"^^xs:string ;
+  owl:versionInfo "version 0.8.2"^^xs:string ;
+  dcterms:modified "2026-05-29"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   # owl:imports <https://w3id.org/batcat/higher> ,
   #			  <https://w3id.org/batcat/manufacturing> ,
@@ -1819,7 +1823,8 @@ to specify which one it addresses"""^^xs:string .
 
 lbco:active_material a owl:Class ;
      rdfs:label "Active material" ;
-     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_property ;
 	owl:someValuesFrom lbco:active_material_potential] ;
@@ -1832,20 +1837,24 @@ lbco:active_material a owl:Class ;
 
 lbco:binder a owl:Class ;
      rdfs:label "Binder" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:percolant a owl:Class ;
      rdfs:label "Percolant" ;
      skos:altLabel "Conductive additive" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:slurry_solvent a owl:Class ; # TOSEE: an object with this role?
      rdfs:label "Slurry solvent" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:additive a owl:Class ;       # TOSEE: an object with this role?
      rdfs:label "Additive" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:electrode a owl:Class ;
      rdfs:label "Electrode" ;
@@ -1944,7 +1953,7 @@ lbco:membrane a owl:Class ;
 lbco:carbon_felt a owl:Class ; # TODO: Add "surface properties". What are they?
      rdfs:label "Carbon felt" ;
      skos:altLabel "Felt" ;
-     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf lbco:material ;     
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty lbco:has_property ;
 	owl:someValuesFrom lbco:felt_porosity] ;

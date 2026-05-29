@@ -14,8 +14,8 @@
 <https://w3id.org/batcat/battery> a owl:Ontology .
 
 <https://w3id.org/batcat/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.8.1"^^xs:string ;
-  dcterms:modified "2026-05-15"^^xs:string ;
+  owl:versionInfo "version 0.8.2"^^xs:string ;
+  dcterms:modified "2026-05-29"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://w3id.org/batcat/higher> ,
   			  <https://w3id.org/batcat/manufacturing> ,
@@ -154,7 +154,8 @@ to specify which one it addresses"""^^xs:string .
 
 lbco:active_material a owl:Class ;
      rdfs:label "Active material" ;
-     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role ;
      rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_property ;
 	owl:someValuesFrom lbco:active_material_potential] ;
@@ -167,20 +168,24 @@ lbco:active_material a owl:Class ;
 
 lbco:binder a owl:Class ;
      rdfs:label "Binder" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:percolant a owl:Class ;
      rdfs:label "Percolant" ;
      skos:altLabel "Conductive additive" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:slurry_solvent a owl:Class ; # TOSEE: an object with this role?
      rdfs:label "Slurry solvent" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:additive a owl:Class ;       # TOSEE: an object with this role?
      rdfs:label "Additive" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:material ;
+     rdfs:subClassOf lbco:physico_chemical_role .
 
 lbco:electrode a owl:Class ;
      rdfs:label "Electrode" ;
@@ -279,7 +284,7 @@ lbco:membrane a owl:Class ;
 lbco:carbon_felt a owl:Class ; # TODO: Add "surface properties". What are they?
      rdfs:label "Carbon felt" ;
      skos:altLabel "Felt" ;
-     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf lbco:material ;     
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty lbco:has_property ;
 	owl:someValuesFrom lbco:felt_porosity] ;
