@@ -1,7 +1,7 @@
-@prefix map2chameo: <https://w3id.org/batcat/mappings/map2gpo#> . # non-resolvable URI
+@prefix map2chameo: <https://w3id.org/batcat/mappings/map2chameo#> .
 
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix lbco: <https://w3id.org/batcat#> . # non-resolvable URI
+@prefix lbco: <https://w3id.org/batcat#> .
 @prefix chameo: <https://w3id.org/emmo/domain/characterisation-methodology/chameo#> .
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .

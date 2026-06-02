@@ -1,7 +1,7 @@
-@prefix map2gpo: <https://w3id.org/batcat/mappings/map2gpo#> . # non-resolvable URI
+@prefix map2gpo: <https://w3id.org/batcat/mappings/map2gpo#> .
 
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix lbco: <https://w3id.org/batcat#> . # non-resolvable URI
+@prefix lbco: <https://w3id.org/batcat#> .
 @prefix gpo: <https://gpo.ontology.link/> . 
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
