@@ -14,7 +14,7 @@
 
 <https://w3id.org/batcat> a owl:Ontology ;                                                                                                                                   
   owl:versionIRI <https://w3id.org/batcat> ;
-  owl:versionInfo "version 1.0.0"^^xs:string ;
+  owl:versionInfo "version May 2026"^^xs:string ;
   owl:imports <https://w3id.org/batcat/higher> ,
   			  <https://w3id.org/batcat/manufacturing> ,
   			  <https://w3id.org/batcat/characterization> ,
