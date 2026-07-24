@@ -13,8 +13,8 @@
 <https://w3id.org/batcat/higher> a owl:Ontology .                                                                                                                                   
 
 <https://w3id.org/batcat/higher> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 1.0.1"^^xs:string ;
-  dcterms:modified "2026-05-29"^^xs:string ;
+  owl:versionInfo "version 1.0.2"^^xs:string ;
+  dcterms:modified "2026-07-24"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -55,7 +55,8 @@ lbco:data a owl:Class ;
     rdfs:label "Data" .
 
 lbco:material a owl:Class ;
-    rdfs:label "Material" .
+    rdfs:label "Material" ;
+    rdfs:comment "What an object is made of. Can be classified based on composition, function, etc."^^xs:string .
 
 lbco:substance a owl:Class ;
     rdfs:label "Substance" ;
@@ -89,7 +90,8 @@ lbco:software a owl:Class ;
     rdfs:label "Software" .
 
 lbco:physical_object a owl:Class ;
-    rdfs:label "(Physical) Object" . 
+    rdfs:label "Physical Object" ;
+    skos:altLabel "Object" .
 
 lbco:sample a owl:Class ;
     rdfs:label "Sample" ;
@@ -154,11 +156,13 @@ lbco:status a owl:Class ;
 
 lbco:physical_quantity a owl:Class ;
      rdfs:label "Physical quantity" ;
-     rdfs:subClassOf lbco:property .
+     rdfs:subClassOf lbco:property ;
+     rdfs:comment "A physical property that is associated with a quantity"^^xs:string .
 
 lbco:annotation a owl:Class ;
     rdfs:label "Annotation" ;
-    rdfs:comment "Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module"^^xs:string .
+    rdfs:comment """Annotation, analog to its use in the EVMPO, covers concepts other than the classes defined in this module (higher.ttl).
+    EVMPO is the European Virtual MarketPlace Ontology, part of VIMMP Ontologies."""^^xs:string .    
 
 lbco:physical_object_status a owl:Class ;
     rdfs:label "Physical object status" ;
