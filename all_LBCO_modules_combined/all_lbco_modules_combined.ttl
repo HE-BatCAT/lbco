@@ -1687,8 +1687,8 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 <https://w3id.org/batcat/battery> a owl:Ontology .
 
 <https://w3id.org/batcat/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.8.2"^^xs:string ;
-  dcterms:modified "2026-05-29"^^xs:string ;
+  owl:versionInfo "version 0.8.3"^^xs:string ;
+  dcterms:modified "2026-10-13"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   # owl:imports <https://w3id.org/batcat/higher> ,
   #			  <https://w3id.org/batcat/manufacturing> ,
@@ -1898,7 +1898,13 @@ lbco:negative_electrode a owl:Class ;
 
 lbco:separator a owl:Class ;
      rdfs:label "Separator" ;
-     rdfs:subClassOf lbco:physical_object .
+     rdfs:subClassOf lbco:physical_object ;
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:separator_porosity] ;
+     rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:separator_thickness] .
 
 lbco:electrolyte a owl:Class ;
      rdfs:label "Electrolyte" ;
@@ -1993,8 +1999,13 @@ lbco:full_cell a owl:Class ;
 	owl:someValuesFrom lbco:full_cell_open_circuit_voltage] ; # TO SEE: OK?
      rdfs:subClassOf [a owl:Restriction ;
      	owl:onProperty lbco:has_property ;
-	owl:someValuesFrom lbco:full_cell_electric_resistance] . # TO SEE: OK?
-
+	owl:someValuesFrom lbco:full_cell_electric_resistance] ; # TO SEE: OK?
+     rdfs:subClassOf [a owl:Restriction ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_minimum_voltage] ; # TO SEE: OK?
+     rdfs:subClassOf [a owl:Restriction ;
+     	owl:onProperty lbco:has_property ;
+	owl:someValuesFrom lbco:full_cell_maximum_voltage] . # TO SEE: OK?
 
 lbco:full_cell_initial_performance a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity .
@@ -2018,6 +2029,12 @@ lbco:full_cell_electric_resistance a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity .
 
 lbco:battery_lifespan a owl:Class ; # TOSEE: is it a cell or a battery property?
+     rdfs:subClassOf lbco:physical_quantity .
+
+lbco:full_cell_minimum_voltage a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity .
+
+lbco:full_cell_maximum_voltage a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity .
 
 lbco:battery a owl:Class ;
@@ -2133,6 +2150,15 @@ lbco:furnace_atmosphere_composition a owl:Class ;
 lbco:charging_rate a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity . 
 
+lbco:electrolyte_volume a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:number_of_spacers a owl:Class ;
+     rdfs:subClassOf lbco:property . 
+
+lbco:number_of_cycles a owl:Class ;
+     rdfs:subClassOf lbco:property . 
+
 # manufacturing devices
 
 lbco:furnace a owl:Class ;
@@ -2144,11 +2170,44 @@ lbco:oven a owl:Class ;
      rdfs:label "Oven" ;
      rdfs:subClassOf lbco:manufacturing_device. 
 
+# characterization settings
+
+lbco:pulse_current a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:pulse_duration a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:minimum_voltage a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:maximum_voltage a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:minimum_charge_current a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:maximum_charge_current a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:discharge_current a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:minimum_discharge_current a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:maximum_discharge_current a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:charge_current a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
 ####################################################################################
 # Based (partially) on CQ_EXP_3 and CQ_EXP_3.2. CQ_CRO_1 and CQ_CRO_2
 
 lbco:electrode_porosity a owl:Class ;
-     rdfs:subClassOf lbco:physical_quantity .
+     rdfs:subClassOf lbco:physical_quantity ;
+     rdfs:subClassOf lbco:porosity .     
 
 lbco:electrode_conductivity a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity ;
@@ -2254,6 +2313,16 @@ lbco:open_circuit_voltage a owl:Class ;
 
 lbco:full_cell_open_circuit_voltage a owl:Class ;
      rdfs:subClassOf lbco:open_circuit_voltage .
+
+# Additional quantities from D3.1 data / October 20206 updates
+
+lbco:separator_porosity a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity ;
+     rdfs:subClassOf lbco:porosity .     
+
+lbco:separator_thickness a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity ;
+     rdfs:subClassOf lbco:thickness .     
 
 ####################################################################################
 # lbco:physical_quantity a owl:Class ; # Duplicated here from modelling. To be updated
@@ -2520,7 +2589,14 @@ lbco:assemblying a owl:Class ;
 	owl:someValuesFrom lbco:electrolyte] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_output ;
-	owl:someValuesFrom lbco:full_cell] .
+	owl:someValuesFrom lbco:full_cell] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:number_of_spacers] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:electrolyte_volume] .
+
 
 lbco:filling a owl:Class ;
         rdfs:label "Filling" ;
@@ -2539,7 +2615,25 @@ lbco:forming a owl:Class ;
 	owl:allValuesFrom lbco:filling] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_setting ;
-	owl:someValuesFrom lbco:charging_rate] .
+	owl:someValuesFrom lbco:charging_rate] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:number_of_cycles] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_input ;
+	owl:someValuesFrom lbco:full_cell] ;  # OK?
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell] ;   # OK?
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:potentiostat] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:human_agent] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:temperature] .
 
 lbco:degassing a owl:Class ;
         rdfs:label "Degassing" ;
@@ -2704,7 +2798,25 @@ lbco:charge_test a owl:Class ;
 	owl:someValuesFrom lbco:full_cell_initial_performance] ; # OK? What are "charge capabilities", capacity???
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_output ;
-	owl:someValuesFrom lbco:full_cell_capacity] . # OK? What are "charge capabilities", capacity???
+	owl:someValuesFrom lbco:full_cell_capacity] ; # OK? What are "charge capabilities", capacity???
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:minimum_charge_current] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:maximum_charge_current] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:discharge_current] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:full_cell] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:human_agent] .
 
 lbco:cyclic_voltametry a owl:Class ;
 	rdfs:label "Cyclic voltametry"^^xs:string ;
@@ -2727,7 +2839,22 @@ lbco:cycling a owl:Class ;
 	owl:someValuesFrom lbco:potentiostat] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_output ;
-	owl:someValuesFrom lbco:full_cell_ageing] .
+	owl:someValuesFrom lbco:full_cell_ageing] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:minimum_voltage] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:maximum_voltage] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:full_cell] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:human_agent] .
 
 lbco:discharge_test a owl:Class ;
 	rdfs:label "Discharge test"^^xs:string ;
@@ -2740,7 +2867,25 @@ lbco:discharge_test a owl:Class ;
 	owl:someValuesFrom lbco:full_cell_capacity] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_output ;
-	owl:someValuesFrom lbco:full_cell_initial_performance] . # OK?
+	owl:someValuesFrom lbco:full_cell_initial_performance] ; # OK?
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:minimum_discharge_current] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:maximum_discharge_current] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:charge_current] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:full_cell] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:human_agent] .
 
 lbco:duty_profile_test a owl:Class ;
 	rdfs:label "Duty profile test"^^xs:string ;
@@ -2778,7 +2923,25 @@ lbco:gitt_test a owl:Class ;
 	owl:someValuesFrom lbco:active_material_potential] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_output ;
-	owl:someValuesFrom lbco:active_material_diffusion_coefficient] . 
+	owl:someValuesFrom lbco:active_material_diffusion_coefficient] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:pulse_duration] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ; # intensity?
+	owl:someValuesFrom lbco:pulse_current] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ; 
+	owl:someValuesFrom lbco:temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:human_agent] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_participant ;
+	owl:someValuesFrom lbco:full_cell] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_output ;
+	owl:someValuesFrom lbco:full_cell_open_circuit_voltage] .
 
 lbco:hppc_test a owl:Class ;
 	rdfs:label "HPPC test"^^xs:string ;
