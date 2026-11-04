@@ -1,0 +1,55 @@
+@prefix map2sosa: <https://w3id.org/batcat/mappings/map2sosa#> .
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lbco: <https://w3id.org/batcat#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+######################### Header of this file ##########################################
+
+<https://w3id.org/batcat/mappings/map2sosa> a owl:Ontology .
+
+<https://w3id.org/batcat/mappings/map2sosa> dcterms:title
+  """Mapping of sensors, actuators, samples and sensor data from LBCO-Lightweight BatCAT Ontologies to
+  SOSA-Sensor, Observation, Sample, and Actuator ontology (W3C SSN core)"""^^xs:string ;
+  owl:versionInfo "version 0.0.1"^^xs:string ;
+  dcterms:modified "2026-10-26"^^xs:string ;
+#  owl:imports <https://w3id.org/batcat> , <http://www.w3.org/ns/sosa/> ; # TO DO: check what (modules?) to import
+  dcterms:creator "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+  dcterms:description """Bridge between LBCO and SOSA. Together with the LBCO-EMMO alignment (alignment/awe.ttl)
+  and the SOSA-EMMO alignment (https://w3id.org/sosa-emmo), it lets LBCO sensors, actuators, samples and
+  sensor data inherit both the SOSA observation pattern and the corresponding EMMO semantics
+  (e.g. lbco:sensor is both an emmo:Object, via lbco:device, and an emmo:Observer, via sosa:Sensor)."""^^xs:string ;
+  dcterms:bibliographicCitation """S. Chiacchiera, M. Gebser, G. Goldbeck, M. Petit, D. Toti, F. Al Machot,
+  I. E. Castelli, S. Drvarič Talian, P. Dubatouka, M. El Bahnasawi, L. Liu, C. Nieto-Draghi, S. Stephan,
+  I. T. Todorov, N. Vizcaino, X. Zhang, & M. T. Horsch (2025). BatCAT deliverable 4.4: Semantic artefacts,
+  schema alignments and mappings. BatCAT consortium. [https://doi.org/10.5281/zenodo.18059132]"""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+########################################################################################
+# Classes
+########################################################################################
+
+# lbco:sensor is defined in both the characterization and the manufacturing modules
+lbco:sensor rdfs:subClassOf sosa:Sensor .
+
+# lbco:actuator is defined in both the characterization (as lbco:device) and the manufacturing (as lbco:agent) modules
+lbco:actuator rdfs:subClassOf sosa:Actuator .
+
+lbco:sample rdfs:subClassOf sosa:Sample .
+
+lbco:sensor_data rdfs:subClassOf sosa:Result .
+
+########################################################################################
+# Object properties
+########################################################################################
+
+# lbco:observes (manufacturing module): domain lbco:sensor, range lbco:physical_quantity
+lbco:observes rdfs:subPropertyOf sosa:observes .
