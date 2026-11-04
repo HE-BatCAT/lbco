@@ -1,0 +1,70 @@
+@prefix ex: <https://w3id.org/batcat/scenarios/lib_cell_example#> .
+
+@prefix lbco: <https://w3id.org/batcat#> . 
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/batcat/scenarios/optimization_example> dcterms:title "BatCAT core ontologies: LIB cell example"^^xs:string ;
+  owl:versionInfo "version 0.1.0"^^xs:string ;
+  dcterms:modified "2026-11-04"^^xs:string ;
+  owl:imports <https://w3id.org/batcat/higher> ;
+  owl:imports <https://w3id.org/batcat/manufacturing> ;
+  owl:imports <https://w3id.org/batcat/characterization> ;
+  owl:imports <https://w3id.org/batcat/battery> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:creator "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:creator "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+#  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+#with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+ex:IFPEN_LIB_CEL_26_399 a lbco:full_cell .
+#    a lbco:physical_object . # entailed
+
+ex:IFPEN_LIB_ELO_26_193 a lbco:positive_electrode ;
+    lbco:has_property ex:PROPERTY_1 ;
+    lbco:has_property ex:PROPERTY_2 .
+
+ex:IFPEN_LIB_ELO_26_195 a lbco:negative_electrode .
+    
+ex:PROPERTY_1 a lbco:electrode_porosity ; # TODO: assign value and unit. It is :40 %.
+   rdfs:comment "Value and unit: 40 %"^^xs:string .
+ex:PROPERTY_2 a lbco:electrode_surface_area ; # TODO: assign value and unit. It is :1.131 cm^2 .
+   rdfs:comment "Value and unit: 1.131 cm^2"^^xs:string .
+
+ex:IFPEN_LIB_AGT_25_1312 a lbco:separator .
+ex:IFPEN_LIB_PRC_25_321 a lbco:electrolyte .
+
+ex:IPFEN_PRP_26_1509 a lbco:assemblying ;
+#    a lbco:lib_manufacturing_process_step ; # entailed
+    lbco:has_input ex:IFPEN_LIB_ELO_26_195 ;
+    lbco:has_input ex:IFPEN_LIB_ELO_26_193 ;
+    lbco:has_input ex:IFPEN_LIB_AGT_25_1312 ;
+    lbco:has_input ex:IFPEN_LIB_PRC_25_321 ;
+    lbco:has_output ex:IFPEN_LIB_CEL_26_399 ;
+    lbco:has_setting [a lbco:number_of_spacers; rdfs:comment "3 units (another way to express it, with a blank node)"^^xs:string] ; # value is: 3 units  # P9266
+#   lbco:has_setting [a lbco:elecrtrolyte_volume] . # value is: 100 microliters  # P9265
+    lbco:has_setting ex:SETTING_1 ;
+    lbco:has_setting ex:SETTING_2 .
+
+ex:SETTING_1 a lbco:number_of_spacers ; # TODO: assign units and value. It is: 3 units  # P9266
+   rdfs:comment "Value and unit: 3 units"^^xs:string .
+ex:SETTING_2 a lbco:electrolyte_volume ; # TODO: assign units and value. It is 100 microliters  # P9265 # https://qudt.org/vocab/unit/MicroL 
+   rdfs:comment "Value and unit: 100 microliters"^^xs:string .
+
+ex:IFPEN_LIB_PRF_26_414 a lbco:characterization_process ;
+    lbco:has_participant ex:IFPEN_LIB_CEL_26_399 ;
+    lbco:has_participant [a lbco:human_agent] .
+
