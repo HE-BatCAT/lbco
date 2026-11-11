@@ -13,8 +13,8 @@
 <https://w3id.org/batcat/higher> a owl:Ontology .                                                                                                                                   
 
 <https://w3id.org/batcat/higher> dcterms:title "BatCAT core ontologies: module for Higher level concepts"^^xs:string ;
-  owl:versionInfo "version 1.0.2"^^xs:string ;
-  dcterms:modified "2026-07-24"^^xs:string ;
+  owl:versionInfo "version 1.0.3"^^xs:string ;
+  dcterms:modified "2026-11-11"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ; # dcterms:creator <https://orcid.org/0000-0003-0422-7870> ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
@@ -60,6 +60,7 @@ lbco:material a owl:Class ;
 
 lbco:substance a owl:Class ;
     rdfs:label "Substance" ;
+    skos:altLabel "Pure substance" ;
     rdfs:subClassOf lbco:material .
 
 lbco:process a owl:Class ;
@@ -204,7 +205,11 @@ lbco:has_part a owl:ObjectProperty ;
 
 lbco:has_participant a owl:ObjectProperty ;
     rdfs:domain lbco:process ;
-    rdfs:range [owl:unionOf (lbco:agent lbco:physical_object lbco:software)] .
+    rdfs:range [owl:unionOf (lbco:agent lbco:physical_object lbco:software)] ;
+    rdfs:comment "Points to an entity that participates in a process."^^xs:string ;
+    rdfs:comment """Used when the entity is not fundamentally changed by the process.
+    Instead, for the case in which an entity is fundamentally altered by the process and/or it has a
+    clear role related to either the beginning or the end of the process, cf. has_input/has_output."""^^xs:string .
 
 lbco:follows a owl:ObjectProperty ;
     rdfs:label "follows" ;
@@ -215,6 +220,7 @@ lbco:follows a owl:ObjectProperty ;
 lbco:follows_directly a owl:ObjectProperty ;
     rdfs:label "follows directly" ;
     rdfs:comment "refers to time ordering of process steps" ;
+    rdfs:comment "points to a process step that follows another directly, with no other intermediate steps" ;
     rdfs:domain lbco:process_step ;
     rdfs:range lbco:process_step ;
     rdfs:subPropertyOf lbco:follows .
@@ -222,12 +228,14 @@ lbco:follows_directly a owl:ObjectProperty ;
 lbco:has_input a owl:ObjectProperty ;
    rdfs:label "has input" ;
     rdfs:domain [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
-    rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
+    rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] ;
+    rdfs:comment "Points to an entity that is fed to/into another"^^xs:string .    
    
 lbco:has_output a owl:ObjectProperty ;
    rdfs:label "has output" ;
    rdfs:domain [owl:unionOf (lbco:process lbco:software lbco:agent lbco:device)] ;
-   rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] .
+   rdfs:range [owl:unionOf (lbco:data lbco:statement lbco:physical_object lbco:material lbco:property)] ;
+   rdfs:comment "Points to an entity that is produced by/results from another"^^xs:string .    
 
 lbco:is_output_of a owl:ObjectProperty ;  # TOSEE: necessary? 
                   owl:inverseOf lbco:has_output ;
@@ -282,10 +290,15 @@ lbco:is_material_incompatible_with_material a owl:ObjectProperty ;
    
 ### Datatype Properties ###
 
+lbco:has_ID a owl:DatatypeProperty ;
+    rdfs:label "has ID" ;
+    rdfs:range rdfs:Literal .
+
 lbco:has_batch_ID a owl:DatatypeProperty ;
     rdfs:label "has batch ID" ;
     rdfs:domain lbco:batch ;
-    rdfs:range rdfs:Literal .
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf lbco:has_ID .
 
 # see also: EMMO-LITE, DOLCE-LITE, EVMPO.
 
@@ -1694,9 +1707,9 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
   dcterms:modified "2026-10-13"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   # owl:imports <https://w3id.org/batcat/higher> ,
-  #			  <https://w3id.org/batcat/manufacturing> ,
-  # 			  <https://w3id.org/batcat/characterization> ,
-  #			  <https://w3id.org/batcat/modelling> ;
+  	#		  <https://w3id.org/batcat/manufacturing> ,
+  	#		  <https://w3id.org/batcat/characterization> ,
+  	#		  <https://w3id.org/batcat/modelling> ;
   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
   dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
