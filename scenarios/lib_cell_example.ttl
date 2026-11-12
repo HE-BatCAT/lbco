@@ -11,8 +11,8 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/batcat/scenarios/optimization_example> dcterms:title "BatCAT core ontologies: LIB cell example"^^xs:string ;
-  owl:versionInfo "version 0.1.0"^^xs:string ;
-  dcterms:modified "2026-11-04"^^xs:string ;
+  owl:versionInfo "version 0.2.0"^^xs:string ;
+  dcterms:modified "2026-11-12"^^xs:string ;
   owl:imports <https://w3id.org/batcat/higher> ;
   owl:imports <https://w3id.org/batcat/manufacturing> ;
   owl:imports <https://w3id.org/batcat/characterization> ;
@@ -30,41 +30,101 @@
   rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
 innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
 
-ex:IFPEN_LIB_CEL_26_399 a lbco:full_cell .
+ex:IFPEN_LIB_CEL_26_399 a lbco:full_cell ;
+    lbco:has_ID "CEL-26-399"^^xs:string ; #code in [cell_name].json
 #    a lbco:physical_object . # entailed
+    lbco:has_property ex:PROPERTY_C1 ;
+    lbco:has_property ex:PROPERTY_C2 ;
+    lbco:has_property ex:PROPERTY_C3 .
+
+ex:PROPERTY_C1 a lbco:full_cell_capacity ; # TODO: assign value and unit. It is : 2.28 mAh . # P9513 in [cell_name].json
+   rdfs:comment "Value and unit: 2.28 mAh"^^xs:string .
+ex:PROPERTY_C2 a lbco:cell_minimum_voltage ; # TODO: assign value and unit. It is : 2.50 V . # P9483 in [cell_name].json
+   rdfs:comment "Value and unit: 2.50 V "^^xs:string .
+ex:PROPERTY_C3 a lbco:cell_maximum_voltage ; # TODO: assign value and unit. It is : 4.20 V . # P9481 in [cell_name].json
+   rdfs:comment "Value and unit: 4.20 V "^^xs:string .
 
 ex:IFPEN_LIB_ELO_26_193 a lbco:positive_electrode ;
+    lbco:has_ID "ELO-26-193"^^xs:string ;
     lbco:has_property ex:PROPERTY_1 ;
     lbco:has_property ex:PROPERTY_2 .
 
-ex:IFPEN_LIB_ELO_26_195 a lbco:negative_electrode .
-    
-ex:PROPERTY_1 a lbco:electrode_porosity ; # TODO: assign value and unit. It is :40 %.
-   rdfs:comment "Value and unit: 40 %"^^xs:string .
-ex:PROPERTY_2 a lbco:electrode_surface_area ; # TODO: assign value and unit. It is :1.131 cm^2 .
-   rdfs:comment "Value and unit: 1.131 cm^2"^^xs:string .
+ex:IFPEN_LIB_ELO_26_195 a lbco:negative_electrode ;
+    lbco:has_ID "ELO-26-195"^^xs:string ;
+    lbco:has_property ex:PROPERTY_3 ;
+    lbco:has_property ex:PROPERTY_4 .
 
-ex:IFPEN_LIB_AGT_25_1312 a lbco:separator .
-ex:IFPEN_LIB_PRC_25_321 a lbco:electrolyte .
+ex:PROPERTY_1 a lbco:electrode_porosity ; # TODO: assign value and unit. It is :40 %. # P9247 in components/[electrode].json
+   rdfs:comment "Value and unit: 40 %"^^xs:string .
+ex:PROPERTY_2 a lbco:electrode_surface_area ; # TODO: assign value and unit. It is : 1.131 cm^2 . # P9191 in components/[electrode].json
+   rdfs:comment "Value and unit: 1.131 cm^2"^^xs:string .
+ex:PROPERTY_3 a lbco:electrode_porosity ; # TODO: assign value and unit. It is : 31 %. # P9247 in components/[electrode].json
+   rdfs:comment "Value and unit: 31 %"^^xs:string .
+ex:PROPERTY_4 a lbco:electrode_surface_area ; # TODO: assign value and unit. It is : 1.539cm^2 . # P9191 in components/[electrode].json
+   rdfs:comment "Value and unit: 1.539 cm^2"^^xs:string .
+
+ex:IFPEN_LIB_AGT_25_1312 a lbco:separator ;
+    lbco:has_ID "AGT-25-1312"^^xs:string ;
+    lbco:has_property ex:PROPERTY_5 ;
+    lbco:has_property ex:PROPERTY_6 ;
+    rdfs:comment "three-layer PP/PE/PP structure"^^xs:string . # P9355 in components/separator.json
+
+ex:PROPERTY_5 a lbco:separator_porosity ; # TODO: assign value and unit. It is : 39 %. # P9354 in components/separator.json
+   rdfs:comment "Value and unit: 39 %"^^xs:string .
+ex:PROPERTY_6 a lbco:separator_thickness ; # TODO: assign value and unit. It is : 25 micro m. # P9353 in components/separator.json
+   rdfs:comment "Value and unit: 25 micro m"^^xs:string .
+
+ex:IFPEN_LIB_PRC_25_321 a lbco:electrolyte ;
+    lbco:has_ID "PRC-25-321"^^xs:string ;
+    lbco:has_property ex:PROPERTY_7 .
+
+ex:PROPERTY_7 a lbco:electrolyte_composition ; # TODO: assign value and unit. It is : TO BE ADDED. # P167 in components/electrolyte.json ???
+   rdfs:comment "Value and unit: TO BE ADDED"^^xs:string .
 
 ex:IPFEN_PRP_26_1509 a lbco:assemblying ;
 #    a lbco:lib_manufacturing_process_step ; # entailed
-    lbco:has_input ex:IFPEN_LIB_ELO_26_195 ;
-    lbco:has_input ex:IFPEN_LIB_ELO_26_193 ;
-    lbco:has_input ex:IFPEN_LIB_AGT_25_1312 ;
-    lbco:has_input ex:IFPEN_LIB_PRC_25_321 ;
-    lbco:has_output ex:IFPEN_LIB_CEL_26_399 ;
+    lbco:has_ID "PRP-26-1509"^^xs:string ;
+    lbco:has_input ex:IFPEN_LIB_ELO_26_195 ; # P9261 in assembly_XXX.json
+    lbco:has_input ex:IFPEN_LIB_ELO_26_193 ; # P9262 in assembly_XXX.json
+    lbco:has_input ex:IFPEN_LIB_AGT_25_1312 ; # P9264 in assembly_XXX.json
+    lbco:has_input ex:IFPEN_LIB_PRC_25_321 ; # P9263 in assembly_XXX.json
+    lbco:has_output ex:IFPEN_LIB_CEL_26_399 ; # outgoing_samples in assembly_XXX.json
     lbco:has_setting [a lbco:number_of_spacers; rdfs:comment "3 units (another way to express it, with a blank node)"^^xs:string] ; # value is: 3 units  # P9266
-#   lbco:has_setting [a lbco:elecrtrolyte_volume] . # value is: 100 microliters  # P9265
+#   lbco:has_setting [a lbco:electrolyte_volume] . # value is: 100 microliters  # P9265
     lbco:has_setting ex:SETTING_1 ;
     lbco:has_setting ex:SETTING_2 .
 
-ex:SETTING_1 a lbco:number_of_spacers ; # TODO: assign units and value. It is: 3 units  # P9266
-   rdfs:comment "Value and unit: 3 units"^^xs:string .
-ex:SETTING_2 a lbco:electrolyte_volume ; # TODO: assign units and value. It is 100 microliters  # P9265 # https://qudt.org/vocab/unit/MicroL 
+ex:SETTING_1 a lbco:number_of_spacers ; # TODO: assign units and value. It is: 3 units  # P9266 in assembly_XXX.json
+   rdfs:comment "Value and unit: 3 units"^^xs:string ;
+   rdfs:comment "0.5 mm spacers"^^xs:string .
+ex:SETTING_2 a lbco:electrolyte_volume ; # TODO: assign units and value. It is 100 microliters  # P9265 in assembly_XXX.json # https://qudt.org/vocab/unit/MicroL 
    rdfs:comment "Value and unit: 100 microliters"^^xs:string .
 
-ex:IFPEN_LIB_PRF_26_414 a lbco:characterization_process ;
-    lbco:has_participant ex:IFPEN_LIB_CEL_26_399 ;
-    lbco:has_participant [a lbco:human_agent] .
+ex:IFPEN_LIB_PRF_26_414 a lbco:characterization_measurement ;
+    lbco:has_ID "PRF-26-414"^^xs:string ; # code in characterization_XXX.json	
+#    lbco:has_participant ex:IFPEN_LIB_CEL_26_399 ; # NB: input/output are different, so we use has_input/has_output, rather than has_participant
+    lbco:has_input ex:IFPEN_LIB_CEL_26_399 ; # P1511 in characterization_XXX.json	
+    lbco:has_output ex:IFPEN_LIB_CEL_26_404 ; # outgoing_samples in characterization_XXX.json	
+    lbco:has_participant [a lbco:human_agent] ;
+    rdfs:comment "The characterization affects the cell, input and output are different"^^xs:string . # TO DO: specify how different?
 
+ex:IFPEN_LIB_CEL_26_404 a lbco:full_cell ;  
+    lbco:has_ID "CEL-26-404"^^xs:string . # outgoing_samples in characterization_XXX.json	
+
+ex:IFPEN_LIB_FORMING_MA_26_1563 a lbco:forming ;
+    lbco:has_ID "MA-26-1563"^^xs:string ; # code in analyses/MA-26-1563/MA-26-1563.json # What is the path pattern, analyses/[Rodage code]/[Rodage code].json ?
+    lbco:has_participant ex:HUMAN_1 ;
+    lbco:has_input ex:IFPEN_LIB_CEL_26_404 ;
+    lbco:has_output ex:IFPEN_LIB_CEL_26_404 ; # NB: if the cell changes, shouldn't we track it somehow for consistency?
+    lbco:has_setting ex:SETTING_3 ;
+    lbco:has_setting ex:SETTING_4 .
+
+ex:SETTING_3 a lbco:temperature ; # TODO: assign units and value. It is:  # P5859 in analyses/MA-26-1563/MA-26-1563.json # What is the path pattern, analyses/[Rodage code]/[Rodage code].json ?
+   rdfs:comment "Value and unit: 25 degree Celsius"^^xs:string .
+ex:SETTING_4 a lbco:charging_current ; # P9996 in analyses/MA-26-1563/MA-26-1563.json # What is the path pattern, analyses/[Rodage code]/[Rodage code].json ?
+   rdfs:comment "Value and unit: 2.08E-04 A"^^xs:string .
+
+ex:HUMAN_1 a lbco:human_agent ;
+    lbco:has_ID "girodn"^^xs:string . # P4892 in analyses/MA-26-1563/MA-26-1563.json # What is the path pattern, analyses/[Rodage code]/[Rodage code].json ?
+    
+# ex:IFPEN_LIB_GITT_TEST_XXX a lbco:gitt_test .

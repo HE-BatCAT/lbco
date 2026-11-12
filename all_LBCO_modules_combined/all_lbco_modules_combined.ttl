@@ -1703,8 +1703,8 @@ ex:DT_LIB_CELL_C032_PID123456 a lbco:digital_twin_model ;
 <https://w3id.org/batcat/battery> a owl:Ontology .
 
 <https://w3id.org/batcat/battery> dcterms:title "BatCAT core ontologies: module for Lithium Ion and Redox Flow Batteries"^^xs:string ;
-  owl:versionInfo "version 0.8.3"^^xs:string ;
-  dcterms:modified "2026-10-13"^^xs:string ;
+  owl:versionInfo "version 0.8.4"^^xs:string ;
+  dcterms:modified "2026-11-12"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   # owl:imports <https://w3id.org/batcat/higher> ,
   	#		  <https://w3id.org/batcat/manufacturing> ,
@@ -2164,6 +2164,9 @@ lbco:furnace_atmosphere_composition a owl:Class ;
      rdfs:subClassOf lbco:physical_quantity . 
 
 lbco:charging_rate a owl:Class ;
+     rdfs:subClassOf lbco:physical_quantity . 
+
+lbco:charging_current a owl:Class ;  # TO SEE: vs charge_current?
      rdfs:subClassOf lbco:physical_quantity . 
 
 lbco:electrolyte_volume a owl:Class ;
@@ -2649,7 +2652,10 @@ lbco:forming a owl:Class ;
 	owl:someValuesFrom lbco:human_agent] ;
 	rdfs:subClassOf [a owl:Restriction ;
         owl:onProperty lbco:has_setting ;
-	owl:someValuesFrom lbco:temperature] .
+	owl:someValuesFrom lbco:temperature] ;
+	rdfs:subClassOf [a owl:Restriction ;
+        owl:onProperty lbco:has_setting ;
+	owl:someValuesFrom lbco:charging_current] . # TO SEE: differrent from charge_current?
 
 lbco:degassing a owl:Class ;
         rdfs:label "Degassing" ;
