@@ -317,8 +317,8 @@ lbco:has_batch_ID a owl:DatatypeProperty ;
 <https://w3id.org/batcat/characterization> a owl:Ontology .
 
 <https://w3id.org/batcat/characterization> dcterms:title "BatCAT core ontologies: module for Characterization"^^xs:string ;
-   owl:versionInfo "version 0.7.2"^^xs:string ;
-   dcterms:modified "2026-10-14"^^xs:string ;
+   owl:versionInfo "version 0.7.3"^^xs:string ;
+   dcterms:modified "2026-11-13"^^xs:string ;
    dcterms:created "2025"^^xs:string ;
    # owl:imports <https://w3id.org/batcat/higher> ;
    dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
@@ -416,14 +416,16 @@ lbco:has_sample_history a owl:ObjectProperty ;
 lbco:measures a owl:ObjectProperty ; # TO SEE: connect to lbco:observes, used for sensors? Move it to higher?
      rdfs:label "measures" ;
      rdfs:domain lbco:device ;
-     rdfs:range lbco:physical_quantity .
+     rdfs:range lbco:physical_quantity ;
+     rdfs:subPropertyOf lbco:has_output .
 
 ### Datatype Properties ###
 
 lbco:has_sample_ID a owl:DatatypeProperty ;
     rdfs:label "has sample ID" ;
     rdfs:domain lbco:sample ;
-    rdfs:range rdfs:Literal .
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf lbco:has_ID .
 
 ####################################################################################
 
@@ -808,8 +810,8 @@ lbco:porosity a owl:Class ;
 <https://w3id.org/batcat/modelling> a owl:Ontology .
 
 <https://w3id.org/batcat/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.7.0"^^xs:string ;
-  dcterms:modified "2025-12-15"^^xs:string ;
+  owl:versionInfo "version 0.7.1"^^xs:string ;
+  dcterms:modified "2025-11-13"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   # owl:imports <https://w3id.org/batcat/higher> ;
   # owl:imports <https://w3id.org/batcat/data> ;
@@ -870,6 +872,9 @@ lbco:simulation a owl:Class ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty lbco:has_participant ;
                    owl:someValuesFrom lbco:software] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty lbco:has_participant ;
+                   owl:someValuesFrom lbco:computational_device] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty lbco:has_input ;
                    owl:someValuesFrom lbco:model_parametrization] .
@@ -1022,7 +1027,8 @@ lbco:gives_modelling_value_for a owl:ObjectProperty ; #gives_prediction_for?
 lbco:gives_value_for a owl:ObjectProperty ; # quantifies?
     rdfs:label "gives value for" ;
     rdfs:domain lbco:method ; #TOSEE: OK?
-    rdfs:range lbco:physical_quantity .
+    rdfs:range lbco:physical_quantity ;
+    rdfs:subPropertyOf lbco:has_output .
 
 lbco:has_modelled_time_scale a owl:ObjectProperty ;
     rdfs:label "has modelled time scale" ;

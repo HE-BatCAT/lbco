@@ -14,8 +14,8 @@
 <https://w3id.org/batcat/modelling> a owl:Ontology .
 
 <https://w3id.org/batcat/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
-  owl:versionInfo "version 0.7.0"^^xs:string ;
-  dcterms:modified "2025-12-15"^^xs:string ;
+  owl:versionInfo "version 0.7.1"^^xs:string ;
+  dcterms:modified "2025-11-13"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://w3id.org/batcat/higher> ;
   owl:imports <https://w3id.org/batcat/data> ;
@@ -76,6 +76,9 @@ lbco:simulation a owl:Class ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty lbco:has_participant ;
                    owl:someValuesFrom lbco:software] ;
+    rdfs:subClassOf [a owl:Restriction ;
+                   owl:onProperty lbco:has_participant ;
+                   owl:someValuesFrom lbco:computational_device] ;
     rdfs:subClassOf [a owl:Restriction ;
                    owl:onProperty lbco:has_input ;
                    owl:someValuesFrom lbco:model_parametrization] .
@@ -228,7 +231,8 @@ lbco:gives_modelling_value_for a owl:ObjectProperty ; #gives_prediction_for?
 lbco:gives_value_for a owl:ObjectProperty ; # quantifies?
     rdfs:label "gives value for" ;
     rdfs:domain lbco:method ; #TOSEE: OK?
-    rdfs:range lbco:physical_quantity .
+    rdfs:range lbco:physical_quantity ;
+    rdfs:subPropertyOf lbco:has_output .
 
 lbco:has_modelled_time_scale a owl:ObjectProperty ;
     rdfs:label "has modelled time scale" ;
