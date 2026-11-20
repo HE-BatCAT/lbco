@@ -1,0 +1,142 @@
+@prefix ex: <https://w3id.org/batcat/scenarios/lib_surrogate_model_example#> .
+
+@prefix lbco: <https://w3id.org/batcat#> . 
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .  
+#@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .  
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/batcat/scenarios/lib_surrogate_model_example> dcterms:title "BatCAT core ontologies: LiB Surrogate model example"^^xs:string ;
+  owl:versionInfo "version 0.1.0"^^xs:string ;
+  dcterms:modified "2026-11-20"^^xs:string ;
+  owl:imports <https://w3id.org/batcat/higher> ;
+  owl:imports <https://w3id.org/batcat/modelling> ;
+#  owl:imports <https://w3id.org/batcat/manufacturing> ;
+#  owl:imports <https://w3id.org/batcat/characterization> ;
+  owl:imports <https://w3id.org/batcat/battery> ;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string ;
+  dcterms:creator "Aditya Dey (ORCID 0000-0002-8086-1243)"^^xs:string ;  
+  dcterms:creator "Noel Vizcaino (ORCID 0000-0001-7608-9484)"^^xs:string ;
+  dcterms:contributor "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string ;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string ;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string ;
+  dcterms:contributor "Fadi Al Machot (ORCID 0000-0002-1239-9261)"^^xs:string ;
+  dcterms:contributor "Liyanapathiranage Sudeepika Wajirakumari Samarathunga (ORCID 0009-0006-6799-7193)"^^xs:string ;
+  dcterms:contributor "Martin Petit (ORCID 0000-0002-4226-6689)"^^xs:string ;
+  dcterms:contributor "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string ;
+  dcterms:license "https://www.gnu.org/licenses/lgpl-3.0.en.html"^^xs:anyURI ;
+#  dcterms:description """The aim of BatCAT core ontologies is covering all needed aspects of the battery domain,
+#with a focus on Industry 5.0 cell manufacturing and addressing BatCAT use-cases."""^^xs:string ;
+#  dcterms:bibliographicCitation ""^^xs:string ;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon Europe research and
+innovation programme under grant agreement no. 101137725, Battery Cell Assembly Twin (BatCAT)."""^^xs:string .
+
+# Model "A"
+ex:NMBU_LIB_GRU_FORMATION_AGEING_MODEL a lbco:model_parametrization ;
+   a lbco:lib_model ;
+   rdfs:label "GRU Formation-to-Ageing Surrogate Model"^^xs:string ;
+   rdfs:comment """A recurrent neural network (Gated Recurrent Unit) that reads the terminal voltage and
+   current recorded during cell formation and predicts four ageing indicators of the cell: discharge capacity,
+   capacity lost to lithium plating, capacity lost to SEI growth, and ECM resistance."""^^xs:string ;
+   lbco:is_data_driven true ;
+   lbco:is_physics_based true ;
+   lbco:represents lbco:forming ; # manufacturing process 
+   lbco:represents lbco:sei_formation_process ; # process
+   lbco:has_action_type lbco:PREDICT , 
+   			lbco:INTERPOLATE ;
+   lbco:has_applicability_range_info """Valid only within the training conditions of the synthetic dataset:
+   formation charge rate 0.01–1.3 C; formation discharge rate 0.01–1.3 C; rest between charge and discharge 0.1–120
+   min; 1–3 formation cycles; formation voltage window 2.7–4.1 V; ambient and initial temperature 298.15 K (25 °C).
+   Formation is preceded by a fixed wetting/pre-charge step. Ageing is predicted for a fixed cycling protocol
+   (charge 1.8 C to 4.1 V, discharge 1.5 C to 2.5 V) at ageing cycles 1 to 500. The model was trained on 128 simulated
+   protocols (4 × 4 × 4 × 2 grid), so predictions between grid points are interpolations and predictions outside these
+   ranges are extrapolations and not validated. The model reproduces the DFN model; it inherits the DFN model’s assumptions
+   and has not been validated against experimental cells."""^^xs:string ;
+   lbco:has_modelled_length_scale lbco:CELL_SCALE ;
+   lbco:has_modelled_time_scale lbco:PLANNING_TIME_SCALE ;
+   lbco:is_model_for_system_containing_substance lbco:NMC ,
+   						 lbco:graphite ; # TO DO: ADD LiPF6 in ethylene carbonate (EC)-based carbonate solvent
+   rdfs:seeAlso "https://github.com/HE-BatCAT/formation_recommendation_system"^^xs:anyURI .
+
+ex:GRU_MODEL_PARAMETRIZATION_PROCESS a lbco:parametrization_process ;
+   lbco:has_input ex:PYBAMM_DFN_SYNTHETIC_DATA ;
+   lbco:has_output ex:NMBU_LIB_GRU_FORMATION_AGEING_MODEL ;
+   rdfs:comment "The surrogate model is trained on synthetic data generated with PyBaMM"^^xs:string .
+
+ex:PYBAMM_DFN_SYNTHETIC_DATA_FOR_TRAINING a lbco:data ;
+   rdfs:comment """Synthetic data generated with PyBaMM (DFN model, 128 formation protocols, 500 ageing cycles each).
+   The DFN model uses the literature parameter set of Mohtat et al. (2020)."""^^xs:string .
+
+ex:GRU_MODEL_VALIDATION_PROCESS a lbco:validation_process ;
+   lbco:has_input ex:NMBU_LIB_GRU_FORMATION_AGEING_MODEL ;
+      lbco:has_input ex:PYBAMM_DFN_SYNTHETIC_DATA_FOR_VALIDATION ;
+   rdfs:comment """The surrogate model is validated against the PyBaMM DFN model: protocol-level 7-fold cross-validation on the
+   128 simulated protocols (all ageing cycles of one protocol stay in the same fold), plus individual check on specific protocols
+   simulated with PyBaMM."""^^xs:string .
+
+ex:PYBAMM_DFN_SYNTHETIC_DATA_FOR_VALIDATION a lbco:data ;
+   rdfs:comment """Synthetic data generated with PyBaMM (DFN model). The DFN model uses the literature parameter set of Mohtat et al. (2020)."""^^xs:string .
+
+# Model "B"
+ex:NMBU_LIB_PATCH_ATTENTION_FORMATION_AGEING_MODEL a lbco:model_parametrization ;
+   a lbco:lib_model ;
+   rdfs:label "PatchAttention Formation-to-Ageing Surrogate"^^xs:string ;
+   rdfs:comment """A compact Transformer surrogate, in the style of PatchTST, that predicts the same four
+   ageing indicators as the GRU model from the formation voltage and current."""^^xs:string ;
+   lbco:is_data_driven true ;
+   lbco:is_physics_based true ;
+   lbco:represents lbco:forming ; # manufacturing process 
+   lbco:represents lbco:sei_formation_process ; # process
+   lbco:has_action_type lbco:PREDICT , 
+   			lbco:INTERPOLATE ;
+   lbco:has_applicability_range_info """Valid only within the training conditions of the synthetic dataset:
+   formation charge rate 0.01–1.3 C; formation discharge rate 0.01–1.3 C; rest between charge and discharge 0.1–120
+   min; 1–3 formation cycles; formation voltage window 2.7–4.1 V; ambient and initial temperature 298.15 K (25 °C).
+   Formation is preceded by a fixed wetting/pre-charge step. Ageing is predicted for a fixed cycling protocol
+   (charge 1.8 C to 4.1 V, discharge 1.5 C to 2.5 V) at ageing cycles 1 to 500. The model was trained on 128 simulated
+   protocols (4 × 4 × 4 × 2 grid), so predictions between grid points are interpolations and predictions outside these
+   ranges are extrapolations and not validated. The model reproduces the DFN model; it inherits the DFN model’s assumptions
+   and has not been validated against experimental cells.
+   Additional limit: the model predicts only on its fixed training cycle grid (currently cycles 1 and 500). Cycles in
+   between are interpolated linearly in log(1 + cycle); cycles outside the grid are clamped to the nearest end with
+   a warning."""^^xs:string ;
+   lbco:has_modelled_length_scale lbco:CELL_SCALE ;
+   lbco:has_modelled_time_scale lbco:PLANNING_TIME_SCALE ;
+   lbco:is_model_for_system_containing_substance lbco:NMC ,
+   						 lbco:graphite ; # TO DO: ADD LiPF6 in ethylene carbonate (EC)-based carbonate solvent
+   rdfs:seeAlso "https://github.com/HE-BatCAT/formation_recommendation_system"^^xs:anyURI .
+
+ex:SIMULATION_1 a lbco:simulation ;
+   rdfs:label "Surrogate-assisted formation protocol recommendation"^^xs:string ;
+   rdfs:comment """Ranks candidate formation protocols for a 5 Ah NMC532/graphite cell. Each candidate is
+   defined by four parameters: formation charge C-rate, formation discharge C-rate, rest time between charge
+   and discharge, and number of formation cycles. For each candidate, PyBaMM simulates the pre-step and the
+   formation itself, which gives the formation time and the voltage/current trajectories. The trained surrogate
+   (PatchAttention by default, or GRU) then predicts capacity, plating loss, SEI loss and resistance at ageing cycles 1 and 500,
+   so no ageing simulation is needed. Each objective is min-max normalised over all candidates and combined with weights:
+   formation time 0.25, final capacity 0.20, capacity fade 0.25, plating growth 0.10, SEI growth 0.10, resistance growth 0.10. Lower
+   scores are better. The best protocols are reported and can be verified with a full PyBaMM ageing simulation.""" ^^xs:string ; # TO SEE: TOO LONG TEXT?
+   lbco:has_input lbco:charge_current ,
+   		  lbco:discharge_current ,
+		  lbco:temperature ,
+		  lbco:number_of_cycles; # TO DO: ADD more   
+   lbco:has_output lbco:full_cell_capacity . # TO SEE: should be further specified. TO DO: ADD more outputs, as formation_time
+
+ex:SIMULATION_2 a lbco:simulation ;
+   rdfs:label "Surrogate vs. DFN validation for a single formation protocol"^^xs:string ;
+   rdfs:comment """Checks a trained surrogate on one formation protocol, which may lie off the training grid.
+   PyBaMM simulates the pre-step, the formation and 500 ageing cycles (charge 1.8 C to 4.1 V, discharge 1.5 C
+   to 2.5 V). The surrogate predicts the same ageing metrics from the same formation signals. The two are compared per
+   target with MAE and MSE. Example protocol: charge 0.1 C, discharge 0.5 C, rest 30 min, 3 formation cycles."""^^xs:string .
+
+ex:DFN_MODEL a lbco:physics_based_model ;
+   rdfs:label"DFN Model" ;
+   rdfs:comment "Doyle–Fuller–Newman (DFN) model"^^xs:string .
+
+ex:PYBAMM a lbco:software ;
+  lbco:implements [a lbco:computational_modelling_method] . # TO SEE: Does PyBAMM "participate" in Simulation 1 or 2?
+
