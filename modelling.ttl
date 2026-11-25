@@ -15,7 +15,7 @@
 
 <https://w3id.org/batcat/modelling> dcterms:title "BatCAT core ontologies: module for Modelling and simulation"^^xs:string ;
   owl:versionInfo "version 0.7.1"^^xs:string ;
-  dcterms:modified "2025-11-13"^^xs:string ;
+  dcterms:modified "2026-11-13"^^xs:string ;
   dcterms:created "2025"^^xs:string ;
   owl:imports <https://w3id.org/batcat/higher> ;
   owl:imports <https://w3id.org/batcat/data> ;
@@ -91,9 +91,9 @@ lbco:computational_modelling_method a owl:Class ;
     rdfs:label "Computational modelling method" ;
     rdfs:subClassOf lbco:method .
     
-lbco:digital_twinning a owl:Class ; # TOSEE: OK?
-    rdfs:label "Digital twinning" ;
-    rdfs:subClassOf lbco:computational_modelling_method .
+# lbco:digital_twinning a owl:Class ; # TOSEE: OK?
+#     rdfs:label "Digital twinning" ;
+#     rdfs:subClassOf lbco:computational_modelling_method .
 
 # cf. EQ_SIM_3
 lbco:model_validation_process a owl:Class ;
