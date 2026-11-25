@@ -11,8 +11,8 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/batcat/scenarios/lib_surrogate_model_example> dcterms:title "BatCAT core ontologies: LiB Surrogate model example"^^xs:string ;
-  owl:versionInfo "version 0.1.0"^^xs:string ;
-  dcterms:modified "2026-11-20"^^xs:string ;
+  owl:versionInfo "version 0.1.1"^^xs:string ;
+  dcterms:modified "2026-11-25"^^xs:string ;
   owl:imports <https://w3id.org/batcat/higher> ;
   owl:imports <https://w3id.org/batcat/modelling> ;
 #  owl:imports <https://w3id.org/batcat/manufacturing> ;
@@ -46,6 +46,8 @@ ex:NMBU_LIB_GRU_FORMATION_AGEING_MODEL a lbco:model_parametrization ;
    lbco:is_physics_based true ;
    lbco:represents lbco:forming ; # manufacturing process 
    lbco:represents lbco:sei_formation_process ; # process
+   lbco:represents lbco:ageing_process ; # process
+   lbco:represents lbco:full_cell ; # object # TO SEE: OK?
    lbco:has_action_type lbco:PREDICT , 
    			lbco:INTERPOLATE ;
    lbco:has_applicability_range_info """Valid only within the training conditions of the synthetic dataset:
@@ -69,7 +71,8 @@ ex:GRU_MODEL_PARAMETRIZATION_PROCESS a lbco:parametrization_process ;
 
 ex:PYBAMM_DFN_SYNTHETIC_DATA_FOR_TRAINING a lbco:data ;
    rdfs:comment """Synthetic data generated with PyBaMM (DFN model, 128 formation protocols, 500 ageing cycles each).
-   The DFN model uses the literature parameter set of Mohtat et al. (2020)."""^^xs:string .
+   The DFN model uses the literature parameter set of Mohtat et al. (2020)."""^^xs:string ;
+   lbco:is_generated_by ex:PYBAMM .
 
 ex:GRU_MODEL_VALIDATION_PROCESS a lbco:validation_process ;
    lbco:has_input ex:NMBU_LIB_GRU_FORMATION_AGEING_MODEL ;
@@ -79,7 +82,8 @@ ex:GRU_MODEL_VALIDATION_PROCESS a lbco:validation_process ;
    simulated with PyBaMM."""^^xs:string .
 
 ex:PYBAMM_DFN_SYNTHETIC_DATA_FOR_VALIDATION a lbco:data ;
-   rdfs:comment """Synthetic data generated with PyBaMM (DFN model). The DFN model uses the literature parameter set of Mohtat et al. (2020)."""^^xs:string .
+   rdfs:comment """Synthetic data generated with PyBaMM (DFN model). The DFN model uses the literature parameter set of Mohtat et al. (2020)."""^^xs:string ;
+   lbco:is_generated_by ex:PYBAMM .   
 
 # Model "B"
 ex:NMBU_LIB_PATCH_ATTENTION_FORMATION_AGEING_MODEL a lbco:model_parametrization ;
@@ -91,6 +95,8 @@ ex:NMBU_LIB_PATCH_ATTENTION_FORMATION_AGEING_MODEL a lbco:model_parametrization 
    lbco:is_physics_based true ;
    lbco:represents lbco:forming ; # manufacturing process 
    lbco:represents lbco:sei_formation_process ; # process
+   lbco:represents lbco:ageing_process ; # process
+   lbco:represents lbco:full_cell ; # object # TO SEE: OK?
    lbco:has_action_type lbco:PREDICT , 
    			lbco:INTERPOLATE ;
    lbco:has_applicability_range_info """Valid only within the training conditions of the synthetic dataset:
@@ -120,11 +126,13 @@ ex:SIMULATION_1 a lbco:simulation ;
    so no ageing simulation is needed. Each objective is min-max normalised over all candidates and combined with weights:
    formation time 0.25, final capacity 0.20, capacity fade 0.25, plating growth 0.10, SEI growth 0.10, resistance growth 0.10. Lower
    scores are better. The best protocols are reported and can be verified with a full PyBaMM ageing simulation.""" ^^xs:string ; # TO SEE: TOO LONG TEXT?
-   lbco:has_input lbco:charge_current ,
-   		  lbco:discharge_current ,
-		  lbco:temperature ,
-		  lbco:number_of_cycles; # TO DO: ADD more   
-   lbco:has_output lbco:full_cell_capacity . # TO SEE: should be further specified. TO DO: ADD more outputs, as formation_time
+   lbco:has_input [a lbco:charge_current] ,
+   		  [a lbco:discharge_current] ,
+		  [a lbco:temperature] ,
+		  [a lbco:number_of_cycles] , # TO DO: ADD more
+		  [a lbco:rest_time_between_cycles] ; # TO DO: ADD more   
+   lbco:has_output [a lbco:full_cell_capacity] , # TO SEE: should be further specified. TO DO: ADD more outputs, as formation_time
+		   [a lbco:formation_time] .
 
 ex:SIMULATION_2 a lbco:simulation ;
    rdfs:label "Surrogate vs. DFN validation for a single formation protocol"^^xs:string ;
@@ -135,8 +143,17 @@ ex:SIMULATION_2 a lbco:simulation ;
 
 ex:DFN_MODEL a lbco:physics_based_model ;
    rdfs:label"DFN Model" ;
-   rdfs:comment "Doyle–Fuller–Newman (DFN) model"^^xs:string .
+   rdfs:comment "Doyle–Fuller–Newman (DFN) model"^^xs:string ;
+   a lbco:lib_model ;
+   a lbco:sei_formation_model ;
+   a lbco:ageing_model .
+#   lbco:has_granularity_level osmo:CONTINUUM; # TODO: OK? CHECK and uncomment
+#   lbco:has_physical_equation_type osmo:XXX; # TODO: ADD and uncomment
 
 ex:PYBAMM a lbco:software ;
-  lbco:implements [a lbco:computational_modelling_method] . # TO SEE: Does PyBAMM "participate" in Simulation 1 or 2?
+   rdfs:label "PyBaMM" ;
+   rdfs:comment """PyBaMM (Python Battery Mathematical Modelling) is an open-source
+   battery simulation package written in Python"""^^xs:string ;
+   rdfs:seeAlso "https://doi.org/10.5334/jors.309"^^xs:anyURI ;
+   lbco:implements [a lbco:computational_modelling_method] . # TO SEE: Does PyBAMM "participate" in Simulation 1 or 2?
 
